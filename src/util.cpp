@@ -1,5 +1,7 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2012 The Bitcoin developers
+// Copyright (c) 2013-2079 Dr. Kimoto Chan
+// Copyright (c) 2013-2079 The Megacoin developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -1479,4 +1481,24 @@ bool NewThread(void(*pfn)(void*), void* parg)
         return false;
     }
     return true;
+}
+
+// for the difficulty update in GetNextWorkRequired
+void DoubleToNumeratorDenominator(double inDouble, long long *outNumerator, long long *outDenominator)
+{
+    double fPart;
+    int expo; // exponent
+    long long lExpo;
+    int i;
+
+    fPart = frexp(inDouble, &expo);
+    for (i=0; i<300 && fPart != floor(fPart) ; i++) { fPart *= 2.0; expo--; }
+
+    *outNumerator = (long long) fPart;
+    lExpo = 1LL << labs((long) expo);
+    if (expo > 0) {
+        *outNumerator *= lExpo;
+        *outDenominator = 1;
+    }
+	else { *outDenominator = lExpo; }
 }

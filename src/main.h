@@ -1,6 +1,7 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2012 The Bitcoin developers
 // Copyright (c) 2011-2012 Tenebrix, Litecoin developers
+// Copyright (c) 2012-2013 Freicoin developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 #ifndef BITCOIN_MAIN_H
@@ -57,6 +58,9 @@ static const int COINBASE_MATURITY = 100;
 static const unsigned int LOCKTIME_THRESHOLD = 500000000; // Tue Nov  5 00:53:20 1985 UTC
 /** Maximum number of script-checking threads allowed */
 static const int MAX_SCRIPTCHECK_THREADS = 16;
+
+static const int DIFF_FILTER_THRESHOLD_TESTNET =  8192;
+static const int DIFF_FILTER_THRESHOLD         = 8192;
 
 #ifdef USE_UPNP
 static const int fHaveUPnP = true;
