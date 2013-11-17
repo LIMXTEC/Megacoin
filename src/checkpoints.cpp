@@ -37,24 +37,38 @@ namespace Checkpoints
     // + Contains no strange transactions
     static MapCheckpoints mapCheckpoints =
         boost::assign::map_list_of
-		(	0, hashGenesisBlock)
+		//(	0, hashGenesisBlock)
+		(   5215, uint256("0xf8a7fec79eeee3228499601c614b179d09b1b08bd58515be8a2795f6baafb493"))
+		(   7333, uint256("0xf798f245214a5ed83c69d362a88c48047c82675d3bf84b0c88d6f1c71ed4b372"))
+		(   9850, uint256("0x03359392dab8f47cd70626bb978c7658a385a49570bd953a1c9f8ceed4ff8be6"))
+		(  10000, uint256("0xe17057f2114a45827acbcfe2a55b273ccabd3dc8982765f7a3fbca166811909b"))
+		(  15480, uint256("0xf682a44431fff21c5d412f97e92f3340c59527626f6b5a4c6b85de78e009f177"))
+		(  17625, uint256("0x5c4df33d72bef0c9e95bcce997e0c1d5985e957a16aebbf463a8bbee1ab9eb4b"))
+		(  21190, uint256("0xe960216ff0e3ebae632af05792f0a11bf8a8f61e4f5ef43fcfd84b6e8053ec59"))
+		(  35500, uint256("0xb88a54ce5d247a46166ff28228c62efc495cfb8d0dadfa895bced191cb261c90"))
+		(  39500, uint256("0x3eb61d9897009caa6ed492fc154121849166d7a627f26322eae9cf32c7dc753b"))
+		(  44400, uint256("0xeb5af032f88981810f31f13e38e33c86585dbf963ea6de199382706dc5b3aee4"))
+		(  59300, uint256("0x558cf1f1fe31eb0816f9fc73900133564c29b50b626cbf82c69860fd3583653c"))
+		(  62767, uint256("0x5bd5d25c8a19b764634435b9ab1121b4678fbf6e6ad771b252f75f3cdfa82131"))		
+		(  96800, uint256("0xf972b9421ac790af82cd63f5db1dbbee114ce3476486d4335f46c6d7d8897671"))
     ;
     static const CCheckpointData data = {
         &mapCheckpoints,
-        1369197853, // * UNIX timestamp of last checkpoint block
-        1,   		// * total number of transactions between genesis and last checkpoint
+        1384183736, // * UNIX timestamp of last checkpoint block
+        365070,   	// * total number of transactions between genesis and last checkpoint
                     //   (the tx=... number in the SetBestChain debug.log lines)
         60000.0     // * estimated number of transactions per day after checkpoint
     };
 	
     static MapCheckpoints mapCheckpointsTestnet = 
         boost::assign::map_list_of
-		(	0, hashGenesisBlock)
+		//(	0, hashGenesisBlock)
+        (   2236, uint256("0xfae5f0ff729c2a296d1aa486818a35279babc40da15dba5ceef047be2c4a7a7a"))
     ;
     static const CCheckpointData dataTestnet = {
         &mapCheckpointsTestnet,
-        1369198853,
-        1,
+        1370212592,
+        2235,
         300
     };
 	
