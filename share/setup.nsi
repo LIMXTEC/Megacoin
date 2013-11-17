@@ -5,8 +5,8 @@ SetCompressor /SOLID lzma
 
 # General Symbol Definitions
 !define REGKEY "SOFTWARE\$(^Name)"
-!define VERSION 0.8.2
-!define COMPANY "Bitcoin project"
+!define VERSION 0.8.99
+!define COMPANY "Megacoin project"
 !define URL http://www.bitcoin.org/
 
 # MUI Symbol Definitions
@@ -45,14 +45,14 @@ Var StartMenuGroup
 !insertmacro MUI_LANGUAGE English
 
 # Installer attributes
-OutFile bitcoin-0.8.2-win32-setup.exe
-InstallDir $PROGRAMFILES\Bitcoin
+OutFile megacoin-0.8.99-win32-setup.exe
+InstallDir $PROGRAMFILES\Megacoin
 CRCCheck on
 XPStyle on
 BrandingText " "
 ShowInstDetails show
-VIProductVersion 0.8.2.2
-VIAddVersionKey ProductName Bitcoin
+VIProductVersion 0.8.99.0
+VIAddVersionKey ProductName Megacoin
 VIAddVersionKey ProductVersion "${VERSION}"
 VIAddVersionKey CompanyName "${COMPANY}"
 VIAddVersionKey CompanyWebsite "${URL}"

@@ -1,6 +1,7 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2012 The Bitcoin developers
 // Copyright (c) 2011-2012 Tenebrix, Litecoin developers
+// Copyright (c) 2013-2079 Dr. Kimoto Chan
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -33,8 +34,8 @@ unsigned int nTransactionsUpdated = 0;
 
 map<uint256, CBlockIndex*> mapBlockIndex;
 std::vector<CBlockIndex*> vBlockIndexByHeight;
-uint256 hashGenesisBlock("0x000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f");
-static CBigNum bnProofOfWorkLimit(~uint256(0) >> 32);
+uint256 hashGenesisBlock("0x7520788e2d99eec7cf6cf7315577e1268e177fff94cb0a7caf6a458ceeea9ac2");
+static CBigNum bnProofOfWorkLimit(~uint256(0) >> 20);
 CBlockIndex* pindexGenesisBlock = NULL;
 int nBestHeight = -1;
 uint256 nBestChainWork = 0;
@@ -1062,17 +1063,36 @@ uint256 static GetOrphanRoot(const CBlockHeader* pblock)
 
 int64 static GetBlockValue(int nHeight, int64 nFees)
 {
-    int64 nSubsidy = 50 * COIN;
-
-    // Subsidy is cut in half every 210000 blocks, which will occur approximately every 4 years
-    nSubsidy >>= (nHeight / 210000);
-
+    int64 nSubsidy = 500 * COIN;
+	/*
+		Total Coins: 42 Million
+		* 1st 5 Months, 21 Million Coins will be generated
+		  Every 21,000 Blocks (1 Month) the reward steps down from 500, 250, 125, 75, 50.
+		
+		* Through the next few decades the Remaining 21 Million will be generated
+		  Every 420,000 Blocks (2 Years), The reward starts at 25 and is Halved each period
+		  10.5 Million come from first 2 Years of 420K Blocks
+	*/
+	int BlockCountA = 21000;
+	int BlockCountB = 420000;
+	if (nHeight >= BlockCountA * 5)
+	{
+		nSubsidy = 25 * COIN;
+		nSubsidy >>= ((nHeight - (BlockCountA * 5)) / (BlockCountB)); // Subsidy is cut in half every 420000 blocks
+	}
+	else if (nHeight >= BlockCountA * 4) { nSubsidy = 50 * COIN; }
+	else if (nHeight >= BlockCountA * 3) { nSubsidy = 75 * COIN; }
+	else if (nHeight >= BlockCountA * 2) { nSubsidy = 125 * COIN; }
+	else if (nHeight >= BlockCountA) { nSubsidy = 250 * COIN; }
+	else { nSubsidy = 500 * COIN; }
+	
     return nSubsidy + nFees;
 }
 
-static const int64 nTargetTimespan = 14 * 24 * 60 * 60; // two weeks
-static const int64 nTargetSpacing = 10 * 60;
+static const int64 nTargetTimespan = 3.5 * 24 * 60 * 60; // 3.5 days
+static const int64 nTargetSpacing = 2.5 * 60; // 2.5 minutes
 static const int64 nInterval = nTargetTimespan / nTargetSpacing;
+
 
 //
 // minimum amount of work that could possibly be required nTime after
@@ -1130,19 +1150,21 @@ unsigned int static GetNextWorkRequired(const CBlockIndex* pindexLast, const CBl
         return pindexLast->nBits;
     }
 
-    // Go back by what we want to be 14 days worth of blocks
-    const CBlockIndex* pindexFirst = pindexLast;
-    for (int i = 0; pindexFirst && i < nInterval-1; i++)
-        pindexFirst = pindexFirst->pprev;
-    assert(pindexFirst);
+    double dAdjustmentFactor;
 
-    // Limit adjustment step
-    int64 nActualTimespan = pindexLast->GetBlockTime() - pindexFirst->GetBlockTime();
-    printf("  nActualTimespan = %"PRI64d"  before bounds\n", nActualTimespan);
-    if (nActualTimespan < nTargetTimespan/4)
-        nActualTimespan = nTargetTimespan/4;
-    if (nActualTimespan > nTargetTimespan*4)
-        nActualTimespan = nTargetTimespan*4;
+	// Go back by what we want to be 14 days worth of blocks
+	const CBlockIndex* pindexFirst = pindexLast;
+    for (int i = 0; pindexFirst && i < nInterval-1; i++)
+		pindexFirst = pindexFirst->pprev;
+	assert(pindexFirst);
+
+	// Limit adjustment step
+	int64 nActualTimespan = pindexLast->GetBlockTime() - pindexFirst->GetBlockTime();
+	printf("  nActualTimespan = %"PRI64d"  before bounds\n", nActualTimespan);
+	if (nActualTimespan < nTargetTimespan/4)
+		nActualTimespan = nTargetTimespan/4;
+	if (nActualTimespan > nTargetTimespan*4)
+		nActualTimespan = nTargetTimespan*4;
 
     // Retarget
     CBigNum bnNew;
@@ -2239,7 +2261,7 @@ bool ProcessBlock(CValidationState &state, CNode* pfrom, CBlock* pblock, CDiskBl
         {
             return state.DoS(100, error("ProcessBlock() : block with too little proof-of-work"));
         }
-    }
+}
 
 
     // If we don't already have its previous block, shunt it off to holding area until we get it
@@ -2679,11 +2701,11 @@ bool LoadBlockIndex()
 {
     if (fTestNet)
     {
-        pchMessageStart[0] = 0x0b;
-        pchMessageStart[1] = 0x11;
-        pchMessageStart[2] = 0x09;
-        pchMessageStart[3] = 0x07;
-        hashGenesisBlock = uint256("000000000933ea01ad0ee984209779baaec3ced90fa3f408719526f8d77f4943");
+        pchMessageStart[0] = 0xfd;
+        pchMessageStart[1] = 0xf0;
+        pchMessageStart[2] = 0xf4;
+        pchMessageStart[3] = 0xfe;
+        hashGenesisBlock = uint256("0xf9e3f18eaa2404b23c57ed9961d7e777e95a1f2c88dfd373e5ddadc8ed343cc1");
     }
 
     //
@@ -2708,34 +2730,43 @@ bool InitBlockIndex() {
 
     // Only add the genesis block if not reindexing (in which case we reuse the one already on disk)
     if (!fReindex) {
-        // Genesis Block:
-        // CBlock(hash=000000000019d6, ver=1, hashPrevBlock=00000000000000, hashMerkleRoot=4a5e1e, nTime=1231006505, nBits=1d00ffff, nNonce=2083236893, vtx=1)
-        //   CTransaction(hash=4a5e1e, ver=1, vin.size=1, vout.size=1, nLockTime=0)
-        //     CTxIn(COutPoint(000000, -1), coinbase 04ffff001d0104455468652054696d65732030332f4a616e2f32303039204368616e63656c6c6f72206f6e206272696e6b206f66207365636f6e64206261696c6f757420666f722062616e6b73)
-        //     CTxOut(nValue=50.00000000, scriptPubKey=0x5F1DF16B2B704C8A578D0B)
-        //   vMerkleTree: 4a5e1e
-
+		// Genesis Block (Main):
+		// CBlock(hash=7520788e2d99eec, PoW=00000f308aff6ee4125a, ver=1, hashPrevBlock=00000000000000000000, hashMerkleRoot=6065d08d75, nTime=1369197853, nBits=1e0ffff0, nNonce=2084576387, vtx=1)
+		//   CTransaction(hash=6065d08d75, ver=1, vin.size=1, vout.size=1, nLockTime=0)
+		//     CTxIn(COutPoint(0000000000, -1), coinbase 04ffff001d01044c4c426f73746f6e20486572616c64202d2032312f4d61792f32303133202d20495253204f6666696369616c20746f2054616b6520466966746820746f204)
+		//     CTxOut(nValue=500.00000000, scriptPubKey=0411582e4e718df82c9d75a4886ab7)
+		//   vMerkleTree: 6065d08d75
+		
+		// Genesis Block (Test):
+		// CBlock(hash=f9e3f18eaa2404b, PoW=00000b75a3fece2f380a, ver=1, hashPrevBlock=00000000000000000000, hashMerkleRoot=6065d08d75, nTime=1369198853, nBits=1e0ffff0, nNonce=386245382, vtx=1)
+		//   CTransaction(hash=6065d08d75, ver=1, vin.size=1, vout.size=1, nLockTime=0)
+		//     CTxIn(COutPoint(0000000000, -1), coinbase 04ffff001d01044c4c426f73746f6e20486572616c64202d2032312f4d61792f32303133202d20495253204f6666696369616c20746f2054616b6520466966746820746f204)
+		//     CTxOut(nValue=500.00000000, scriptPubKey=0411582e4e718df82c9d75a4886ab7)
+		//   vMerkleTree: 6065d08d75
+		
         // Genesis block
-        const char* pszTimestamp = "The Times 03/Jan/2009 Chancellor on brink of second bailout for banks";
+        const char* pszTimestamp = "Boston Herald - 21/May/2013 - IRS Official to Take Fifth to Avoid Testifying";
+
         CTransaction txNew;
         txNew.vin.resize(1);
         txNew.vout.resize(1);
         txNew.vin[0].scriptSig = CScript() << 486604799 << CBigNum(4) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
-        txNew.vout[0].nValue = 50 * COIN;
-        txNew.vout[0].scriptPubKey = CScript() << ParseHex("04678afdb0fe5548271967f1a67130b7105cd6a828e03909a67962e0ea1f61deb649f6bc3f4cef38c4f35504e51ec112de5c384df7ba0b8d578a4c702b6bf11d5f") << OP_CHECKSIG;
+        txNew.vout[0].nValue = 500 * COIN;
+        txNew.vout[0].scriptPubKey = CScript() << ParseHex("0411582e4e718df82c9d75a4886ab7602f0a1b866d81a4e44acba04e847ccd0514b97bee4a61fa73b1474d12851422b01565f244f722f318f1608258b74a3f3fe6") << OP_CHECKSIG;
         CBlock block;
         block.vtx.push_back(txNew);
         block.hashPrevBlock = 0;
         block.hashMerkleRoot = block.BuildMerkleTree();
         block.nVersion = 1;
-        block.nTime    = 1231006505;
-        block.nBits    = 0x1d00ffff;
-        block.nNonce   = 2083236893;
+        block.nBits    = 0x1e0ffff0;
+		
+        block.nTime    = 1369197853;
+        block.nNonce   = 2084576387;
 
         if (fTestNet)
         {
-            block.nTime    = 1296688602;
-            block.nNonce   = 414098458;
+            block.nTime    = 1369198853;
+            block.nNonce   = 386245382;
         }
 
         //// debug print
@@ -2743,7 +2774,7 @@ bool InitBlockIndex() {
         printf("%s\n", hash.ToString().c_str());
         printf("%s\n", hashGenesisBlock.ToString().c_str());
         printf("%s\n", block.hashMerkleRoot.ToString().c_str());
-        assert(block.hashMerkleRoot == uint256("0x4a5e1e4baab89f3a32518a88c31bc87f618f76673e2cc77ab2127b7afdeda33b"));
+        assert(block.hashMerkleRoot == uint256("0x6065d08d755e00a90449abe8a0923d0622feb6f7ab3f435c337369334119e636"));
 		
 	// +Scrypt ----------------------------v
         // If genesis block hash does not match, then generate new genesis hash.
@@ -3050,7 +3081,7 @@ bool static AlreadyHave(const CInv& inv)
 // The message start string is designed to be unlikely to occur in normal data.
 // The characters are rarely used upper ASCII, not valid as UTF-8, and produce
 // a large 4-byte int at any alignment.
-unsigned char pchMessageStart[4] = { 0xf9, 0xbe, 0xb4, 0xd9 };
+unsigned char pchMessageStart[4] = { 0xed, 0xe0, 0xe4, 0xee };
 
 
 void static ProcessGetData(CNode* pfrom)
@@ -4321,7 +4352,7 @@ CBlockTemplate* CreateNewBlock(CReserveKey& reservekey)
             // Prioritize by fee once past the priority size or we run out of high-priority
             // transactions:
             if (!fSortedByFee &&
-                ((nBlockSize + nTxSize >= nBlockPrioritySize) || (dPriority < COIN * 144 / 250)))
+                ((nBlockSize + nTxSize >= nBlockPrioritySize) || (dPriority < COIN * (576 / 250))))
             {
                 fSortedByFee = true;
                 comparer = TxPriorityCompare(fSortedByFee);
