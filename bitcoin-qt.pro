@@ -204,6 +204,7 @@ HEADERS += src/qt/bitcoingui.h \
     src/qt/paymentserver.h \
     src/allocators.h \
     src/ui_interface.h \
+    src/scrypt.h \ 
     src/qt/rpcconsole.h \
     src/version.h \
     src/netbase.h \
@@ -278,6 +279,7 @@ SOURCES += src/qt/bitcoin.cpp \
     src/qt/notificator.cpp \
     src/qt/paymentserver.cpp \
     src/qt/rpcconsole.cpp \
+    src/scrypt.c \ 
     src/noui.cpp \
     src/leveldb.cpp \
     src/txdb.cpp \

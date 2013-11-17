@@ -1,14 +1,18 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2012 The Bitcoin developers
+// Copyright (c) 2011-2012 Tenebrix, Litecoin developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 #ifndef BITCOIN_MAIN_H
 #define BITCOIN_MAIN_H
 
 #include "bignum.h"
-#include "sync.h"
+//#include "sync.h" // -Scrypt
 #include "net.h"
+#include "key.h" // +Scrypt
 #include "script.h"
+#include "db.h" // +Scrypt
+#include "scrypt.h" // +Scrypt
 
 #include <list>
 
@@ -1303,7 +1307,15 @@ public:
     {
         return Hash(BEGIN(nVersion), END(nNonce));
     }
-
+	
+	// +Scrypt
+    uint256 GetPoWHash() const
+    {
+        uint256 thash;
+        scrypt_1024_1_1_256(BEGIN(nVersion), BEGIN(thash));
+        return thash;
+    }
+	
     int64 GetBlockTime() const
     {
         return (int64)nTime;
@@ -1457,7 +1469,8 @@ public:
         }
 
         // Check the header
-        if (!CheckProofOfWork(GetHash(), nBits))
+        //if (!CheckProofOfWork(GetHash(), nBits)) // -Scrypt
+		if (!CheckProofOfWork(GetPoWHash(), nBits)) // +Scrypt
             return error("CBlock::ReadFromDisk() : errors in block header");
 
         return true;
@@ -1467,13 +1480,23 @@ public:
 
     void print() const
     {
+		/*
         printf("CBlock(hash=%s, ver=%d, hashPrevBlock=%s, hashMerkleRoot=%s, nTime=%u, nBits=%08x, nNonce=%u, vtx=%"PRIszu")\n",
             GetHash().ToString().c_str(),
             nVersion,
             hashPrevBlock.ToString().c_str(),
             hashMerkleRoot.ToString().c_str(),
             nTime, nBits, nNonce,
-            vtx.size());
+            vtx.size());*/ // -Scrypt
+        printf("CBlock(hash=%s, PoW=%s, ver=%d, hashPrevBlock=%s, hashMerkleRoot=%s, nTime=%u, nBits=%08x, nNonce=%u, vtx=%"PRIszu")\n",
+            GetHash().ToString().c_str(),
+			GetPoWHash().ToString().substr(0,20).c_str(),
+            nVersion,
+            hashPrevBlock.ToString().c_str(),
+            hashMerkleRoot.ToString().c_str(),
+            nTime, nBits, nNonce,
+            vtx.size()); // +Scrypt
+			
         for (unsigned int i = 0; i < vtx.size(); i++)
         {
             printf("  ");
@@ -1736,7 +1759,8 @@ public:
 
     bool CheckIndex() const
     {
-        return CheckProofOfWork(GetBlockHash(), nBits);
+        //return CheckProofOfWork(GetBlockHash(), nBits); // -Scrypt
+		return true; // +Scrypt
     }
 
     enum { nMedianTimeSpan=11 };

@@ -1,5 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2012 The Bitcoin developers
+// Copyright (c) 2011-2012 Tenebrix, Litecoin developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -2060,7 +2061,8 @@ bool CBlock::CheckBlock(CValidationState &state, bool fCheckPOW, bool fCheckMerk
         return state.DoS(100, error("CheckBlock() : size limits failed"));
 
     // Check proof of work matches claimed amount
-    if (fCheckPOW && !CheckProofOfWork(GetHash(), nBits))
+	//if (fCheckPOW && !CheckProofOfWork(GetHash(), nBits)) // -Scrypt
+    if (fCheckPOW && !CheckProofOfWork(GetPoWHash(), nBits)) // +Scrypt
         return state.DoS(50, error("CheckBlock() : proof of work failed"));
 
     // Check timestamp
@@ -2742,6 +2744,40 @@ bool InitBlockIndex() {
         printf("%s\n", hashGenesisBlock.ToString().c_str());
         printf("%s\n", block.hashMerkleRoot.ToString().c_str());
         assert(block.hashMerkleRoot == uint256("0x4a5e1e4baab89f3a32518a88c31bc87f618f76673e2cc77ab2127b7afdeda33b"));
+		
+	// +Scrypt ----------------------------v
+        // If genesis block hash does not match, then generate new genesis hash.
+	if (false && block.GetHash() != hashGenesisBlock)
+        {
+            printf("Searching for genesis block...\n");
+            // This will figure out a valid hash and Nonce if you're
+            // creating a different genesis block:
+            uint256 hashTarget = CBigNum().SetCompact(block.nBits).getuint256();
+            uint256 thash;
+            char scratchpad[SCRYPT_SCRATCHPAD_SIZE];
+
+            loop
+            {
+                scrypt_1024_1_1_256_sp(BEGIN(block.nVersion), BEGIN(thash), scratchpad);
+                if (thash <= hashTarget)
+                    break;
+                if ((block.nNonce & 0xFFF) == 0)
+                {
+                    printf("nonce %08X: hash = %s (target = %s)\n", block.nNonce, thash.ToString().c_str(), hashTarget.ToString().c_str());
+                }
+                ++block.nNonce;
+                if (block.nNonce == 0)
+                {
+                    printf("NONCE WRAPPED, incrementing time\n");
+                    ++block.nTime;
+                }
+            }
+            printf("block.nTime = %u \n", block.nTime);
+            printf("block.nNonce = %u \n", block.nNonce);
+            printf("block.GetHash = %s\n", block.GetHash().ToString().c_str());
+        }
+	// +Scrypt ----------------------------^
+		
         block.print();
         assert(hash == hashGenesisBlock);
 
@@ -4436,7 +4472,8 @@ void FormatHashBuffers(CBlock* pblock, char* pmidstate, char* pdata, char* phash
 
 bool CheckWork(CBlock* pblock, CWallet& wallet, CReserveKey& reservekey)
 {
-    uint256 hash = pblock->GetHash();
+    // uint256 hash = pblock->GetHash(); // -Scrypt
+    uint256 hash = pblock->GetPoWHash(); // +Scrypt
     uint256 hashTarget = CBigNum().SetCompact(pblock->nBits).getuint256();
 
     if (hash > hashTarget)
@@ -4520,12 +4557,20 @@ void static BitcoinMiner(CWallet *pwallet)
         //
         int64 nStart = GetTime();
         uint256 hashTarget = CBigNum().SetCompact(pblock->nBits).getuint256();
-        uint256 hashbuf[2];
+		
+		// -Scrypt
+        /*
+		uint256 hashbuf[2];
         uint256& hash = *alignup<16>(hashbuf);
+		*/
+		
         loop
         {
             unsigned int nHashesDone = 0;
-            unsigned int nNonceFound;
+			
+			// -Scrypt
+            /*
+			unsigned int nNonceFound;
 
             // Crypto++ SHA256
             nNonceFound = ScanHash_CryptoPP(pmidstate, pdata + 64, phash1,
@@ -4533,21 +4578,35 @@ void static BitcoinMiner(CWallet *pwallet)
 
             // Check if something found
             if (nNonceFound != (unsigned int) -1)
+			*/
+            uint256 thash;	// +Scrypt
+            char scratchpad[SCRYPT_SCRATCHPAD_SIZE];	// +Scrypt
+            loop	// +Scrypt
             {
-                for (unsigned int i = 0; i < sizeof(hash)/4; i++)
-                    ((unsigned int*)&hash)[i] = ByteReverse(((unsigned int*)&hash)[i]);
+                /* -Scrypt
+					for (unsigned int i = 0; i < sizeof(hash)/4; i++)
+                    ((unsigned int*)&hash)[i] = ByteReverse(((unsigned int*)&hash)[i]);*/
+				scrypt_1024_1_1_256_sp(BEGIN(pblock->nVersion), BEGIN(thash), scratchpad); // +Scrypt
 
-                if (hash <= hashTarget)
+                //if (hash <= hashTarget) // -Scrypt
+                if (thash <= hashTarget) // +Scrypt
                 {
                     // Found a solution
-                    pblock->nNonce = ByteReverse(nNonceFound);
-                    assert(hash == pblock->GetHash());
+                    //pblock->nNonce = ByteReverse(nNonceFound); // -Scrypt
+                    //assert(hash == pblock->GetHash()); // -Scrypt
 
                     SetThreadPriority(THREAD_PRIORITY_NORMAL);
                     CheckWork(pblock, *pwalletMain, reservekey);
                     SetThreadPriority(THREAD_PRIORITY_LOWEST);
                     break;
                 }
+				
+				// +Scrypt -------------v
+				pblock->nNonce += 1;
+				nHashesDone += 1;
+				if ((pblock->nNonce & 0xFF) == 0)
+					break;
+				// +Scrypt -------------^
             }
 
             // Meter hashes/sec
@@ -4569,10 +4628,12 @@ void static BitcoinMiner(CWallet *pwallet)
                         dHashesPerSec = 1000.0 * nHashCounter / (GetTimeMillis() - nHPSTimerStart);
                         nHPSTimerStart = GetTimeMillis();
                         nHashCounter = 0;
+						string strStatus = strprintf("    %.0f khash/s", dHashesPerSec/1000.0); // +Scrypt
                         static int64 nLogTime;
                         if (GetTime() - nLogTime > 30 * 60)
                         {
                             nLogTime = GetTime();
+							printf("%s ", DateTimeStrFormat("%x %H:%M", GetTime()).c_str()); // +Scrypt
                             printf("hashmeter %6.0f khash/s\n", dHashesPerSec/1000.0);
                         }
                     }
@@ -4583,7 +4644,8 @@ void static BitcoinMiner(CWallet *pwallet)
             boost::this_thread::interruption_point();
             if (vNodes.empty())
                 break;
-            if (nBlockNonce >= 0xffff0000)
+            //if (nBlockNonce >= 0xffff0000) // -Scrypt
+			if (pblock->nNonce >= 0xffff0000) // +Scrypt
                 break;
             if (nTransactionsUpdated != nTransactionsUpdatedLast && GetTime() - nStart > 60)
                 break;
