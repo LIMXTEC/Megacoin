@@ -1,4 +1,6 @@
 # Copyright (c) 2009-2010 Satoshi Nakamoto
+# Copyright (c) 2013-2079 Dr. Kimoto Chan
+# Copyright (c) 2013-2079 The Megacoin developers
 # Distributed under the MIT/X11 software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -84,7 +86,7 @@ OBJS= \
     obj/main.o \
     obj/net.o \
     obj/protocol.o \
-    obj/bitcoinrpc.o \
+    obj/megacoinrpc.o \
     obj/rpcdump.o \
     obj/rpcnet.o \
     obj/rpcmining.o \
@@ -104,10 +106,10 @@ OBJS= \
     obj/txdb.o
 
 
-all: bitcoind.exe
+all: megacoind.exe
 
-test check: test_bitcoin.exe FORCE
-	test_bitcoin.exe
+test check: test_megacoin.exe FORCE
+	test_megacoin.exe
 
 #
 # LevelDB support
@@ -132,11 +134,11 @@ TESTOBJS := $(patsubst test/%.cpp,obj-test/%.o,$(wildcard test/*.cpp))
 obj-test/%.o: test/%.cpp $(HEADERS)
 	$(CXX) -c $(TESTDEFS) $(CFLAGS) -o $@ $<
 
-test_bitcoin.exe: $(TESTOBJS) $(filter-out obj/init.o,$(OBJS:obj/%=obj/%))
+test_megacoin.exe: $(TESTOBJS) $(filter-out obj/init.o,$(OBJS:obj/%=obj/%))
 	$(CXX) $(CFLAGS) $(LDFLAGS) -o $@ $(LIBPATHS) $^ -lboost_unit_test_framework$(BOOST_SUFFIX) $(LIBS)
 
 clean:
-	rm -f bitcoind.exe test_bitcoin.exe
+	rm -f megacoind.exe test_megacoin.exe
 	rm -f obj/*
 	rm -f obj-test/*
 	cd leveldb && $(MAKE) TARGET_OS=NATIVE_WINDOWS clean && cd ..

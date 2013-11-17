@@ -12,10 +12,10 @@
 #define NUM_MULTIPLES_CENT 10000
 
 // amounts 1 .. 10000
-#define NUM_MULTIPLES_1BTC 10000
+#define NUM_MULTIPLES_1MEC 10000
 
 // amounts 50 .. 21000000
-#define NUM_MULTIPLES_50BTC 420000
+#define NUM_MULTIPLES_50MEC 420000
 
 using namespace std;
 
@@ -49,10 +49,10 @@ BOOST_AUTO_TEST_CASE(compress_amounts)
     for (uint64 i = 1; i <= NUM_MULTIPLES_CENT; i++)
         BOOST_CHECK(TestEncode(i * CENT));
 
-    for (uint64 i = 1; i <= NUM_MULTIPLES_1BTC; i++)
+    for (uint64 i = 1; i <= NUM_MULTIPLES_1MEC; i++)
         BOOST_CHECK(TestEncode(i * COIN));
 
-    for (uint64 i = 1; i <= NUM_MULTIPLES_50BTC; i++)
+    for (uint64 i = 1; i <= NUM_MULTIPLES_50MEC; i++)
         BOOST_CHECK(TestEncode(i * 50 * COIN));
 
     for (uint64 i = 0; i < 100000; i++)

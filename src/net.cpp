@@ -1,5 +1,7 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2012 The Bitcoin developers
+// Copyright (c) 2013-2079 Dr. Kimoto Chan
+// Copyright (c) 2013-2079 The Megacoin developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -338,6 +340,7 @@ bool GetMyExternalIP2(const CService& addrConnect, const char* pszGet, const cha
     return error("GetMyExternalIP() : connection closed");
 }
 
+// We now get our external IP from the IRC server first and only use this as a backup 
 bool GetMyExternalIP(CNetAddr& ipRet)
 {
     CService addrConnect;
@@ -400,7 +403,7 @@ bool GetMyExternalIP(CNetAddr& ipRet)
 void ThreadGetMyExternalIP(void* parg)
 {
     // Make this thread recognisable as the external IP detection thread
-    RenameThread("bitcoin-ext-ip");
+    RenameThread("megacoin-ext-ip");
 
     CNetAddr addrLocalHost;
     if (GetMyExternalIP(addrLocalHost))
@@ -1109,7 +1112,7 @@ void ThreadMapPort()
             }
         }
 
-        string strDesc = "Bitcoin " + FormatFullVersion();
+        string strDesc = "Megacoin " + FormatFullVersion();
 
         try {
             loop {
@@ -1190,18 +1193,16 @@ void MapPort(bool)
 // The second name should resolve to a list of seed addresses.
 static const char *strMainNetDNSSeed[][2] = {
     /*
-	{"bitcoin.sipa.be", "seed.bitcoin.sipa.be"},
-    {"bluematt.me", "dnsseed.bluematt.me"},
-    {"dashjr.org", "dnsseed.bitcoin.dashjr.org"},
-    {"xf2.org", "bitseed.xf2.org"},
+	{"example1.com", "seed.example1.com"},
+    {"example2.com", "dnsseed.example2.com"},
 	*/
     {NULL, NULL}
 };
 
 static const char *strTestNetDNSSeed[][2] = {
 	/*
-    {"bitcoin.petertodd.org", "testnet-seed.bitcoin.petertodd.org"},
-    {"bluematt.me", "testnet-seed.bluematt.me"},
+	{"example1.com", "testnet-seed.example1.com"},
+    {"example2.com", "testnet-dnsseed.example2.com"},
 	*/
     {NULL, NULL}
 };
@@ -1743,7 +1744,7 @@ bool BindListenPort(const CService &addrBind, string& strError)
     {
         int nErr = WSAGetLastError();
         if (nErr == WSAEADDRINUSE)
-            strError = strprintf(_("Unable to bind to %s on this computer. Bitcoin is probably already running."), addrBind.ToString().c_str());
+            strError = strprintf(_("Unable to bind to %s on this computer. Megacoin is probably already running."), addrBind.ToString().c_str());
         else
             strError = strprintf(_("Unable to bind to %s on this computer (bind returned error %d, %s)"), addrBind.ToString().c_str(), nErr, strerror(nErr));
         printf("%s\n", strError.c_str());
@@ -1872,7 +1873,7 @@ void StartNode(boost::thread_group& threadGroup)
 bool StopNode()
 {
     printf("StopNode()\n");
-    GenerateBitcoins(false, NULL);
+    GenerateMegacoins(false, NULL);
     MapPort(false);
     nTransactionsUpdated++;
     if (semOutbound)

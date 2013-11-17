@@ -52,20 +52,20 @@ bool static TestSplitHost(string test, string host, int port)
 
 BOOST_AUTO_TEST_CASE(netbase_splithost)
 {
-    BOOST_CHECK(TestSplitHost("www.bitcoin.org", "www.bitcoin.org", -1));
-    BOOST_CHECK(TestSplitHost("[www.bitcoin.org]", "www.bitcoin.org", -1));
-    BOOST_CHECK(TestSplitHost("www.bitcoin.org:80", "www.bitcoin.org", 80));
-    BOOST_CHECK(TestSplitHost("[www.bitcoin.org]:80", "www.bitcoin.org", 80));
+    BOOST_CHECK(TestSplitHost("www.megacoin.co.nz", "www.megacoin.co.nz", -1));
+    BOOST_CHECK(TestSplitHost("[www.megacoin.co.nz]", "www.megacoin.co.nz", -1));
+    BOOST_CHECK(TestSplitHost("www.megacoin.co.nz:80", "www.megacoin.co.nz", 80));
+    BOOST_CHECK(TestSplitHost("[www.megacoin.co.nz]:80", "www.megacoin.co.nz", 80));
     BOOST_CHECK(TestSplitHost("127.0.0.1", "127.0.0.1", -1));
-    BOOST_CHECK(TestSplitHost("127.0.0.1:8333", "127.0.0.1", 8333));
+    BOOST_CHECK(TestSplitHost("127.0.0.1:7951", "127.0.0.1", 7951));
     BOOST_CHECK(TestSplitHost("[127.0.0.1]", "127.0.0.1", -1));
-    BOOST_CHECK(TestSplitHost("[127.0.0.1]:8333", "127.0.0.1", 8333));
+    BOOST_CHECK(TestSplitHost("[127.0.0.1]:7951", "127.0.0.1", 7951));
     BOOST_CHECK(TestSplitHost("::ffff:127.0.0.1", "::ffff:127.0.0.1", -1));
-    BOOST_CHECK(TestSplitHost("[::ffff:127.0.0.1]:8333", "::ffff:127.0.0.1", 8333));
-    BOOST_CHECK(TestSplitHost("[::]:8333", "::", 8333));
-    BOOST_CHECK(TestSplitHost("::8333", "::8333", -1));
-    BOOST_CHECK(TestSplitHost(":8333", "", 8333));
-    BOOST_CHECK(TestSplitHost("[]:8333", "", 8333));
+    BOOST_CHECK(TestSplitHost("[::ffff:127.0.0.1]:7951", "::ffff:127.0.0.1", 7951));
+    BOOST_CHECK(TestSplitHost("[::]:7951", "::", 7951));
+    BOOST_CHECK(TestSplitHost("::7951", "::7951", -1));
+    BOOST_CHECK(TestSplitHost(":7951", "", 7951));
+    BOOST_CHECK(TestSplitHost("[]:7951", "", 7951));
     BOOST_CHECK(TestSplitHost("", "", -1));
 }
 
@@ -80,10 +80,10 @@ bool static TestParse(string src, string canon)
 BOOST_AUTO_TEST_CASE(netbase_lookupnumeric)
 {
     BOOST_CHECK(TestParse("127.0.0.1", "127.0.0.1:65535"));
-    BOOST_CHECK(TestParse("127.0.0.1:8333", "127.0.0.1:8333"));
+    BOOST_CHECK(TestParse("127.0.0.1:7951", "127.0.0.1:7951"));
     BOOST_CHECK(TestParse("::ffff:127.0.0.1", "127.0.0.1:65535"));
     BOOST_CHECK(TestParse("::", "[::]:65535"));
-    BOOST_CHECK(TestParse("[::]:8333", "[::]:8333"));
+    BOOST_CHECK(TestParse("[::]:7951", "[::]:7951"));
     BOOST_CHECK(TestParse("[127.0.0.1]", "127.0.0.1:65535"));
     BOOST_CHECK(TestParse(":::", ""));
 }

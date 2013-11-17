@@ -1,17 +1,18 @@
 /*
- * Qt4 bitcoin GUI.
+ * Qt4 megacoin GUI.
  *
  * W.J. van der Laan 2011-2012
  * The Bitcoin Developers 2011-2013
+ * Dr. Kimoto Chan 2013-2079
  */
 #include "walletframe.h"
-#include "bitcoingui.h"
+#include "megacoingui.h"
 #include "walletstack.h"
 
 #include <QHBoxLayout>
 #include <QMessageBox>
 
-WalletFrame::WalletFrame(BitcoinGUI *_gui) :
+WalletFrame::WalletFrame(MegacoinGUI *_gui) :
     QFrame(_gui),
     gui(_gui),
     clientModel(0)
@@ -20,7 +21,7 @@ WalletFrame::WalletFrame(BitcoinGUI *_gui) :
     QHBoxLayout *walletFrameLayout = new QHBoxLayout(this);
     setContentsMargins(0,0,0,0);
     walletStack = new WalletStack(this);
-    walletStack->setBitcoinGUI(gui);
+    walletStack->setMegacoinGUI(gui);
     walletFrameLayout->setContentsMargins(0,0,0,0);
     walletFrameLayout->addWidget(walletStack);
 }

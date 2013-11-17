@@ -97,7 +97,7 @@ bool RecvLineFixed(SOCKET hSocket, string& strLine)
 
         char c;
 		
-		// +bitcoin added for irc exits, without this, recv(hSocket, &c, 1, 0); will hang when closing the program after using irc on windows.
+		// +megacoin added for irc exits, without this, recv(hSocket, &c, 1, 0); will hang when closing the program after using irc on windows.
 		bool stop = false;
 		u_long RecvCount;
         while(!stop)

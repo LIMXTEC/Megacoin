@@ -31,7 +31,7 @@ BOOST_AUTO_TEST_CASE(util_criticalsection)
 }
 
 BOOST_AUTO_TEST_CASE(util_MedianFilter)
-{
+{    
     CMedianFilter<int> filter(5, 15);
 
     BOOST_CHECK_EQUAL(filter.median(), 15);
@@ -56,10 +56,10 @@ BOOST_AUTO_TEST_CASE(util_MedianFilter)
 }
 
 static const unsigned char ParseHex_expected[65] = {
-    0x04, 0x67, 0x8a, 0xfd, 0xb0, 0xfe, 0x55, 0x48, 0x27, 0x19, 0x67, 0xf1, 0xa6, 0x71, 0x30, 0xb7,
-    0x10, 0x5c, 0xd6, 0xa8, 0x28, 0xe0, 0x39, 0x09, 0xa6, 0x79, 0x62, 0xe0, 0xea, 0x1f, 0x61, 0xde,
-    0xb6, 0x49, 0xf6, 0xbc, 0x3f, 0x4c, 0xef, 0x38, 0xc4, 0xf3, 0x55, 0x04, 0xe5, 0x1e, 0xc1, 0x12,
-    0xde, 0x5c, 0x38, 0x4d, 0xf7, 0xba, 0x0b, 0x8d, 0x57, 0x8a, 0x4c, 0x70, 0x2b, 0x6b, 0xf1, 0x1d,
+    0x04, 0x67, 0x8a, 0xfd, 0xb0, 0xfe, 0x55, 0x48, 0x27, 0x19, 0x67, 0xf1, 0xa6, 0x71, 0x30, 0xb7, 
+    0x10, 0x5c, 0xd6, 0xa8, 0x28, 0xe0, 0x39, 0x09, 0xa6, 0x79, 0x62, 0xe0, 0xea, 0x1f, 0x61, 0xde, 
+    0xb6, 0x49, 0xf6, 0xbc, 0x3f, 0x4c, 0xef, 0x38, 0xc4, 0xf3, 0x55, 0x04, 0xe5, 0x1e, 0xc1, 0x12, 
+    0xde, 0x5c, 0x38, 0x4d, 0xf7, 0xba, 0x0b, 0x8d, 0x57, 0x8a, 0x4c, 0x70, 0x2b, 0x6b, 0xf1, 0x1d, 
     0x5f
 };
 BOOST_AUTO_TEST_CASE(util_ParseHex)
@@ -106,7 +106,7 @@ BOOST_AUTO_TEST_CASE(util_DateTimeStrFormat)
 /*These are platform-dependant and thus removed to avoid useless test failures
     BOOST_CHECK_EQUAL(DateTimeStrFormat("%Y-%m-%d %H:%M:%S", 0), "1970-01-01 00:00:00");
     BOOST_CHECK_EQUAL(DateTimeStrFormat("%Y-%m-%d %H:%M:%S", 0x7FFFFFFF), "2038-01-19 03:14:07");
-    // Formats used within Bitcoin
+    // Formats used within Megacoin
     BOOST_CHECK_EQUAL(DateTimeStrFormat("%Y-%m-%d %H:%M:%S", 1317425777), "2011-09-30 23:36:17");
     BOOST_CHECK_EQUAL(DateTimeStrFormat("%Y-%m-%d %H:%M", 1317425777), "2011-09-30 23:36");
 */
@@ -123,13 +123,13 @@ BOOST_AUTO_TEST_CASE(util_ParseParameters)
     BOOST_CHECK(mapArgs.empty() && mapMultiArgs.empty());
 
     ParseParameters(5, (char**)argv_test);
-    // expectation: -ignored is ignored (program name argument),
+    // expectation: -ignored is ignored (program name argument), 
     // -a, -b and -ccc end up in map, -d ignored because it is after
     // a non-option argument (non-GNU option parsing)
     BOOST_CHECK(mapArgs.size() == 3 && mapMultiArgs.size() == 3);
-    BOOST_CHECK(mapArgs.count("-a") && mapArgs.count("-b") && mapArgs.count("-ccc")
+    BOOST_CHECK(mapArgs.count("-a") && mapArgs.count("-b") && mapArgs.count("-ccc") 
                 && !mapArgs.count("f") && !mapArgs.count("-d"));
-    BOOST_CHECK(mapMultiArgs.count("-a") && mapMultiArgs.count("-b") && mapMultiArgs.count("-ccc")
+    BOOST_CHECK(mapMultiArgs.count("-a") && mapMultiArgs.count("-b") && mapMultiArgs.count("-ccc") 
                 && !mapMultiArgs.count("f") && !mapMultiArgs.count("-d"));
 
     BOOST_CHECK(mapArgs["-a"] == "" && mapArgs["-ccc"] == "multiple");

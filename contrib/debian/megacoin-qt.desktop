@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Megacoin
+Comment=Megacoin P2P Cryptocurrency
+Comment[fr]=Megacoin, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=Megacoin, eşten eşe kriptografik sanal para birimi
+Exec=/usr/bin/megacoin-qt
+Terminal=false
+Type=Application
+Icon=/usr/share/pixmaps/megacoin128.png
+MimeType=x-scheme-handler/megacoin;
+Categories=Office;

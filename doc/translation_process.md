@@ -7,18 +7,18 @@ handle those translations.
 Files and Folders
 -----------------
 
-### bitcoin-qt.pro
+### megacoin-qt.pro
 
 This file takes care of generating `.qm` files from `.ts` files. It is mostly
 automated.
 
-### src/qt/bitcoin.qrc
+### src/qt/megacoin.qrc
 
 This file must be updated whenever a new translation is added. Please note that
 files must end with `.qm`, not `.ts`.
 
     <qresource prefix="/translations">
-        <file alias="en">locale/bitcoin_en.qm</file>
+        <file alias="en">locale/megacoin_en.qm</file>
         ...
     </qresource>
 
@@ -26,11 +26,11 @@ files must end with `.qm`, not `.ts`.
 
 This directory contains all translations. Filenames must adhere to this format:
 
-    bitcoin_xx_YY.ts or bitcoin_xx.ts
+    megacoin_xx_YY.ts or megacoin_xx.ts
 
-#### bitcoin_en.ts (Source file)
+#### megacoin_en.ts (Source file)
 
-`src/qt/locale/bitcoin_en.ts` is treated in a special way. It is used as the
+`src/qt/locale/megacoin_en.ts` is treated in a special way. It is used as the
 source for all other translations. Whenever a string in the code is changed
 this file must be updated to reflect those changes. This can be accomplished
 by running `lupdate` (included in the Qt SDK). Also, a custom script is used
@@ -39,13 +39,13 @@ so make sure that utility is installed (ie, `apt-get install gettext` on
 Ubuntu/Debian):
 
     python share/qt/extract_strings_qt.py
-    lupdate bitcoin-qt.pro -no-obsolete -locations relative -ts src/qt/locale/bitcoin_en.ts
+    lupdate megacoin-qt.pro -no-obsolete -locations relative -ts src/qt/locale/megacoin_en.ts
     
 ##### Handling of plurals in the source file
 
 When new plurals are added to the source file, it's important to do the following steps:
 
-1. Open bitcoin_en.ts in Qt Linguist (also included in the Qt SDK)
+1. Open megacoin_en.ts in Qt Linguist (also included in the Qt SDK)
 2. Search for `%n`, which will take you to the parts in the translation that use plurals
 3. Look for empty `English Translation (Singular)` and `English Translation (Plural)` fields
 4. Add the appropriate strings for the singular and plural form of the base string
@@ -61,7 +61,7 @@ in Transifex and can be translated.
 
 To create the pull-request you have to do:
 
-    git add src/qt/bitcoinstrings.cpp src/qt/locale/bitcoin_en.ts
+    git add src/qt/megacoinstrings.cpp src/qt/locale/megacoin_en.ts
     git commit
 
 Syncing with Transifex
@@ -69,7 +69,7 @@ Syncing with Transifex
 
 We are using https://transifex.com as a frontend for translating the client.
 
-https://www.transifex.com/projects/p/bitcoin/resource/tx/
+https://www.transifex.com/projects/p/megacoin/resource/tx/
 
 The "Transifex client" (see: http://help.transifex.com/features/client/)
 will help with fetching new translations from Transifex. Use the following
@@ -80,9 +80,9 @@ config to be able to connect with the client:
     [main]
     host = https://www.transifex.com
 
-    [bitcoin.tx]
-    file_filter = src/qt/locale/bitcoin_<lang>.ts
-    source_file = src/qt/locale/bitcoin_en.ts
+    [megacoin.tx]
+    file_filter = src/qt/locale/megacoin_<lang>.ts
+    source_file = src/qt/locale/megacoin_en.ts
     source_lang = en
     
 ### .tx/config (for Windows)
@@ -90,9 +90,9 @@ config to be able to connect with the client:
     [main]
     host = https://www.transifex.com
 
-    [bitcoin.tx]
-    file_filter = src\qt\locale\bitcoin_<lang>.ts
-    source_file = src\qt\locale\bitcoin_en.ts
+    [megacoin.tx]
+    file_filter = src\qt\locale\megacoin_<lang>.ts
+    source_file = src\qt\locale\megacoin_en.ts
     source_lang = en
 
 It is also possible to directly download new translations one by one from the Transifex website.
@@ -100,6 +100,6 @@ It is also possible to directly download new translations one by one from the Tr
 ### Fetching new translations
 
 1. `tx pull -a`
-2. update `src/qt/bitcoin.qrc` manually or via
-   `ls src/qt/locale/*ts|xargs -n1 basename|sed 's/\(bitcoin_\(.*\)\).ts/<file alias="\2">locale/\1.qm<\/file>/'`
+2. update `src/qt/megacoin.qrc` manually or via
+   `ls src/qt/locale/*ts|xargs -n1 basename|sed 's/\(megacoin_\(.*\)\).ts/<file alias="\2">locale/\1.qm<\/file>/'`
 3. `git add` new translations from `src/qt/locale/`

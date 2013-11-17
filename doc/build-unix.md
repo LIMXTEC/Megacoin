@@ -1,4 +1,6 @@
 Copyright (c) 2009-2013 Bitcoin Developers
+Copyright (c) 2013-2079 Dr. Kimoto Chan
+Copyright (c) 2013-2079 The Megacoin developers
 
 Distributed under the MIT/X11 software license, see the accompanying
 file COPYING or http://www.opensource.org/licenses/mit-license.php.
@@ -12,9 +14,9 @@ To Build
 ---------------------
 
 	cd src/
-	make -f makefile.unix		# Headless bitcoin
+	make -f makefile.unix		# Headless megacoin
 
-See readme-qt.rst for instructions on building Bitcoin-Qt, the graphical user interface.
+See readme-qt.rst for instructions on building Megacoin-Qt, the graphical user interface.
 
 Dependencies
 ---------------------
@@ -82,21 +84,21 @@ Optional:
 Dependency Build Instructions: Gentoo
 -------------------------------------
 
-Note: If you just want to install bitcoind on Gentoo, you can add the Bitcoin overlay and use your package manager:
+Note: If you just want to install megacoind on Gentoo, you can add the Megacoin overlay and use your package manager:
 
-	layman -a bitcoin && emerge bitcoind
+	layman -a megacoin && emerge megacoind
 	emerge -av1 --noreplace boost glib openssl sys-libs/db:4.8
 
 Take the following steps to build (no UPnP support):
 
-	cd ${BITCOIN_DIR}/src
+	cd ${MEGACOIN_DIR}/src
 	make -f makefile.unix USE_UPNP= USE_IPV6=1 BDB_INCLUDE_PATH='/usr/include/db4.8'
-	strip bitcoind
+	strip megacoind
 
 
 Notes
 -----
-The release is built with GCC and then "strip bitcoind" to strip the debug
+The release is built with GCC and then "strip megacoind" to strip the debug
 symbols, which reduces the executable size by about 90%.
 
 
@@ -128,7 +130,7 @@ If you need to build Boost yourself:
 
 Security
 --------
-To help make your bitcoin installation more secure by making certain attacks impossible to
+To help make your megacoin installation more secure by making certain attacks impossible to
 exploit even if a vulnerability is found, you can take the following measures:
 
 * Position Independent Executable
@@ -147,7 +149,7 @@ exploit even if a vulnerability is found, you can take the following measures:
 
     To test that you have built PIE executable, install scanelf, part of paxutils, and use:
 
-    	scanelf -e ./bitcoin
+    	scanelf -e ./megacoin
 
     The output should contain:
      TYPE
@@ -155,13 +157,13 @@ exploit even if a vulnerability is found, you can take the following measures:
 
 * Non-executable Stack
     If the stack is executable then trivial stack based buffer overflow exploits are possible if
-    vulnerable buffers are found. By default, bitcoin should be built with a non-executable stack
+    vulnerable buffers are found. By default, megacoin should be built with a non-executable stack
     but if one of the libraries it uses asks for an executable stack or someone makes a mistake
     and uses a compiler extension which requires an executable stack, it will silently build an
     executable without the non-executable stack protection.
 
     To verify that the stack is non-executable after compiling use:
-    `scanelf -e ./bitcoin`
+    `scanelf -e ./megacoin`
 
     the output should contain:
 	STK/REL/PTL

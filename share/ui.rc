@@ -1,4 +1,4 @@
-bitcoin               ICON    "pixmaps/bitcoin.ico"
+megacoin               ICON    "pixmaps/megacoin.ico"
 
 #include "wx/msw/wx.rc"
 

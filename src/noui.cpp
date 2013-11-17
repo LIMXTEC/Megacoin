@@ -1,11 +1,13 @@
 // Copyright (c) 2010 Satoshi Nakamoto
 // Copyright (c) 2009-2012 The Bitcoin developers
+// Copyright (c) 2013-2079 Dr. Kimoto Chan
+// Copyright (c) 2013-2079 The Megacoin developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include "ui_interface.h"
 #include "init.h"
-#include "bitcoinrpc.h"
+#include "megacoinrpc.h"
 
 #include <string>
 
@@ -44,7 +46,7 @@ static void noui_InitMessage(const std::string &message)
 
 void noui_connect()
 {
-    // Connect bitcoind signal handlers
+    // Connect megacoind signal handlers
     uiInterface.ThreadSafeMessageBox.connect(noui_ThreadSafeMessageBox);
     uiInterface.ThreadSafeAskFee.connect(noui_ThreadSafeAskFee);
     uiInterface.InitMessage.connect(noui_InitMessage);

@@ -70,7 +70,7 @@ map<uint256, map<uint256, CDataStream*> > mapOrphanTransactionsByPrev;
 // Constant stuff for coinbase transactions we create:
 CScript COINBASE_FLAGS;
 
-const string strMessageMagic = "Bitcoin Signed Message:\n";
+const string strMessageMagic = "Megacoin Signed Message:\n";
 
 double dHashesPerSec = 0.0;
 int64 nHPSTimerStart = 0;
@@ -374,7 +374,7 @@ bool CTxOut::IsDust() const
     // to spend something, then we consider it dust.
     // A typical txout is 33 bytes big, and will
     // need a CTxIn of at least 148 bytes to spend,
-    // so dust is a txout less than 54 uBTC
+    // so dust is a txout less than 54 uMEC
     // (5430 satoshis) with default nMinRelayTxFee
     return ((nValue*1000)/(3*((int)GetSerializeSize(SER_DISK,0)+148)) < CTransaction::nMinRelayTxFee);
 }
@@ -610,7 +610,7 @@ int64 CTransaction::GetMinFee(unsigned int nBlockSize, bool fAllowFree,
         if (nBlockSize == 1)
         {
             // Transactions under 10K are free
-            // (about 4500 BTC if made of 50 BTC inputs)
+            // (about 4500 MEC if made of 50 MEC inputs)
             if (nBytes < 10000)
                 nMinFee = 0;
         }
@@ -1774,7 +1774,7 @@ bool FindUndoPos(CValidationState &state, int nFile, CDiskBlockPos &pos, unsigne
 static CCheckQueue<CScriptCheck> scriptcheckqueue(128);
 
 void ThreadScriptCheck() {
-    RenameThread("bitcoin-scriptch");
+    RenameThread("megacoin-scriptch");
     scriptcheckqueue.Thread();
 }
 
@@ -4248,7 +4248,7 @@ bool SendMessages(CNode* pto, bool fSendTrickle)
 
 //////////////////////////////////////////////////////////////////////////////
 //
-// BitcoinMiner
+// MegacoinMiner
 //
 
 int static FormatHashBlocks(void* pbuffer, unsigned int len)
@@ -4467,7 +4467,7 @@ CBlockTemplate* CreateNewBlock(CReserveKey& reservekey)
                     nTotalIn += mempool.mapTx[txin.prevout.hash].vout[txin.prevout.n].nValue;
                     continue;
                 }
-                const CCoins &coins = view.GetCoins(txin.prevout.hash);
+				const CCoins &coins = view.GetCoins(txin.prevout.hash);
 
                 int64 nValueIn = coins.vout[txin.prevout.n].nValue;
                 nTotalIn += nValueIn;
@@ -4691,7 +4691,7 @@ bool CheckWork(CBlock* pblock, CWallet& wallet, CReserveKey& reservekey)
         return false;
 
     //// debug print
-    printf("BitcoinMiner:\n");
+    printf("MegacoinMiner:\n");
     printf("proof-of-work found  \n  hash: %s  \ntarget: %s\n", hash.GetHex().c_str(), hashTarget.GetHex().c_str());
     pblock->print();
     printf("generated %s\n", FormatMoney(pblock->vtx[0].vout[0].nValue).c_str());
@@ -4700,7 +4700,7 @@ bool CheckWork(CBlock* pblock, CWallet& wallet, CReserveKey& reservekey)
     {
         LOCK(cs_main);
         if (pblock->hashPrevBlock != hashBestChain)
-            return error("BitcoinMiner : generated block is stale");
+            return error("MegacoinMiner : generated block is stale");
 
         // Remove key from key pool
         reservekey.KeepKey();
@@ -4714,17 +4714,17 @@ bool CheckWork(CBlock* pblock, CWallet& wallet, CReserveKey& reservekey)
         // Process this block the same as if we had received it from another node
         CValidationState state;
         if (!ProcessBlock(state, NULL, pblock))
-            return error("BitcoinMiner : ProcessBlock, block not accepted");
+            return error("MegacoinMiner : ProcessBlock, block not accepted");
     }
 
     return true;
 }
 
-void static BitcoinMiner(CWallet *pwallet)
+void static MegacoinMiner(CWallet *pwallet)
 {
-    printf("BitcoinMiner started\n");
+    printf("MegacoinMiner started\n");
     SetThreadPriority(THREAD_PRIORITY_LOWEST);
-    RenameThread("bitcoin-miner");
+    RenameThread("megacoin-miner");
 
     // Each thread has its own key and counter
     CReserveKey reservekey(pwallet);
@@ -4746,7 +4746,7 @@ void static BitcoinMiner(CWallet *pwallet)
         CBlock *pblock = &pblocktemplate->block;
         IncrementExtraNonce(pblock, pindexPrev, nExtraNonce);
 
-        printf("Running BitcoinMiner with %"PRIszu" transactions in block (%u bytes)\n", pblock->vtx.size(),
+        printf("Running MegacoinMiner with %"PRIszu" transactions in block (%u bytes)\n", pblock->vtx.size(),
                ::GetSerializeSize(*pblock, SER_NETWORK, PROTOCOL_VERSION));
 
         //
@@ -4876,12 +4876,12 @@ void static BitcoinMiner(CWallet *pwallet)
     } }
     catch (boost::thread_interrupted)
     {
-        printf("BitcoinMiner terminated\n");
+        printf("MegacoinMiner terminated\n");
         throw;
     }
 }
 
-void GenerateBitcoins(bool fGenerate, CWallet* pwallet)
+void GenerateMegacoins(bool fGenerate, CWallet* pwallet)
 {
     static boost::thread_group* minerThreads = NULL;
 
@@ -4901,7 +4901,7 @@ void GenerateBitcoins(bool fGenerate, CWallet* pwallet)
 
     minerThreads = new boost::thread_group();
     for (int i = 0; i < nThreads; i++)
-        minerThreads->create_thread(boost::bind(&BitcoinMiner, pwallet));
+        minerThreads->create_thread(boost::bind(&MegacoinMiner, pwallet));
 }
 
 // Amount compression:

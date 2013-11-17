@@ -1,8 +1,10 @@
 // Copyright (c) 2012 The Bitcoin developers
+// Copyright (c) 2013-2079 Dr. Kimoto Chan
+// Copyright (c) 2013-2079 The Megacoin developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
-#ifndef BITCOIN_BLOOM_H
-#define BITCOIN_BLOOM_H
+#ifndef MEGACOIN_BLOOM_H
+#define MEGACOIN_BLOOM_H
 
 #include <vector>
 
@@ -85,4 +87,4 @@ public:
     bool IsRelevantAndUpdate(const CTransaction& tx, const uint256& hash);
 };
 
-#endif /* BITCOIN_BLOOM_H */
+#endif /* MEGACOIN_BLOOM_H */

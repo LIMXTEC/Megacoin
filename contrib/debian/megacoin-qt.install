@@ -1,0 +1,6 @@
+megacoin-qt usr/bin
+share/pixmaps/megacoin32.xpm usr/share/pixmaps
+share/pixmaps/megacoin16.xpm usr/share/pixmaps
+share/pixmaps/megacoin128.png usr/share/pixmaps
+debian/megacoin-qt.desktop usr/share/applications
+debian/megacoin-qt.protocol usr/share/kde4/services/

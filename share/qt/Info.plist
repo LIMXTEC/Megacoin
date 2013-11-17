@@ -3,11 +3,11 @@
 <plist version="0.9">
 <dict>
 	<key>CFBundleIconFile</key>
-	<string>bitcoin.icns</string>
+	<string>megacoin.icns</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleGetInfoString</key>
-	<string>$VERSION, Copyright © 2009-$YEAR The Bitcoin developers</string>
+	<string>$VERSION, Copyright © 2013-2079 Dr. Kimoto Chan, The Megacoin developers</string>
 	<key>CFBundleShortVersionString</key>
 	<string>$VERSION</string>
 	<key>CFBundleVersion</key>
@@ -15,19 +15,19 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleExecutable</key>
-	<string>Bitcoin-Qt</string>
+	<string>Megacoin-Qt</string>
 	<key>CFBundleIdentifier</key>
-	<string>org.bitcoinfoundation.Bitcoin-Qt</string>
+	<string>org.megacoinfoundation.Megacoin-Qt</string>
         <key>CFBundleURLTypes</key>
         <array>
           <dict>
             <key>CFBundleTypeRole</key>
             <string>Editor</string>
             <key>CFBundleURLName</key>
-            <string>org.bitcoinfoundation.BitcoinPayment</string>
+            <string>org.megacoinfoundation.MegacoinPayment</string>
             <key>CFBundleURLSchemes</key>
             <array>
-              <string>bitcoin</string>
+              <string>megacoin</string>
             </array>
           </dict>
         </array>

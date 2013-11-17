@@ -1,9 +1,11 @@
 // Copyright (c) 2010 Satoshi Nakamoto
 // Copyright (c) 2012 The Bitcoin developers
+// Copyright (c) 2013-2079 Dr. Kimoto Chan
+// Copyright (c) 2013-2079 The Megacoin developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
-#ifndef BITCOIN_UI_INTERFACE_H
-#define BITCOIN_UI_INTERFACE_H
+#ifndef MEGACOIN_UI_INTERFACE_H
+#define MEGACOIN_UI_INTERFACE_H
 
 #include <string>
 #include "util.h" // for int64
