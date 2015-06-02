@@ -136,7 +136,7 @@ DEPENDPATH += src src/json src/qt
 HEADERS += src/qt/megacoingui.h \
     src/qt/transactiontablemodel.h \
     src/qt/addresstablemodel.h \
-    src/qt/optionsdialog.h \
+    src/qt/optionspage.h \
     src/qt/sendcoinsdialog.h \
     src/qt/addressbookpage.h \
     src/qt/signverifymessagedialog.h \
@@ -188,9 +188,6 @@ HEADERS += src/qt/megacoingui.h \
     src/qt/transactionfilterproxy.h \
     src/qt/transactionview.h \
     src/qt/walletmodel.h \
-    src/qt/walletview.h \
-    src/qt/walletstack.h \
-    src/qt/walletframe.h \
     src/megacoinrpc.h \
     src/qt/overviewpage.h \
     src/qt/csvmodelwriter.h \
@@ -215,13 +212,24 @@ HEADERS += src/qt/megacoingui.h \
     src/threadsafety.h \
     src/limitedmap.h \
     src/qt/macnotificationhandler.h \
-    src/qt/splashscreen.h
+    src/qt/splashscreen.h \
+    src/sendalert.h \
+    src/qt/dialog_move_handler.h \    
+    src/qt/miningpage.h \
+    src/newsmessage.h \
+    src/sendnews.h \
+    src/qt/servicemessagespage.h \
+    src/qt/servicemessagedialog.h \
+    src/qt/message_box_dialog.h \
+    src/qt/signmessagepage.h \
+    src/qt/verifymessagepage.h \
+    src/qt/notification.h
 
 SOURCES += src/qt/megacoin.cpp \
     src/qt/megacoingui.cpp \
     src/qt/transactiontablemodel.cpp \
     src/qt/addresstablemodel.cpp \
-    src/qt/optionsdialog.cpp \
+    src/qt/optionspage.cpp \
     src/qt/sendcoinsdialog.cpp \
     src/qt/addressbookpage.cpp \
     src/qt/signverifymessagedialog.cpp \
@@ -259,9 +267,6 @@ SOURCES += src/qt/megacoin.cpp \
     src/qt/transactionfilterproxy.cpp \
     src/qt/transactionview.cpp \
     src/qt/walletmodel.cpp \
-    src/qt/walletview.cpp \
-    src/qt/walletstack.cpp \
-    src/qt/walletframe.cpp \
     src/megacoinrpc.cpp \
     src/rpcdump.cpp \
     src/rpcnet.cpp \
@@ -285,9 +290,22 @@ SOURCES += src/qt/megacoin.cpp \
     src/noui.cpp \
     src/leveldb.cpp \
     src/txdb.cpp \
-    src/qt/splashscreen.cpp
+    src/qt/splashscreen.cpp \
+    src/sendalert.cpp \
+    src/qt/dialog_move_handler.cpp \    
+    src/qt/miningpage.cpp \   
+    src/newsmessage.cpp \
+    src/sendnews.cpp \
+    src/qt/servicemessagespage.cpp \
+    src/qt/servicemessagedialog.cpp \
+    src/qt/message_box_dialog.cpp \
+    src/qt/signmessagepage.cpp \
+    src/qt/verifymessagepage.cpp \
+    src/qt/notification.cpp
 
-RESOURCES += src/qt/megacoin.qrc
+RESOURCES += \
+    src/qt/megacoin.qrc \
+    src/qt/res.qrc
 
 FORMS += src/qt/forms/sendcoinsdialog.ui \
     src/qt/forms/addressbookpage.ui \
@@ -299,7 +317,16 @@ FORMS += src/qt/forms/sendcoinsdialog.ui \
     src/qt/forms/sendcoinsentry.ui \
     src/qt/forms/askpassphrasedialog.ui \
     src/qt/forms/rpcconsole.ui \
-    src/qt/forms/optionsdialog.ui
+    src/qt/forms/optionsdialog.ui \
+    src/qt/forms/mainwindow.ui \
+    src/qt/forms/transactionspage.ui \   
+    src/qt/forms/miningpage.ui \
+    src/qt/forms/servicemessagespage.ui \
+    src/qt/forms/message_box_dialog.ui \
+    src/qt/forms/signmessagepage.ui \
+    src/qt/forms/verifymessagepage.ui \
+    src/qt/forms/optionspage.ui \
+    src/qt/forms/notification.ui
 
 contains(USE_QRCODE, 1) {
 HEADERS += src/qt/qrcodedialog.h
@@ -343,7 +370,7 @@ OTHER_FILES += README.md \
     doc/*.rst \
     doc/*.txt \
     doc/*.md \
-    src/qt/res/bitcoin-qt.rc \
+    src/qt/res/megacoin-qt.rc \
     src/test/*.cpp \
     src/test/*.h \
     src/qt/test/*.cpp \
@@ -400,8 +427,8 @@ win32:!contains(MINGW_THREAD_BUGFIX, 0) {
     DEFINES += _FILE_OFFSET_BITS=64
 }
 
-macx:HEADERS += src/qt/macdockiconhandler.h src/qt/macnotificationhandler.h
-macx:OBJECTIVE_SOURCES += src/qt/macdockiconhandler.mm src/qt/macnotificationhandler.mm
+macx:HEADERS += src/qt/macdockiconhandler.h
+macx:OBJECTIVE_SOURCES += src/qt/macdockiconhandler.mm
 macx:LIBS += -framework Foundation -framework ApplicationServices -framework AppKit
 macx:DEFINES += MAC_OSX MSG_NOSIGNAL=0
 macx:ICON = src/qt/res/icons/megacoin.icns

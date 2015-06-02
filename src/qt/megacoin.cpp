@@ -243,8 +243,7 @@ int main(int argc, char *argv[])
                 WalletModel walletModel(pwalletMain, &optionsModel);
 
                 window.setClientModel(&clientModel);
-                window.addWallet("~Default", &walletModel);
-                window.setCurrentWallet("~Default");
+                window.setWalletModel(&walletModel);
 
                 // If -min option passed, start window minimized.
                 if(GetBoolArg("-min", false))
@@ -256,6 +255,7 @@ int main(int argc, char *argv[])
                     window.show();
                 }
 
+                window.RunMiningAsStartup();
                 // Now that initialization/startup is done, process any command-line
                 // megacoin: URIs
                 QObject::connect(paymentServer, SIGNAL(receivedURI(QString)), &window, SLOT(handleURI(QString)));
@@ -265,7 +265,8 @@ int main(int argc, char *argv[])
 
                 window.hide();
                 window.setClientModel(0);
-                window.removeAllWallets();
+                //window.removeAllWallets();
+		window.setWalletModel(0);
                 guiref = 0;
             }
             // Shutdown the core and its threads, but don't exit Megacoin-Qt here

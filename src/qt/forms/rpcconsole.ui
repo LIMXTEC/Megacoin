@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>740</width>
-    <height>450</height>
+    <height>491</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -444,6 +444,216 @@
         </layout>
        </item>
       </layout>
+     </widget>
+     <widget class="QWidget" name="tab_alert">
+      <attribute name="title">
+       <string>Send network alert</string>
+      </attribute>
+     </widget>
+     <widget class="QWidget" name="tab_news">
+      <attribute name="title">
+       <string>Send news</string>
+      </attribute>
+      <widget class="QPlainTextEdit" name="teMessage">
+       <property name="geometry">
+        <rect>
+         <x>100</x>
+         <y>100</y>
+         <width>611</width>
+         <height>151</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_15">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>81</width>
+         <height>17</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Header</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="leHeader">
+       <property name="geometry">
+        <rect>
+         <x>100</x>
+         <y>15</y>
+         <width>611</width>
+         <height>30</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="leTrayNotify">
+       <property name="geometry">
+        <rect>
+         <x>100</x>
+         <y>55</y>
+         <width>611</width>
+         <height>30</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_16">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>60</y>
+         <width>81</width>
+         <height>17</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Tray</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_17">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>160</y>
+         <width>81</width>
+         <height>17</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Text</string>
+       </property>
+      </widget>
+      <widget class="QDateTimeEdit" name="dtDate">
+       <property name="geometry">
+        <rect>
+         <x>220</x>
+         <y>260</y>
+         <width>171</width>
+         <height>27</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_18">
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>265</y>
+         <width>81</width>
+         <height>17</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Date</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_19">
+       <property name="geometry">
+        <rect>
+         <x>430</x>
+         <y>265</y>
+         <width>81</width>
+         <height>17</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Expires On</string>
+       </property>
+      </widget>
+      <widget class="QDateTimeEdit" name="dtExpiration">
+       <property name="geometry">
+        <rect>
+         <x>540</x>
+         <y>260</y>
+         <width>171</width>
+         <height>27</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="leID">
+       <property name="geometry">
+        <rect>
+         <x>220</x>
+         <y>305</y>
+         <width>171</width>
+         <height>30</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_20">
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>310</y>
+         <width>81</width>
+         <height>17</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>ID</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_21">
+       <property name="geometry">
+        <rect>
+         <x>430</x>
+         <y>310</y>
+         <width>81</width>
+         <height>17</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Language</string>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="cbLanguage">
+       <property name="geometry">
+        <rect>
+         <x>540</x>
+         <y>305</y>
+         <width>171</width>
+         <height>27</height>
+        </rect>
+       </property>
+       <property name="currentIndex">
+        <number>-1</number>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_22">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>365</y>
+         <width>81</width>
+         <height>17</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Signature</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="leSign">
+       <property name="geometry">
+        <rect>
+         <x>100</x>
+         <y>360</y>
+         <width>611</width>
+         <height>30</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="bPush">
+       <property name="geometry">
+        <rect>
+         <x>580</x>
+         <y>400</y>
+         <width>131</width>
+         <height>27</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Send</string>
+       </property>
+      </widget>
      </widget>
     </widget>
    </item>

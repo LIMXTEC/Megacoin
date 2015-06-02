@@ -145,6 +145,9 @@ void OptionsDialog::setMapper()
     mapper->addMapping(ui->lang, OptionsModel::Language);
     mapper->addMapping(ui->unit, OptionsModel::DisplayUnit);
     mapper->addMapping(ui->displayAddresses, OptionsModel::DisplayAddresses);
+
+    /* Mining */
+    mapper->addMapping(ui->autoMining, OptionsModel::StartMiningAtStartup);
 }
 
 void OptionsDialog::enableApplyButton()

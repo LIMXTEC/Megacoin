@@ -1,21 +1,18 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2012 The Bitcoin developers
-// Copyright (c) 2011-2012 Tenebrix, Litecoin developers
-// Copyright (c) 2012-2013 Freicoin developers
 // Copyright (c) 2013-2079 Dr. Kimoto Chan
-// Copyright (c) 2013-2079 The Megacoin developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 #ifndef MEGACOIN_MAIN_H
 #define MEGACOIN_MAIN_H
 
 #include "bignum.h"
-//#include "sync.h" // -Scrypt
+//#include "sync.h" // Removed for scrypt
 #include "net.h"
-#include "key.h" // +Scrypt
+#include "key.h" // Added for scrypt
 #include "script.h"
-#include "db.h" // +Scrypt
-#include "scrypt.h" // +Scrypt
+#include "db.h" // Added for scrypt
+#include "scrypt.h" // Added for scrypt
 
 #include <list>
 
@@ -619,7 +616,7 @@ public:
     {
         // Large (in bytes) low-priority (new, small-coin) transactions
         // need a fee.
-        return dPriority > COIN * 576 / 250;
+        return dPriority > COIN * 576 / 250; // Megacoin: (1440) blocks found a day. Priority cutoff is 1 coin day / 250 bytes.
     }
 
     int64 GetMinFee(unsigned int nBlockSize=1, bool fAllowFree=true, enum GetMinFee_mode mode=GMF_BLOCK) const;
@@ -1315,7 +1312,7 @@ public:
         return Hash(BEGIN(nVersion), END(nNonce));
     }
 	
-	// +Scrypt
+	// Added for scrypt
     uint256 GetPoWHash() const
     {
         uint256 thash;

@@ -7,7 +7,7 @@ SetCompressor /SOLID lzma
 !define REGKEY "SOFTWARE\$(^Name)"
 !define VERSION 0.8.99
 !define COMPANY "Megacoin project"
-!define URL http://megacoin.co.nz/
+!define URL http://www.megacoin.org/
 
 # MUI Symbol Definitions
 !define MUI_ICON "../share/pixmaps/megacoin.ico"
@@ -51,7 +51,7 @@ CRCCheck on
 XPStyle on
 BrandingText " "
 ShowInstDetails show
-VIProductVersion 0.8.99.0
+VIProductVersion 0.8.2.99
 VIAddVersionKey ProductName Megacoin
 VIAddVersionKey ProductVersion "${VERSION}"
 VIAddVersionKey CompanyName "${COMPANY}"

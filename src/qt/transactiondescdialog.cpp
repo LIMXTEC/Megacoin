@@ -3,6 +3,7 @@
 
 #include "transactiontablemodel.h"
 
+#include <QDesktopWidget>
 #include <QModelIndex>
 
 TransactionDescDialog::TransactionDescDialog(const QModelIndex &idx, QWidget *parent) :
@@ -12,6 +13,10 @@ TransactionDescDialog::TransactionDescDialog(const QModelIndex &idx, QWidget *pa
     ui->setupUi(this);
     QString desc = idx.data(TransactionTableModel::LongDescriptionRole).toString();
     ui->detailText->setHtml(desc);
+
+    // Center window (deleted)
+//    QRect scr = QApplication::desktop()->screenGeometry();
+//    move(scr.center() - rect().center());
 }
 
 TransactionDescDialog::~TransactionDescDialog()

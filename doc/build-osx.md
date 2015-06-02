@@ -14,7 +14,6 @@ License
 
 Copyright (c) 2009-2012 Bitcoin Developers
 Copyright (c) 2013-2079 Dr. Kimoto Chan
-Copyright (c) 2013-2079 The Megacoin developers
 
 Distributed under the MIT/X11 software license, see the accompanying
 file COPYING or http://www.opensource.org/licenses/mit-license.php.
@@ -101,7 +100,7 @@ Note: After you have installed the dependencies, you should check that the Brew 
 
         openssl version
 
-into Terminal. You should see OpenSSL 1.0.1e 11 Feb 2013.
+into Terminal. You should see OpenSSL 1.0.1g 7 Apr 2014.
 
 If not, you can ensure that the Brew OpenSSL is correctly linked by running
 

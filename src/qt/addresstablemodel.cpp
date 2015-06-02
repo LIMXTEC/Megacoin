@@ -1,5 +1,4 @@
 #include "addresstablemodel.h"
-
 #include "guiutil.h"
 #include "walletmodel.h"
 
@@ -7,9 +6,12 @@
 #include "base58.h"
 
 #include <QFont>
+#include <QColor>
 
 const QString AddressTableModel::Send = "S";
 const QString AddressTableModel::Receive = "R";
+
+extern QFont g_fontHeader;
 
 struct AddressTableEntry
 {
@@ -206,6 +208,9 @@ QVariant AddressTableModel::data(const QModelIndex &index, int role) const
             return Receive;
         default: break;
         }
+    } else if (role == Qt::ForegroundRole)
+    {
+        return QColor(qRgb(171, 127, 130));
     }
     return QVariant();
 }
@@ -276,6 +281,12 @@ QVariant AddressTableModel::headerData(int section, Qt::Orientation orientation,
         if(role == Qt::DisplayRole)
         {
             return columns[section];
+        } else if (role == Qt::FontRole)
+        {
+            return g_fontHeader;
+        } else if (role == Qt::SizeHintRole)
+        {
+            return QSize(0, 24);
         }
     }
     return QVariant();

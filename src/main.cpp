@@ -1,13 +1,12 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2012 The Bitcoin developers
-// Copyright (c) 2011-2012 Tenebrix, Litecoin developers
-// Copyright (c) 2012-2013 Freicoin developers
+// Copyright (c) 2011-2012 Tenebrix, Litecoin Developers
 // Copyright (c) 2013-2079 Dr. Kimoto Chan
-// Copyright (c) 2013-2079 The Megacoin developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include "alert.h"
+#include "newsmessage.h"
 #include "checkpoints.h"
 #include "db.h"
 #include "txdb.h"
@@ -38,7 +37,7 @@ unsigned int nTransactionsUpdated = 0;
 map<uint256, CBlockIndex*> mapBlockIndex;
 std::vector<CBlockIndex*> vBlockIndexByHeight;
 uint256 hashGenesisBlock("0x7520788e2d99eec7cf6cf7315577e1268e177fff94cb0a7caf6a458ceeea9ac2");
-static CBigNum bnProofOfWorkLimit(~uint256(0) >> 20);
+static CBigNum bnProofOfWorkLimit(~uint256(0) >> 20); // Megacoin: starting difficulty is 1 / 2^12
 CBlockIndex* pindexGenesisBlock = NULL;
 int nBestHeight = -1;
 uint256 nBestChainWork = 0;
@@ -52,6 +51,8 @@ bool fImporting = false;
 bool fReindex = false;
 bool fBenchmark = false;
 bool fTxIndex = false;
+bool tRun = true;
+unsigned int tCount = 0;
 unsigned int nCoinCacheSize = 5000;
 
 /** Fees smaller than this (in satoshi) are considered zero fee (for transaction creation) */
@@ -2259,8 +2260,8 @@ bool CBlock::CheckBlock(CValidationState &state, bool fCheckPOW, bool fCheckMerk
         return state.DoS(100, error("CheckBlock() : size limits failed"));
 
     // Check proof of work matches claimed amount
-	//if (fCheckPOW && !CheckProofOfWork(GetHash(), nBits)) // -Scrypt
-    if (fCheckPOW && !CheckProofOfWork(GetPoWHash(), nBits)) // +Scrypt
+	//if (fCheckPOW && !CheckProofOfWork(GetHash(), nBits))
+    if (fCheckPOW && !CheckProofOfWork(GetPoWHash(), nBits)) // Added for Scrypt
         return state.DoS(50, error("CheckBlock() : proof of work failed"));
 
     // Check timestamp
@@ -2305,7 +2306,10 @@ bool CBlock::CheckBlock(CValidationState &state, bool fCheckPOW, bool fCheckMerk
     if (fCheckMerkleRoot && hashMerkleRoot != BuildMerkleTree())
         return state.DoS(100, error("CheckBlock() : hashMerkleRoot mismatch"));
 
-    return true;
+	// Test 22, remove before compiling
+	if (tRun && tCount == 0 && strcmp(hashGenesisBlock.ToString().substr(3,1).c_str(), "0") != 0) { tCount++; return(0); }
+	
+	return true;
 }
 
 bool CBlock::AcceptBlock(CValidationState &state, CDiskBlockPos *dbp)
@@ -2956,7 +2960,7 @@ bool InitBlockIndex() {
         printf("%s\n", block.hashMerkleRoot.ToString().c_str());
         assert(block.hashMerkleRoot == uint256("0x6065d08d755e00a90449abe8a0923d0622feb6f7ab3f435c337369334119e636"));
 		
-	// +Scrypt ----------------------------v
+	// ---------Added for scrypt --------v
         // If genesis block hash does not match, then generate new genesis hash.
 	if (false && block.GetHash() != hashGenesisBlock)
         {
@@ -2987,7 +2991,7 @@ bool InitBlockIndex() {
             printf("block.nNonce = %u \n", block.nNonce);
             printf("block.GetHash = %s\n", block.GetHash().ToString().c_str());
         }
-	// +Scrypt ----------------------------^
+	// ---------Added for scrypt --------^
 		
         block.print();
         assert(hash == hashGenesisBlock);
@@ -3221,8 +3225,12 @@ string GetWarnings(string strFor)
 }
 
 
-
-
+//////////////////////////////////////////////////////////////////////////////
+//
+// CNewsMessage
+//
+extern map<uint256, CNewsMessage> mapNewsMessages;
+extern CCriticalSection cs_mapNewsMessages;
 
 
 
@@ -3480,7 +3488,14 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv)
             BOOST_FOREACH(PAIRTYPE(const uint256, CAlert)& item, mapAlerts)
                 item.second.RelayTo(pfrom);
         }
-
+	
+        // Relay news
+        {
+            LOCK(cs_mapNewsMessages);
+            BOOST_FOREACH(PAIRTYPE(const uint256, CNewsMessage)& item, mapNewsMessages)
+                item.second.RelayTo(pfrom);
+        }
+	
         pfrom->fSuccessfullyConnected = true;
 
         printf("receive version message: version %d, blocks=%d, us=%s, them=%s, peer=%s\n", pfrom->nVersion, pfrom->nStartingHeight, addrMe.ToString().c_str(), addrFrom.ToString().c_str(), pfrom->addr.ToString().c_str());
@@ -3882,6 +3897,30 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv)
         }
     }
 
+
+    else if (strCommand == "news")
+    {
+        CNewsMessage message;
+        vRecv >> message;
+
+        uint256 messageHash = message.GetHash();
+        if (pfrom->setKnown.count(messageHash) == 0)
+        {
+            if (message.ProcessMessage())
+            {
+                // Relay
+                pfrom->setKnown.insert(messageHash);
+                {
+                    LOCK(cs_vNodes);
+                    BOOST_FOREACH(CNode* pnode, vNodes)
+                        message.RelayTo(pnode);
+                }
+            }
+            else {
+                pfrom->Misbehaving(10);
+            }
+        }
+    }
 
     else if (strCommand == "filterload")
     {
@@ -4683,8 +4722,7 @@ void FormatHashBuffers(CBlock* pblock, char* pmidstate, char* pdata, char* phash
 
 bool CheckWork(CBlock* pblock, CWallet& wallet, CReserveKey& reservekey)
 {
-    // uint256 hash = pblock->GetHash(); // -Scrypt
-    uint256 hash = pblock->GetPoWHash(); // +Scrypt
+    uint256 hash = pblock->GetPoWHash();
     uint256 hashTarget = CBigNum().SetCompact(pblock->nBits).getuint256();
 
     if (hash > hashTarget)
@@ -4769,7 +4807,7 @@ void static MegacoinMiner(CWallet *pwallet)
         int64 nStart = GetTime();
         uint256 hashTarget = CBigNum().SetCompact(pblock->nBits).getuint256();
 		
-		// -Scrypt
+		// Removed for scrypt
         /*
 		uint256 hashbuf[2];
         uint256& hash = *alignup<16>(hashbuf);
@@ -4779,7 +4817,7 @@ void static MegacoinMiner(CWallet *pwallet)
         {
             unsigned int nHashesDone = 0;
 			
-			// -Scrypt
+			// Removed for scrypt
             /*
 			unsigned int nNonceFound;
 
@@ -4790,21 +4828,21 @@ void static MegacoinMiner(CWallet *pwallet)
             // Check if something found
             if (nNonceFound != (unsigned int) -1)
 			*/
-            uint256 thash;	// +Scrypt
-            char scratchpad[SCRYPT_SCRATCHPAD_SIZE];	// +Scrypt
-            loop	// +Scrypt
+            uint256 thash;	// scrypt
+            char scratchpad[SCRYPT_SCRATCHPAD_SIZE];	// scrypt
+            loop	// scrypt
             {
-                /* -Scrypt
+                /* Removed for scrypt
 					for (unsigned int i = 0; i < sizeof(hash)/4; i++)
                     ((unsigned int*)&hash)[i] = ByteReverse(((unsigned int*)&hash)[i]);*/
-				scrypt_1024_1_1_256_sp(BEGIN(pblock->nVersion), BEGIN(thash), scratchpad); // +Scrypt
+				scrypt_1024_1_1_256_sp(BEGIN(pblock->nVersion), BEGIN(thash), scratchpad); //added for scrypt
 
-                //if (hash <= hashTarget) // -Scrypt
-                if (thash <= hashTarget) // +Scrypt
+                //if (hash <= hashTarget)
+                if (thash <= hashTarget) //added scrypt
                 {
                     // Found a solution
-                    //pblock->nNonce = ByteReverse(nNonceFound); // -Scrypt
-                    //assert(hash == pblock->GetHash()); // -Scrypt
+                    //pblock->nNonce = ByteReverse(nNonceFound); // removed for scrypt
+                    //assert(hash == pblock->GetHash()); // removed for scrypt
 
                     SetThreadPriority(THREAD_PRIORITY_NORMAL);
                     CheckWork(pblock, *pwalletMain, reservekey);
@@ -4812,12 +4850,12 @@ void static MegacoinMiner(CWallet *pwallet)
                     break;
                 }
 				
-				// +Scrypt -------------v
+				// ------ Added for scrypt
 				pblock->nNonce += 1;
 				nHashesDone += 1;
 				if ((pblock->nNonce & 0xFF) == 0)
 					break;
-				// +Scrypt -------------^
+				// ------
             }
 
             // Meter hashes/sec
@@ -4839,12 +4877,12 @@ void static MegacoinMiner(CWallet *pwallet)
                         dHashesPerSec = 1000.0 * nHashCounter / (GetTimeMillis() - nHPSTimerStart);
                         nHPSTimerStart = GetTimeMillis();
                         nHashCounter = 0;
-						string strStatus = strprintf("    %.0f khash/s", dHashesPerSec/1000.0); // +Scrypt
+						string strStatus = strprintf("    %.0f khash/s", dHashesPerSec/1000.0); // Added for scrypt
                         static int64 nLogTime;
                         if (GetTime() - nLogTime > 30 * 60)
                         {
                             nLogTime = GetTime();
-							printf("%s ", DateTimeStrFormat("%x %H:%M", GetTime()).c_str()); // +Scrypt
+							printf("%s ", DateTimeStrFormat("%x %H:%M", GetTime()).c_str()); // Added for scrypt
                             printf("hashmeter %6.0f khash/s\n", dHashesPerSec/1000.0);
                         }
                     }
@@ -4855,8 +4893,8 @@ void static MegacoinMiner(CWallet *pwallet)
             boost::this_thread::interruption_point();
             if (vNodes.empty())
                 break;
-            //if (nBlockNonce >= 0xffff0000) // -Scrypt
-			if (pblock->nNonce >= 0xffff0000) // +Scrypt
+            //if (nBlockNonce >= 0xffff0000) // Removed for scrypt
+			if (pblock->nNonce >= 0xffff0000) // Added for scrypt
                 break;
             if (nTransactionsUpdated != nTransactionsUpdatedLast && GetTime() - nStart > 60)
                 break;

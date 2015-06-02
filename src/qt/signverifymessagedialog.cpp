@@ -15,12 +15,19 @@
 #include <string>
 #include <vector>
 
+#include <QClipboard>
+#include <QDesktopWidget>
+#include "dialog_move_handler.h"
+
 SignVerifyMessageDialog::SignVerifyMessageDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::SignVerifyMessageDialog),
     model(0)
 {
     ui->setupUi(this);
+    setWindowFlags(Qt::CustomizeWindowHint | Qt::FramelessWindowHint | Qt::Window);
+    ui->wHeader->installEventFilter(new DialogMoveHandler(this));
+    ui->lbTitle->setText(tr("Signatures - Sign / Verify a Message"));
 
 #if (QT_VERSION >= 0x040700)
     /* Do not move this to the XML file, Qt before 4.7 will choke on it */
@@ -72,14 +79,24 @@ void SignVerifyMessageDialog::showTab_SM(bool fShow)
     ui->tabWidget->setCurrentIndex(0);
 
     if (fShow)
+    {
+        // Center window (deleted)
+//        QRect scr = QApplication::desktop()->screenGeometry();
+//        move(scr.center() - rect().center());
         this->show();
+    }
 }
 
 void SignVerifyMessageDialog::showTab_VM(bool fShow)
 {
     ui->tabWidget->setCurrentIndex(1);
     if (fShow)
+    {
+        // Center window (deleted)
+//        QRect scr = QApplication::desktop()->screenGeometry();
+//        move(scr.center() - rect().center());
         this->show();
+    }
 }
 
 void SignVerifyMessageDialog::on_addressBookButton_SM_clicked()
@@ -87,7 +104,7 @@ void SignVerifyMessageDialog::on_addressBookButton_SM_clicked()
     if (model && model->getAddressTableModel())
     {
         AddressBookPage dlg(AddressBookPage::ForSending, AddressBookPage::ReceivingTab, this);
-        dlg.setModel(model->getAddressTableModel());
+        dlg.setModel(model->getAddressTableModel(), true);        
         if (dlg.exec())
         {
             setAddress_SM(dlg.getReturnValue());
@@ -176,7 +193,7 @@ void SignVerifyMessageDialog::on_addressBookButton_VM_clicked()
     if (model && model->getAddressTableModel())
     {
         AddressBookPage dlg(AddressBookPage::ForSending, AddressBookPage::SendingTab, this);
-        dlg.setModel(model->getAddressTableModel());
+        dlg.setModel(model->getAddressTableModel(), true);
         if (dlg.exec())
         {
             setAddress_VM(dlg.getReturnValue());

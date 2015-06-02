@@ -9,8 +9,10 @@
 #include "guiutil.h"
 #include "askpassphrasedialog.h"
 #include "base58.h"
+#include "net.h"
 
 #include <QMessageBox>
+#include <QLocale>
 #include <QTextDocument>
 #include <QScrollBar>
 
@@ -22,14 +24,14 @@ SendCoinsDialog::SendCoinsDialog(QWidget *parent) :
     ui->setupUi(this);
 
 #ifdef Q_OS_MAC // Icons on push buttons are very uncommon on Mac
-    ui->addButton->setIcon(QIcon());
+    // ui->addButton->setIcon(QIcon());
     ui->clearButton->setIcon(QIcon());
     ui->sendButton->setIcon(QIcon());
 #endif
 
     addEntry();
 
-    connect(ui->addButton, SIGNAL(clicked()), this, SLOT(addEntry()));
+    // connect(ui->addButton, SIGNAL(clicked()), this, SLOT(addEntry()));
     connect(ui->clearButton, SIGNAL(clicked()), this, SLOT(clear()));
 
     fNewRecipientAllowed = true;
@@ -199,6 +201,7 @@ SendCoinsEntry *SendCoinsDialog::addEntry()
     entry->setModel(model);
     ui->entries->addWidget(entry);
     connect(entry, SIGNAL(removeEntry(SendCoinsEntry*)), this, SLOT(removeEntry(SendCoinsEntry*)));
+    connect(entry, SIGNAL(addEntry()), this, SLOT(addEntry()));
 
     updateRemoveEnabled();
 
@@ -244,8 +247,7 @@ QWidget *SendCoinsDialog::setupTabChain(QWidget *prev)
             prev = entry->setupTabChain(prev);
         }
     }
-    QWidget::setTabOrder(prev, ui->addButton);
-    QWidget::setTabOrder(ui->addButton, ui->sendButton);
+    QWidget::setTabOrder(prev, ui->sendButton);
     return ui->sendButton;
 }
 

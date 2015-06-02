@@ -1,6 +1,5 @@
 Copyright (c) 2009-2013 Bitcoin Developers
 Copyright (c) 2013-2079 Dr. Kimoto Chan
-Copyright (c) 2013-2079 The Megacoin developers
 
 Distributed under the MIT/X11 software license, see the accompanying
 file COPYING or http://www.opensource.org/licenses/mit-license.php.
@@ -48,7 +47,7 @@ Licenses of statically linked libraries:
 
 - Versions used in this release:
 -  GCC           4.3.3
--  OpenSSL       1.0.1c
+-  OpenSSL       1.0.1g
 -  Berkeley DB   4.8.30.NC
 -  Boost         1.37
 -  miniupnpc     1.6
@@ -73,6 +72,12 @@ for other Ubuntu & Debian:
 
 	sudo apt-get install libdb4.8-dev
 	sudo apt-get install libdb4.8++-dev
+	or
+	sudo apt-get install libdb5.1-dev
+	sudo apt-get install libdb5.1++-dev
+	
+	then
+	
 	sudo apt-get install libboost1.37-dev
  (If using Boost 1.37, append -mt to the boost libraries in the makefile)
 

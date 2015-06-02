@@ -7,71 +7,157 @@
     <x>0</x>
     <y>0</y>
     <width>729</width>
-    <height>136</height>
+    <height>112</height>
    </rect>
   </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string notr="true"/>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QLabel {
+	color: #AF272E;
+}
+QLineEdit {
+	border: 1px solid #ededed;
+	background-color: white;
+	min-height: 20px;
+}
+QComboBox {
+	border: 1px solid #ededed;
+	background-color: white;
+	min-height: 20px;
+	max-width: 60px;
+}</string>
   </property>
   <property name="frameShape">
-   <enum>QFrame::StyledPanel</enum>
+   <enum>QFrame::NoFrame</enum>
   </property>
   <property name="frameShadow">
    <enum>QFrame::Sunken</enum>
   </property>
-  <layout class="QGridLayout" name="gridLayout">
-   <property name="spacing">
-    <number>12</number>
-   </property>
-   <item row="5" column="0">
-    <widget class="QLabel" name="label">
-     <property name="text">
-      <string>A&amp;mount:</string>
+  <property name="lineWidth">
+   <number>0</number>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_2">
+   <item row="0" column="0">
+    <spacer name="horizontalSpacer">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
      </property>
-     <property name="alignment">
-      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>40</width>
+       <height>20</height>
+      </size>
      </property>
-     <property name="buddy">
-      <cstring>payAmount</cstring>
-     </property>
-    </widget>
+    </spacer>
    </item>
-   <item row="3" column="0">
-    <widget class="QLabel" name="label_2">
-     <property name="text">
-      <string>Pay &amp;To:</string>
+   <item row="0" column="1">
+    <layout class="QGridLayout" name="gridLayout">
+     <property name="verticalSpacing">
+      <number>10</number>
      </property>
-     <property name="alignment">
-      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-     </property>
-     <property name="buddy">
-      <cstring>payTo</cstring>
-     </property>
-    </widget>
-   </item>
-   <item row="5" column="1">
-    <widget class="MegacoinAmountField" name="payAmount"/>
-   </item>
-   <item row="4" column="0">
-    <widget class="QLabel" name="label_4">
-     <property name="text">
-      <string>&amp;Label:</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-     </property>
-     <property name="buddy">
-      <cstring>addAsLabel</cstring>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="1">
-    <layout class="QHBoxLayout" name="payToLayout">
-     <property name="spacing">
-      <number>0</number>
-     </property>
-     <item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="label_2">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Pay &amp;To:</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+       <property name="buddy">
+        <cstring>payTo</cstring>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="label_4">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>&amp;Label:</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+       <property name="buddy">
+        <cstring>addAsLabel</cstring>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="label">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>A&amp;mount:</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+       <property name="buddy">
+        <cstring>payAmount</cstring>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <widget class="MegacoinAmountField" name="payAmount">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="1" column="1">
+      <widget class="QValidatedLineEdit" name="addAsLabel">
+       <property name="toolTip">
+        <string>Enter a label for this address to add it to your address book</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
       <widget class="QValidatedLineEdit" name="payTo">
+       <property name="minimumSize">
+        <size>
+         <width>300</width>
+         <height>22</height>
+        </size>
+       </property>
        <property name="toolTip">
         <string>The address to send the payment to (e.g. MNS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</string>
        </property>
@@ -80,69 +166,229 @@
        </property>
       </widget>
      </item>
+    </layout>
+   </item>
+   <item row="0" column="2">
+    <layout class="QVBoxLayout" name="verticalLayout">
      <item>
-      <widget class="QToolButton" name="addressBookButton">
-       <property name="toolTip">
-        <string>Choose address from address book</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="icon">
-        <iconset resource="../megacoin.qrc">
-         <normaloff>:/icons/address-book</normaloff>:/icons/address-book</iconset>
-       </property>
-       <property name="shortcut">
-        <string>Alt+A</string>
-       </property>
-      </widget>
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <item>
+        <widget class="QPushButton" name="addButton">
+         <property name="minimumSize">
+          <size>
+           <width>28</width>
+           <height>28</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>28</width>
+           <height>28</height>
+          </size>
+         </property>
+         <property name="toolTip">
+          <string>Send to multiple recipients at once</string>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton {
+	border: 0px solid gray;
+	image: url(:/res/add_receiver/normal.png);
+}
+
+QPushButton:!enabled {
+	image: url(:/res/add_receiver/disabled.png);
+}
+
+QPushButton:pressed:flat {
+	image: url(:/res/add_receiver/pressed.png);
+}
+
+QPushButton:hover {
+	image: url(:/res/add_receiver/hover.png);
+}</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="shortcut">
+          <string>Alt+P</string>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pasteButton">
+         <property name="minimumSize">
+          <size>
+           <width>28</width>
+           <height>28</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>28</width>
+           <height>28</height>
+          </size>
+         </property>
+         <property name="toolTip">
+          <string>Paste address from clipboard</string>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton {
+	border: 0px solid gray;
+	image: url(:/res/paste/normal.png);	
+}
+
+QPushButton:!enabled {
+	image: url(:/res/paste/disabled.png);
+}
+
+QPushButton:pressed:flat {
+	image: url(:/res/paste/pressed.png);
+}
+
+QPushButton:hover {
+	image: url(:/res/paste/hover.png);
+}</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="shortcut">
+          <string>Alt+A</string>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="addressBookButton">
+         <property name="minimumSize">
+          <size>
+           <width>28</width>
+           <height>28</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>28</width>
+           <height>28</height>
+          </size>
+         </property>
+         <property name="toolTip">
+          <string>Choose address from address book</string>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton {
+	border: 0px solid gray;
+	image: url(:/res/addressbook/normal.png);
+}
+
+QPushButton:!enabled {
+	image: url(:/res/addressbook/disabled.png);
+}
+
+QPushButton:pressed:flat {
+	image: url(:/res/addressbook/pressed.png);
+}
+
+QPushButton:hover {
+	image: url(:/res/addressbook/hover.png);
+}</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="shortcut">
+          <string>Alt+P</string>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="deleteButton">
+         <property name="minimumSize">
+          <size>
+           <width>28</width>
+           <height>28</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>28</width>
+           <height>28</height>
+          </size>
+         </property>
+         <property name="toolTip">
+          <string>Remove this recipient</string>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton {
+	border: 0px solid gray;
+	image: url(:/res/del_receiver/normal.png);
+}
+
+QPushButton:!enabled {
+	image: url(:/res/del_receiver/disabled.png);
+}
+
+QPushButton:pressed:flat {
+	image: url(:/res/del_receiver/pressed.png);
+}
+
+QPushButton:hover {
+	image: url(:/res/del_receiver/hover.png);
+}</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </item>
      <item>
-      <widget class="QToolButton" name="pasteButton">
-       <property name="toolTip">
-        <string>Paste address from clipboard</string>
+      <spacer name="verticalSpacer">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
        </property>
-       <property name="text">
-        <string/>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
        </property>
-       <property name="icon">
-        <iconset resource="../megacoin.qrc">
-         <normaloff>:/icons/editpaste</normaloff>:/icons/editpaste</iconset>
-       </property>
-       <property name="shortcut">
-        <string>Alt+P</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QToolButton" name="deleteButton">
-       <property name="toolTip">
-        <string>Remove this recipient</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="icon">
-        <iconset resource="../megacoin.qrc">
-         <normaloff>:/icons/remove</normaloff>:/icons/remove</iconset>
-       </property>
-      </widget>
+      </spacer>
      </item>
     </layout>
    </item>
-   <item row="4" column="1">
-    <widget class="QValidatedLineEdit" name="addAsLabel">
-     <property name="toolTip">
-      <string>Enter a label for this address to add it to your address book</string>
+   <item row="0" column="3">
+    <spacer name="horizontalSpacer_2">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
      </property>
-    </widget>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>40</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
    </item>
   </layout>
  </widget>
  <customwidgets>
   <customwidget>
    <class>MegacoinAmountField</class>
-   <extends>QLineEdit</extends>
+   <extends>QSpinBox</extends>
    <header>megacoinamountfield.h</header>
    <container>1</container>
   </customwidget>
@@ -152,8 +398,11 @@
    <header>qvalidatedlineedit.h</header>
   </customwidget>
  </customwidgets>
- <resources>
-  <include location="../megacoin.qrc"/>
- </resources>
+ <resources/>
  <connections/>
+ <slots>
+  <slot>pasteRequested()</slot>
+  <slot>addFromAddressBookRequested()</slot>
+  <slot>deleteRequested()</slot>
+ </slots>
 </ui>

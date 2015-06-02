@@ -1,6 +1,5 @@
 // Copyright (c) 2009-2012 The Bitcoin developers
 // Copyright (c) 2013-2079 Dr. Kimoto Chan
-// Copyright (c) 2013-2079 The Megacoin developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -51,13 +50,15 @@ namespace Checkpoints
 		(  39500, uint256("0x3eb61d9897009caa6ed492fc154121849166d7a627f26322eae9cf32c7dc753b"))
 		(  44400, uint256("0xeb5af032f88981810f31f13e38e33c86585dbf963ea6de199382706dc5b3aee4"))
 		(  59300, uint256("0x558cf1f1fe31eb0816f9fc73900133564c29b50b626cbf82c69860fd3583653c"))
-		(  62767, uint256("0x5bd5d25c8a19b764634435b9ab1121b4678fbf6e6ad771b252f75f3cdfa82131"))		
+		(  62767, uint256("0x5bd5d25c8a19b764634435b9ab1121b4678fbf6e6ad771b252f75f3cdfa82131"))
 		(  96800, uint256("0xf972b9421ac790af82cd63f5db1dbbee114ce3476486d4335f46c6d7d8897671"))
+		( 106980, uint256("0x0144e525eb188106e435af296caf2bf707e174c65b1b50361b9dfeb942123cab"))
+		( 184000, uint256("0x61974eed4dd83c7b4b4954593769fe1939e00d701bd5cfd17d30eeb986dae67c"))
     ;
     static const CCheckpointData data = {
         &mapCheckpoints,
-        1384183736, // * UNIX timestamp of last checkpoint block
-        365070,   	// * total number of transactions between genesis and last checkpoint
+        1397271012, // * UNIX timestamp of last checkpoint block
+        709594,   	// * total number of transactions between genesis and last checkpoint
                     //   (the tx=... number in the SetBestChain debug.log lines)
         60000.0     // * estimated number of transactions per day after checkpoint
     };

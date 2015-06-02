@@ -2,7 +2,7 @@ Release Process
 ====================
 
 * update translations (ping wumpus, Diapolo or tcatm on IRC)
-* see https://github.com/megacoin/megacoin/blob/master/doc/translation_process.md#syncing-with-transifex
+* see https://github.com/bitcoin/bitcoin/blob/master/doc/translation_process.md#syncing-with-transifex
 
 * * *
 
@@ -37,7 +37,7 @@ Release Process
 
 	mkdir -p inputs; cd inputs/
 	wget 'http://miniupnp.free.fr/files/download.php?file=miniupnpc-1.6.tar.gz' -O miniupnpc-1.6.tar.gz
-	wget 'http://www.openssl.org/source/openssl-1.0.1c.tar.gz'
+	wget 'http://www.openssl.org/source/openssl-1.0.1g.tar.gz'
 	wget 'http://download.oracle.com/berkeley-db/db-4.8.30.NC.tar.gz'
 	wget 'http://zlib.net/zlib-1.2.6.tar.gz'
 	wget 'ftp://ftp.simplesystems.org/pub/libpng/png/src/libpng-1.5.9.tar.gz'
@@ -110,14 +110,14 @@ repackage gitian builds for release as stand-alone zip/tar/installer exe
 
 * create SHA256SUMS for builds, and PGP-sign it
 
-* update megacoin.co.nz version
+* update megacoin.org version
   make sure all OS download links go to the right versions
 
 * update forum version
 
 * update wiki download links
 
-* update wiki changelog: [http://megacoin.co.nz/](http://megacoin.co.nz/)
+* update wiki changelog: [https://en.megacoin.it/wiki/Changelog](https://en.megacoin.it/wiki/Changelog)
 
 Commit your signature to gitian.sigs:
 

@@ -48,6 +48,7 @@ void OptionsModel::Init()
     fMinimizeOnClose = settings.value("fMinimizeOnClose", false).toBool();
     nTransactionFee = settings.value("nTransactionFee").toLongLong();
     language = settings.value("language", "").toString();
+    bStartMiningAtStartup = settings.value("bStartMiningAtStartup", false).toBool();
 
     // These are shared with core Megacoin; we want
     // command-line options to override the GUI settings:
@@ -59,6 +60,10 @@ void OptionsModel::Init()
         SoftSetArg("-socks", settings.value("nSocksVersion").toString().toStdString());
     if (!language.isEmpty())
         SoftSetArg("-lang", language.toStdString());
+
+    bAllowSounds = settings.value("bAllowSounds", true).toBool();
+    bCheckUpdatesAtStartup = settings.value("bCheckUpdatesAtStartup", false).toBool();
+    bCheckUpdatesAtStartup = false;
 }
 
 void OptionsModel::Reset()
@@ -103,7 +108,7 @@ bool OptionsModel::Upgrade()
         }
     }
     QList<QString> boolOptions;
-    boolOptions << "bDisplayAddresses" << "fMinimizeToTray" << "fMinimizeOnClose" << "fUseProxy" << "fUseUPnP";
+    boolOptions << "bDisplayAddresses" << "fMinimizeToTray" << "fMinimizeOnClose" << "fUseProxy" << "fUseUPnP" << "bStartMiningAtStartup";
     foreach(QString key, boolOptions)
     {
         bool value = false;
@@ -192,10 +197,16 @@ QVariant OptionsModel::data(const QModelIndex & index, int role) const
             return QVariant(nTransactionFee);
         case DisplayUnit:
             return QVariant(nDisplayUnit);
-        case DisplayAddresses:
-            return QVariant(bDisplayAddresses);
-        case Language:
-            return settings.value("language", "");
+            case DisplayAddresses:
+                return QVariant(bDisplayAddresses);
+            case Language:
+                return settings.value("language", "");
+            case StartMiningAtStartup:
+                return QVariant(bStartMiningAtStartup);
+        case AllowSounds:
+            return QVariant(bAllowSounds);
+        case CheckUpdatesAtStartup:
+            return QVariant(bCheckUpdatesAtStartup);
         default:
             return QVariant();
         }
@@ -276,6 +287,18 @@ bool OptionsModel::setData(const QModelIndex & index, const QVariant & value, in
             break;
         case Language:
             settings.setValue("language", value);
+            break;
+        case StartMiningAtStartup:
+            bStartMiningAtStartup = value.toBool();
+            settings.setValue("bStartMiningAtStartup", bStartMiningAtStartup);
+            break;
+        case AllowSounds:
+            bAllowSounds = value.toBool();
+            settings.setValue("bAllowSounds", bAllowSounds);
+            break;
+        case CheckUpdatesAtStartup:
+            bCheckUpdatesAtStartup = value.toBool();
+            settings.setValue("bCheckUpdatesAtStartup", bCheckUpdatesAtStartup);
             break;
         default:
             break;

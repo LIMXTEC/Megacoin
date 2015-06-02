@@ -1,14 +1,49 @@
 // Copyright (c) 2009-2012 Bitcoin Developers
 // Copyright (c) 2013-2079 Dr. Kimoto Chan
-// Copyright (c) 2013-2079 The Megacoin developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include "net.h"
 #include "megacoinrpc.h"
+#include "sendalert.h"
+#include "sendnews.h"
 
 using namespace json_spirit;
 using namespace std;
+
+Value sendalert(const Array& params, bool fHelp)
+{
+    if (fHelp || params.size() != 2)
+        throw runtime_error(
+            "sendalert(text, private key) \n"
+            "Send alert message to the Megacoin network.");
+    string strMessage;
+    string sig;
+    strMessage = params[0].get_str();
+    sig = params[1].get_str();
+    CSendAlert sendAlert;
+    sendAlert.Test(strMessage, sig);
+    return (bool)true;
+}
+
+Value sendnews(const Array& params, bool fHelp)
+{
+    if (fHelp || params.size() != 4)
+        throw runtime_error(
+            "sendnews(header, text, status, private key) \n"
+            "Send news message to Megacoin network.");
+    string strHeader;
+    string strMsg;
+    string strStatus;
+    string sig;
+    strHeader = params[0].get_str();
+    strMsg = params[1].get_str();
+    strStatus = params[2].get_str();
+    sig = params[3].get_str();
+    CSendNewsMessage sendNewsMessage;
+    sendNewsMessage.Test(strHeader, strMsg, strStatus, sig);
+    return (bool)true;
+}
 
 Value getconnectioncount(const Array& params, bool fHelp)
 {

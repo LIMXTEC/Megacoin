@@ -7,10 +7,9 @@ Source: http://sourceforge.net/projects/megacoin/files/
 
 Files: *
 Copyright: 2013-2079 Dr. Kimoto Chan
-Copyright: 2013-2079 The Megacoin developers
 Copyright: 2009-2012, Bitcoin Developers
 License: Expat
-Comment: The Megacoin Developers encompasses the current developers listed on http://megacoin.co.nz/,
+Comment: The Megacoin Developers encompasses the current developers listed on megacoin.org,
          as well as the numerous contributors to the project.
 
 Files: src/json/*

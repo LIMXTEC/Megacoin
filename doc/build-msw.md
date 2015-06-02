@@ -1,6 +1,5 @@
 Copyright (c) 2009-2013 Bitcoin Developers
 Copyright (c) 2013-2079 Dr. Kimoto Chan
-Copyright (c) 2013-2079 The Megacoin developers
 
 Distributed under the MIT/X11 software license, see the accompanying
 file COPYING or http://www.opensource.org/licenses/mit-license.php.
@@ -25,7 +24,7 @@ Dependencies
 Libraries you need to download separately and build:
 
                 default path               download
-OpenSSL         \openssl-1.0.1c-mgw        http://www.openssl.org/source/
+OpenSSL         \openssl-1.0.1g-mgw        http://www.openssl.org/source/
 Berkeley DB     \db-4.8.30.NC-mgw          http://www.oracle.com/technology/software/products/berkeley-db/index.html
 Boost           \boost-1.50.0-mgw          http://www.boost.org/users/download/
 miniupnpc       \miniupnpc-1.6-mgw         http://miniupnp.tuxfamily.org/files/
@@ -39,7 +38,7 @@ Their licenses:
 
 Versions used in this release:
 
-	OpenSSL      1.0.1c
+	OpenSSL      1.0.1g
 	Berkeley DB  4.8.30.NC
 	Boost        1.50.0
 	miniupnpc    1.6
@@ -52,7 +51,7 @@ MSYS shell:
 un-tar sources with MSYS 'tar xfz' to avoid issue with symlinks (OpenSSL ticket 2377)
 change 'MAKE' env. variable from 'C:\MinGW32\bin\mingw32-make.exe' to '/c/MinGW32/bin/mingw32-make.exe'
 
-	cd /c/openssl-1.0.1c-mgw
+	cd /c/openssl-1.0.1g-mgw
 	./config
 	make
 

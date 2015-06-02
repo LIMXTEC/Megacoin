@@ -48,7 +48,7 @@ void SendCoinsEntry::on_addressBookButton_clicked()
     if(!model)
         return;
     AddressBookPage dlg(AddressBookPage::ForSending, AddressBookPage::SendingTab, this);
-    dlg.setModel(model->getAddressTableModel());
+    dlg.setModel(model->getAddressTableModel(), true);
     if(dlg.exec())
     {
         ui->payTo->setText(dlg.getReturnValue());
@@ -89,6 +89,11 @@ void SendCoinsEntry::clear()
     ui->payTo->setFocus();
     // update the display unit, to not use the default ("MEC")
     updateDisplayUnit();
+}
+
+void SendCoinsEntry::on_addButton_clicked()
+{
+    emit addEntry();
 }
 
 void SendCoinsEntry::on_deleteButton_clicked()
@@ -139,9 +144,10 @@ SendCoinsRecipient SendCoinsEntry::getValue()
 QWidget *SendCoinsEntry::setupTabChain(QWidget *prev)
 {
     QWidget::setTabOrder(prev, ui->payTo);
-    QWidget::setTabOrder(ui->payTo, ui->addressBookButton);
-    QWidget::setTabOrder(ui->addressBookButton, ui->pasteButton);
-    QWidget::setTabOrder(ui->pasteButton, ui->deleteButton);
+    QWidget::setTabOrder(ui->payTo, ui->addButton);
+    QWidget::setTabOrder(ui->addButton, ui->pasteButton);
+    QWidget::setTabOrder(ui->pasteButton, ui->addressBookButton);
+    QWidget::setTabOrder(ui->addressBookButton, ui->deleteButton);
     QWidget::setTabOrder(ui->deleteButton, ui->addAsLabel);
     return ui->payAmount->setupTabChain(ui->addAsLabel);
 }

@@ -1,19 +1,26 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="zh_CN" version="2.0">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.0" language="zh_CN">
 <defaultcodec>UTF-8</defaultcodec>
 <context>
     <name>AboutDialog</name>
     <message>
-        <location filename="../forms/aboutdialog.ui" line="+14"/>
-        <source>About Megacoin</source>
-        <translation>关于美卡币</translation>
+        <location filename="../forms/aboutdialog.ui" line="+26"/>
+        <source>Dialog</source>
+        <translation>对话</translation>
     </message>
     <message>
-        <location line="+39"/>
+        <location line="+125"/>
+        <source>Information about program</source>
+        <translation>显示相关信息</translation>
+    </message>
+    <message>
+        <location line="+91"/>
         <source>&lt;b&gt;Megacoin&lt;/b&gt; version</source>
         <translation>&lt;b&gt;美卡币&lt;/b&gt;版本</translation>
     </message>
     <message>
-        <location line="+57"/>
+        <location line="+170"/>
         <source>
 This is experimental software.
 
@@ -28,7 +35,12 @@ Distributed under the MIT/X11 software license, see the accompanying file COPYIN
 This product includes software developed by the OpenSSL Project for use in the OpenSSL Toolkit (http://www.openssl.org/) and cryptographic software written by Eric Young (eay@cryptsoft.com) and UPnP software written by Thomas Bernard.</translation>
     </message>
     <message>
-        <location filename="../aboutdialog.cpp" line="+14"/>
+        <location line="+105"/>
+        <source>OK</source>
+        <translation>确定</translation>
+    </message>
+    <message>
+        <location filename="../aboutdialog.cpp" line="+21"/>
         <source>Copyright</source>
         <translation>版权</translation>
     </message>
@@ -41,92 +53,43 @@ This product includes software developed by the OpenSSL Project for use in the O
 <context>
     <name>AddressBookPage</name>
     <message>
-        <location filename="../forms/addressbookpage.ui" line="+14"/>
+        <location filename="../forms/addressbookpage.ui" line="+159"/>
+        <location line="+137"/>
         <source>Address Book</source>
         <translation>通讯录</translation>
     </message>
     <message>
-        <location line="+19"/>
+        <location line="+48"/>
         <source>Double-click to edit address or label</source>
         <translation>双击以编辑地址或标签</translation>
     </message>
     <message>
-        <location line="+27"/>
-        <source>Create a new address</source>
-        <translation>创建新地址</translation>
-    </message>
-    <message>
-        <location line="+14"/>
-        <source>Copy the currently selected address to the system clipboard</source>
-        <translation>复制当前选中地址到系统剪贴板</translation>
-    </message>
-    <message>
-        <location line="-11"/>
-        <source>&amp;New Address</source>
-        <translation>&amp;新建地址</translation>
-    </message>
-    <message>
-        <location filename="../addressbookpage.cpp" line="+63"/>
-        <source>These are your Megacoin addresses for receiving payments. You may want to give a different one to each sender so you can keep track of who is paying you.</source>
-        <translation>这是您用来收款的美卡币地址。为了标记不同的资金来源，建议为每个付款人保留不同的收款地址。</translation>
-    </message>
-    <message>
-        <location filename="../forms/addressbookpage.ui" line="+14"/>
+        <location filename="../addressbookpage.cpp" line="+74"/>
         <source>&amp;Copy Address</source>
         <translation>&amp;复制地址</translation>
     </message>
     <message>
-        <location line="+11"/>
+        <location filename="../forms/addressbookpage.ui" line="+219"/>
         <source>Show &amp;QR Code</source>
         <translation>显示二维码</translation>
     </message>
     <message>
-        <location line="+11"/>
-        <source>Sign a message to prove you own a Megacoin address</source>
-        <translation>签名消息，证明这个地址属于您。</translation>
-    </message>
-    <message>
-        <location line="+3"/>
+        <location filename="../addressbookpage.cpp" line="+4"/>
         <source>Sign &amp;Message</source>
         <translation>对消息签名</translation>
     </message>
     <message>
-        <location line="+25"/>
-        <source>Delete the currently selected address from the list</source>
-        <translation>从列表中删除选中的地址</translation>
-    </message>
-    <message>
-        <location line="+27"/>
-        <source>Export the data in the current tab to a file</source>
-        <translation>导出当前数据到文件</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>&amp;Export</source>
-        <translation>&amp;导出</translation>
-    </message>
-    <message>
-        <location line="-44"/>
-        <source>Verify a message to ensure it was signed with a specified Megacoin address</source>
-        <translation>验证消息，确保消息是由指定的美卡币地址签名过的。</translation>
-    </message>
-    <message>
-        <location line="+3"/>
+        <location line="+1"/>
         <source>&amp;Verify Message</source>
         <translation>&amp;验证消息</translation>
     </message>
     <message>
-        <location line="+14"/>
+        <location line="+1"/>
         <source>&amp;Delete</source>
         <translation>&amp;删除</translation>
     </message>
     <message>
-        <location filename="../addressbookpage.cpp" line="-5"/>
-        <source>These are your Megacoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>这是您用来付款的美卡币地址。在付款前，请总是核实付款金额和收款地址。</translation>
-    </message>
-    <message>
-        <location line="+13"/>
+        <location line="-5"/>
         <source>Copy &amp;Label</source>
         <translation>复制 &amp;标签</translation>
     </message>
@@ -136,12 +99,12 @@ This product includes software developed by the OpenSSL Project for use in the O
         <translation>&amp;编辑</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>Send &amp;Coins</source>
-        <translation>付款</translation>
+        <location line="-10"/>
+        <source>Adress for receiving Megacoins</source>
+        <translation>接收美卡币地址</translation>
     </message>
     <message>
-        <location line="+260"/>
+        <location line="+272"/>
         <source>Export Address Book Data</source>
         <translation>导出通讯录数据</translation>
     </message>
@@ -164,7 +127,7 @@ This product includes software developed by the OpenSSL Project for use in the O
 <context>
     <name>AddressTableModel</name>
     <message>
-        <location filename="../addresstablemodel.cpp" line="+144"/>
+        <location filename="../addresstablemodel.cpp" line="+146"/>
         <source>Label</source>
         <translation>标签</translation>
     </message>
@@ -187,26 +150,32 @@ This product includes software developed by the OpenSSL Project for use in the O
         <translation>密码对话框</translation>
     </message>
     <message>
-        <location line="+21"/>
+        <location line="+162"/>
+        <source>Change password</source>
+        <translation>修改密码</translation>
+    </message>
+    <message>
+        <location line="+111"/>
         <source>Enter passphrase</source>
         <translation>输入密码</translation>
     </message>
     <message>
-        <location line="+14"/>
+        <location line="+27"/>
         <source>New passphrase</source>
         <translation>新密码</translation>
     </message>
     <message>
-        <location line="+14"/>
+        <location line="+27"/>
         <source>Repeat new passphrase</source>
         <translation>重复新密码</translation>
     </message>
     <message>
-        <location filename="../askpassphrasedialog.cpp" line="+33"/>
+        <location filename="../askpassphrasedialog.cpp" line="+38"/>
         <source>Enter the new passphrase to the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;10 or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
         <translation>输入钱包的新密码。&lt;br/&gt;使用的密码请至少包含&lt;b&gt;10个以上随机字符&lt;/&gt;，或者是&lt;b&gt;8个以上的单词&lt;/b&gt;。</translation>
     </message>
     <message>
+        <location line="+1"/>
         <location line="+1"/>
         <source>Encrypt wallet</source>
         <translation>加密钱包</translation>
@@ -217,7 +186,8 @@ This product includes software developed by the OpenSSL Project for use in the O
         <translation>该操作需要您首先使用密码解锁钱包。</translation>
     </message>
     <message>
-        <location line="+5"/>
+        <location line="+6"/>
+        <location line="+1"/>
         <source>Unlock wallet</source>
         <translation>解锁钱包</translation>
     </message>
@@ -227,12 +197,14 @@ This product includes software developed by the OpenSSL Project for use in the O
         <translation>该操作需要您首先使用密码解密钱包。</translation>
     </message>
     <message>
-        <location line="+5"/>
+        <location line="+6"/>
+        <location line="+1"/>
         <source>Decrypt wallet</source>
         <translation>解密钱包</translation>
     </message>
     <message>
-        <location line="+3"/>
+        <location line="+4"/>
+        <location line="+1"/>
         <source>Change passphrase</source>
         <translation>修改密码</translation>
     </message>
@@ -242,7 +214,7 @@ This product includes software developed by the OpenSSL Project for use in the O
         <translation>请输入钱包的旧密码与新密码。</translation>
     </message>
     <message>
-        <location line="+46"/>
+        <location line="+50"/>
         <source>Confirm wallet encryption</source>
         <translation>确认加密钱包</translation>
     </message>
@@ -321,417 +293,81 @@ This product includes software developed by the OpenSSL Project for use in the O
     </message>
 </context>
 <context>
-    <name>MegacoinGUI</name>
-    <message>
-        <location filename="../megacoingui.cpp" line="+233"/>
-        <source>Sign &amp;message...</source>
-        <translation>对&amp;消息签名...</translation>
-    </message>
-    <message>
-        <location line="+280"/>
-        <source>Synchronizing with network...</source>
-        <translation>正在与网络同步...</translation>
-    </message>
-    <message>
-        <location line="-349"/>
-        <source>&amp;Overview</source>
-        <translation>&amp;概况</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Show general overview of wallet</source>
-        <translation>显示钱包概况</translation>
-    </message>
-    <message>
-        <location line="+20"/>
-        <source>&amp;Transactions</source>
-        <translation>&amp;交易记录</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Browse transaction history</source>
-        <translation>查看交易历史</translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>Edit the list of stored addresses and labels</source>
-        <translation>修改存储的地址和标签列表</translation>
-    </message>
-    <message>
-        <location line="-14"/>
-        <source>Show the list of addresses for receiving payments</source>
-        <translation>显示接收支付的地址列表</translation>
-    </message>
-    <message>
-        <location line="+31"/>
-        <source>E&amp;xit</source>
-        <translation>退出</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Quit application</source>
-        <translation>退出程序</translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>Show information about Megacoin</source>
-        <translation>显示美卡币的相关信息</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>About &amp;Qt</source>
-        <translation>关于 &amp;Qt</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Show information about Qt</source>
-        <translation>显示Qt相关信息</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>&amp;Options...</source>
-        <translation>&amp;选项...</translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>&amp;Encrypt Wallet...</source>
-        <translation>&amp;加密钱包...</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>&amp;Backup Wallet...</source>
-        <translation>&amp;备份钱包...</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>&amp;Change Passphrase...</source>
-        <translation>&amp;修改密码...</translation>
-    </message>
-    <message>
-        <location line="+285"/>
-        <source>Importing blocks from disk...</source>
-        <translation>正在从磁盘导入数据块...</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Reindexing blocks on disk...</source>
-        <translation>正在为数据块建立索引...</translation>
-    </message>
-    <message>
-        <location line="-347"/>
-        <source>Send coins to a Megacoin address</source>
-        <translation>向一个美卡币地址发送美卡币</translation>
-    </message>
-    <message>
-        <location line="+49"/>
-        <source>Modify configuration options for Megacoin</source>
-        <translation>设置选项</translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>Backup wallet to another location</source>
-        <translation>备份钱包到其它文件夹</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Change the passphrase used for wallet encryption</source>
-        <translation>修改钱包加密口令</translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>&amp;Debug window</source>
-        <translation>&amp;调试窗口</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Open debugging and diagnostic console</source>
-        <translation>在诊断控制台调试</translation>
-    </message>
-    <message>
-        <location line="-4"/>
-        <source>&amp;Verify message...</source>
-        <translation>&amp;验证消息...</translation>
-    </message>
-    <message>
-        <location line="-165"/>
-        <location line="+530"/>
-        <source>Megacoin</source>
-        <translation>美卡币</translation>
-    </message>
-    <message>
-        <location line="-530"/>
-        <source>Wallet</source>
-        <translation>钱包</translation>
-    </message>
-    <message>
-        <location line="+101"/>
-        <source>&amp;Send</source>
-        <translation>&amp;发送</translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>&amp;Receive</source>
-        <translation>&amp;接收</translation>
-    </message>
-    <message>
-        <location line="+14"/>
-        <source>&amp;Addresses</source>
-        <translation>&amp;地址</translation>
-    </message>
-    <message>
-        <location line="+22"/>
-        <source>&amp;About Megacoin</source>
-        <translation>&amp;关于美卡币</translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>&amp;Show / Hide</source>
-        <translation>&amp;显示 / 隐藏</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Show or hide the main Window</source>
-        <translation>显示或隐藏主窗口</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Encrypt the private keys that belong to your wallet</source>
-        <translation>对钱包中的私钥加密</translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>Sign messages with your Megacoin addresses to prove you own them</source>
-        <translation>用美卡币地址关联的私钥为消息签名，以证明您拥有这个美卡币地址</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Verify messages to ensure they were signed with specified Megacoin addresses</source>
-        <translation>校验消息，确保该消息是由指定的美卡币地址所有者签名的</translation>
-    </message>
-    <message>
-        <location line="+28"/>
-        <source>&amp;File</source>
-        <translation>&amp;文件</translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>&amp;Settings</source>
-        <translation>&amp;设置</translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>&amp;Help</source>
-        <translation>&amp;帮助</translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>Tabs toolbar</source>
-        <translation>分页工具栏</translation>
-    </message>
-    <message>
-        <location line="+17"/>
-        <location line="+10"/>
-        <source>[testnet]</source>
-        <translation>[testnet]</translation>
-    </message>
-    <message>
-        <location line="+47"/>
-        <source>Megacoin client</source>
-        <translation>美卡币客户端</translation>
-    </message>
-    <message numerus="yes">
-        <location line="+141"/>
-        <source>%n active connection(s) to Megacoin network</source>
-        <translation><numerusform>到美卡币网络的连接共有%n条</numerusform></translation>
-    </message>
-    <message>
-        <location line="+22"/>
-        <source>No block source available...</source>
-        <translation>No block source available...</translation>
-    </message>
-    <message>
-        <location line="+12"/>
-        <source>Processed %1 of %2 (estimated) blocks of transaction history.</source>
-        <translation>%1 / %2 个交易历史的区块已下载</translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>Processed %1 blocks of transaction history.</source>
-        <translation>已处理 %1 个交易历史数据块。</translation>
-    </message>
-    <message numerus="yes">
-        <location line="+20"/>
-        <source>%n hour(s)</source>
-        <translation><numerusform>%n 小时前</numerusform></translation>
-    </message>
-    <message numerus="yes">
-        <location line="+4"/>
-        <source>%n day(s)</source>
-        <translation><numerusform>%n 天前</numerusform></translation>
-    </message>
-    <message numerus="yes">
-        <location line="+4"/>
-        <source>%n week(s)</source>
-        <translation><numerusform>%n 周前</numerusform></translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>%1 behind</source>
-        <translation>落后 %1 </translation>
-    </message>
-    <message>
-        <location line="+14"/>
-        <source>Last received block was generated %1 ago.</source>
-        <translation>最新收到的区块产生于 %1。</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Transactions after this will not yet be visible.</source>
-        <translation>在此之后的交易尚未可见</translation>
-    </message>
-    <message>
-        <location line="+22"/>
-        <source>Error</source>
-        <translation>错误</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Warning</source>
-        <translation>警告</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Information</source>
-        <translation>信息</translation>
-    </message>
-    <message>
-        <location line="+70"/>
-        <source>This transaction is over the size limit. You can still send it for a fee of %1, which goes to the nodes that process your transaction and helps to support the network. Do you want to pay the fee?</source>
-        <translation>该交易的字节数超标。您可以选择支付%1的交易费给处理您的交易的网络节点，有助于美卡币网络的运行。您愿意支付这笔交易费用吗？</translation>
-    </message>
-    <message>
-        <location line="-140"/>
-        <source>Up to date</source>
-        <translation>最新状态</translation>
-    </message>
-    <message>
-        <location line="+31"/>
-        <source>Catching up...</source>
-        <translation>更新中...</translation>
-    </message>
-    <message>
-        <location line="+113"/>
-        <source>Confirm transaction fee</source>
-        <translation>确认交易费</translation>
-    </message>
-    <message>
-        <location line="+8"/>
-        <source>Sent transaction</source>
-        <translation>已发送交易</translation>
-    </message>
-    <message>
-        <location line="+0"/>
-        <source>Incoming transaction</source>
-        <translation>流入交易</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Date: %1
-Amount: %2
-Type: %3
-Address: %4
-</source>
-        <translation>日期: %1
-金额: %2
-类别: %3
-地址: %4
-</translation>
-    </message>
-    <message>
-        <location line="+33"/>
-        <location line="+23"/>
-        <source>URI handling</source>
-        <translation>URI 处理</translation>
-    </message>
-    <message>
-        <location line="-23"/>
-        <location line="+23"/>
-        <source>URI can not be parsed! This can be caused by an invalid Megacoin address or malformed URI parameters.</source>
-        <translation>URI无法解析！原因可能是美卡币地址不正确，或者URI参数错误。</translation>
-    </message>
-    <message>
-        <location line="+17"/>
-        <source>Wallet is &lt;b&gt;encrypted&lt;/b&gt; and currently &lt;b&gt;unlocked&lt;/b&gt;</source>
-        <translation>钱包已被&lt;b&gt;加密&lt;/b&gt;，当前为&lt;b&gt;解锁&lt;/b&gt;状态</translation>
-    </message>
-    <message>
-        <location line="+8"/>
-        <source>Wallet is &lt;b&gt;encrypted&lt;/b&gt; and currently &lt;b&gt;locked&lt;/b&gt;</source>
-        <translation>钱包已被&lt;b&gt;加密&lt;/b&gt;，当前为&lt;b&gt;锁定&lt;/b&gt;状态</translation>
-    </message>
-    <message>
-        <location filename="../megacoin.cpp" line="+111"/>
-        <source>A fatal error occurred. Megacoin can no longer continue safely and will quit.</source>
-        <translation>发生严重错误。</translation>
-    </message>
-</context>
-<context>
     <name>ClientModel</name>
     <message>
         <location filename="../clientmodel.cpp" line="+104"/>
         <source>Network Alert</source>
         <translation>网络警报</translation>
     </message>
+    <message>
+        <location line="+16"/>
+        <source>Incoming News</source>
+        <translation>流入信息</translation>
+    </message>
 </context>
 <context>
     <name>EditAddressDialog</name>
     <message>
-        <location filename="../forms/editaddressdialog.ui" line="+14"/>
-        <source>Edit Address</source>
-        <translation>编辑地址</translation>
+        <location filename="../forms/editaddressdialog.ui" line="+171"/>
+        <source>Edit record</source>
+        <translation>编辑记录</translation>
     </message>
     <message>
-        <location line="+11"/>
+        <location line="+89"/>
         <source>&amp;Label</source>
         <translation>&amp;标签</translation>
     </message>
     <message>
-        <location line="+10"/>
+        <location line="+78"/>
         <source>The label associated with this address book entry</source>
         <translation>与此地址条目关联的标签</translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="+14"/>
         <source>&amp;Address</source>
         <translation>&amp;地址</translation>
     </message>
     <message>
-        <location line="+10"/>
+        <location line="+25"/>
+        <source>Paste from clipboard</source>
+        <translation>从剪贴板粘贴</translation>
+    </message>
+    <message>
+        <location line="+24"/>
+        <source>Alt+A</source>
+        <translation>Alt+A</translation>
+    </message>
+    <message>
+        <location line="-122"/>
         <source>The address associated with this address book entry. This can only be modified for sending addresses.</source>
         <translation>该地址与地址簿中的条目已关联，无法作为发送地址编辑。</translation>
     </message>
     <message>
-        <location filename="../editaddressdialog.cpp" line="+21"/>
+        <location filename="../editaddressdialog.cpp" line="+26"/>
+        <location line="+1"/>
         <source>New receiving address</source>
         <translation>新接收地址</translation>
     </message>
     <message>
-        <location line="+4"/>
+        <location line="+7"/>
+        <location line="+1"/>
         <source>New sending address</source>
         <translation>新发送地址</translation>
     </message>
     <message>
-        <location line="+3"/>
+        <location line="+5"/>
+        <location line="+1"/>
         <source>Edit receiving address</source>
         <translation>编辑接收地址</translation>
     </message>
     <message>
-        <location line="+4"/>
+        <location line="+7"/>
+        <location line="+1"/>
         <source>Edit sending address</source>
         <translation>编辑发送地址</translation>
     </message>
     <message>
-        <location line="+76"/>
+        <location line="+81"/>
         <source>The entered address &quot;%1&quot; is already in the address book.</source>
         <translation>输入的地址 &quot;%1&quot; 已经存在于地址簿。</translation>
     </message>
@@ -754,7 +390,7 @@ Address: %4
 <context>
     <name>GUIUtil::HelpMessageBox</name>
     <message>
-        <location filename="../guiutil.cpp" line="+424"/>
+        <location filename="../guiutil.cpp" line="+442"/>
         <location line="+12"/>
         <source>Megacoin-Qt</source>
         <translation>Megacoin-Qt</translation>
@@ -797,6 +433,633 @@ Address: %4
     </message>
 </context>
 <context>
+    <name>MainWindow</name>
+    <message>
+        <location filename="../forms/mainwindow.ui" line="+19"/>
+        <source>MainWindow</source>
+        <translation>主页</translation>
+    </message>
+    <message>
+        <location line="+266"/>
+        <source>Messages from Megacoin</source>
+        <translation>美卡币信息</translation>
+    </message>
+    <message>
+        <location line="+85"/>
+        <source>Megacoin</source>
+        <translation>美卡币</translation>
+    </message>
+    <message>
+        <location line="+17"/>
+        <source>global wallet</source>
+        <translation>钱包</translation>
+    </message>
+    <message>
+        <location line="+51"/>
+        <source>File</source>
+        <translation>文件</translation>
+    </message>
+    <message>
+        <location line="+52"/>
+        <source>Operations</source>
+        <translation>选项</translation>
+    </message>
+    <message>
+        <location line="+52"/>
+        <source>Settings</source>
+        <translation>设置</translation>
+    </message>
+    <message>
+        <location line="+156"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Welcome to Megacoin. This is your personal account&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;欢迎来到美卡币，这是你的个人账户&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <location line="+62"/>
+        <source>Overview</source>
+        <translation>概况</translation>
+    </message>
+    <message>
+        <location line="+110"/>
+        <source>Mining</source>
+        <translation>挖矿</translation>
+    </message>
+    <message>
+        <location line="+53"/>
+        <source>Send Coins</source>
+        <translation>发送货币</translation>
+    </message>
+    <message>
+        <location line="+47"/>
+        <source>Transactions</source>
+        <translation>交易记录</translation>
+    </message>
+    <message>
+        <location line="+47"/>
+        <source>Sign Message</source>
+        <translation>签名消息</translation>
+    </message>
+    <message>
+        <location line="+47"/>
+        <source>Receive Coins</source>
+        <translation>接受货币</translation>
+    </message>
+    <message>
+        <location line="+47"/>
+        <source>Address Book</source>
+        <translation>通讯录</translation>
+    </message>
+    <message>
+        <location line="+47"/>
+        <source>Verify Message</source>
+        <translation>验证消息</translation>
+    </message>
+    <message>
+        <location line="+200"/>
+        <source>Synchronization</source>
+        <translation>同步</translation>
+    </message>
+    <message>
+        <location line="+45"/>
+        <source>10549874 blocks</source>
+        <translation>10549874区块</translation>
+    </message>
+</context>
+<context>
+    <name>MegacoinGUI</name>
+    <message>
+        <location filename="../megacoingui.cpp" line="+366"/>
+        <location line="+753"/>
+        <source>Sign &amp;message...</source>
+        <translation>对&amp;消息签名...</translation>
+    </message>
+    <message>
+        <location line="-487"/>
+        <source>Synchronizing with network...</source>
+        <translation>正在与网络同步...</translation>
+    </message>
+    <message>
+        <location line="-343"/>
+        <location line="+780"/>
+        <source>&amp;Overview</source>
+        <translation>&amp;概况</translation>
+    </message>
+    <message>
+        <location line="-779"/>
+        <source>Show general overview of wallet</source>
+        <translation>显示钱包概况</translation>
+    </message>
+    <message>
+        <location line="+20"/>
+        <location line="+804"/>
+        <source>&amp;Transactions</source>
+        <translation>&amp;交易记录</translation>
+    </message>
+    <message>
+        <location line="-803"/>
+        <source>Browse transaction history</source>
+        <translation>查看交易历史</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Edit the list of stored addresses and labels</source>
+        <translation>修改存储的地址和标签列表</translation>
+    </message>
+    <message>
+        <location line="-14"/>
+        <source>Show the list of addresses for receiving payments</source>
+        <translation>显示接收支付的地址列表</translation>
+    </message>
+    <message>
+        <location line="-8"/>
+        <source>&amp;Send coins</source>
+        <translation>&amp;发送货币</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>&amp;Receive coins</source>
+        <translation>&amp;接受货币</translation>
+    </message>
+    <message>
+        <location line="+14"/>
+        <location line="+798"/>
+        <source>&amp;Address Book</source>
+        <translation>&amp;通讯录</translation>
+    </message>
+    <message>
+        <location line="-778"/>
+        <location line="+735"/>
+        <source>E&amp;xit</source>
+        <translation>退出</translation>
+    </message>
+    <message>
+        <location line="-734"/>
+        <source>Quit application</source>
+        <translation>退出程序</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Show information about Megacoin</source>
+        <translation>显示美卡币的相关信息</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>About &amp;Qt</source>
+        <translation>关于 &amp;Qt</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Show information about Qt</source>
+        <translation>显示Qt相关信息</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>&amp;Options...</source>
+        <translation>&amp;选项...</translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <location line="+757"/>
+        <source>&amp;Encrypt Wallet...</source>
+        <translation>&amp;加密钱包...</translation>
+    </message>
+    <message>
+        <location line="-754"/>
+        <source>&amp;Backup Wallet...</source>
+        <translation>&amp;备份钱包...</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <location line="+754"/>
+        <source>&amp;Change Passphrase...</source>
+        <translation>&amp;修改密码...</translation>
+    </message>
+    <message>
+        <location line="-747"/>
+        <location line="+700"/>
+        <source>&amp;Export...</source>
+        <translation>&amp;端口:</translation>
+    </message>
+    <message>
+        <location line="-699"/>
+        <source>Export the data in the current tab to a file</source>
+        <translation>导出当前数据到文件</translation>
+    </message>
+    <message>
+        <location line="+59"/>
+        <source>Actions toolbar</source>
+        <translation>工具栏</translation>
+    </message>
+    <message>
+        <location line="+204"/>
+        <source>Importing blocks from disk...</source>
+        <translation>正在从磁盘导入数据块...</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Reindexing blocks on disk...</source>
+        <translation>正在为数据块建立索引...</translation>
+    </message>
+    <message>
+        <location line="-341"/>
+        <source>Send coins to a Megacoin address</source>
+        <translation>向一个美卡币地址发送美卡币</translation>
+    </message>
+    <message>
+        <location line="+54"/>
+        <source>Modify configuration options for Megacoin</source>
+        <translation>设置选项</translation>
+    </message>
+    <message>
+        <location line="+12"/>
+        <source>Backup wallet to another location</source>
+        <translation>备份钱包到其它文件夹</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Change the passphrase used for wallet encryption</source>
+        <translation>修改钱包加密口令</translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <location line="+800"/>
+        <source>&amp;Debug window</source>
+        <translation>&amp;调试窗口</translation>
+    </message>
+    <message>
+        <location line="-799"/>
+        <source>Open debugging and diagnostic console</source>
+        <translation>在诊断控制台调试</translation>
+    </message>
+    <message>
+        <location line="-7"/>
+        <location line="+752"/>
+        <source>&amp;Verify message...</source>
+        <translation>&amp;验证消息...</translation>
+    </message>
+    <message>
+        <location line="-1014"/>
+        <location line="+6"/>
+        <location line="+619"/>
+        <source>Megacoin</source>
+        <translation>美卡币</translation>
+    </message>
+    <message>
+        <location line="-625"/>
+        <location line="+6"/>
+        <source>Wallet</source>
+        <translation>钱包</translation>
+    </message>
+    <message>
+        <location line="+230"/>
+        <location line="+2"/>
+        <location line="+831"/>
+        <source>&amp;About Megacoin</source>
+        <translation>&amp;关于美卡币</translation>
+    </message>
+    <message>
+        <location line="-821"/>
+        <location line="+2"/>
+        <source>&amp;Show / Hide</source>
+        <translation>&amp;显示 / 隐藏</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Show or hide the main Window</source>
+        <translation>显示或隐藏主窗口</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Encrypt the private keys that belong to your wallet</source>
+        <translation>对钱包中的私钥加密</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Sign messages with your Megacoin addresses to prove you own them</source>
+        <translation>用美卡币地址关联的私钥为消息签名，以证明您拥有这个美卡币地址</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Verify messages to ensure they were signed with specified Megacoin addresses</source>
+        <translation>校验消息，确保该消息是由指定的美卡币地址所有者签名的</translation>
+    </message>
+    <message>
+        <location line="+31"/>
+        <source>&amp;File</source>
+        <translation>&amp;文件</translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>&amp;Settings</source>
+        <translation>&amp;设置</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>&amp;Help</source>
+        <translation>&amp;帮助</translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>Tabs toolbar</source>
+        <translation>分页工具栏</translation>
+    </message>
+    <message>
+        <location line="-311"/>
+        <source>[testnet]</source>
+        <translation>[testnet]</translation>
+    </message>
+    <message>
+        <location line="+385"/>
+        <source>Megacoin client</source>
+        <translation>美卡币客户端</translation>
+    </message>
+    <message numerus="yes">
+        <location line="+109"/>
+        <source>%n active connection(s) to Megacoin network</source>
+        <translation>
+            <numerusform>到美卡币网络的连接共有%n条</numerusform>
+        </translation>
+    </message>
+    <message>
+        <location line="+57"/>
+        <source>Processed %1 blocks of transaction history.</source>
+        <translation>已处理 %1 个交易历史数据块。</translation>
+    </message>
+    <message>
+        <location line="+77"/>
+        <source>Error</source>
+        <translation>错误</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Warning</source>
+        <translation>警告</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Information</source>
+        <translation>信息</translation>
+    </message>
+    <message>
+        <location line="+70"/>
+        <source>This transaction is over the size limit. You can still send it for a fee of %1, which goes to the nodes that process your transaction and helps to support the network. Do you want to pay the fee?</source>
+        <translation>该交易的字节数超标。您可以选择支付%1的交易费给处理您的交易的网络节点，有助于美卡币网络的运行。您愿意支付这笔交易费用吗？</translation>
+    </message>
+    <message>
+        <location line="-121"/>
+        <source>Up to date</source>
+        <translation>最新状态</translation>
+    </message>
+    <message numerus="yes">
+        <location line="-47"/>
+        <source>~%n block(s) remaining</source>
+        <translation>
+            <numerusform>~%n 剩余区块</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <location line="+4"/>
+        <source>%n blocks</source>
+        <translation>
+            <numerusform>%n 区块</numerusform>
+        </translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Processed %1 of %2 blocks of transaction history (%3% done).</source>
+        <translation>已处理 %1 之 %2 交易历史数据块 (%3% 完成).</translation>
+    </message>
+    <message numerus="yes">
+        <location line="+22"/>
+        <source>%n second(s) ago</source>
+        <translation>
+            <numerusform>%n 秒之前</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <location line="+4"/>
+        <source>%n minute(s) ago</source>
+        <translation>
+            <numerusform>%n 分钟之前</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <location line="+4"/>
+        <source>%n hour(s) ago</source>
+        <translation>
+            <numerusform>%n 小时之前</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <location line="+4"/>
+        <source>%n day(s) ago</source>
+        <translation>
+            <numerusform>%n 天之前</numerusform>
+        </translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>Catching up...</source>
+        <translation>更新中...</translation>
+    </message>
+    <message>
+        <location line="+16"/>
+        <source>Last received block was generated %1.</source>
+        <translation>产出最后接收区块 %1.</translation>
+    </message>
+    <message>
+        <location line="+102"/>
+        <source>Confirm transaction fee</source>
+        <translation>确认交易费</translation>
+    </message>
+    <message>
+        <location line="+38"/>
+        <source>Sent transaction</source>
+        <translation>已发送交易</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Incoming transaction</source>
+        <translation>流入交易</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Date: %1
+Amount: %2
+Type: %3
+Address: %4
+</source>
+        <translation>日期: %1
+金额: %2
+类别: %3
+地址: %4
+</translation>
+    </message>
+    <message>
+        <location line="+123"/>
+        <location line="+80"/>
+        <source>URI handling</source>
+        <translation>URI 处理</translation>
+    </message>
+    <message>
+        <location line="-80"/>
+        <location line="+80"/>
+        <source>URI can not be parsed! This can be caused by an invalid Megacoin address or malformed URI parameters.</source>
+        <translation>URI无法解析！原因可能是美卡币地址不正确，或者URI参数错误。</translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>Service messages</source>
+        <translation>服务器信息</translation>
+    </message>
+    <message>
+        <location line="+42"/>
+        <source>Send Megacoins</source>
+        <translation>发送货币</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Receive Megacoins</source>
+        <translation>接受货币</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Mining</source>
+        <translation>挖矿</translation>
+    </message>
+    <message>
+        <location line="+56"/>
+        <source>Common, Network</source>
+        <translation>普通，网络</translation>
+    </message>
+    <message>
+        <location line="+38"/>
+        <source>Wallet is &lt;b&gt;encrypted&lt;/b&gt; and currently &lt;b&gt;unlocked&lt;/b&gt;</source>
+        <translation>钱包已被&lt;b&gt;加密&lt;/b&gt;，当前为&lt;b&gt;解锁&lt;/b&gt;状态</translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>Wallet is &lt;b&gt;encrypted&lt;/b&gt; and currently &lt;b&gt;locked&lt;/b&gt;</source>
+        <translation>钱包已被&lt;b&gt;加密&lt;/b&gt;，当前为&lt;b&gt;锁定&lt;/b&gt;状态</translation>
+    </message>
+    <message>
+        <location line="+23"/>
+        <source>Backup Wallet</source>
+        <translation>备份钱包</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Wallet Data (*.dat)</source>
+        <translation>钱包文件(*.dat)</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Backup Failed</source>
+        <translation>备份失败</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>There was an error trying to save the wallet data to the new location.</source>
+        <translation>备份钱包到其它文件夹失败.</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Backup Successful</source>
+        <translation>备份成功</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>The wallet data was successfully saved to the new location.</source>
+        <translation>钱包数据成功存储到新位置</translation>
+    </message>
+    <message>
+        <location filename="../megacoin.cpp" line="+109"/>
+        <source>A fatal error occurred. Megacoin can no longer continue safely and will quit.</source>
+        <translation>发生严重错误。</translation>
+    </message>
+</context>
+<context>
+    <name>MessageBoxDialog</name>
+    <message>
+        <location filename="../forms/message_box_dialog.ui" line="+374"/>
+        <source>OK</source>
+        <translation>确定</translation>
+    </message>
+    <message>
+        <location line="+82"/>
+        <source>Yes</source>
+        <translation>是</translation>
+    </message>
+    <message>
+        <location line="+51"/>
+        <source>No</source>
+        <translation>否</translation>
+    </message>
+    <message>
+        <location line="+76"/>
+        <source>Don&apos;t show again</source>
+        <translation>不再显示</translation>
+    </message>
+</context>
+<context>
+    <name>MiningPage</name>
+    <message>
+        <location filename="../forms/miningpage.ui" line="+159"/>
+        <source>Form</source>
+        <translation>表单</translation>
+    </message>
+    <message>
+        <location line="+107"/>
+        <source>Mining coins</source>
+        <translation>挖币</translation>
+    </message>
+    <message>
+        <location line="+378"/>
+        <source>Stop</source>
+        <translation>停止</translation>
+    </message>
+    <message>
+        <location line="+38"/>
+        <source>Start</source>
+        <translation>启动</translation>
+    </message>
+    <message>
+        <location filename="../miningpage.cpp" line="+66"/>
+        <source>Mining coins started!</source>
+        <translation>启动挖币</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Used threads %1</source>
+        <translation>已使用线程 %1</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Mining coins stopped!</source>
+        <translation>挖币停止</translation>
+    </message>
+    <message>
+        <location line="+46"/>
+        <source>Running mining coins...</source>
+        <translation>挖币进行中</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Start error!</source>
+        <translation>运行错误：</translation>
+    </message>
+    <message>
+        <location line="+11"/>
+        <source>Stop mining coins...</source>
+        <translation>停止挖币</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Stop error!</source>
+        <translation>错误：</translation>
+    </message>
+</context>
+<context>
     <name>OptionsDialog</name>
     <message>
         <location filename="../forms/optionsdialog.ui" line="+14"/>
@@ -811,7 +1074,7 @@ Address: %4
     <message>
         <location line="+6"/>
         <source>Optional transaction fee per kB that helps make sure your transactions are processed quickly. Most transactions are 1 kB.</source>
-        <translation type="unfinished"/>
+        <translation>可选的交易费 每kB 有助于确保快速处理您的交易。大多数的交易 1 kB.</translation>
     </message>
     <message>
         <location line="+15"/>
@@ -954,6 +1217,16 @@ Address: %4
         <translation>在交易清单中&amp;显示美卡币地址</translation>
     </message>
     <message>
+        <location line="+21"/>
+        <source>Mining</source>
+        <translation>挖矿</translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>&amp;Start mining Megacoins on application start</source>
+        <translation>启动时运行程序</translation>
+    </message>
+    <message>
         <location line="+71"/>
         <source>&amp;OK</source>
         <translation>&amp;确定</translation>
@@ -969,12 +1242,17 @@ Address: %4
         <translation>&amp;应用</translation>
     </message>
     <message>
-        <location filename="../optionsdialog.cpp" line="+53"/>
+        <location filename="../optionspage.cpp" line="+56"/>
         <source>default</source>
         <translation>缺省</translation>
     </message>
     <message>
-        <location line="+130"/>
+        <location line="+43"/>
+        <source>Optional transaction fee per kB that helps make sure your transactions are processed quickly. Fee 0.01 recommended.</source>
+        <translation>可选的交易费 每kB 有助于确保快速处理您的交易。建议费用0.01</translation>
+    </message>
+    <message>
+        <location line="+112"/>
         <source>Confirm options reset</source>
         <translation>确认恢复缺省设置</translation>
     </message>
@@ -1007,69 +1285,222 @@ Address: %4
     </message>
 </context>
 <context>
-    <name>OverviewPage</name>
+    <name>OptionsPage</name>
     <message>
-        <location filename="../forms/overviewpage.ui" line="+14"/>
+        <location filename="../forms/optionspage.ui" line="+159"/>
         <source>Form</source>
         <translation>表单</translation>
     </message>
     <message>
-        <location line="+50"/>
-        <location line="+166"/>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Megacoin network after a connection is established, but this process has not completed yet.</source>
-        <translation>现在显示的消息可能是过期的. 在连接上美卡币网络节点后，您的钱包将自动与网络同步，但是这个过程还没有完成.</translation>
+        <location line="+110"/>
+        <source>Common settings, Network</source>
+        <translation>普通设置，网络</translation>
     </message>
     <message>
-        <location line="-124"/>
+        <location line="+103"/>
+        <source>Common</source>
+        <translation>普通</translation>
+    </message>
+    <message>
+        <location line="+29"/>
+        <source>Automatically start Megacoin after logging in to the system.</source>
+        <translation>登录系统后自动开启美卡币客户端</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>&amp;Start Megacoin on system login</source>
+        <translation>启动时&amp;运行</translation>
+    </message>
+    <message>
+        <location line="+17"/>
+        <source>&amp;Start mining megacoins on start application</source>
+        <translation>启动时运行程序</translation>
+    </message>
+    <message>
+        <location line="+14"/>
+        <source>Show only a tray icon after minimizing the window.</source>
+        <translation>最小化窗口后仅显示托盘图标</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>&amp;Minimize to the tray instead of the taskbar</source>
+        <translation>&amp;最小化到托盘</translation>
+    </message>
+    <message>
+        <location line="+14"/>
+        <source>Minimize instead of exit the application when the window is closed. When this option is enabled, the application will be closed only after selecting Quit in the menu.</source>
+        <translation>当窗口关闭时程序最小化而不是退出。当使用该选项时，程序只能通过在菜单中选择退出来关闭</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>M&amp;inimize on close</source>
+        <translation>单击关闭按钮最小化</translation>
+    </message>
+    <message>
+        <location line="+17"/>
+        <source>&amp;Allow sounds</source>
+        <translation>&amp;开启声音</translation>
+    </message>
+    <message>
+        <location line="+20"/>
+        <source>&amp;Check updates at startup</source>
+        <translation>&amp;开启时检测更新</translation>
+    </message>
+    <message>
+        <location line="+36"/>
+        <source>Display</source>
+        <translation>显示</translation>
+    </message>
+    <message>
+        <location line="+60"/>
+        <source>&amp;Unit to show amounts in:</source>
+        <translation>&amp;美卡币金额单位:</translation>
+    </message>
+    <message>
+        <location line="+18"/>
+        <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
+        <translation>选择美卡币单位。</translation>
+    </message>
+    <message>
+        <location line="+45"/>
+        <source>User Interface &amp;language:</source>
+        <translation>用户界面&amp;语言:</translation>
+    </message>
+    <message>
+        <location line="+31"/>
+        <source>The user interface language can be set here. This setting will take effect after restarting Megacoin.</source>
+        <translation>在这里设置用户界面的语言。设置将在客户端重启后生效。</translation>
+    </message>
+    <message>
+        <location line="+17"/>
+        <source>Whether to show Megacoin addresses in the transaction list or not.</source>
+        <translation>是否需要在交易清单中显示美卡币地址。</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>&amp;Display addresses in transaction list</source>
+        <translation>在交易清单中&amp;显示美卡币地址</translation>
+    </message>
+    <message>
+        <location line="+59"/>
+        <source>Pay transaction fee</source>
+        <translation>支付交易 费用</translation>
+    </message>
+    <message>
+        <location line="+56"/>
+        <source>Network</source>
+        <translation>网络</translation>
+    </message>
+    <message>
+        <location line="+32"/>
+        <source>Automatically open the Megacoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation>自动在路由器中打开美卡币端口。只有当您的路由器开启 UPnP 选项时此功能才有效。</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Map port using &amp;UPnP</source>
+        <translation>使用 &amp;UPnP 映射端口</translation>
+    </message>
+    <message>
+        <location line="+23"/>
+        <source>Connect to the Megacoin network through a SOCKS proxy (e.g. when connecting through Tor).</source>
+        <translation>通过代理服务器连接美卡币网络(例如：通过Tor连接)</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>&amp;Connect through SOCKS proxy:</source>
+        <translation>&amp;通过Socks代理连接:</translation>
+    </message>
+    <message>
+        <location line="+42"/>
+        <source>Proxy &amp;IP:</source>
+        <translation>代理服务器&amp;IP:</translation>
+    </message>
+    <message>
+        <location line="+27"/>
+        <source>IP address of the proxy (e.g. 127.0.0.1)</source>
+        <translation>代理服务器IP (如 127.0.0.1)</translation>
+    </message>
+    <message>
+        <location line="+30"/>
+        <source>&amp;Port:</source>
+        <translation>&amp;端口:</translation>
+    </message>
+    <message>
+        <location line="+27"/>
+        <source>Port of the proxy (e.g. 9050)</source>
+        <translation>代理端口(例如 9050)</translation>
+    </message>
+    <message>
+        <location line="+48"/>
+        <source>SOCKS &amp;Version:</source>
+        <translation>Socks &amp;版本</translation>
+    </message>
+    <message>
+        <location line="+33"/>
+        <source>SOCKS version of the proxy (e.g. 5)</source>
+        <translation>Socks代理版本 (例如 5)</translation>
+    </message>
+    <message>
+        <location line="+128"/>
+        <source>Reset all client options to default.</source>
+        <translation>恢复客户端的缺省设置</translation>
+    </message>
+    <message>
+        <location line="+22"/>
+        <source>&amp;Reset Options</source>
+        <translation>恢复缺省设置</translation>
+    </message>
+    <message>
+        <location line="+51"/>
+        <source>&amp;Apply</source>
+        <translation>&amp;应用</translation>
+    </message>
+</context>
+<context>
+    <name>OverviewPage</name>
+    <message>
+        <location filename="../forms/overviewpage.ui" line="+159"/>
+        <source>Form</source>
+        <translation>表单</translation>
+    </message>
+    <message>
+        <location line="+128"/>
+        <source>Account status</source>
+        <translation>账户状态</translation>
+    </message>
+    <message>
+        <location line="+35"/>
+        <location line="+46"/>
+        <location line="+46"/>
+        <source>0 Lrks</source>
+        <translation>0 Mec</translation>
+    </message>
+    <message>
+        <location line="+64"/>
         <source>Balance:</source>
         <translation>余额：</translation>
     </message>
     <message>
-        <location line="+29"/>
+        <location line="+47"/>
         <source>Unconfirmed:</source>
         <translation>未确认：</translation>
     </message>
     <message>
-        <location line="-78"/>
-        <source>Wallet</source>
-        <translation>钱包</translation>
+        <location line="+175"/>
+        <source>Last transactions</source>
+        <translation>最后一次交易记录</translation>
     </message>
     <message>
-        <location line="+107"/>
+        <location line="-128"/>
         <source>Immature:</source>
         <translation>未成熟的：</translation>
-    </message>
-    <message>
-        <location line="+13"/>
-        <source>Mined balance that has not yet matured</source>
-        <translation>尚未成熟的挖矿收入余额</translation>
-    </message>
-    <message>
-        <location line="+46"/>
-        <source>&lt;b&gt;Recent transactions&lt;/b&gt;</source>
-        <translation>&lt;b&gt;最近交易记录&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <location line="-101"/>
-        <source>Your current balance</source>
-        <translation>您的当前余额</translation>
-    </message>
-    <message>
-        <location line="+29"/>
-        <source>Total of transactions that have yet to be confirmed, and do not yet count toward the current balance</source>
-        <translation>尚未确认的交易总额, 未计入当前余额</translation>
-    </message>
-    <message>
-        <location filename="../overviewpage.cpp" line="+116"/>
-        <location line="+1"/>
-        <source>out of sync</source>
-        <translation>数据同步中</translation>
     </message>
 </context>
 <context>
     <name>PaymentServer</name>
     <message>
-        <location filename="../paymentserver.cpp" line="+107"/>
+        <location filename="../paymentserver.cpp" line="+110"/>
         <source>Cannot start megacoin: click-to-pay handler</source>
         <translation>暂时无法启动美卡币：点击支付功能</translation>
     </message>
@@ -1107,7 +1538,7 @@ Address: %4
         <translation>&amp;另存为</translation>
     </message>
     <message>
-        <location filename="../qrcodedialog.cpp" line="+62"/>
+        <location filename="../qrcodedialog.cpp" line="+64"/>
         <source>Error encoding URI into QR Code.</source>
         <translation>将 URI 转换成二维码失败.</translation>
     </message>
@@ -1149,7 +1580,7 @@ Address: %4
         <location line="+53"/>
         <location line="+23"/>
         <location line="+23"/>
-        <location filename="../rpcconsole.cpp" line="+339"/>
+        <location filename="../rpcconsole.cpp" line="+365"/>
         <source>N/A</source>
         <translation>不可用</translation>
     </message>
@@ -1234,7 +1665,62 @@ Address: %4
         <translation>&amp;控制台</translation>
     </message>
     <message>
-        <location line="-260"/>
+        <location line="+72"/>
+        <source>Send network alert</source>
+        <translation>发送网络警报</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Send news</source>
+        <translation>发送信息</translation>
+    </message>
+    <message>
+        <location line="+22"/>
+        <source>Header</source>
+        <translation>标题</translation>
+    </message>
+    <message>
+        <location line="+33"/>
+        <source>Tray</source>
+        <translation>最小化窗口</translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>Text</source>
+        <translation>信息</translation>
+    </message>
+    <message>
+        <location line="+23"/>
+        <source>Date</source>
+        <translation>日期</translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>Expires On</source>
+        <translation>过期</translation>
+    </message>
+    <message>
+        <location line="+33"/>
+        <source>ID</source>
+        <translation>ID</translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>Language</source>
+        <translation>语言</translation>
+    </message>
+    <message>
+        <location line="+26"/>
+        <source>Signature</source>
+        <translation>签名</translation>
+    </message>
+    <message>
+        <location line="+23"/>
+        <source>Send</source>
+        <translation>发送</translation>
+    </message>
+    <message>
+        <location line="-536"/>
         <source>Build date</source>
         <translation>创建时间</translation>
     </message>
@@ -1282,8 +1768,8 @@ Address: %4
 <context>
     <name>SendCoinsDialog</name>
     <message>
-        <location filename="../forms/sendcoinsdialog.ui" line="+14"/>
-        <location filename="../sendcoinsdialog.cpp" line="+124"/>
+        <location filename="../forms/sendcoinsdialog.ui" line="+105"/>
+        <location filename="../sendcoinsdialog.cpp" line="+130"/>
         <location line="+5"/>
         <location line="+5"/>
         <location line="+5"/>
@@ -1294,52 +1780,48 @@ Address: %4
         <translation>发送货币</translation>
     </message>
     <message>
-        <location line="+50"/>
-        <source>Send to multiple recipients at once</source>
-        <translation>一次发送给多个接收者</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Add &amp;Recipient</source>
-        <translation>添加收款人</translation>
-    </message>
-    <message>
-        <location line="+20"/>
+        <location line="+278"/>
         <source>Remove all transaction fields</source>
         <translation>移除所有交易项</translation>
     </message>
     <message>
-        <location line="+3"/>
+        <location line="+22"/>
         <source>Clear &amp;All</source>
         <translation>清除 &amp;所有</translation>
     </message>
     <message>
-        <location line="+22"/>
+        <location line="-75"/>
         <source>Balance:</source>
         <translation>余额：</translation>
     </message>
     <message>
-        <location line="+10"/>
+        <location line="-115"/>
+        <source>Send Megacoins</source>
+        <translation>发送货币</translation>
+    </message>
+    <message>
+        <location line="+137"/>
         <source>123.456 MEC</source>
         <translation>123.456 MEC</translation>
     </message>
     <message>
-        <location line="+31"/>
+        <location line="+75"/>
         <source>Confirm the send action</source>
         <translation>确认并发送货币</translation>
     </message>
     <message>
-        <location line="+3"/>
+        <location line="+22"/>
         <source>S&amp;end</source>
         <translation>发送</translation>
     </message>
     <message>
-        <location filename="../sendcoinsdialog.cpp" line="-59"/>
+        <location filename="../sendcoinsdialog.cpp" line="-62"/>
+        <location line="+2"/>
         <source>&lt;b&gt;%1&lt;/b&gt; to %2 (%3)</source>
         <translation>&lt;b&gt;%1&lt;/b&gt; 到 %2 (%3)</translation>
     </message>
     <message>
-        <location line="+5"/>
+        <location line="+6"/>
         <source>Confirm send coins</source>
         <translation>确认发送货币</translation>
     </message>
@@ -1392,76 +1874,242 @@ Address: %4
 <context>
     <name>SendCoinsEntry</name>
     <message>
-        <location filename="../forms/sendcoinsentry.ui" line="+14"/>
-        <source>Form</source>
-        <translation>表单</translation>
-    </message>
-    <message>
-        <location line="+15"/>
+        <location filename="../forms/sendcoinsentry.ui" line="+116"/>
         <source>A&amp;mount:</source>
         <translation>金额</translation>
     </message>
     <message>
-        <location line="+13"/>
+        <location line="-40"/>
         <source>Pay &amp;To:</source>
         <translation>付款&amp;给：</translation>
     </message>
     <message>
-        <location line="+34"/>
-        <source>The address to send the payment to (e.g. 1NS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</source>
-        <translation>付款给这个地址  (例如 1NS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</translation>
+        <location line="+86"/>
+        <source>The address to send the payment to (e.g. MNS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</source>
+        <translation>付款给这个地址  (例如 MNS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</translation>
     </message>
     <message>
-        <location line="+60"/>
+        <location line="-13"/>
         <location filename="../sendcoinsentry.cpp" line="+26"/>
         <source>Enter a label for this address to add it to your address book</source>
         <translation>为这个地址输入一个标签，以便将它添加到您的地址簿</translation>
     </message>
     <message>
-        <location line="-78"/>
+        <location line="-53"/>
         <source>&amp;Label:</source>
         <translation>&amp;标签：</translation>
     </message>
     <message>
-        <location line="+28"/>
+        <location line="+94"/>
+        <source>Send to multiple recipients at once</source>
+        <translation>一次发送给多个接收者</translation>
+    </message>
+    <message>
+        <location line="+92"/>
         <source>Choose address from address book</source>
         <translation>从地址簿选择地址</translation>
     </message>
     <message>
-        <location line="+10"/>
+        <location line="-22"/>
         <source>Alt+A</source>
         <translation>Alt+A</translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="-24"/>
         <source>Paste address from clipboard</source>
         <translation>从剪贴板粘贴地址</translation>
     </message>
     <message>
-        <location line="+10"/>
+        <location line="-22"/>
+        <location line="+92"/>
         <source>Alt+P</source>
         <translation>Alt+P</translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="+22"/>
         <source>Remove this recipient</source>
         <translation>移除此接收者</translation>
     </message>
     <message>
         <location filename="../sendcoinsentry.cpp" line="+1"/>
         <source>Enter a Megacoin address (e.g. MNS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</source>
-        <translation>请输入美卡币地址 (例如: 1NS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</translation>
+        <translation>请输入美卡币地址 (例如: MNS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</translation>
+    </message>
+</context>
+<context>
+    <name>ServiceMessagesPage</name>
+    <message>
+        <location filename="../forms/servicemessagespage.ui" line="+159"/>
+        <source>Form</source>
+        <translation>表单</translation>
+    </message>
+    <message>
+        <location line="+107"/>
+        <source>Messages from Megacoin</source>
+        <translation>美卡币信息</translation>
+    </message>
+    <message>
+        <location line="+60"/>
+        <source>Date</source>
+        <translation>日期</translation>
+    </message>
+    <message>
+        <location line="+20"/>
+        <source>Message content</source>
+        <translation>信息</translation>
+    </message>
+    <message>
+        <location filename="../servicemessagespage.cpp" line="+33"/>
+        <source>17:56, 01.03.2012</source>
+        <translation>17:56, 01.03.2012</translation>
+    </message>
+</context>
+<context>
+    <name>SignMessagePage</name>
+    <message>
+        <location filename="../forms/signmessagepage.ui" line="+159"/>
+        <source>Form</source>
+        <translation>表单</translation>
+    </message>
+    <message>
+        <location line="+110"/>
+        <source>Sign Message</source>
+        <translation>签名消息</translation>
+    </message>
+    <message>
+        <location line="+73"/>
+        <source>Signature</source>
+        <translation>签名</translation>
+    </message>
+    <message>
+        <location line="+25"/>
+        <source>Choose an address from the address book</source>
+        <translation>从地址簿选择地址</translation>
+    </message>
+    <message>
+        <location line="+21"/>
+        <source>Alt+A</source>
+        <translation>Alt+A</translation>
+    </message>
+    <message>
+        <location line="+22"/>
+        <source>Paste address from clipboard</source>
+        <translation>从剪贴板粘贴地址</translation>
+    </message>
+    <message>
+        <location line="+21"/>
+        <source>Alt+P</source>
+        <translation>Alt+P</translation>
+    </message>
+    <message>
+        <location line="+22"/>
+        <source>Address</source>
+        <translation>地址</translation>
+    </message>
+    <message>
+        <location line="+24"/>
+        <source>The address to sign the message with (e.g. MNS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</source>
+        <translation>用于签名消息的地址(例如: MNS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</translation>
+    </message>
+    <message>
+        <location line="+22"/>
+        <source>Text</source>
+        <translation>信息</translation>
+    </message>
+    <message>
+        <location line="+18"/>
+        <source>Enter the message you want to sign here</source>
+        <translation>请输入您要发送的签名消息</translation>
+    </message>
+    <message>
+        <location line="+30"/>
+        <source>Copy the current signature to the system clipboard</source>
+        <translation>复制当前签名至剪切板</translation>
+    </message>
+    <message>
+        <location line="+110"/>
+        <source>Reset all sign message fields</source>
+        <translation>清空所有签名消息栏</translation>
+    </message>
+    <message>
+        <location line="+22"/>
+        <source>Clear &amp;All</source>
+        <translation>清除 &amp;所有</translation>
+    </message>
+    <message>
+        <location line="+16"/>
+        <source>Sign the message to prove you own this Megacoin address</source>
+        <translation>签名消息，证明这个地址属于您。</translation>
+    </message>
+    <message>
+        <location line="+22"/>
+        <source>Sign &amp;Message</source>
+        <translation>对消息签名</translation>
+    </message>
+    <message>
+        <location filename="../signmessagepage.cpp" line="+28"/>
+        <source>Enter a Megacoin address (e.g. MNS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</source>
+        <translation>请输入美卡币地址 (例如: MNS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Click &quot;Sign Message&quot; to generate signature</source>
+        <translation>单击“签名消息“产生签名。</translation>
+    </message>
+    <message>
+        <location line="+12"/>
+        <location line="+53"/>
+        <source>The entered address is invalid.</source>
+        <translation>输入的地址非法。</translation>
+    </message>
+    <message>
+        <location line="-53"/>
+        <location line="+53"/>
+        <location line="+8"/>
+        <source>Please check the address and try again.</source>
+        <translation>请检查地址后重试。</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>The entered address does not refer to a key.</source>
+        <translation>输入的地址没有关联的公私钥对。</translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>Wallet unlock was cancelled.</source>
+        <translation>钱包解锁动作取消。</translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>Private key for the entered address is not available.</source>
+        <translation>找不到输入地址关联的私钥。</translation>
+    </message>
+    <message>
+        <location line="+12"/>
+        <source>Message signing failed.</source>
+        <translation>消息签名失败。</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Message signed.</source>
+        <translation>消息已签名。</translation>
     </message>
 </context>
 <context>
     <name>SignVerifyMessageDialog</name>
     <message>
         <location filename="../forms/signverifymessagedialog.ui" line="+14"/>
+        <location filename="../signverifymessagedialog.cpp" line="+30"/>
         <source>Signatures - Sign / Verify a Message</source>
         <translation>签名 - 为消息签名/验证签名消息</translation>
     </message>
     <message>
-        <location line="+13"/>
+        <location line="+105"/>
+        <source>Edit record</source>
+        <translation>编辑记录</translation>
+    </message>
+    <message>
+        <location line="+49"/>
         <source>&amp;Sign Message</source>
         <translation>&amp;签名消息</translation>
     </message>
@@ -1472,8 +2120,8 @@ Address: %4
     </message>
     <message>
         <location line="+18"/>
-        <source>The address to sign the message with (e.g. 1NS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</source>
-        <translation>用于签名消息的地址(例如: 1NS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</translation>
+        <source>The address to sign the message with (e.g. MNS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</source>
+        <translation>用于签名消息的地址(例如: MNS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</translation>
     </message>
     <message>
         <location line="+10"/>
@@ -1545,8 +2193,8 @@ Address: %4
     </message>
     <message>
         <location line="+21"/>
-        <source>The address the message was signed with (e.g. 1NS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</source>
-        <translation>用于签名消息的地址(例如: 1NS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</translation>
+        <source>The address the message was signed with (e.g. MNS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</source>
+        <translation>用于签名消息的地址(例如: MNS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</translation>
     </message>
     <message>
         <location line="+40"/>
@@ -1564,10 +2212,10 @@ Address: %4
         <translation>清空所有验证消息栏</translation>
     </message>
     <message>
-        <location filename="../signverifymessagedialog.cpp" line="+27"/>
+        <location filename="../signverifymessagedialog.cpp" line="+4"/>
         <location line="+3"/>
         <source>Enter a Megacoin address (e.g. MNS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</source>
-        <translation>请输入美卡币地址 (例如: 1NS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</translation>
+        <translation>请输入美卡币地址 (例如: MNS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</translation>
     </message>
     <message>
         <location line="-2"/>
@@ -1580,7 +2228,7 @@ Address: %4
         <translation>输入美卡币签名</translation>
     </message>
     <message>
-        <location line="+82"/>
+        <location line="+92"/>
         <location line="+81"/>
         <source>The entered address is invalid.</source>
         <translation>输入的地址非法。</translation>
@@ -1649,7 +2297,7 @@ Address: %4
 <context>
     <name>SplashScreen</name>
     <message>
-        <location filename="../splashscreen.cpp" line="+22"/>
+        <location filename="../splashscreen.cpp" line="+24"/>
         <source>Dr. Kimoto Chan</source>
         <translation>Megacoin-qt 客户端开发团队</translation>
     </message>
@@ -1689,7 +2337,9 @@ Address: %4
     <message numerus="yes">
         <location line="+7"/>
         <source>, broadcast through %n node(s)</source>
-        <translation><numerusform>通过 %n 个节点广播</numerusform></translation>
+        <translation>
+            <numerusform>通过 %n 个节点广播</numerusform>
+        </translation>
     </message>
     <message>
         <location line="+4"/>
@@ -1742,7 +2392,9 @@ Address: %4
     <message numerus="yes">
         <location line="-102"/>
         <source>matures in %n more block(s)</source>
-        <translation><numerusform>将在 %n 个数据块后成熟</numerusform></translation>
+        <translation>
+            <numerusform>将在 %n 个数据块后成熟</numerusform>
+        </translation>
     </message>
     <message>
         <location line="+2"/>
@@ -1825,7 +2477,9 @@ Address: %4
     <message numerus="yes">
         <location line="-35"/>
         <source>Open for %n more block(s)</source>
-        <translation><numerusform>Open for %n more block</numerusform></translation>
+        <translation>
+            <numerusform>Open for %n more block</numerusform>
+        </translation>
     </message>
     <message>
         <location line="+70"/>
@@ -1836,12 +2490,12 @@ Address: %4
 <context>
     <name>TransactionDescDialog</name>
     <message>
-        <location filename="../forms/transactiondescdialog.ui" line="+14"/>
+        <location filename="../forms/transactiondescdialog.ui" line="+105"/>
         <source>Transaction details</source>
         <translation>交易明细</translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="+76"/>
         <source>This pane shows a detailed description of the transaction</source>
         <translation>当前面板显示了交易的详细信息</translation>
     </message>
@@ -1849,7 +2503,7 @@ Address: %4
 <context>
     <name>TransactionTableModel</name>
     <message>
-        <location filename="../transactiontablemodel.cpp" line="+225"/>
+        <location filename="../transactiontablemodel.cpp" line="+230"/>
         <source>Date</source>
         <translation>日期</translation>
     </message>
@@ -1871,7 +2525,9 @@ Address: %4
     <message numerus="yes">
         <location line="+57"/>
         <source>Open for %n more block(s)</source>
-        <translation><numerusform>Open for %n more block</numerusform></translation>
+        <translation>
+            <numerusform>Open for %n more block</numerusform>
+        </translation>
     </message>
     <message>
         <location line="+3"/>
@@ -1896,7 +2552,9 @@ Address: %4
     <message numerus="yes">
         <location line="+8"/>
         <source>Mined balance will be available when it matures in %n more block(s)</source>
-        <translation><numerusform>挖矿收入余额将在 %n 个数据块后可用</numerusform></translation>
+        <translation>
+            <numerusform>挖矿收入余额将在 %n 个数据块后可用</numerusform>
+        </translation>
     </message>
     <message>
         <location line="+5"/>
@@ -1934,12 +2592,12 @@ Address: %4
         <translation>挖矿所得</translation>
     </message>
     <message>
-        <location line="+38"/>
+        <location line="+40"/>
         <source>(n/a)</source>
         <translation>(n/a)</translation>
     </message>
     <message>
-        <location line="+199"/>
+        <location line="+201"/>
         <source>Transaction status. Hover over this field to show number of confirmations.</source>
         <translation>交易状态。 鼠标移到此区域上可显示确认消息项的数目。</translation>
     </message>
@@ -1967,13 +2625,13 @@ Address: %4
 <context>
     <name>TransactionView</name>
     <message>
-        <location filename="../transactionview.cpp" line="+52"/>
-        <location line="+16"/>
+        <location filename="../transactionview.cpp" line="+62"/>
+        <location line="+17"/>
         <source>All</source>
         <translation>全部</translation>
     </message>
     <message>
-        <location line="-15"/>
+        <location line="-16"/>
         <source>Today</source>
         <translation>今天</translation>
     </message>
@@ -2003,7 +2661,7 @@ Address: %4
         <translation>范围...</translation>
     </message>
     <message>
-        <location line="+11"/>
+        <location line="+12"/>
         <source>Received with</source>
         <translation>接收于</translation>
     </message>
@@ -2028,17 +2686,17 @@ Address: %4
         <translation>其他</translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="+9"/>
         <source>Enter address or label to search</source>
         <translation>输入地址或标签进行搜索</translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="+8"/>
         <source>Min amount</source>
         <translation>最小金额</translation>
     </message>
     <message>
-        <location line="+34"/>
+        <location line="+37"/>
         <source>Copy address</source>
         <translation>复制地址</translation>
     </message>
@@ -2068,7 +2726,7 @@ Address: %4
         <translation>显示交易详情</translation>
     </message>
     <message>
-        <location line="+139"/>
+        <location line="+150"/>
         <source>Export Transaction Data</source>
         <translation>导出交易数据</translation>
     </message>
@@ -2134,54 +2792,141 @@ Address: %4
     </message>
 </context>
 <context>
+    <name>TransactionsPage</name>
+    <message>
+        <location filename="../forms/transactionspage.ui" line="+159"/>
+        <source>Form</source>
+        <translation>表单</translation>
+    </message>
+    <message>
+        <location line="+101"/>
+        <source>Transactions</source>
+        <translation>交易记录</translation>
+    </message>
+</context>
+<context>
+    <name>VerifyMessagePage</name>
+    <message>
+        <location filename="../forms/verifymessagepage.ui" line="+159"/>
+        <source>Form</source>
+        <translation>表单</translation>
+    </message>
+    <message>
+        <location line="+110"/>
+        <source>Verify Message</source>
+        <translation>验证消息</translation>
+    </message>
+    <message>
+        <location line="+93"/>
+        <source>Signature</source>
+        <translation>签名</translation>
+    </message>
+    <message>
+        <location line="+43"/>
+        <source>Text</source>
+        <translation>信息</translation>
+    </message>
+    <message>
+        <location line="+45"/>
+        <source>Address</source>
+        <translation>地址</translation>
+    </message>
+    <message>
+        <location line="+24"/>
+        <source>The address the message was signed with (e.g. MNS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</source>
+        <translation>用于签名消息的地址(例如: MNS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</translation>
+    </message>
+    <message>
+        <location line="+22"/>
+        <source>Choose an address from the address book</source>
+        <translation>从地址簿选择地址</translation>
+    </message>
+    <message>
+        <location line="+21"/>
+        <source>Alt+A</source>
+        <translation>Alt+A</translation>
+    </message>
+    <message>
+        <location line="+101"/>
+        <source>Reset all verify message fields</source>
+        <translation>清空所有验证消息栏</translation>
+    </message>
+    <message>
+        <location line="+22"/>
+        <source>Clear &amp;All</source>
+        <translation>清除 &amp;所有</translation>
+    </message>
+    <message>
+        <location line="+16"/>
+        <source>Verify the message to ensure it was signed with the specified Megacoin address</source>
+        <translation>验证消息，确保消息是由指定的美卡币地址签名过的。</translation>
+    </message>
+    <message>
+        <location line="+22"/>
+        <source>Verify &amp;Message</source>
+        <translation>验证消息签名</translation>
+    </message>
+    <message>
+        <location filename="../verifymessagepage.cpp" line="+28"/>
+        <source>Enter a Megacoin address (e.g. MNS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</source>
+        <translation>请输入美卡币地址 (例如: MNS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Enter Megacoin signature</source>
+        <translation>输入美卡币签名</translation>
+    </message>
+    <message>
+        <location line="+12"/>
+        <location line="+45"/>
+        <source>The entered address is invalid.</source>
+        <translation>输入的地址非法。</translation>
+    </message>
+    <message>
+        <location line="-45"/>
+        <location line="+45"/>
+        <location line="+8"/>
+        <source>Please check the address and try again.</source>
+        <translation>请检查地址后重试。</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>The entered address does not refer to a key.</source>
+        <translation>输入的地址没有关联的公私钥对。</translation>
+    </message>
+    <message>
+        <location line="+11"/>
+        <source>The signature could not be decoded.</source>
+        <translation>签名无法解码。</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <location line="+13"/>
+        <source>Please check the signature and try again.</source>
+        <translation>请检查签名后重试。</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>The signature did not match the message digest.</source>
+        <translation>签名与消息摘要不匹配。</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Message verification failed.</source>
+        <translation>消息验证失败。</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Message verified.</source>
+        <translation>消息验证成功。</translation>
+    </message>
+</context>
+<context>
     <name>WalletModel</name>
     <message>
         <location filename="../walletmodel.cpp" line="+193"/>
         <source>Send Coins</source>
         <translation>发送美卡币</translation>
-    </message>
-</context>
-<context>
-    <name>WalletView</name>
-    <message>
-        <location filename="../walletview.cpp" line="+42"/>
-        <source>&amp;Export</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Export the data in the current tab to a file</source>
-        <translation>导出当前数据到文件</translation>
-    </message>
-    <message>
-        <location line="+193"/>
-        <source>Backup Wallet</source>
-        <translation>备份钱包</translation>
-    </message>
-    <message>
-        <location line="+0"/>
-        <source>Wallet Data (*.dat)</source>
-        <translation>钱包文件(*.dat)</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Backup Failed</source>
-        <translation>备份失败</translation>
-    </message>
-    <message>
-        <location line="+0"/>
-        <source>There was an error trying to save the wallet data to the new location.</source>
-        <translation>备份钱包到其它文件夹失败.</translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>Backup Successful</source>
-        <translation>备份成功</translation>
-    </message>
-    <message>
-        <location line="+0"/>
-        <source>The wallet data was successfully saved to the new location.</source>
-        <translation>钱包数据成功存储到新位置</translation>
     </message>
 </context>
 <context>
@@ -2530,7 +3275,7 @@ rpcpassword=%s
     <message>
         <location line="+1"/>
         <source>Generate coins (default: 0)</source>
-        <translation type="unfinished"/>
+        <translation>产出货币（默认：0）</translation>
     </message>
     <message>
         <location line="+2"/>
@@ -2545,7 +3290,7 @@ rpcpassword=%s
     <message>
         <location line="+19"/>
         <source>Not enough file descriptors available.</source>
-        <translation type="unfinished"/>
+        <translation>没有足够可用的文件描述符。</translation>
     </message>
     <message>
         <location line="+8"/>
@@ -2575,7 +3320,7 @@ rpcpassword=%s
     <message>
         <location line="-76"/>
         <source>Set the number of script verification threads (up to 16, 0 = auto, &lt;0 = leave that many cores free, default: 0)</source>
-        <translation type="unfinished"/>
+        <translation>设置脚本的数量核查线程 (不大于 16, 0 = 自动, &lt;0 = 许多核心自由的离开, 默认: 0)</translation>
     </message>
     <message>
         <location line="+77"/>
@@ -2590,12 +3335,12 @@ rpcpassword=%s
     <message>
         <location line="+1"/>
         <source>Invalid amount for -minrelaytxfee=&lt;amount&gt;: &apos;%s&apos;</source>
-        <translation type="unfinished"/>
+        <translation>非法金额 -minrelaytxfee=&lt;amount&gt;: &apos;%s&apos;</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Invalid amount for -mintxfee=&lt;amount&gt;: &apos;%s&apos;</source>
-        <translation type="unfinished"/>
+        <translation>非法金额 -mintxfee=&lt;amount&gt;: &apos;%s&apos;</translation>
     </message>
     <message>
         <location line="+8"/>
@@ -2675,7 +3420,7 @@ rpcpassword=%s
     <message>
         <location line="+1"/>
         <source>Signing transaction failed</source>
-        <translation type="unfinished"/>
+        <translation>交易签名失败</translation>
     </message>
     <message>
         <location line="+2"/>
@@ -2690,17 +3435,17 @@ rpcpassword=%s
     <message>
         <location line="+4"/>
         <source>Transaction amount too small</source>
-        <translation type="unfinished"/>
+        <translation>交易金额太少</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Transaction amounts must be positive</source>
-        <translation type="unfinished"/>
+        <translation>交易金额必须为正数</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Transaction too large</source>
-        <translation type="unfinished"/>
+        <translation>交易金额太大</translation>
     </message>
     <message>
         <location line="+7"/>

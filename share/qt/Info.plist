@@ -7,7 +7,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleGetInfoString</key>
-	<string>$VERSION, Copyright © 2013-2079 Dr. Kimoto Chan, The Megacoin developers</string>
+	<string>$VERSION, Copyright © 2013-2079 Dr. Kimoto Chan</string>
 	<key>CFBundleShortVersionString</key>
 	<string>$VERSION</string>
 	<key>CFBundleVersion</key>

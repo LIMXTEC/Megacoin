@@ -19,7 +19,7 @@ Build-Depends: debhelper,
  libqt4-dev,
  libqrencode-dev
 Standards-Version: 3.9.2
-Homepage: http://megacoin.co.nz/
+Homepage: http://www.megacoin.org/
 Vcs-Git: git://github.com/megacoin/megacoin.git
 Vcs-Browser: http://github.com/megacoin/megacoin
 

@@ -15,7 +15,7 @@ public:
     explicit MegacoinUnits(QObject *parent);
 
     /** Megacoin units.
-      @note Please add only sensible ones
+      @note Source: https://en.megacoin.it/wiki/Units . Please add only sensible ones
      */
     enum Unit
     {

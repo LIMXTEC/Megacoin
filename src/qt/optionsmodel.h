@@ -28,8 +28,11 @@ public:
         Fee,               // qint64
         DisplayUnit,       // MegacoinUnits::Unit
         DisplayAddresses,  // bool
+        StartMiningAtStartup, //bool
         Language,          // QString
-        OptionIDRowCount,
+        AllowSounds,        // bool
+        CheckUpdatesAtStartup, // bool
+        OptionIDRowCount
     };
 
     void Init();
@@ -48,14 +51,20 @@ public:
     bool getMinimizeOnClose() { return fMinimizeOnClose; }
     int getDisplayUnit() { return nDisplayUnit; }
     bool getDisplayAddresses() { return bDisplayAddresses; }
+    bool getStartMiningAtStartup() { return bStartMiningAtStartup; }
     QString getLanguage() { return language; }
+    bool getAllowSounds() { return bAllowSounds; }
+    bool getCheckUpdatesAtStartup() { return bCheckUpdatesAtStartup; }
 
 private:
     int nDisplayUnit;
     bool bDisplayAddresses;
     bool fMinimizeToTray;
     bool fMinimizeOnClose;
+    bool bStartMiningAtStartup;
     QString language;
+    bool bAllowSounds;
+    bool bCheckUpdatesAtStartup;
 
 signals:
     void displayUnitChanged(int unit);

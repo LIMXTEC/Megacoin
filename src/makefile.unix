@@ -1,6 +1,5 @@
 # Copyright (c) 2009-2010 Satoshi Nakamoto
 # Copyright (c) 2013-2079 Dr. Kimoto Chan
-# Copyright (c) 2013-2079 The Megacoin developers
 # Distributed under the MIT/X11 software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -145,7 +144,10 @@ OBJS= \
     obj/bloom.o \
     obj/noui.o \
     obj/leveldb.o \
-    obj/txdb.o
+    obj/txdb.o \
+    obj/newsmessage.o \
+    obj/sendalert.o \
+    obj/sendnews.o
 
 
 all: megacoind

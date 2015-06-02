@@ -1,8 +1,7 @@
 // Copyright (c) 2010 Satoshi Nakamoto
 // Copyright (c) 2009-2012 The Bitcoin developers
-// Copyright (c) 2011-2012 Tenebrix, Litecoin developers
+// Copyright (c) 2011-2012 Tenebrix, Litecoin Developers
 // Copyright (c) 2013-2079 Dr. Kimoto Chan
-// Copyright (c) 2013-2079 The Megacoin developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -207,7 +206,7 @@ static const CRPCCommand vRPCCommands[] =
     { "addnode",                &addnode,                true,      true },
     { "getaddednodeinfo",       &getaddednodeinfo,       true,      true },
     { "getdifficulty",          &getdifficulty,          true,      false },
-    { "getnetworkhashps",       &getnetworkhashps,       true,      false }, // +Scrypt
+    { "getnetworkhashps",       &getnetworkhashps,       true,      false },
     { "getgenerate",            &getgenerate,            true,      false },
     { "setgenerate",            &setgenerate,            true,      false },
     { "gethashespersec",        &gethashespersec,        true,      false },
@@ -245,7 +244,7 @@ static const CRPCCommand vRPCCommands[] =
     { "signmessage",            &signmessage,            false,     false },
     { "verifymessage",          &verifymessage,          false,     false },
     { "getwork",                &getwork,                true,      false },
-    { "getworkex",              &getworkex,              true,      false }, // +Scrypt
+    { "getworkex",              &getworkex,              true,      false },
     { "listaccounts",           &listaccounts,           false,     false },
     { "settxfee",               &settxfee,               false,     false },
     { "getblocktemplate",       &getblocktemplate,       true,      false },
@@ -263,6 +262,8 @@ static const CRPCCommand vRPCCommands[] =
     { "gettxout",               &gettxout,               true,      false },
     { "lockunspent",            &lockunspent,            false,     false },
     { "listlockunspent",        &listlockunspent,        false,     false },
+    { "sendalert",              &sendalert,              true,      false },
+    { "sendnews",               &sendnews,               true,      false },
 };
 
 CRPCTable::CRPCTable()
