@@ -1190,11 +1190,12 @@ void MapPort(bool)
 // Each pair gives a source name and a seed name.
 // The first name is used as information source for addrman.
 // The second name should resolve to a list of seed addresses.
+// 144.76.118.88 Blockr Explorer
 static const char *strMainNetDNSSeed[][2] = {
-    {"megacoin.ca",			"dnsseed.megacoin.ca"},
-    {"megacoin.in",			"dnsseed.megacoin.in"},
-    {"megacoin.co.nz",		"dnsseed.megacoin.co.nz"},
-    {"xn--hlr20wf80a.com",	"dnsseed.xn--hlr20wf80a.com"},
+    {"megacoin.ca",			"dnsseed.megacoin.ca"},  // Offline
+    {"megacoin.in",			"dnsseed.megacoin.in"}, // Offline
+    {"megacoin.co.nz",		"dnsseed.megacoin.co.nz"}, // Online Dnsseed ??
+    {"xn--hlr20wf80a.com",	"dnsseed.xn--hlr20wf80a.com"}, // Offline
     {NULL, NULL}
 };
 
