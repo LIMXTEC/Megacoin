@@ -7,161 +7,20 @@
     <x>0</x>
     <y>0</y>
     <width>700</width>
-    <height>400</height>
+    <height>380</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Signatures - Sign / Verify a Message</string>
   </property>
-  <property name="styleSheet">
-   <string notr="true">QLabel {
-	color: #AF272E;
-}
-
-QDialog {
-	background-color: #E9D9D8;
-}</string>
-  </property>
   <property name="modal">
    <bool>true</bool>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
-   <property name="spacing">
-    <number>0</number>
-   </property>
-   <property name="margin">
-    <number>0</number>
-   </property>
-   <item>
-    <widget class="QWidget" name="wHeader" native="true">
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>32</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>16777215</width>
-       <height>32</height>
-      </size>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">#wHeader {
-	background-color: #9D0B17;
-}</string>
-     </property>
-     <property name="is_header" stdset="0">
-      <bool>true</bool>
-     </property>
-     <layout class="QHBoxLayout" name="horizontalLayout_19">
-      <property name="margin">
-       <number>0</number>
-      </property>
-      <item>
-       <spacer name="horizontalSpacer_26">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeType">
-         <enum>QSizePolicy::Fixed</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>7</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <widget class="QLabel" name="label_33">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>30</width>
-          <height>30</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>30</width>
-          <height>30</height>
-         </size>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="pixmap">
-         <pixmap resource="../res.qrc">:/res/edit_record_icon.png</pixmap>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="lbTitle">
-        <property name="font">
-         <font>
-          <pointsize>11</pointsize>
-          <stylestrategy>PreferAntialias</stylestrategy>
-         </font>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QLabel {
-	color: #E9D9D8;
-}</string>
-        </property>
-        <property name="text">
-         <string>Edit record</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="bClose">
-        <property name="minimumSize">
-         <size>
-          <width>30</width>
-          <height>30</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>30</width>
-          <height>30</height>
-         </size>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QPushButton {	
-	image: url(:/res/close_normal.png);
-	border: 0px solid gray;
-}
-QPushButton:pressed:flat {
-	image: url(:/res/close_normal.png);
-}
-
-QPushButton:hover {
-	image: url(:/res/close_hover.png);
-}</string>
-        </property>
-        <property name="text">
-         <string notr="true"/>
-        </property>
-        <property name="flat">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </item>
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tabSignMessage">
       <attribute name="title">
@@ -189,23 +48,20 @@ QPushButton:hover {
          <item>
           <widget class="QValidatedLineEdit" name="addressIn_SM">
            <property name="toolTip">
-            <string>The address to sign the message with (e.g. MNS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</string>
-           </property>
-           <property name="maxLength">
-            <number>34</number>
+            <string>The Megacoin address to sign the message with</string>
            </property>
           </widget>
          </item>
          <item>
           <widget class="QPushButton" name="addressBookButton_SM">
            <property name="toolTip">
-            <string>Choose an address from the address book</string>
+            <string>Choose previously used address</string>
            </property>
            <property name="text">
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="../megacoin.qrc">
+            <iconset resource="../bitcoin.qrc">
              <normaloff>:/icons/address-book</normaloff>:/icons/address-book</iconset>
            </property>
            <property name="shortcut">
@@ -225,7 +81,7 @@ QPushButton:hover {
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="../megacoin.qrc">
+            <iconset resource="../bitcoin.qrc">
              <normaloff>:/icons/editpaste</normaloff>:/icons/editpaste</iconset>
            </property>
            <property name="shortcut">
@@ -281,7 +137,7 @@ QPushButton:hover {
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="../megacoin.qrc">
+            <iconset resource="../bitcoin.qrc">
              <normaloff>:/icons/editcopy</normaloff>:/icons/editcopy</iconset>
            </property>
            <property name="autoDefault">
@@ -302,7 +158,7 @@ QPushButton:hover {
             <string>Sign &amp;Message</string>
            </property>
            <property name="icon">
-            <iconset resource="../megacoin.qrc">
+            <iconset resource="../bitcoin.qrc">
              <normaloff>:/icons/edit</normaloff>:/icons/edit</iconset>
            </property>
            <property name="autoDefault">
@@ -319,7 +175,7 @@ QPushButton:hover {
             <string>Clear &amp;All</string>
            </property>
            <property name="icon">
-            <iconset resource="../megacoin.qrc">
+            <iconset resource="../bitcoin.qrc">
              <normaloff>:/icons/remove</normaloff>:/icons/remove</iconset>
            </property>
            <property name="autoDefault">
@@ -402,23 +258,20 @@ QPushButton:hover {
          <item>
           <widget class="QValidatedLineEdit" name="addressIn_VM">
            <property name="toolTip">
-            <string>The address the message was signed with (e.g. MNS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</string>
-           </property>
-           <property name="maxLength">
-            <number>34</number>
+            <string>The Megacoin address the message was signed with</string>
            </property>
           </widget>
          </item>
          <item>
           <widget class="QPushButton" name="addressBookButton_VM">
            <property name="toolTip">
-            <string>Choose an address from the address book</string>
+            <string>Choose previously used address</string>
            </property>
            <property name="text">
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="../megacoin.qrc">
+            <iconset resource="../bitcoin.qrc">
              <normaloff>:/icons/address-book</normaloff>:/icons/address-book</iconset>
            </property>
            <property name="shortcut">
@@ -448,7 +301,7 @@ QPushButton:hover {
             <string>Verify &amp;Message</string>
            </property>
            <property name="icon">
-            <iconset resource="../megacoin.qrc">
+            <iconset resource="../bitcoin.qrc">
              <normaloff>:/icons/transaction_0</normaloff>:/icons/transaction_0</iconset>
            </property>
            <property name="autoDefault">
@@ -465,7 +318,7 @@ QPushButton:hover {
             <string>Clear &amp;All</string>
            </property>
            <property name="icon">
-            <iconset resource="../megacoin.qrc">
+            <iconset resource="../bitcoin.qrc">
              <normaloff>:/icons/remove</normaloff>:/icons/remove</iconset>
            </property>
            <property name="autoDefault">
@@ -531,25 +384,7 @@ QPushButton:hover {
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../megacoin.qrc"/>
-  <include location="../res.qrc"/>
+  <include location="../bitcoin.qrc"/>
  </resources>
- <connections>
-  <connection>
-   <sender>bClose</sender>
-   <signal>clicked()</signal>
-   <receiver>SignVerifyMessageDialog</receiver>
-   <slot>reject()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>489</x>
-     <y>15</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>349</x>
-     <y>199</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>

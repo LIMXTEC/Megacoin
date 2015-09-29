@@ -1,72 +1,72 @@
+// Copyright (c) 2011-2013 The Bitcoin developers
+// Distributed under the MIT/X11 software license, see the accompanying
+// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
+#if defined(HAVE_CONFIG_H)
+#include "config/bitcoin-config.h"
+#endif
+
 #include "addressbookpage.h"
 #include "ui_addressbookpage.h"
 
 #include "addresstablemodel.h"
-#include "optionsmodel.h"
-#include "megacoingui.h"
-#include "editaddressdialog.h"
+#include "bitcoingui.h"
 #include "csvmodelwriter.h"
+#include "editaddressdialog.h"
 #include "guiutil.h"
-#include "dialog_move_handler.h"
 
-#include <QDesktopWidget>
-#include <QSortFilterProxyModel>
-#include <QClipboard>
-#include <QMessageBox>
+#include <QIcon>
 #include <QMenu>
-
-#ifdef USE_QRCODE
-#include "qrcodedialog.h"
-#endif
+#include <QMessageBox>
+#include <QSortFilterProxyModel>
 
 AddressBookPage::AddressBookPage(Mode mode, Tabs tab, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::AddressBookPage),
     model(0),
-    optionsModel(0),
     mode(mode),
     tab(tab)
 {
     ui->setupUi(this);
-    setWindowFlags(Qt::CustomizeWindowHint | Qt::FramelessWindowHint | Qt::Window);
 
 #ifdef Q_OS_MAC // Icons on push buttons are very uncommon on Mac
-    ui->newAddressButton->setIcon(QIcon());
-    ui->copyToClipboard->setIcon(QIcon());
-    ui->deleteButton->setIcon(QIcon());
-#endif
-
-#ifndef USE_QRCODE
-    ui->showQRCode->setVisible(false);
+    ui->newAddress->setIcon(QIcon());
+    ui->copyAddress->setIcon(QIcon());
+    ui->deleteAddress->setIcon(QIcon());
+    ui->exportButton->setIcon(QIcon());
 #endif
 
     switch(mode)
     {
-    case ForSending:
+    case ForSelection:
+        switch(tab)
+        {
+        case SendingTab: setWindowTitle(tr("Choose the address to send coins to")); break;
+        case ReceivingTab: setWindowTitle(tr("Choose the address to receive coins with")); break;
+        }
         connect(ui->tableView, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(accept()));
         ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
         ui->tableView->setFocus();
+        ui->closeButton->setText(tr("C&hoose"));
+        ui->exportButton->hide();
         break;
     case ForEditing:
-        ui->buttonBox->setVisible(false);
-        ui->bClose->setVisible(false);
+        switch(tab)
+        {
+        case SendingTab: setWindowTitle(tr("Sending addresses")); break;
+        case ReceivingTab: setWindowTitle(tr("Receiving addresses")); break;
+        }
         break;
     }
     switch(tab)
     {
     case SendingTab:
-        ui->label_25_1->setVisible(false);
-//        ui->labelExplanation->setVisible(false);
-        ui->deleteButton->setVisible(true);
-        ui->signMessage->setVisible(false);
-        ui->verifyMessage->setVisible(true);
+        ui->labelExplanation->setText(tr("These are your Megacoin addresses for sending payments. Always check the amount and the receiving address before sending coins."));
+        ui->deleteAddress->setVisible(true);
         break;
     case ReceivingTab:
-        ui->label_25->setVisible(false);
-        ui->label_27->setText(tr("Adress for receiving Megacoins"));
-        ui->deleteButton->setVisible(false);
-        ui->signMessage->setVisible(true);
-        ui->verifyMessage->setVisible(false);
+        ui->labelExplanation->setText(tr("These are your Megacoin addresses for receiving payments. It is recommended to use a new receiving address for each transaction."));
+        ui->deleteAddress->setVisible(false);
         break;
     }
 
@@ -74,44 +74,26 @@ AddressBookPage::AddressBookPage(Mode mode, Tabs tab, QWidget *parent) :
     QAction *copyAddressAction = new QAction(tr("&Copy Address"), this);
     QAction *copyLabelAction = new QAction(tr("Copy &Label"), this);
     QAction *editAction = new QAction(tr("&Edit"), this);
-    QAction *showQRCodeAction = new QAction(ui->showQRCode->text(), this);
-    QAction *signMessageAction = new QAction(tr("Sign &Message"), this);
-    QAction *verifyMessageAction = new QAction(tr("&Verify Message"), this);
-    deleteAction = new QAction(tr("&Delete"), this);
+    deleteAction = new QAction(ui->deleteAddress->text(), this);
 
     // Build context menu
-    contextMenu = new QMenu(this);
+    contextMenu = new QMenu();
     contextMenu->addAction(copyAddressAction);
     contextMenu->addAction(copyLabelAction);
     contextMenu->addAction(editAction);
     if(tab == SendingTab)
         contextMenu->addAction(deleteAction);
     contextMenu->addSeparator();
-#ifdef USE_QRCODE
-    contextMenu->addAction(showQRCodeAction);
-#endif
-    if(tab == ReceivingTab)
-        contextMenu->addAction(signMessageAction);
-    else if(tab == SendingTab)
-        contextMenu->addAction(verifyMessageAction);
 
     // Connect signals for context menu actions
-    connect(copyAddressAction, SIGNAL(triggered()), this, SLOT(on_copyToClipboard_clicked()));
+    connect(copyAddressAction, SIGNAL(triggered()), this, SLOT(on_copyAddress_clicked()));
     connect(copyLabelAction, SIGNAL(triggered()), this, SLOT(onCopyLabelAction()));
     connect(editAction, SIGNAL(triggered()), this, SLOT(onEditAction()));
-    connect(deleteAction, SIGNAL(triggered()), this, SLOT(on_deleteButton_clicked()));
-    connect(showQRCodeAction, SIGNAL(triggered()), this, SLOT(on_showQRCode_clicked()));
-    connect(signMessageAction, SIGNAL(triggered()), this, SLOT(on_signMessage_clicked()));
-    connect(verifyMessageAction, SIGNAL(triggered()), this, SLOT(on_verifyMessage_clicked()));
+    connect(deleteAction, SIGNAL(triggered()), this, SLOT(on_deleteAddress_clicked()));
 
     connect(ui->tableView, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(contextualMenu(QPoint)));
 
-    // Pass through accept action from button box
-    connect(ui->buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
-
-    // Center window (deleted)
-//    QRect scr = QApplication::desktop()->screenGeometry();
-//    move(scr.center() - rect().center());
+    connect(ui->closeButton, SIGNAL(clicked()), this, SLOT(accept()));
 }
 
 AddressBookPage::~AddressBookPage()
@@ -119,11 +101,8 @@ AddressBookPage::~AddressBookPage()
     delete ui;
 }
 
-void AddressBookPage::setModel(AddressTableModel *model, bool isMove)
+void AddressBookPage::setModel(AddressTableModel *model)
 {
-    if (isMove)
-        ui->wAddressBookHeader->installEventFilter(new DialogMoveHandler(this));
-
     this->model = model;
     if(!model)
         return;
@@ -150,27 +129,24 @@ void AddressBookPage::setModel(AddressTableModel *model, bool isMove)
     ui->tableView->sortByColumn(0, Qt::AscendingOrder);
 
     // Set column widths
-    ui->tableView->horizontalHeader()->resizeSection(
-            AddressTableModel::Address, 320);
-    ui->tableView->horizontalHeader()->setResizeMode(
-            AddressTableModel::Label, QHeaderView::Stretch);
+#if QT_VERSION < 0x050000
+    ui->tableView->horizontalHeader()->setResizeMode(AddressTableModel::Label, QHeaderView::Stretch);
+    ui->tableView->horizontalHeader()->setResizeMode(AddressTableModel::Address, QHeaderView::ResizeToContents);
+#else
+    ui->tableView->horizontalHeader()->setSectionResizeMode(AddressTableModel::Label, QHeaderView::Stretch);
+    ui->tableView->horizontalHeader()->setSectionResizeMode(AddressTableModel::Address, QHeaderView::ResizeToContents);
+#endif
 
     connect(ui->tableView->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)),
-            this, SLOT(selectionChanged()));
+        this, SLOT(selectionChanged()));
 
     // Select row for newly created address
-    connect(model, SIGNAL(rowsInserted(QModelIndex,int,int)),
-            this, SLOT(selectNewAddress(QModelIndex,int,int)));
+    connect(model, SIGNAL(rowsInserted(QModelIndex,int,int)), this, SLOT(selectNewAddress(QModelIndex,int,int)));
 
     selectionChanged();
 }
 
-void AddressBookPage::setOptionsModel(OptionsModel *optionsModel)
-{
-    this->optionsModel = optionsModel;
-}
-
-void AddressBookPage::on_copyToClipboard_clicked()
+void AddressBookPage::on_copyAddress_clicked()
 {
     GUIUtil::copyEntryData(ui->tableView, AddressTableModel::Address);
 }
@@ -182,6 +158,9 @@ void AddressBookPage::onCopyLabelAction()
 
 void AddressBookPage::onEditAction()
 {
+    if(!model)
+        return;
+
     if(!ui->tableView->selectionModel())
         return;
     QModelIndexList indexes = ui->tableView->selectionModel()->selectedRows();
@@ -189,50 +168,24 @@ void AddressBookPage::onEditAction()
         return;
 
     EditAddressDialog dlg(
-            tab == SendingTab ?
-            EditAddressDialog::EditSendingAddress :
-            EditAddressDialog::EditReceivingAddress,
-                this);
+        tab == SendingTab ?
+        EditAddressDialog::EditSendingAddress :
+        EditAddressDialog::EditReceivingAddress, this);
     dlg.setModel(model);
     QModelIndex origIndex = proxyModel->mapToSource(indexes.at(0));
     dlg.loadRow(origIndex.row());
     dlg.exec();
 }
 
-void AddressBookPage::on_signMessage_clicked()
-{
-    QTableView *table = ui->tableView;
-    QModelIndexList indexes = table->selectionModel()->selectedRows(AddressTableModel::Address);
-
-    foreach (QModelIndex index, indexes)
-    {
-        QString address = index.data().toString();
-        emit signMessage(address);
-    }
-}
-
-void AddressBookPage::on_verifyMessage_clicked()
-{
-    QTableView *table = ui->tableView;
-    QModelIndexList indexes = table->selectionModel()->selectedRows(AddressTableModel::Address);
-
-    foreach (QModelIndex index, indexes)
-    {
-        QString address = index.data().toString();
-        emit verifyMessage(address);
-    }
-}
-
-void AddressBookPage::on_newAddressButton_clicked()
+void AddressBookPage::on_newAddress_clicked()
 {
     if(!model)
         return;
 
     EditAddressDialog dlg(
-            tab == SendingTab ?
-            EditAddressDialog::NewSendingAddress :
-            EditAddressDialog::NewReceivingAddress,
-                this);
+        tab == SendingTab ?
+        EditAddressDialog::NewSendingAddress :
+        EditAddressDialog::NewReceivingAddress, this);
     dlg.setModel(model);
     if(dlg.exec())
     {
@@ -240,7 +193,7 @@ void AddressBookPage::on_newAddressButton_clicked()
     }
 }
 
-void AddressBookPage::on_deleteButton_clicked()
+void AddressBookPage::on_deleteAddress_clicked()
 {
     QTableView *table = ui->tableView;
     if(!table->selectionModel())
@@ -251,11 +204,6 @@ void AddressBookPage::on_deleteButton_clicked()
     {
         table->model()->removeRow(indexes.at(0).row());
     }
-}
-
-void AddressBookPage::on_editButton_clicked()
-{
-    onEditAction();
 }
 
 void AddressBookPage::selectionChanged()
@@ -271,35 +219,23 @@ void AddressBookPage::selectionChanged()
         {
         case SendingTab:
             // In sending tab, allow deletion of selection
-            ui->deleteButton->setEnabled(true);
-            ui->deleteButton->setVisible(true);
+            ui->deleteAddress->setEnabled(true);
+            ui->deleteAddress->setVisible(true);
             deleteAction->setEnabled(true);
-            ui->signMessage->setEnabled(false);
-            ui->signMessage->setVisible(false);
-            ui->verifyMessage->setEnabled(true);
-            ui->verifyMessage->setVisible(true);
             break;
         case ReceivingTab:
             // Deleting receiving addresses, however, is not allowed
-            ui->deleteButton->setEnabled(false);
-            ui->deleteButton->setVisible(false);
+            ui->deleteAddress->setEnabled(false);
+            ui->deleteAddress->setVisible(false);
             deleteAction->setEnabled(false);
-            ui->signMessage->setEnabled(true);
-            ui->signMessage->setVisible(true);
-            ui->verifyMessage->setEnabled(false);
-            ui->verifyMessage->setVisible(false);
             break;
         }
-        ui->copyToClipboard->setEnabled(true);
-        ui->showQRCode->setEnabled(true);
+        ui->copyAddress->setEnabled(true);
     }
     else
     {
-        ui->deleteButton->setEnabled(false);
-        ui->showQRCode->setEnabled(false);
-        ui->copyToClipboard->setEnabled(false);
-        ui->signMessage->setEnabled(false);
-        ui->verifyMessage->setEnabled(false);
+        ui->deleteAddress->setEnabled(false);
+        ui->copyAddress->setEnabled(false);
     }
 }
 
@@ -307,9 +243,6 @@ void AddressBookPage::done(int retval)
 {
     QTableView *table = ui->tableView;
     if(!table->selectionModel() || !table->model())
-        return;
-    // When this is a tab/widget and not a model dialog, ignore "done"
-    if(mode == ForEditing)
         return;
 
     // Figure out which address was selected, and return it
@@ -330,15 +263,15 @@ void AddressBookPage::done(int retval)
     QDialog::done(retval);
 }
 
-void AddressBookPage::exportClicked()
+void AddressBookPage::on_exportButton_clicked()
 {
     // CSV is currently the only supported format
-    QString filename = GUIUtil::getSaveFileName(
-            this,
-            tr("Export Address Book Data"), QString(),
-            tr("Comma separated file (*.csv)"));
+    QString filename = GUIUtil::getSaveFileName(this,
+        tr("Export Address List"), QString(),
+        tr("Comma separated file (*.csv)"), NULL);
 
-    if (filename.isNull()) return;
+    if (filename.isNull())
+        return;
 
     CSVModelWriter writer(filename);
 
@@ -347,30 +280,10 @@ void AddressBookPage::exportClicked()
     writer.addColumn("Label", AddressTableModel::Label, Qt::EditRole);
     writer.addColumn("Address", AddressTableModel::Address, Qt::EditRole);
 
-    if(!writer.write())
-    {
-        QMessageBox::critical(this, tr("Error exporting"), tr("Could not write to file %1.").arg(filename),
-                              QMessageBox::Abort, QMessageBox::Abort);
+    if(!writer.write()) {
+        QMessageBox::critical(this, tr("Exporting Failed"),
+            tr("There was an error trying to save the address list to %1. Please try again.").arg(filename));
     }
-}
-
-void AddressBookPage::on_showQRCode_clicked()
-{
-#ifdef USE_QRCODE
-    QTableView *table = ui->tableView;
-    QModelIndexList indexes = table->selectionModel()->selectedRows(AddressTableModel::Address);
-
-    foreach (QModelIndex index, indexes)
-    {
-        QString address = index.data().toString();
-        QString label = index.sibling(index.row(), 0).data(Qt::EditRole).toString();
-
-        QRCodeDialog *dialog = new QRCodeDialog(address, label, tab == ReceivingTab, this);
-        dialog->setModel(optionsModel);
-        dialog->setAttribute(Qt::WA_DeleteOnClose);
-        dialog->show();
-    }
-#endif
 }
 
 void AddressBookPage::contextualMenu(const QPoint &point)

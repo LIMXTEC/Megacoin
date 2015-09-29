@@ -1,9 +1,5 @@
-Building Megacoin
+Building Bitcoin
 
-See doc/readme-qt.rst for instructions on building Megacoin-Qt,
-the intended-for-end-users, nice-graphical-interface, reference
-implementation of Megacoin.
-
-See doc/build-*.txt for instructions on building megacoind,
+See doc/build-*.md for instructions on building bitcoind,
 the intended-for-services, no-graphical-interface, reference
-implementation of Megacoin.
+implementation of Bitcoin.
