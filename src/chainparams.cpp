@@ -1,5 +1,7 @@
 // Copyright (c) 2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin developers
+// Copyright (c) 2013-2079 Dr. Kimoto Chan
+// Copyright (c) 2013-2079 The Megacoin developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -69,6 +71,20 @@ static Checkpoints::MapCheckpoints mapCheckpoints =
 		(  59300, uint256("0x558cf1f1fe31eb0816f9fc73900133564c29b50b626cbf82c69860fd3583653c"))
 		(  62767, uint256("0x5bd5d25c8a19b764634435b9ab1121b4678fbf6e6ad771b252f75f3cdfa82131"))		
 		(  96800, uint256("0xf972b9421ac790af82cd63f5db1dbbee114ce3476486d4335f46c6d7d8897671"))
+		( 106980, uint256("0x0144e525eb188106e435af296caf2bf707e174c65b1b50361b9dfeb942123cab"))
+		( 184000, uint256("0x61974eed4dd83c7b4b4954593769fe1939e00d701bd5cfd17d30eeb986dae67c"))		
+		( 201050, uint256("0xf6f0890c7d94ac3596fbb19050a95edaea14fca8706b2b55408fe202f413153b"))
+		( 221000, uint256("0x88d40255918470d178b1f171f58543b74b130982a29eda026416ca643592132d"))
+		( 241000, uint256("0x53c964a043a98d8731a4ad62e8d155a619d4f2d413d4d6352e5cba5eb6c6b786"))
+		( 261300, uint256("0xcd9d91664a49bbf8c1c504420bf6ea5e2ac3a68e55344396d4bbf59162ff4261"))
+		( 284000, uint256("0x5cdce62308c7e77c6aa93ab0e754116fbb14d4a0972da5b6465a31b047e47cb2"))
+		( 304000, uint256("0x6ab3a605154bd90aa748ea07de6d3f98d42f32b8a56ba1d993ea0837fa28087c"))
+		( 334100, uint256("0xb44d860b7332c4d235b013270dedaec9b0e8e4bfe701cc1ef322b807c41c6b7d"))
+		( 392675, uint256("0x26693075b87f5b6394381fe8590cd69a93e965a66d329786a1abfe0bc2fcdc5c"))		
+		( 401000, uint256("0xf4b402f749719cb89251303fb376eb9d51cc05618e16585b9fdb13d02387e620"))
+		( 425000, uint256("0xab5473a5b41bb86d4e5b45ff079b239ea8cd4be83da295ab5b3f35a386a5892c"))
+		( 460100, uint256("0x122716bde5b0cc2d7ec4d95784e6f483926c2227b8af927753d24326390c654f"))
+		( 490000, uint256("0x957ffdc0ead5ac30a6bb914fbf68f285a32dcf091b47b621827e3b58e8e9bf66"))		
         ;
 static const Checkpoints::CCheckpointData data = {
         &mapCheckpoints,
