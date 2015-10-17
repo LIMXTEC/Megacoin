@@ -94,6 +94,7 @@ private:
     QAction *usedReceivingAddressesAction;
     QAction *signMessageAction;
     QAction *verifyMessageAction;
+	QAction *paperWalletAction;
     QAction *aboutAction;
     QAction *receiveCoinsAction;
     QAction *optionsAction;

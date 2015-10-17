@@ -63,6 +63,21 @@ bool CPubKey::IsFullyValid() const {
     return true;
 }
 
+bool CPubKey::Compress() {
+   if (!IsValid())
+        return false;
+    CECKey key;
+   // if (!key.SetPubKey(*this))
+   //     return false;
+    if (!key.SetPubKey(begin(), size()))
+        return false;
+	std::vector<unsigned char> pubkey;
+    //key.GetPubKey(*this, true);  Limxdev Core 10 Paperwallet
+	key.GetPubKey(pubkey, true);
+    return true;
+}
+
+
 bool CPubKey::Decompress() {
     if (!IsValid())
         return false;
