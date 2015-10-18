@@ -13,6 +13,9 @@
   <property name="windowTitle">
    <string>Print Your Paper Wallets</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
   <widget class="QLabel" name="privateKeyQRCode">
    <property name="geometry">
     <rect>
@@ -50,12 +53,12 @@
     <rect>
      <x>20</x>
      <y>480</y>
-     <width>181</width>
+     <width>155</width>
      <height>26</height>
     </rect>
    </property>
    <property name="text">
-    <string>more new address</string>
+    <string> new address</string>
    </property>
    <property name="icon">
     <iconset resource="../bitcoin.qrc">
@@ -67,9 +70,14 @@
     <rect>
      <x>20</x>
      <y>10</y>
-     <width>781</width>
-     <height>421</height>
+     <width>775</width>
+     <height>416</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>6</pointsize>
+    </font>
    </property>
    <property name="text">
     <string notr="true"/>
@@ -78,51 +86,51 @@
     <pixmap resource="../bitcoin.qrc">:/images/paper_wallet</pixmap>
    </property>
   </widget>
-  <widget class="VerticalLabel" name="addressText">
+  <widget class="VerticalLabel" name="addressText2">
    <property name="geometry">
     <rect>
-     <x>245</x>
-     <y>22</y>
-     <width>31</width>
-     <height>371</height>
+     <x>262</x>
+     <y>13</y>
+     <width>28</width>
+     <height>375</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <family>Monospace</family>
-     <pointsize>12</pointsize>
-     <weight>75</weight>
+     <family>Sans</family>
+     <pointsize>6</pointsize>
+     <weight>50</weight>
      <italic>false</italic>
-     <bold>true</bold>
+     <bold>false</bold>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
    </property>
    <property name="text">
     <string/>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignCenter</set>
-   </property>
-   <property name="textInteractionFlags">
-    <set>Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
    </property>
   </widget>
   <widget class="VerticalLabel" name="privateKeyText">
    <property name="geometry">
     <rect>
-     <x>541</x>
-     <y>9</y>
-     <width>31</width>
-     <height>381</height>
+     <x>781</x>
+     <y>11</y>
+     <width>18</width>
+     <height>414</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <family>Monospace</family>
-     <pointsize>8</pointsize>
+     <family>Sans</family>
+     <pointsize>6</pointsize>
      <weight>50</weight>
      <italic>false</italic>
      <bold>false</bold>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
    </property>
    <property name="text">
     <string/>
@@ -142,12 +150,12 @@
     <rect>
      <x>410</x>
      <y>480</y>
-     <width>131</width>
+     <width>118</width>
      <height>26</height>
     </rect>
    </property>
    <property name="text">
-    <string>So Print</string>
+    <string>Print</string>
    </property>
    <property name="icon">
     <iconset resource="../bitcoin.qrc">
@@ -175,7 +183,7 @@
     <rect>
      <x>210</x>
      <y>480</y>
-     <width>91</width>
+     <width>117</width>
      <height>26</height>
     </rect>
    </property>
@@ -186,9 +194,9 @@
   <widget class="QComboBox" name="walletCount">
    <property name="geometry">
     <rect>
-     <x>300</x>
+     <x>328</x>
      <y>480</y>
-     <width>74</width>
+     <width>58</width>
      <height>26</height>
     </rect>
    </property>
@@ -275,8 +283,8 @@
     <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:7.8pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Sans Serif'; font-size:9pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Sans Serif';&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
    <property name="acceptRichText">
     <bool>false</bool>
@@ -295,11 +303,29 @@ p, li { white-space: pre-wrap; }
     <string>Public Key:</string>
    </property>
   </widget>
+  <widget class="QLabel" name="addressText">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>355</y>
+     <width>414</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>6</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </widget>
   <zorder>getNewAddress</zorder>
   <zorder>paperTemplate</zorder>
   <zorder>addressQRCode</zorder>
   <zorder>privateKeyQRCode</zorder>
-  <zorder>addressText</zorder>
+  <zorder>addressText2</zorder>
   <zorder>privateKeyText</zorder>
   <zorder>printButton</zorder>
   <zorder>buttonBox</zorder>
@@ -307,6 +333,7 @@ p, li { white-space: pre-wrap; }
   <zorder>walletCount</zorder>
   <zorder>publicKey</zorder>
   <zorder>label_2</zorder>
+  <zorder>addressText</zorder>
  </widget>
  <customwidgets>
   <customwidget>
