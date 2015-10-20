@@ -134,7 +134,7 @@ public:
         vAlertPubKey = ParseHex("04680D5270D3E6BA9E2671D889778FC4A0753FF036171D553A179635DDE67146481AB4EA7A6856CBB6A97AE16E7820F2F318E88F21E9BCFB0380E52BD63306C05C");
         nDefaultPort = 7951;
         bnProofOfWorkLimit = ~uint256(0) >> 20;
-        nSubsidyHalvingInterval = 22471626;  // Limx Dev 07.08.2015 Big Value for no Change
+        nSubsidyHalvingInterval = 420000;  // Limx Dev 
         nEnforceBlockUpgradeMajority = 750;
         nRejectBlockOutdatedMajority = 950;
         nToCheckBlockUpgradeMajority = 1000;
