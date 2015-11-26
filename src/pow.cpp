@@ -90,7 +90,7 @@ unsigned int GetNextWorkRequired_BTC(const CBlockIndex* pindexLast, const CBlock
     return bnNew.GetCompact();
 }
 
-unsigned int static KimotoGravityWell2(const CBlockIndex* pindexLast, const CBlockHeader *pblock, uint64_t TargetBlocksSpacingSeconds, uint64_t PastBlocksMin, uint64_t PastBlocksMax) {
+unsigned int static KimotoGravityWell2(const CBlockIndex* pindexLast, const CBlockHeader *pblock, uint64_t BlocksTargetSpacing, uint64_t PastBlocksMin, uint64_t PastBlocksMax) {
     /* current difficulty formula, megacoin - kimoto gravity well */
     const CBlockIndex  *BlockLastSolved                                = pindexLast;
     const CBlockIndex  *BlockReading                                = pindexLast;
@@ -105,6 +105,13 @@ unsigned int static KimotoGravityWell2(const CBlockIndex* pindexLast, const CBlo
     double                                EventHorizonDeviation;
     double                                EventHorizonDeviationFast;
     double                                EventHorizonDeviationSlow;
+  //  int64_t LastBlockTime = 0;
+  /*
+if (BlockReading->nHeight > 537000 ) {
+          BlocksTargetSpacing                        = 3.5 * 60; // 3.5 minutes
+        }
+        
+        */
 
     if (BlockLastSolved == NULL || BlockLastSolved->nHeight == 0 || (uint64_t)BlockLastSolved->nHeight < PastBlocksMin) { return bnProofOfWorkLimit.GetCompact(); }
 
@@ -118,7 +125,7 @@ unsigned int static KimotoGravityWell2(const CBlockIndex* pindexLast, const CBlo
         else                { PastDifficultyAverage = ((CBigNum().SetCompact(BlockReading->nBits) - PastDifficultyAveragePrev) / i) + PastDifficultyAveragePrev; }
         PastDifficultyAveragePrev = PastDifficultyAverage;
 
-        if (BlockReading->nHeight > 700000 && LatestBlockTime < BlockReading->GetBlockTime()) {
+        if (BlockReading->nHeight > 537000 && LatestBlockTime < BlockReading->GetBlockTime()) {
             //eliminates the ability to go back in time
             LatestBlockTime = BlockReading->GetBlockTime();
         }
@@ -127,9 +134,9 @@ unsigned int static KimotoGravityWell2(const CBlockIndex* pindexLast, const CBlo
         PastRateTargetSeconds                        = TargetBlocksSpacingSeconds * PastBlocksMass;
         PastRateAdjustmentRatio                        = double(1);
 
-        if (BlockReading->nHeight > 700000){
+        if (BlockReading->nHeight > 537000){
             //this should slow down the upward difficulty change
-            if (PastRateActualSeconds < 5) { PastRateActualSeconds = 5; }
+            if (PastRateActualSeconds < 20) { PastRateActualSeconds = 20; }
         }
         else {
             if (PastRateActualSeconds < 0) { PastRateActualSeconds = 0; }
@@ -155,14 +162,53 @@ unsigned int static KimotoGravityWell2(const CBlockIndex* pindexLast, const CBlo
         bnNew *= PastRateActualSeconds;
         bnNew /= PastRateTargetSeconds;
     }
+    
+    // KGW3 Securty Option 1 Limx Dev 26-11-2015
+   /*
+       if(LastBlockTime > 0){
+            int64_t Diff = (LastBlockTime - BlockReading->GetBlockTime());
+            nActualTimespan += Diff;
+        }
+        LastBlockTime = BlockReading->GetBlockTime();
+
+    if (nActualTimespan < PastRateTargetSeconds/3)
+        nActualTimespan = PastRateTargetSeconds/3;
+    if (nActualTimespan > PastRateTargetSeconds*3)
+        nActualTimespan = PastRateTargetSeconds*3;
+
+    // Retarget
+    bnNew *= nActualTimespan;
+    bnNew /= PastRateTargetSeconds;
+    */
+    
+    /*
+    /////////////////////// Diff Break Option 2 Limx Dev 26-11-2015
+	// LogPrintf("Prediff %08x %s\n", bnNew.GetCompact(), bnNew.ToString().c_str());
+	// Reduce difficulty if current block generation time has already exceeded maximum time limit.
+	const int nLongTimeLimit   = 6 * 60 * 60; 
+	// LogPrintf("Vordiff %d \n", nLongTimeLimit);
+	// LogPrintf(" %d Block", BlockReading->nHeight );
+	if (BlockReading->nHeight > 139800){ 
+	if ((pblock-> nTime - pindexLast->GetBlockTime()) > nLongTimeLimit)  //block.nTime 
+	{
+	// Limxdev for 11.1.34 LIMX Diffbreak function
+	const int nLongTimebnNew   = 3500;
+	bnNew = bnNew * nLongTimebnNew;
+       	//LogPrintf("<LIMX> Maximum block time hit - cute diff %08x %s\n", bnNew.GetCompact(), bnNew.ToString().c_str()); 
+	}
+	}
+	///////////////////////
+	*/
+
     if (bnNew > bnProofOfWorkLimit) { bnNew = bnProofOfWorkLimit; }
 
     /// debug print
+    /*
     LogPrintf("Difficulty Retarget - Kimoto Gravity Well\n");
     LogPrintf("PastRateAdjustmentRatio = %g\n", PastRateAdjustmentRatio);
     LogPrintf("Before: %08x  %s\n", BlockLastSolved->nBits, CBigNum().SetCompact(BlockLastSolved->nBits).getuint256().ToString().c_str());
     LogPrintf("After:  %08x  %s\n", bnNew.GetCompact(), bnNew.getuint256().ToString().c_str());
-
+  */
     return bnNew.GetCompact();
 } //Limxdev
 
