@@ -105,9 +105,10 @@ unsigned int static KimotoGravityWell2(const CBlockIndex* pindexLast, const CBlo
     double                                EventHorizonDeviation;
     double                                EventHorizonDeviationFast;
     double                                EventHorizonDeviationSlow;
+    int KGW3_var = 550000;
   //  int64_t LastBlockTime = 0;
-  /*
-if (BlockReading->nHeight > 537000 ) {
+  /* 
+if (BlockReading->nHeight > KGW3_var ) {
           BlocksTargetSpacing                        = 3.5 * 60; // 3.5 minutes
         }
         
@@ -125,7 +126,7 @@ if (BlockReading->nHeight > 537000 ) {
         else                { PastDifficultyAverage = ((CBigNum().SetCompact(BlockReading->nBits) - PastDifficultyAveragePrev) / i) + PastDifficultyAveragePrev; }
         PastDifficultyAveragePrev = PastDifficultyAverage;
 
-        if (BlockReading->nHeight > 537000 && LatestBlockTime < BlockReading->GetBlockTime()) {
+        if (BlockReading->nHeight > KGW3_var && LatestBlockTime < BlockReading->GetBlockTime()) {
             //eliminates the ability to go back in time
             LatestBlockTime = BlockReading->GetBlockTime();
         }
@@ -134,7 +135,7 @@ if (BlockReading->nHeight > 537000 ) {
         PastRateTargetSeconds                        = TargetBlocksSpacingSeconds * PastBlocksMass;
         PastRateAdjustmentRatio                        = double(1);
 
-        if (BlockReading->nHeight > 537000){
+        if (BlockReading->nHeight > KGW3_var){
             //this should slow down the upward difficulty change
             if (PastRateActualSeconds < 20) { PastRateActualSeconds = 20; }
         }
@@ -146,7 +147,11 @@ if (BlockReading->nHeight > 537000 ) {
         if (PastRateActualSeconds != 0 && PastRateTargetSeconds != 0) {
             PastRateAdjustmentRatio                        = double(PastRateTargetSeconds) / double(PastRateActualSeconds);
         }
-        EventHorizonDeviation                        = 1 + (0.7084 * pow((double(PastBlocksMass)/double(144)), -1.228));
+        if (BlockReading->nHeight > KGW3_var) {
+                        EventHorizonDeviation = 1 + (0.7084 * pow((double(PastBlocksMass)/double(36)), -1.228));
+                } else {
+                        EventHorizonDeviation = 1 + (0.7084 * pow((double(PastBlocksMass)/double(144)), -1.228));
+                }
         EventHorizonDeviationFast                = EventHorizonDeviation;
         EventHorizonDeviationSlow                = 1 / EventHorizonDeviation;
 
@@ -182,19 +187,19 @@ if (BlockReading->nHeight > 537000 ) {
     */
     
     /*
-    /////////////////////// Diff Break Option 2 Limx Dev 26-11-2015
+    // KGW3 Diff Break Option 2 Limx Dev 26-11-2015
 	// LogPrintf("Prediff %08x %s\n", bnNew.GetCompact(), bnNew.ToString().c_str());
 	// Reduce difficulty if current block generation time has already exceeded maximum time limit.
-	const int nLongTimeLimit   = 6 * 60 * 60; 
+	const int nLongTimeLimit   = 18 * 60 * 60; 
 	// LogPrintf("Vordiff %d \n", nLongTimeLimit);
 	// LogPrintf(" %d Block", BlockReading->nHeight );
-	if (BlockReading->nHeight > 139800){ 
+	if (BlockReading->nHeight > KGW3_var){ 
 	if ((pblock-> nTime - pindexLast->GetBlockTime()) > nLongTimeLimit)  //block.nTime 
 	{
 	// Limxdev for 11.1.34 LIMX Diffbreak function
-	const int nLongTimebnNew   = 3500;
+	const int nLongTimebnNew   = 1000;
 	bnNew = bnNew * nLongTimebnNew;
-       	//LogPrintf("<LIMX> Maximum block time hit - cute diff %08x %s\n", bnNew.GetCompact(), bnNew.ToString().c_str()); 
+       	//LogPrintf("<MEC> Maximum block time hit - cute diff %08x %s\n", bnNew.GetCompact(), bnNew.ToString().c_str()); 
 	}
 	}
 	///////////////////////
