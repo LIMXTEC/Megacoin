@@ -107,13 +107,6 @@ unsigned int static KimotoGravityWell2(const CBlockIndex* pindexLast, const CBlo
     double                                EventHorizonDeviationSlow;
     int KGW3_var = 550000;
   //  int64_t LastBlockTime = 0;
-  /* 
-if (BlockReading->nHeight > KGW3_var ) {
-          BlocksTargetSpacing                        = 3.5 * 60; // 3.5 minutes
-        }
-        
-        */
-
     if (BlockLastSolved == NULL || BlockLastSolved->nHeight == 0 || (uint64_t)BlockLastSolved->nHeight < PastBlocksMin) { return bnProofOfWorkLimit.GetCompact(); }
 
     int64_t LatestBlockTime = BlockLastSolved->GetBlockTime();
@@ -148,7 +141,7 @@ if (BlockReading->nHeight > KGW3_var ) {
             PastRateAdjustmentRatio                        = double(PastRateTargetSeconds) / double(PastRateActualSeconds);
         }
         if (BlockReading->nHeight > KGW3_var) {
-                        EventHorizonDeviation = 1 + (0.7084 * pow((double(PastBlocksMass)/double(36)), -1.228));
+                        EventHorizonDeviation = 1 + (0.7084 * pow((double(PastBlocksMass)/double(72)), -1.228));
                 } else {
                         EventHorizonDeviation = 1 + (0.7084 * pow((double(PastBlocksMass)/double(144)), -1.228));
                 }
@@ -168,7 +161,7 @@ if (BlockReading->nHeight > KGW3_var ) {
         bnNew /= PastRateTargetSeconds;
     }
     
-    // KGW3 Securty Option 1 Limx Dev 26-11-2015
+    // KGW3 Securty Option 1 Limx Dev 26-11-2015 Not used !
    /*
        if(LastBlockTime > 0){
             int64_t Diff = (LastBlockTime - BlockReading->GetBlockTime());
@@ -186,24 +179,42 @@ if (BlockReading->nHeight > KGW3_var ) {
     bnNew /= PastRateTargetSeconds;
     */
     
-    /*
-    // KGW3 Diff Break Option 2 Limx Dev 26-11-2015
+    
+          
+    // Limxdev cgminer-0 KGW3 VAR Diff Break version 2 Limx Dev 7-12-2015
 	// LogPrintf("Prediff %08x %s\n", bnNew.GetCompact(), bnNew.ToString().c_str());
 	// Reduce difficulty if current block generation time has already exceeded maximum time limit.
-	const int nLongTimeLimit   = 18 * 60 * 60; 
-	// LogPrintf("Vordiff %d \n", nLongTimeLimit);
-	// LogPrintf(" %d Block", BlockReading->nHeight );
+	const int nLongTimeLimit   = 1 * 60 * 60; 
+	// LogPrintf("prediff %d \n", nLongTimeLimit);LogPrintf(" %d Block", BlockReading->nHeight );
 	if (BlockReading->nHeight > KGW3_var){ 
-	if ((pblock-> nTime - pindexLast->GetBlockTime()) > nLongTimeLimit)  //block.nTime 
-	{
-	// Limxdev for 11.1.34 LIMX Diffbreak function
-	const int nLongTimebnNew   = 1000;
-	bnNew = bnNew * nLongTimebnNew;
-       	//LogPrintf("<MEC> Maximum block time hit - cute diff %08x %s\n", bnNew.GetCompact(), bnNew.ToString().c_str()); 
+	if ((pblock-> nTime - pindexLast->GetBlockTime()) > nLongTimeLimit )  // 1 hours
+	{	
+	const int nLongTimebnNew   = 2; bnNew = bnNew * nLongTimebnNew;
+       	LogPrintf("<MEC> KGW3 1h cute diff %08x %s\n", bnNew.GetCompact(), bnNew.ToString().c_str()); 
+	}
+		if ((pblock-> nTime - pindexLast->GetBlockTime()) > nLongTimeLimit *2)  // 2 hours 
+	{	
+	const int nLongTimebnNew   = 3; bnNew = bnNew * nLongTimebnNew;
+       	LogPrintf("<MEC> KGW3 1h cute diff %08x %s\n", bnNew.GetCompact(), bnNew.ToString().c_str()); 
+	}
+		if ((pblock-> nTime - pindexLast->GetBlockTime()) > nLongTimeLimit *3)  // 3 hours 
+	{	
+	const int nLongTimebnNew   = 4; bnNew = bnNew * nLongTimebnNew;
+       LogPrintf("<MEC> KGW3 1h - cute diff %08x %s\n", bnNew.GetCompact(), bnNew.ToString().c_str()); 
+	}
+		if ((pblock-> nTime - pindexLast->GetBlockTime()) > nLongTimeLimit *4)  // 4 hours
+	{	
+	const int nLongTimebnNew   = 5; bnNew = bnNew * nLongTimebnNew;
+       	LogPrintf("<MEC> KGW3 3h - cute diff %08x %s\n", bnNew.GetCompact(), bnNew.ToString().c_str()); 
+	}
+	if ((pblock-> nTime - pindexLast->GetBlockTime()) > nLongTimeLimit *5)  // Backupfunction after 5 hours 
+	{	
+	const int nLongTimebnNew   = 100; bnNew = bnNew * nLongTimebnNew;
+       	LogPrintf("<MEC> KGW3 5h -  cute diff %08x %s\n", bnNew.GetCompact(), bnNew.ToString().c_str()); 
 	}
 	}
-	///////////////////////
-	*/
+
+  
 
     if (bnNew > bnProofOfWorkLimit) { bnNew = bnProofOfWorkLimit; }
 
