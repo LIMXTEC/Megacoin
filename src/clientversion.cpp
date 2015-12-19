@@ -15,7 +15,7 @@
  * for both megacoind and megacoin-core, to make it harder for attackers to
  * target servers or GUI users specifically.
  */
-const std::string CLIENT_NAME("Kimoto");
+const std::string CLIENT_NAME("Megacoin Core");
 
 /**
  * Client version number
