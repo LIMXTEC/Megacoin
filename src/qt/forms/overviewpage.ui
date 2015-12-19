@@ -10,8 +10,105 @@
     <height>342</height>
    </rect>
   </property>
+  <property name="palette">
+   <palette>
+    <active>
+     <colorrole role="Button">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>233</red>
+        <green>217</green>
+        <blue>216</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Base">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>233</red>
+        <green>217</green>
+        <blue>216</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Window">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>233</red>
+        <green>217</green>
+        <blue>216</blue>
+       </color>
+      </brush>
+     </colorrole>
+    </active>
+    <inactive>
+     <colorrole role="Button">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>233</red>
+        <green>217</green>
+        <blue>216</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Base">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>233</red>
+        <green>217</green>
+        <blue>216</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Window">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>233</red>
+        <green>217</green>
+        <blue>216</blue>
+       </color>
+      </brush>
+     </colorrole>
+    </inactive>
+    <disabled>
+     <colorrole role="Button">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>233</red>
+        <green>217</green>
+        <blue>216</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Base">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>233</red>
+        <green>217</green>
+        <blue>216</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Window">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>233</red>
+        <green>217</green>
+        <blue>216</blue>
+       </color>
+      </brush>
+     </colorrole>
+    </disabled>
+   </palette>
+  </property>
   <property name="windowTitle">
    <string>Form</string>
+  </property>
+  <property name="autoFillBackground">
+   <bool>false</bool>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">OverviewPage {backround-image: url(./BG.png);}</string>
   </property>
   <layout class="QVBoxLayout" name="topLayout">
    <item>
@@ -32,6 +129,9 @@
    </item>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,1">
+     <property name="leftMargin">
+      <number>0</number>
+     </property>
      <item>
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
@@ -111,6 +211,14 @@
               <property name="toolTip">
                <string>Unconfirmed transactions to watch-only addresses</string>
               </property>
+              <property name="styleSheet">
+               <string notr="true">QLabel {
+	margin-right: 0px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	color: #AF272E;
+}</string>
+              </property>
               <property name="text">
                <string notr="true">0.000 000 00 MEC</string>
               </property>
@@ -136,6 +244,14 @@
               <property name="toolTip">
                <string>Total of transactions that have yet to be confirmed, and do not yet count toward the spendable balance</string>
               </property>
+              <property name="styleSheet">
+               <string notr="true">QLabel {
+	margin-right: 0px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	color: #AF272E;
+}</string>
+              </property>
               <property name="text">
                <string notr="true">0.000 000 00 MEC</string>
               </property>
@@ -160,6 +276,14 @@
               </property>
               <property name="toolTip">
                <string>Mined balance in watch-only addresses that has not yet matured</string>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QLabel {
+	margin-right: 0px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	color: #AF272E;
+}</string>
               </property>
               <property name="text">
                <string notr="true">0.000 000 00 MEC</string>
@@ -200,6 +324,14 @@
             </item>
             <item row="5" column="0">
              <widget class="QLabel" name="labelTotalText">
+              <property name="styleSheet">
+               <string notr="true">QLabel {
+	margin-right: 0px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	color: #AF272E;
+}</string>
+              </property>
               <property name="text">
                <string>Total:</string>
               </property>
@@ -218,6 +350,14 @@
               </property>
               <property name="toolTip">
                <string>Mined balance that has not yet matured</string>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QLabel {
+	margin-right: 0px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	color: #AF272E;
+}</string>
               </property>
               <property name="text">
                <string notr="true">0.000 000 00 MEC</string>
@@ -245,6 +385,14 @@
             </item>
             <item row="3" column="0">
              <widget class="QLabel" name="labelImmatureText">
+              <property name="styleSheet">
+               <string notr="true">QLabel {
+	margin-right: 0px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	color: #AF272E;
+}</string>
+              </property>
               <property name="text">
                <string>Immature:</string>
               </property>
@@ -263,6 +411,14 @@
               </property>
               <property name="toolTip">
                <string>Your current total balance</string>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QLabel {
+	margin-right: 0px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	color: #AF272E;
+}</string>
               </property>
               <property name="text">
                <string notr="true">0.000 000 00 MEC</string>
@@ -289,6 +445,14 @@
               <property name="toolTip">
                <string>Current total balance in watch-only addresses</string>
               </property>
+              <property name="styleSheet">
+               <string notr="true">QLabel {
+	margin-right: 0px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	color: #AF272E;
+}</string>
+              </property>
               <property name="text">
                <string notr="true">0.000 000 00 MEC</string>
               </property>
@@ -302,6 +466,14 @@
             </item>
             <item row="0" column="2">
              <widget class="QLabel" name="labelWatchonly">
+              <property name="styleSheet">
+               <string notr="true">QLabel {
+	margin-right: 0px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	color: #AF272E;
+}</string>
+              </property>
               <property name="text">
                <string>Watch-only:</string>
               </property>
@@ -312,6 +484,14 @@
             </item>
             <item row="1" column="0">
              <widget class="QLabel" name="labelBalanceText">
+              <property name="styleSheet">
+               <string notr="true">QLabel {
+	margin-right: 0px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	color: #AF272E;
+}</string>
+              </property>
               <property name="text">
                <string>Available:</string>
               </property>
@@ -330,6 +510,14 @@
               </property>
               <property name="toolTip">
                <string>Your current spendable balance</string>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QLabel {
+	margin-right: 0px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	color: #AF272E;
+}</string>
               </property>
               <property name="text">
                <string notr="true">0.000 000 00 MEC</string>
@@ -356,6 +544,14 @@
               <property name="toolTip">
                <string>Your current balance in watch-only addresses</string>
               </property>
+              <property name="styleSheet">
+               <string notr="true">QLabel {
+	margin-right: 0px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	color: #AF272E;
+}</string>
+              </property>
               <property name="text">
                <string notr="true">0.000 000 00 BTC</string>
               </property>
@@ -369,6 +565,14 @@
             </item>
             <item row="2" column="0">
              <widget class="QLabel" name="labelPendingText">
+              <property name="styleSheet">
+               <string notr="true">QLabel {
+	margin-right: 0px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	color: #AF272E;
+}</string>
+              </property>
               <property name="text">
                <string>Pending:</string>
               </property>
@@ -376,6 +580,14 @@
             </item>
             <item row="0" column="1">
              <widget class="QLabel" name="labelSpendable">
+              <property name="styleSheet">
+               <string notr="true">QLabel {
+	margin-right: 0px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	color: #AF272E;
+}</string>
+              </property>
               <property name="text">
                <string>Spendable:</string>
               </property>
@@ -425,6 +637,14 @@
                 <bold>true</bold>
                </font>
               </property>
+              <property name="styleSheet">
+               <string notr="true">QLabel {
+	margin-right: 0px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	color: #AF272E;
+}</string>
+              </property>
               <property name="text">
                <string>Recent transactions</string>
               </property>
@@ -467,7 +687,12 @@
           <item>
            <widget class="QListView" name="listTransactions">
             <property name="styleSheet">
-             <string notr="true">QListView { background: transparent; }</string>
+             <string notr="true">QListView { background: transparent; }QLabel {
+	margin-right: 0px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	color: #AF272E;
+}</string>
             </property>
             <property name="frameShape">
              <enum>QFrame::NoFrame</enum>

@@ -10,8 +10,107 @@
     <height>363</height>
    </rect>
   </property>
+  <property name="palette">
+   <palette>
+    <active>
+     <colorrole role="Button">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>233</red>
+        <green>217</green>
+        <blue>216</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Base">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>233</red>
+        <green>217</green>
+        <blue>216</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Window">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>233</red>
+        <green>217</green>
+        <blue>216</blue>
+       </color>
+      </brush>
+     </colorrole>
+    </active>
+    <inactive>
+     <colorrole role="Button">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>233</red>
+        <green>217</green>
+        <blue>216</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Base">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>233</red>
+        <green>217</green>
+        <blue>216</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Window">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>233</red>
+        <green>217</green>
+        <blue>216</blue>
+       </color>
+      </brush>
+     </colorrole>
+    </inactive>
+    <disabled>
+     <colorrole role="Button">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>233</red>
+        <green>217</green>
+        <blue>216</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Base">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>233</red>
+        <green>217</green>
+        <blue>216</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Window">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>233</red>
+        <green>217</green>
+        <blue>216</blue>
+       </color>
+      </brush>
+     </colorrole>
+    </disabled>
+   </palette>
+  </property>
   <property name="windowTitle">
    <string>Welcome</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QLabel {
+	margin-right: 0px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	color: #AF272E;
+}</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -65,6 +164,14 @@
    </item>
    <item>
     <widget class="QRadioButton" name="dataDirDefault">
+     <property name="styleSheet">
+      <string notr="true">QLabel {
+	margin-right: 0px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	color: #AF272E;
+}</string>
+     </property>
      <property name="text">
       <string>Use the default data directory</string>
      </property>
@@ -72,6 +179,14 @@
    </item>
    <item>
     <widget class="QRadioButton" name="dataDirCustom">
+     <property name="styleSheet">
+      <string notr="true">QLabel {
+	margin-right: 0px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	color: #AF272E;
+}</string>
+     </property>
      <property name="text">
       <string>Use a custom data directory:</string>
      </property>
