@@ -1,4 +1,4 @@
-Bitcoin Core 0.10.2
+Megaxoin Core 0.10.3
 =====================
 
 Setup
