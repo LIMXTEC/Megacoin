@@ -2574,7 +2574,7 @@ bool ContextualCheckBlockHeader(const CBlockHeader& block, CValidationState& sta
         }
         else
         {
-            // Regtest and Unittest: use Bitcoin's supermajority rule
+            // Regtest and Unittest: use Megacoin's supermajority rule
             if (CBlockIndex::IsSuperMajority(2, pindexPrev, Params().RejectBlockOutdatedMajority()))
                 enforceV2 = true;
         }
@@ -2620,7 +2620,7 @@ bool ContextualCheckBlock(const CBlock& block, CValidationState& state, CBlockIn
         }
         else
         {
-            // Regtest and Unittest: use Bitcoin's supermajority rule
+            // Regtest and Unittest: use Megacoin's supermajority rule
             if (CBlockIndex::IsSuperMajority(2, pindexPrev, Params().EnforceBlockUpgradeMajority()))
                 checkHeightMismatch = true;
         }
