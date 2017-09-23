@@ -105,7 +105,7 @@ unsigned int static KimotoGravityWell2(const CBlockIndex* pindexLast, const CBlo
     double                                EventHorizonDeviation;
     double                                EventHorizonDeviationFast;
     double                                EventHorizonDeviationSlow;
-    int KGW3_var = 550000;
+    int KGW3_var = 999999999;
   //  int64_t LastBlockTime = 0;
     if (BlockLastSolved == NULL || BlockLastSolved->nHeight == 0 || (uint64_t)BlockLastSolved->nHeight < PastBlocksMin) { return bnProofOfWorkLimit.GetCompact(); }
 
@@ -160,7 +160,7 @@ unsigned int static KimotoGravityWell2(const CBlockIndex* pindexLast, const CBlo
         bnNew *= PastRateActualSeconds;
         bnNew /= PastRateTargetSeconds;
     }
-    
+
     // KGW3 Securty Option 1 Limx Dev 26-11-2015 Not used !
    /*
        if(LastBlockTime > 0){
@@ -178,45 +178,45 @@ unsigned int static KimotoGravityWell2(const CBlockIndex* pindexLast, const CBlo
     bnNew *= nActualTimespan;
     bnNew /= PastRateTargetSeconds;
     */
-    
-    
-          
+
+
+
     // Limxdev cgminer-0 KGW3 VAR Diff Break version 2 Limx Dev 7-12-2015
 	// LogPrintf("Prediff %08x %s\n", bnNew.GetCompact(), bnNew.ToString().c_str());
 	// Reduce difficulty if current block generation time has already exceeded maximum time limit.
-	const int nLongTimeLimit   = 1 * 60 * 60; 
+	const int nLongTimeLimit   = 1 * 60 * 60;
 	LogPrintf("prediff %d \n", nLongTimeLimit);//LogPrintf(" %d Block", BlockReading->nHeight );
 	int aaa = pblock-> nTime - pindexLast->GetBlockTime();
 	LogPrintf("Time since last Block -  %d \n", aaa);
-	if (BlockReading->nHeight > KGW3_var){ 
+	if (BlockReading->nHeight > KGW3_var){
 	if ((pblock-> nTime - pindexLast->GetBlockTime()) > nLongTimeLimit )  // 1 hours
-	{	
+	{
 	const int nLongTimebnNew   = 2; bnNew = bnNew * nLongTimebnNew;
-       	LogPrintf("<MEC> KGW3 1h cute diff %08x %s\n", bnNew.GetCompact(), bnNew.ToString().c_str()); 
+       	LogPrintf("<MEC> KGW3 1h cute diff %08x %s\n", bnNew.GetCompact(), bnNew.ToString().c_str());
 	}
-		if ((pblock-> nTime - pindexLast->GetBlockTime()) > nLongTimeLimit *2)  // 2 hours 
-	{	
+		if ((pblock-> nTime - pindexLast->GetBlockTime()) > nLongTimeLimit *2)  // 2 hours
+	{
 	const int nLongTimebnNew   = 3; bnNew = bnNew * nLongTimebnNew;
-       	LogPrintf("<MEC> KGW3 1h cute diff %08x %s\n", bnNew.GetCompact(), bnNew.ToString().c_str()); 
+       	LogPrintf("<MEC> KGW3 1h cute diff %08x %s\n", bnNew.GetCompact(), bnNew.ToString().c_str());
 	}
-		if ((pblock-> nTime - pindexLast->GetBlockTime()) > nLongTimeLimit *3)  // 3 hours 
-	{	
+		if ((pblock-> nTime - pindexLast->GetBlockTime()) > nLongTimeLimit *3)  // 3 hours
+	{
 	const int nLongTimebnNew   = 4; bnNew = bnNew * nLongTimebnNew;
-       LogPrintf("<MEC> KGW3 1h - cute diff %08x %s\n", bnNew.GetCompact(), bnNew.ToString().c_str()); 
+       LogPrintf("<MEC> KGW3 1h - cute diff %08x %s\n", bnNew.GetCompact(), bnNew.ToString().c_str());
 	}
 		if ((pblock-> nTime - pindexLast->GetBlockTime()) > nLongTimeLimit *4)  // 4 hours
-	{	
+	{
 	const int nLongTimebnNew   = 5; bnNew = bnNew * nLongTimebnNew;
-       	LogPrintf("<MEC> KGW3 3h - cute diff %08x %s\n", bnNew.GetCompact(), bnNew.ToString().c_str()); 
+       	LogPrintf("<MEC> KGW3 3h - cute diff %08x %s\n", bnNew.GetCompact(), bnNew.ToString().c_str());
 	}
-	if ((pblock-> nTime - pindexLast->GetBlockTime()) > nLongTimeLimit *5)  // Backupfunction after 5 hours 
-	{	
+	if ((pblock-> nTime - pindexLast->GetBlockTime()) > nLongTimeLimit *5)  // Backupfunction after 5 hours
+	{
 	const int nLongTimebnNew   = 100; bnNew = bnNew * nLongTimebnNew;
-       	LogPrintf("<MEC> KGW3 5h -  cute diff %08x %s\n", bnNew.GetCompact(), bnNew.ToString().c_str()); 
+       	LogPrintf("<MEC> KGW3 5h -  cute diff %08x %s\n", bnNew.GetCompact(), bnNew.ToString().c_str());
 	}
 	}
 
-  
+
 
     if (bnNew > bnProofOfWorkLimit) { bnNew = bnProofOfWorkLimit; }
 
