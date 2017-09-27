@@ -91,12 +91,12 @@ AC_ARG_ENABLE([upnp-default],
   [AS_HELP_STRING([--enable-upnp-default],
   [if UPNP is enabled, turn it on at startup (default is no)])],
   [use_upnp_default=$enableval],
-  [use_upnp_default=yes])
+  [use_upnp_default=no])
 
 AC_ARG_ENABLE(tests,
     AS_HELP_STRING([--enable-tests],[compile tests (default is yes)]),
     [use_tests=$enableval],
-    [use_tests=yes])
+    [use_tests=no])
 
 AC_ARG_WITH([comparison-tool],
     AS_HELP_STRING([--with-comparison-tool],[path to java comparison tool (requires --enable-tests)]),
