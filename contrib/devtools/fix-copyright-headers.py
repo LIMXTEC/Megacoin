@@ -11,7 +11,8 @@ For example: if it finds something like this and we're in 2014
 
 it will change it to
 
-// Copyright (c) 2009-2014 The Bitcoin developers
+// Copyright (c) 2009-2017 The Bitcoin developers
+// Copyright (c) 2014-2017 The Megacoin developers
 
 It will do this for all the files in the folder and its children.
 

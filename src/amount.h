@@ -1,5 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
-// Copyright (c) 2009-2014 The Bitcoin developers
+// Copyright (c) 2009-2017 The Bitcoin developers
+// Copyright (c) 2014-2017 The Megacoin developers
 // Copyright (c) 2013-2079 Dr. Kimoto Chan
 // Copyright (c) 2013-2079 The Megacoin developers
 // Distributed under the MIT software license, see the accompanying

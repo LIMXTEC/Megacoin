@@ -47,7 +47,8 @@ For example a file changed in 2014 (with 2014 being the current year):
 ```// Copyright (c) 2009-2013 The Bitcoin developers```
 
 would be changed to:
-```// Copyright (c) 2009-2014 The Bitcoin developers```
+```// Copyright (c) 2009-2017 The Bitcoin developers
+// Copyright (c) 2014-2017 The Megacoin developers```
 
 symbol-check.py
 ==================
