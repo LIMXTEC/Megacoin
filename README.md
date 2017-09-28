@@ -1,7 +1,7 @@
 Megacoin Core integration/staging tree
 =====================================
 
-https://megacoin.org
+http://www.megacoin.eu/
 
 What is Megacoin?
 ----------------
@@ -13,7 +13,7 @@ out collectively by the network. Megacoin Core is the name of open source
 software which enables the use of this currency.
 
 For more information, as well as an immediately useable, binary version of
-the Megacoin Core software, see https://megacoin.org
+the Megacoin Core software, see http://www.megacoin.eu/
 
 License
 -------
