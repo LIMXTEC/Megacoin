@@ -13,11 +13,10 @@
 #include <math.h>
 
 unsigned int static KimotoGravityWell(const CBlockIndex* pindexLast, const Consensus::Params& params, const CBlockHeader *pblock) {
-    // current difficulty formula, ERC3 - DUAL_KGW3, written by Bitcoin Talk Limx Dev
-    // BitSend and Europecoin Developer
+    /* current difficulty formula, megacoin - kimoto gravity well */
     const CBlockIndex *BlockLastSolved = pindexLast;
     const CBlockIndex *BlockReading = pindexLast;
-    bool kgwdebug=false;
+    
     uint64_t PastBlocksMass = 0;
     int64_t PastRateActualSeconds = 0;
     int64_t PastRateTargetSeconds = 0;
@@ -30,8 +29,8 @@ unsigned int static KimotoGravityWell(const CBlockIndex* pindexLast, const Conse
     //DUAL_KGW3 SETUP
     static const int64_t Blocktime = 2.5 * 60; // 9.6 = 10 min (Value = Value*0.96) Limx DEV 23.04.2017
     static const unsigned int timeDaySeconds = 60 * 60 * 24;
-    uint64_t pastSecondsMin = timeDaySeconds * 0.25;
-    uint64_t pastSecondsMax = timeDaySeconds * 7;
+    int64_t pastSecondsMin = timeDaySeconds * 0.25;
+    int64_t pastSecondsMax = timeDaySeconds * 7;
     uint64_t PastBlocksMin = pastSecondsMin / Blocktime;
     uint64_t PastBlocksMax = pastSecondsMax / Blocktime;
 	const arith_uint256 bnPowLimit = UintToArith256(params.powLimit);
