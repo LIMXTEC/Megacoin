@@ -1,0 +1,67 @@
+#!/bin/bash
+#
+#  megacoind The megacoin core server.
+#
+#
+# chkconfig: 345 80 20
+# description: megacoind
+# processname: megacoind
+#
+
+# Source function library.
+. /etc/init.d/functions
+
+# you can override defaults in /etc/sysconfig/megacoind, see below
+if [ -f /etc/sysconfig/megacoind ]; then
+        . /etc/sysconfig/megacoind
+fi
+
+RETVAL=0
+
+prog=megacoind
+# you can override the lockfile via MEGACOIND_LOCKFILE in /etc/sysconfig/megacoind
+lockfile=${MEGACOIND_LOCKFILE-/var/lock/subsys/megacoind}
+
+# megacoind defaults to /usr/bin/megacoind, override with MEGACOIND_BIN
+megacoind=${MEGACOIND_BIN-/usr/bin/megacoind}
+
+# megacoind opts default to -disablewallet, override with MEGACOIND_OPTS
+megacoind_opts=${MEGACOIND_OPTS--disablewallet}
+
+start() {
+    echo -n $"Starting $prog: "
+    daemon $DAEMONOPTS $megacoind $megacoind_opts
+    RETVAL=$?
+    echo
+    [ $RETVAL -eq 0 ] && touch $lockfile
+    return $RETVAL
+}
+
+stop() {
+    echo -n $"Stopping $prog: "
+    killproc $prog
+    RETVAL=$?
+    echo
+    [ $RETVAL -eq 0 ] && rm -f $lockfile
+    return $RETVAL
+}
+
+case "$1" in
+    start)
+        start
+        ;;
+    stop)
+        stop
+        ;;
+    status)
+        status $prog
+        ;;
+    restart)
+        stop
+        start
+        ;;
+    *)
+        echo "Usage: service $prog {start|stop|status|restart}"
+        exit 1
+        ;;
+esac

@@ -1,0 +1,33 @@
+# /etc/conf.d/megacoind: config file for /etc/init.d/megacoind
+
+# Config file location
+#MEGACOIND_CONFIGFILE="/etc/megacoin/megacoin.conf"
+
+# What directory to write pidfile to?  (created and owned by $MEGACOIND_USER)
+#MEGACOIND_PIDDIR="/var/run/megacoind"
+
+# What filename to give the pidfile
+#MEGACOIND_PIDFILE="${MEGACOIND_PIDDIR}/megacoind.pid"
+
+# Where to write megacoind data (be mindful that the blockchain is large)
+#MEGACOIND_DATADIR="/var/lib/megacoind"
+
+# User and group to own megacoind process
+#MEGACOIND_USER="megacoin"
+#MEGACOIND_GROUP="megacoin"
+
+# Path to megacoind executable
+#MEGACOIND_BIN="/usr/bin/megacoind"
+
+# Nice value to run megacoind under
+#MEGACOIND_NICE=0
+
+# Additional options (avoid -conf and -datadir, use flags above)
+#MEGACOIND_OPTS=""
+
+# The timeout in seconds OpenRC will wait for megacoind to terminate
+# after a SIGTERM has been raised.
+# Note that this will be mapped as argument to start-stop-daemon's
+# '--retry' option, which means you can specify a retry schedule
+# here. For more information see man 8 start-stop-daemon.
+MEGACOIND_SIGTERM_TIMEOUT=60
