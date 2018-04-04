@@ -78,10 +78,10 @@ public:
     CMainParams() {
         strNetworkID = "main";
         consensus.nSubsidyHalvingInterval = 420000;
-        consensus.BIP34Height = 974448; // MegaCoin BIP34 height 
+        consensus.BIP34Height = 1010034; // MegaCoin BIP34 height 
         consensus.BIP34Hash = uint256S("c69f5106c4f3ba92cfdcd13d20135694de444087e975ba7ea89e3532708bfccf"); // MegaCoin BIP34 Hash
-        consensus.BIP65Height = 974448; // c69f5106c4f3ba92cfdcd13d20135694de444087e975ba7ea89e3532708bfccf
-        consensus.BIP66Height = 974448; // c69f5106c4f3ba92cfdcd13d20135694de444087e975ba7ea89e3532708bfccf
+        consensus.BIP65Height = 1010065; // c69f5106c4f3ba92cfdcd13d20135694de444087e975ba7ea89e3532708bfccf
+        consensus.BIP66Height = 1010066; // c69f5106c4f3ba92cfdcd13d20135694de444087e975ba7ea89e3532708bfccf
         consensus.powLimit = uint256S("ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"); // To Do
         consensus.nPowTargetTimespan = 3.5 * 24 * 60 * 60;
 		consensus.nPowTargetTimespanV2 = 160 * 60;
