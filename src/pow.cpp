@@ -5,6 +5,8 @@
 
 #include "pow.h"
 
+#include "bignum.h"
+
 #include "arith_uint256.h"
 #include "chain.h"
 #include "primitives/block.h"
@@ -21,8 +23,8 @@ unsigned int static KimotoGravityWell(const CBlockIndex* pindexLast, const Conse
     int64_t PastRateActualSeconds = 0;
     int64_t PastRateTargetSeconds = 0;
     double PastRateAdjustmentRatio = double(1);
-    arith_uint256 PastDifficultyAverage;
-    arith_uint256 PastDifficultyAveragePrev;
+    CBigNum PastDifficultyAverage;
+    CBigNum PastDifficultyAveragePrev;
     double EventHorizonDeviation;
     double EventHorizonDeviationFast;
     double EventHorizonDeviationSlow;
@@ -33,7 +35,8 @@ unsigned int static KimotoGravityWell(const CBlockIndex* pindexLast, const Conse
     int64_t pastSecondsMax = timeDaySeconds * 7;
     uint64_t PastBlocksMin = pastSecondsMin / Blocktime;
     uint64_t PastBlocksMax = pastSecondsMax / Blocktime;
-	const arith_uint256 bnPowLimit = UintToArith256(params.powLimit);
+	//const arith_uint256 bnPowLimit = UintToArith256(params.powLimit);
+	static const CBigNum bnPowLimit(uint256S("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"));
 	
 	if (BlockLastSolved == NULL || BlockLastSolved->nHeight == 0 || (uint64_t)BlockLastSolved->nHeight < PastBlocksMin) { return bnPowLimit.GetCompact(); }
 
@@ -44,7 +47,7 @@ unsigned int static KimotoGravityWell(const CBlockIndex* pindexLast, const Conse
         PastBlocksMass++;
 				
             if (i == 1) { PastDifficultyAverage.SetCompact(BlockReading->nBits); }
-            else        { PastDifficultyAverage = ((PastDifficultyAverage.SetCompact(BlockReading->nBits) - PastDifficultyAveragePrev) / i) + PastDifficultyAveragePrev; }
+            else        { PastDifficultyAverage = ((CBigNum().SetCompact(BlockReading->nBits) - PastDifficultyAveragePrev) / i) + PastDifficultyAveragePrev; }
         PastDifficultyAveragePrev = PastDifficultyAverage;
 
 
@@ -66,7 +69,7 @@ unsigned int static KimotoGravityWell(const CBlockIndex* pindexLast, const Conse
         BlockReading = BlockReading->pprev;
     }
 
-    arith_uint256 bnNew(PastDifficultyAverage);
+    CBigNum bnNew(PastDifficultyAverage);
     if (PastRateActualSeconds != 0 && PastRateTargetSeconds != 0) 
 	    {
         bnNew *= PastRateActualSeconds;
