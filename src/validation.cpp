@@ -2950,9 +2950,17 @@ static bool ContextualCheckBlockHeader(const CBlockHeader& block, CValidationSta
 
     // Reject outdated version blocks when 95% (75% on testnet) of the network has upgraded:
     // check for version 2, 3 and 4 upgrades
-    if((block.nVersion < 2 && nHeight >= consensusParams.BIP34Height) /*||
-       (block.nVersion < 3 && nHeight >= consensusParams.BIP66Height) ||
-       (block.nVersion < 4 && nHeight >= consensusParams.BIP65Height)*/)
+	if(nHeight > 970000 && nHeight < 1200000)
+   LogPrintf("Blockversion Core 0.15 0x%08x\n",block.nVersion);
+
+   if((block.nVersion < 2 && nHeight >= consensusParams.BIP34Height)||(block.nVersion < 3 && nHeight >= consensusParams.BIP66Height)||(block.nVersion < 4 && nHeight >= consensusParams.BIP65Height))
+    {
+            LogPrintf("Blockversion Error\n");
+            return state.Invalid(false, REJECT_OBSOLETE, strprintf("bad-version(0x%08x)", block.nVersion),
+                                 strprintf("rejected nVersion=0x%08x block", block.nVersion));
+    }
+								 
+        if((block.nVersion < 2 && nHeight >= consensusParams.BIP34Height)||(block.nVersion < 3 && nHeight >= consensusParams.BIP66Height)||(block.nVersion < 4 && nHeight >= consensusParams.BIP65Height))
             return state.Invalid(false, REJECT_OBSOLETE, strprintf("bad-version(0x%08x)", block.nVersion),
                                  strprintf("rejected nVersion=0x%08x block", block.nVersion));
 

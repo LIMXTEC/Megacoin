@@ -78,10 +78,10 @@ public:
     CMainParams() {
         strNetworkID = "main";
         consensus.nSubsidyHalvingInterval = 420000;
-        consensus.BIP34Height = 1010034; // MegaCoin BIP34 height 
-        consensus.BIP34Hash = uint256S("c69f5106c4f3ba92cfdcd13d20135694de444087e975ba7ea89e3532708bfccf"); // MegaCoin BIP34 Hash
-        consensus.BIP65Height = 1010065; // c69f5106c4f3ba92cfdcd13d20135694de444087e975ba7ea89e3532708bfccf
-        consensus.BIP66Height = 1010066; // c69f5106c4f3ba92cfdcd13d20135694de444087e975ba7ea89e3532708bfccf
+        consensus.BIP34Height = 500000; // MegaCoin BIP34 height 
+        consensus.BIP34Hash = uint256S("11618621285fb4f1a560b462a2f8c8eb44250aac1406d9fe2c90ffbc472e3ebb"); // MegaCoin BIP34 Hash
+        consensus.BIP65Height = 1050065; // c69f5106c4f3ba92cfdcd13d20135694de444087e975ba7ea89e3532708bfccf
+        consensus.BIP66Height = 1070066; // c69f5106c4f3ba92cfdcd13d20135694de444087e975ba7ea89e3532708bfccf
         consensus.powLimit = uint256S("ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"); // To Do
         consensus.nPowTargetTimespan = 3.5 * 24 * 60 * 60;
 		consensus.nPowTargetTimespanV2 = 160 * 60;
@@ -107,7 +107,7 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 1746057600; // 05/01/2025 @ 12:00am (UTC)
 
         // The best chain should have at least this much work.
-        consensus.nMinimumChainWork = uint256S("0000000000000000000000000000000000000000000000000c626cbb40320000"); // to do
+        consensus.nMinimumChainWork = uint256S("0000000000000000000000000000000000000000000000000000000000000000"); // to do
 
         // By default assume that the signatures in ancestors of this block are valid.
         consensus.defaultAssumeValid = uint256S("0xc69f5106c4f3ba92cfdcd13d20135694de444087e975ba7ea89e3532708bfccf"); //974448
