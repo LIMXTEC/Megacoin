@@ -1030,6 +1030,21 @@ void RPCConsole::updateTrafficStats(quint64 totalBytesIn, quint64 totalBytesOut)
     ui->lblBytesIn->setText(FormatBytes(totalBytesIn));
     ui->lblBytesOut->setText(FormatBytes(totalBytesOut));
 }
+///CCCC
+void RPCConsole::hyperlinks_slot1(){ GUIUtil::hyperlinks_slot1();}
+void RPCConsole::hyperlinks_slot2(){ GUIUtil::hyperlinks_slot2();}
+void RPCConsole::hyperlinks_slot3(){ GUIUtil::hyperlinks_slot3();}
+void RPCConsole::hyperlinks_slot4(){ GUIUtil::hyperlinks_slot4();}
+void RPCConsole::hyperlinks_slot5(){ GUIUtil::hyperlinks_slot5();}
+void RPCConsole::hyperlinks_slot6(){ GUIUtil::hyperlinks_slot6();}
+void RPCConsole::hyperlinks_slot7(){ GUIUtil::hyperlinks_slot7();}
+void RPCConsole::hyperlinks_slot8(){ GUIUtil::hyperlinks_slot8();}
+
+void RPCConsole::hyperlinks2_slot1(){ GUIUtil::hyperlinks2_slot1();}
+void RPCConsole::hyperlinks2_slot2(){ GUIUtil::hyperlinks2_slot2();}
+void RPCConsole::hyperlinks2_slot3(){ GUIUtil::hyperlinks2_slot3();}
+void RPCConsole::hyperlinks2_slot4(){ GUIUtil::hyperlinks2_slot4();}
+
 
 void RPCConsole::peerSelected(const QItemSelection &selected, const QItemSelection &deselected)
 {

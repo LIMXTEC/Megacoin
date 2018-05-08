@@ -431,6 +431,22 @@ bool openBitcoinConf()
     return QDesktopServices::openUrl(QUrl::fromLocalFile(boostPathToQString(pathConfig)));
 }
 
+///CCCC
+void hyperlinks_slot1(){QString link1 = "https://megacoin.eu/"; QDesktopServices::openUrl(QUrl(link1, QUrl::TolerantMode));}
+void hyperlinks_slot2(){QString link1 = "https://t.me/Megacoin1"; QDesktopServices::openUrl(QUrl(link1, QUrl::TolerantMode));}
+void hyperlinks_slot3(){QString link1 = "https://t.me/Megacoin_MEC"; QDesktopServices::openUrl(QUrl(link1, QUrl::TolerantMode));}
+void hyperlinks_slot4(){QString link1 = "https://twitter.com/megacoin3"; QDesktopServices::openUrl(QUrl(link1, QUrl::TolerantMode));}
+void hyperlinks_slot5(){QString link1 = "https://discordapp.com/invite/r9ebtKD"; QDesktopServices::openUrl(QUrl(link1, QUrl::TolerantMode));}
+void hyperlinks_slot6(){QString link1 = "https://bitcointalk.org/index.php?topic=2242071.0"; QDesktopServices::openUrl(QUrl(link1, QUrl::TolerantMode));}
+void hyperlinks_slot7(){QString link1 = "https://chainz.cryptoid.info/mec/"; QDesktopServices::openUrl(QUrl(link1, QUrl::TolerantMode));}
+void hyperlinks_slot8(){QString link1 = "https://github.com/LIMXTEC/Megacoin"; QDesktopServices::openUrl(QUrl(link1, QUrl::TolerantMode));}
+
+//Exchanges
+void hyperlinks2_slot1(){QString link1 = "https://crex24.com/de/exchange/MEC-BTC"; QDesktopServices::openUrl(QUrl(link1, QUrl::TolerantMode));}
+void hyperlinks2_slot2(){QString link1 = "https://www.cryptopia.co.nz/Exchange?market=MEC_BTC"; QDesktopServices::openUrl(QUrl(link1, QUrl::TolerantMode));}
+void hyperlinks2_slot3(){QString link1 = "https://coinexchange.io/market/MEC/BTC"; QDesktopServices::openUrl(QUrl(link1, QUrl::TolerantMode));}
+void hyperlinks2_slot4(){QString link1 = "https://novaexchange.com/market/BTC_MEC/"; QDesktopServices::openUrl(QUrl(link1, QUrl::TolerantMode));}
+
 void SubstituteFonts(const QString& language)
 {
 #if defined(Q_OS_MAC)

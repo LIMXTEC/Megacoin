@@ -308,6 +308,16 @@ RES_ICONS = \
   qt/res/icons/tx_output.png \
   qt/res/icons/tx_mined.png \
   qt/res/icons/warning.png \
+  qt/res/icons/Bitcointalk.png \
+  qt/res/icons/Coinexchange.png \
+  qt/res/icons/crex24.png \
+  qt/res/icons/Cryptopia.png \
+  qt/res/icons/discord.png \
+  qt/res/icons/GitHub.png \
+  qt/res/icons/Novaexchange.png \
+  qt/res/icons/Telegram.png \
+  qt/res/icons/Twitter.png \
+  qt/res/icons/cryptoID.png \
   qt/res/icons/verify.png
 
 MEGACOIN_QT_BASE_CPP = \

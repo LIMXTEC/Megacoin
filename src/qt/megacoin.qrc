@@ -54,6 +54,16 @@
         <file alias="hd_enabled">res/icons/hd_enabled.png</file>
         <file alias="hd_disabled">res/icons/hd_disabled.png</file>
         <file alias="network_disabled">res/icons/network_disabled.png</file>
+		<file alias="bitcointalk">res/icons/Bitcointalk.png</file>
+		<file alias="crex24">res/icons/crex24.png</file>
+		<file alias="cryptopia">res/icons/Cryptopia.png</file>
+		<file alias="discord">res/icons/discord.png</file>
+		<file alias="github">res/icons/GitHub.png</file>
+		<file alias="novaexchange">res/icons/Novaexchange.png</file>
+		<file alias="telegram">res/icons/Telegram.png</file>
+		<file alias="coinexchange">res/icons/Coinexchange.png</file>
+		<file alias="twitter">res/icons/Twitter.png</file>
+		<file alias="cryptoID">res/icons/cryptoID.png</file>
     </qresource>
 	<qresource prefix="/css">
         <file alias="megacoin_main">res/css/megacoin_main.css</file>

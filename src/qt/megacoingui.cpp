@@ -253,6 +253,19 @@ BitcoinGUI::BitcoinGUI(const PlatformStyle *_platformStyle, const NetworkStyle *
     subscribeToCoreSignals();
 
     connect(connectionsControl, SIGNAL(clicked(QPoint)), this, SLOT(toggleNetworkActive()));
+	
+	connect(openWebsite1, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot1()));
+    connect(openWebsite2, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot2()));
+    connect(openWebsite3, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot3()));
+    connect(openWebsite4, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot4()));
+    connect(openWebsite5, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot5()));
+    connect(openWebsite6, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot6()));
+    connect(openWebsite7, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot7()));
+	
+	connect(Exchangesite1, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks2_slot1()));
+    connect(Exchangesite2, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks2_slot2()));
+    connect(Exchangesite3, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks2_slot3()));
+    connect(Exchangesite4, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks2_slot4()));
 
     modalOverlay = new ModalOverlay(this->centralWidget());
 #ifdef ENABLE_WALLET
@@ -397,6 +410,30 @@ void BitcoinGUI::createActions()
     connect(openRPCConsoleAction, SIGNAL(triggered()), this, SLOT(showDebugWindow()));
     // prevents an open debug window from becoming stuck/unusable on client shutdown
     connect(quitAction, SIGNAL(triggered()), rpcConsole, SLOT(hide()));
+		//CCCC
+    openWebsite1 = new QAction(QIcon(":/icons/megacoin"), tr("&Megacoin.eu"), this);
+    openWebsite2 = new QAction(QIcon(":/icons/telegram"), tr("&Telegram"), this);
+    openWebsite3 = new QAction(QIcon(":/icons/telegram"), tr("&Twitter"), this);
+	openWebsite4 = new QAction(QIcon(":/icons/twitter"), tr("&Twitter"), this);
+    openWebsite5 = new QAction(QIcon(":/icons/discord"), tr("&Discord"), this);
+    openWebsite6 = new QAction(QIcon(":/icons/bitcointalk"), tr("&Bitcointalk"), this);
+    openWebsite7 = new QAction(QIcon(":/icons/cryptoID"), tr("&CryptoID"), this);
+    openWebsite8 = new QAction(QIcon(":/icons/github"), tr("&Github"), this);
+
+	Exchangesite1 = new QAction(QIcon(":/icons/crex24"), tr("&Crex24"), this);
+	Exchangesite2 = new QAction(QIcon(":/icons/cryptopia"), tr("&Cryptopia"), this);
+	Exchangesite3 = new QAction(QIcon(":/icons/coinexchange"), tr("&CoinExchange"), this);
+	Exchangesite4 = new QAction(QIcon(":/icons/cryptobridgeb"), tr("&Novaexchange"), this);
+ 
+	
+			<file alias="bitcointalk">res/icons/Bitcointalk.png</file>
+		<file alias="crex24">res/icons/crex24.png</file>
+		<file alias="cryptopia">res/icons/Cryptopia.png</file>
+		<file alias="discord">res/icons/discord.png</file>
+		<file alias="github">res/icons/GitHub.png</file>
+		<file alias="novaexchange">res/icons/Novaexchange.png</file>
+		<file alias="telegram">res/icons/Telegram.png</file>
+		<file alias="coinexchange">res/icons/Coinexchange.png</file>
 
 #ifdef ENABLE_WALLET
     if(walletFrame)
