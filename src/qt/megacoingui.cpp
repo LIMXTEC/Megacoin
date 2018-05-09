@@ -426,14 +426,14 @@ void BitcoinGUI::createActions()
 	Exchangesite4 = new QAction(QIcon(":/icons/cryptobridgeb"), tr("&Novaexchange"), this);
  
 	
-			<file alias="bitcointalk">res/icons/Bitcointalk.png</file>
+	/*		<file alias="bitcointalk">res/icons/Bitcointalk.png</file>
 		<file alias="crex24">res/icons/crex24.png</file>
 		<file alias="cryptopia">res/icons/Cryptopia.png</file>
 		<file alias="discord">res/icons/discord.png</file>
 		<file alias="github">res/icons/GitHub.png</file>
 		<file alias="novaexchange">res/icons/Novaexchange.png</file>
 		<file alias="telegram">res/icons/Telegram.png</file>
-		<file alias="coinexchange">res/icons/Coinexchange.png</file>
+		<file alias="coinexchange">res/icons/Coinexchange.png</file>*/
 
 #ifdef ENABLE_WALLET
     if(walletFrame)
@@ -488,7 +488,27 @@ void BitcoinGUI::createMenuBar()
         settings->addSeparator();
     }
     settings->addAction(optionsAction);
+///CCCC
+     if (walletFrame) {
+        QMenu* hyperlinks = appMenuBar->addMenu(tr("&Links"));
+        hyperlinks->addAction(openWebsite1);
+        hyperlinks->addSeparator();
+        hyperlinks->addAction(openWebsite2);
+        hyperlinks->addAction(openWebsite3);
+        hyperlinks->addAction(openWebsite4);
+        hyperlinks->addAction(openWebsite5);
+        hyperlinks->addAction(openWebsite6);
+        hyperlinks->addAction(openWebsite7);
+        hyperlinks->addAction(openWebsite8);
 
+    }
+	     if (walletFrame) {
+        QMenu* hyperlinks2 = appMenuBar->addMenu(tr("&Exchanges"));
+        hyperlinks2->addAction(Exchangesite1);
+        hyperlinks2->addAction(Exchangesite2);
+        hyperlinks2->addAction(Exchangesite3);
+        hyperlinks2->addAction(Exchangesite4);
+    }
     QMenu *help = appMenuBar->addMenu(tr("&Help"));
     if(walletFrame)
     {
