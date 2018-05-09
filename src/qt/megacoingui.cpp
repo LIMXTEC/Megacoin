@@ -423,7 +423,7 @@ void BitcoinGUI::createActions()
 	Exchangesite1 = new QAction(QIcon(":/icons/crex24"), tr("&Crex24"), this);
 	Exchangesite2 = new QAction(QIcon(":/icons/cryptopia"), tr("&Cryptopia"), this);
 	Exchangesite3 = new QAction(QIcon(":/icons/coinexchange"), tr("&CoinExchange"), this);
-	Exchangesite4 = new QAction(QIcon(":/icons/cryptobridgeb"), tr("&Novaexchange"), this);
+	Exchangesite4 = new QAction(QIcon(":/icons/novaexchange"), tr("&Novaexchange"), this);
  
 	
 	/*		<file alias="bitcointalk">res/icons/Bitcointalk.png</file>
@@ -495,7 +495,7 @@ void BitcoinGUI::createMenuBar()
         hyperlinks->addSeparator();
         hyperlinks->addAction(openWebsite2);
         hyperlinks->addAction(openWebsite3);
-        hyperlinks->addAction(openWebsite4);
+        //hyperlinks->addAction(openWebsite4);
         hyperlinks->addAction(openWebsite5);
         hyperlinks->addAction(openWebsite6);
         hyperlinks->addAction(openWebsite7);
