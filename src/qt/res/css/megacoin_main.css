@@ -84,7 +84,7 @@ background-color:#f3f3f3;
 /*******************************************************/
 
 QLabel { /* Base Text Size & Color */
-font-size:12px;
+font-size:15px;
 color:#333333;
 }
 
@@ -255,7 +255,7 @@ border-radius: 7px;
 margin: 0px; }
 
 QWidget .QFrame#frame_2 { /* Transactions Widget */
-min-width:410px;
+min-width:560px;
 margin-right:auto;
 margin-left:auto;
 background-image: url(':/images/megacoin_logo_horizontal');
@@ -265,13 +265,13 @@ background-position: center top;
 
 QWidget .QFrame#frame_2 .QLabel#label_4 { /* Recent Transactions Label */
 min-width:200px;
-color:#000;
-margin-left:67px;
-margin-top:173px;
+color:#fff;
+margin-left:60px;
+margin-top:153px;
 margin-right:5px;
 padding-right:5px;
 font-weight:bold;
-font-size:15px;
+font-size:18px;
 min-height:24px;
 }
 
@@ -284,6 +284,7 @@ min-height:16px;
 
 QWidget .QFrame#frame_2 QListView { /* Transaction List */
 font-weight:normal;
+color:#fff;
 font-size:12px;
 max-width:369px;
 margin-left:0px; /* CSS Voodoo - set to -66px to hide default transaction icons */
