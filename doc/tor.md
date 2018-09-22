@@ -42,11 +42,11 @@ reachable from the Tor network. Add these lines to your /etc/tor/torrc (or equiv
 config file):
 
 	HiddenServiceDir /var/lib/tor/megacoin-service/
-	HiddenServicePort 8555 127.0.0.1:8555
+	HiddenServicePort 7951 127.0.0.1:7951
 	HiddenServicePort 19335 127.0.0.1:19335
 
 The directory can be different of course, but (both) port numbers should be equal to
-your megacoind's P2P listen port (8555 by default).
+your megacoind's P2P listen port (7951 by default).
 
 	-externalip=X   You can tell megacoin about its publicly reachable address using
 	                this option, and this can be a .onion address. Given the above
@@ -81,7 +81,7 @@ as well, use `discover` instead:
 
 	./megacoind ... -discover
 
-and open port 8555 on your firewall (or use -upnp).
+and open port 7951 on your firewall (or use -upnp).
 
 If you only want to use Tor to reach onion addresses, but not use it as a proxy
 for normal IPv4/IPv6 communication, use:
