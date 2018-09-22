@@ -1097,7 +1097,7 @@ CAmount nSubsidy = 500 * COIN;
 		Total Coins: 42 Million
 		* 1st 5 Months, 21 Million Coins will be generated
 		  Every 21,000 Blocks (1 Month) the reward steps down from 500, 250, 125, 75, 50.
-		
+
 		* Through the next few decades the Remaining 21 Million will be generated
 		  Every 420,000 Blocks (2 Years), The reward starts at 25 and is Halved each period
 		  10.5 Million come from first 2 Years of 420K Blocks
@@ -1113,7 +1113,7 @@ CAmount nSubsidy = 500 * COIN;
 	else if (nHeight >= BlockCountA * 3) { nSubsidy = 75 * COIN; }
 	else if (nHeight >= BlockCountA * 2) { nSubsidy = 125 * COIN; }
     else if (nHeight >= BlockCountA) { nSubsidy = 250 * COIN; }
-	
+
     return nSubsidy;
 }
 
@@ -3095,7 +3095,7 @@ bool CheckBlock(const CBlock& block, CValidationState& state, const Consensus::P
 
     // Check transactions
     for (const auto& tx : block.vtx)
-        if (!CheckTransaction(*tx, state, false))
+        if (!CheckTransaction(*tx, state,true))
             return state.Invalid(false, state.GetRejectCode(), state.GetRejectReason(),
                                  strprintf("Transaction check failed (tx hash %s) %s", tx->GetHash().ToString(), state.GetDebugMessage()));
 
@@ -3220,7 +3220,7 @@ static bool ContextualCheckBlockHeader(const CBlockHeader& block, CValidationSta
             return state.Invalid(false, REJECT_OBSOLETE, strprintf("bad-version(0x%08x)", block.nVersion),
                                  strprintf("rejected nVersion=0x%08x block", block.nVersion));
     }
-								 
+
         if((block.nVersion < 2 && nHeight >= consensusParams.BIP34Height)||(block.nVersion < 3 && nHeight >= consensusParams.BIP66Height)||(block.nVersion < 4 && nHeight >= consensusParams.BIP65Height))
             return state.Invalid(false, REJECT_OBSOLETE, strprintf("bad-version(0x%08x)", block.nVersion),
                                  strprintf("rejected nVersion=0x%08x block", block.nVersion));
@@ -4216,7 +4216,7 @@ bool LoadBlockIndex(const CChainParams& chainparams)
         fTimestampIndex = gArgs.GetBoolArg("-timestampindex", DEFAULT_TIMESTAMPINDEX);
         pblocktree->WriteFlag("timestampindex", fTimestampIndex);
         LogPrintf("%s: timestamp index %s\n", __func__, fTimestampIndex ? "enabled" : "disabled");
-        
+
         // Use the provided setting for -spentindex in the new database
         fSpentIndex = gArgs.GetBoolArg("-spentindex", DEFAULT_SPENTINDEX);
         pblocktree->WriteFlag("spentindex", fSpentIndex);
