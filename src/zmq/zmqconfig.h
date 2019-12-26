@@ -1,12 +1,12 @@
-// Copyright (c) 2014 The Bitcoin Core developers
+// Copyright (c) 2014-2018 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef MEGACOIN_ZMQ_ZMQCONFIG_H
-#define MEGACOIN_ZMQ_ZMQCONFIG_H
+#ifndef FXTC_ZMQ_ZMQCONFIG_H
+#define FXTC_ZMQ_ZMQCONFIG_H
 
 #if defined(HAVE_CONFIG_H)
-#include "config/megacoin-config.h"
+#include <config/bitcoin-config.h>
 #endif
 
 #include <stdarg.h>
@@ -16,9 +16,9 @@
 #include <zmq.h>
 #endif
 
-#include "primitives/block.h"
-#include "primitives/transaction.h"
+#include <primitives/block.h>
+#include <primitives/transaction.h>
 
 void zmqError(const char *str);
 
-#endif // MEGACOIN_ZMQ_ZMQCONFIG_H
+#endif // FXTC_ZMQ_ZMQCONFIG_H

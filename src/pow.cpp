@@ -1,20 +1,217 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
-// Copyright (c) 2009-2017 The Bitcoin Core developers\n// Copyright (c) 2009-2016 The Litecoin Core developers\n// Copyright (c) 2009-2016 The Megacoin Core developers
+// Copyright (c) 2009-2018 The Bitcoin Core developers
+// Copyright (c) 2018 FXTC developers
+// Copyright (c) 2019 Megacoin developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include "pow.h"
+#include <pow.h>
+// FXTC BEGIN
+#include <spork.h>
+// FXTC END
 
-#include "bignum.h"
+// Megacoin
+#include <bignum.h>
 
-#include "arith_uint256.h"
-#include "chain.h"
-#include "primitives/block.h"
-#include "uint256.h"
-#include "util.h"
-#include <math.h>
+#include <arith_uint256.h>
+#include <chain.h>
+#include <primitives/block.h>
+#include <uint256.h>
 
-unsigned int static KimotoGravityWell(const CBlockIndex* pindexLast, const Consensus::Params& params, const CBlockHeader *pblock) {
+/*
+unsigned int static DarkGravityWave(const CBlockIndex* pindexLast, const CBlockHeader *pblock, const Consensus::Params& params) {
+    if (params.fPowNoRetargeting)
+        return pindexLast->nBits;
+
+    const arith_uint256 bnPowLimit = UintToArith256(params.powLimit);
+
+    const int64_t nPastAlgoFastBlocks = 5; // fast average for algo
+    const int64_t nPastAlgoBlocks = nPastAlgoFastBlocks * ALGO_ACTIVE_COUNT; // average for algo
+
+    const int64_t nPastFastBlocks = nPastAlgoFastBlocks * 2; //fast average for chain
+    int64_t nPastBlocks = nPastFastBlocks * ALGO_ACTIVE_COUNT; // average for chain
+
+    // stabilizing block spacing
+    if ((pindexLast->nHeight + 1) >= 0)
+        nPastBlocks *= 100;
+
+    // make sure we have at least ALGO_ACTIVE_COUNT blocks, otherwise just return powLimit
+    if (!pindexLast || pindexLast->nHeight < nPastBlocks) {
+        if (pindexLast->nHeight < nPastAlgoBlocks)
+            return bnPowLimit.GetCompact();
+        else
+            nPastBlocks = pindexLast->nHeight;
+    }
+
+    const CBlockIndex *pindex = pindexLast;
+    const CBlockIndex *pindexFast = pindexLast;
+    arith_uint256 bnPastTargetAvg(0);
+    arith_uint256 bnPastTargetAvgFast(0);
+
+    const CBlockIndex *pindexAlgo = nullptr;
+    const CBlockIndex *pindexAlgoFast = nullptr;
+    const CBlockIndex *pindexAlgoLast = nullptr;
+    arith_uint256 bnPastAlgoTargetAvg(0);
+    arith_uint256 bnPastAlgoTargetAvgFast(0);
+
+    // count blocks mined by actual algo for secondary average
+    int32_t nVersion = pblock->nVersion & ALGO_VERSION_MASK;
+
+    unsigned int nCountBlocks = 0;
+    unsigned int nCountFastBlocks = 0;
+    unsigned int nCountAlgoBlocks = 0;
+    unsigned int nCountAlgoFastBlocks = 0;
+
+    while (nCountBlocks < nPastBlocks && nCountAlgoBlocks < nPastAlgoBlocks) {
+        arith_uint256 bnTarget = arith_uint256().SetCompact(pindex->nBits) / pindex->GetBlockHeader().GetAlgoEfficiency(pindex->nHeight); // convert to normalized target by algo efficiency
+
+        // calculate algo average
+        if (nVersion == (pindex->nVersion & ALGO_VERSION_MASK))
+        {
+            nCountAlgoBlocks++;
+
+            pindexAlgo = pindex;
+            if (!pindexAlgoLast)
+                pindexAlgoLast = pindex;
+
+            // algo average
+            bnPastAlgoTargetAvg = (bnPastAlgoTargetAvg * (nCountAlgoBlocks - 1) + bnTarget) / nCountAlgoBlocks;
+            // fast algo average
+            if (nCountAlgoBlocks <= nPastAlgoFastBlocks)
+            {
+                nCountAlgoFastBlocks++;
+                pindexAlgoFast = pindex;
+                bnPastAlgoTargetAvgFast = bnPastAlgoTargetAvg;
+            }
+        }
+
+        nCountBlocks++;
+
+        // average
+        bnPastTargetAvg = (bnPastTargetAvg * (nCountBlocks - 1) + bnTarget) / nCountBlocks;
+        // fast average
+        if (nCountBlocks <= nPastFastBlocks)
+        {
+            nCountFastBlocks++;
+            pindexFast = pindex;
+            bnPastTargetAvgFast = bnPastTargetAvg;
+        }
+
+        // next block
+        if(nCountBlocks != nPastBlocks) {
+            assert(pindex->pprev); // should never fail
+            pindex = pindex->pprev;
+        }
+    }
+
+    // FXTC instamine protection for blockchain
+    if (pindexLast->GetBlockTime() - pindexFast->GetBlockTime() < params.nPowTargetSpacing / 2)
+    {
+        nCountBlocks = nCountFastBlocks;
+        pindex = pindexFast;
+        bnPastTargetAvg = bnPastTargetAvgFast;
+    }
+
+    arith_uint256 bnNew(bnPastTargetAvg);
+
+    if (pindexAlgo && pindexAlgoLast && nCountAlgoBlocks > 1)
+    {
+        // FXTC instamine protection for algo
+        if (pindexLast->GetBlockTime() - pindexAlgoFast->GetBlockTime() < params.nPowTargetSpacing * ALGO_ACTIVE_COUNT / 2)
+        {
+            nCountAlgoBlocks = nCountAlgoFastBlocks;
+            pindexAlgo = pindexAlgoFast;
+            bnPastAlgoTargetAvg = bnPastAlgoTargetAvgFast;
+        }
+
+        bnNew = bnPastAlgoTargetAvg;
+
+        // pindexLast instead of pindexAlgoLst on purpose
+        int64_t nActualTimespan = pindexLast->GetBlockTime() - pindexAlgo->GetBlockTime();
+        int64_t nTargetTimespan = nCountAlgoBlocks * params.nPowTargetSpacing * ALGO_ACTIVE_COUNT;
+
+        // higher algo diff faster
+        if (nActualTimespan < 1)
+            nActualTimespan = 1;
+        // lower algo diff slower
+        if (nActualTimespan > nTargetTimespan*2)
+            nActualTimespan = nTargetTimespan*2;
+
+        // Retarget algo
+        bnNew *= nActualTimespan;
+        bnNew /= nTargetTimespan;
+    } else {
+        bnNew = bnPowLimit;
+    }
+
+    int64_t nActualTimespan = pindexLast->GetBlockTime() - pindex->GetBlockTime();
+    int64_t nTargetTimespan = nCountBlocks * params.nPowTargetSpacing;
+
+    // higher diff faster
+    if (nActualTimespan < 1)
+        nActualTimespan = 1;
+    // lower diff slower
+    if (nActualTimespan > nTargetTimespan*2)
+        nActualTimespan = nTargetTimespan*2;
+
+    // Retarget
+    bnNew *= nActualTimespan;
+    bnNew /= nTargetTimespan;
+
+    // at least PoW limit
+    if ((bnPowLimit / pblock->GetAlgoEfficiency(pindexLast->nHeight+1)) > bnNew)
+        bnNew *= pblock->GetAlgoEfficiency(pindexLast->nHeight+1); // convert normalized target to actual algo target
+    else
+        bnNew = bnPowLimit;
+
+    // mining handbrake via spork
+    if ((bnPowLimit * GetHandbrakeForce(pblock->nVersion, pindexLast->nHeight+1)) < bnNew)
+        bnNew = bnPowLimit;
+    else
+        bnNew /= GetHandbrakeForce(pblock->nVersion, pindexLast->nHeight+1);
+
+    return bnNew.GetCompact();
+}
+
+unsigned int GetNextWorkRequiredBTC(const CBlockIndex* pindexLast, const CBlockHeader *pblock, const Consensus::Params& params)
+{
+    assert(pindexLast != nullptr);
+    unsigned int nProofOfWorkLimit = UintToArith256(params.powLimit).GetCompact();
+
+    // Only change once per difficulty adjustment interval
+    if ((pindexLast->nHeight+1) % params.DifficultyAdjustmentInterval() != 0)
+    {
+        if (params.fPowAllowMinDifficultyBlocks)
+        {
+            // Special difficulty rule for testnet:
+            // If the new block's timestamp is more than 2* 10 minutes
+            // then allow mining of a min-difficulty block.
+            if (pblock->GetBlockTime() > pindexLast->GetBlockTime() + params.nPowTargetSpacing*2)
+                return nProofOfWorkLimit;
+            else
+            {
+                // Return the last non-special-min-difficulty-rules-block
+                const CBlockIndex* pindex = pindexLast;
+                while (pindex->pprev && pindex->nHeight % params.DifficultyAdjustmentInterval() != 0 && pindex->nBits == nProofOfWorkLimit)
+                    pindex = pindex->pprev;
+                return pindex->nBits;
+            }
+        }
+        return pindexLast->nBits;
+    }
+
+    // Go back by what we want to be 14 days worth of blocks
+    int nHeightFirst = pindexLast->nHeight - (params.DifficultyAdjustmentInterval()-1);
+    assert(nHeightFirst >= 0);
+    const CBlockIndex* pindexFirst = pindexLast->GetAncestor(nHeightFirst);
+    assert(pindexFirst);
+
+    return CalculateNextWorkRequired(pindexLast, pindexFirst->GetBlockTime(), params);
+}
+*/
+
+// Megacoin
+unsigned int static KimotoGravityWell(const CBlockIndex* pindexLast, const CBlockHeader *pblock, const Consensus::Params& params) {
     /* current difficulty formula, megacoin - kimoto gravity well */
     const CBlockIndex *BlockLastSolved = pindexLast;
     const CBlockIndex *BlockReading = pindexLast;
@@ -35,21 +232,19 @@ unsigned int static KimotoGravityWell(const CBlockIndex* pindexLast, const Conse
     int64_t pastSecondsMax = timeDaySeconds * 7;
     uint64_t PastBlocksMin = pastSecondsMin / Blocktime;
     uint64_t PastBlocksMax = pastSecondsMax / Blocktime;
-	//const arith_uint256 bnPowLimit = UintToArith256(params.powLimit);
-	static const CBigNum bnPowLimit(uint256S("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"));
-	
-	if (BlockLastSolved == NULL || BlockLastSolved->nHeight == 0 || (uint64_t)BlockLastSolved->nHeight < PastBlocksMin) { return bnPowLimit.GetCompact(); }
+    //const arith_uint256 bnPowLimit = UintToArith256(params.powLimit);
+    static const CBigNum bnPowLimit(uint256S("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"));
 
-    int64_t LatestBlockTime = BlockLastSolved->GetBlockTime();
+    if (BlockLastSolved == NULL || BlockLastSolved->nHeight == 0 || (uint64_t)BlockLastSolved->nHeight < PastBlocksMin) { return bnPowLimit.GetCompact(); }
+
+    //int64_t LatestBlockTime = BlockLastSolved->GetBlockTime(); //not used
 
     for (unsigned int i = 1; BlockReading && BlockReading->nHeight > 0; i++) {
         if (PastBlocksMax > 0 && i > PastBlocksMax) { break; }
         PastBlocksMass++;
-				
             if (i == 1) { PastDifficultyAverage.SetCompact(BlockReading->nBits); }
             else        { PastDifficultyAverage = ((CBigNum().SetCompact(BlockReading->nBits) - PastDifficultyAveragePrev) / i) + PastDifficultyAveragePrev; }
         PastDifficultyAveragePrev = PastDifficultyAverage;
-
 
         PastRateActualSeconds                        = BlockLastSolved->GetBlockTime() - BlockReading->GetBlockTime();
         PastRateTargetSeconds                        = Blocktime * PastBlocksMass;
@@ -70,18 +265,16 @@ unsigned int static KimotoGravityWell(const CBlockIndex* pindexLast, const Conse
     }
 
     CBigNum bnNew(PastDifficultyAverage);
-    if (PastRateActualSeconds != 0 && PastRateTargetSeconds != 0) 
-	    {
-        bnNew *= PastRateActualSeconds;
-        bnNew /= PastRateTargetSeconds;
-	    }
-		if (bnNew > bnPowLimit) 
-	    {
-		bnNew = bnPowLimit;
+    if (PastRateActualSeconds != 0 && PastRateTargetSeconds != 0) {
+            bnNew *= PastRateActualSeconds;
+            bnNew /= PastRateTargetSeconds;
+        }
+        if (bnNew > bnPowLimit) {
+            bnNew = bnPowLimit;
         }
     return bnNew.GetCompact();
     
-	/*
+    /*
     const arith_uint256 bnPowLimit = UintToArith256(params.powLimit);
     
     if (BlockLastSolved == NULL || BlockLastSolved->nHeight == 0 || (uint64_t)BlockLastSolved->nHeight < PastBlocksMin) {  return bnPowLimit.GetCompact(); }
@@ -178,22 +371,63 @@ unsigned int static KimotoGravityWell(const CBlockIndex* pindexLast, const Conse
         bnNew = bnPowLimit;
     }
     return bnNew.GetCompact();
-	*/
+    */
 }
 
 unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHeader *pblock, const Consensus::Params& params)
 {
+    /*
+    unsigned int nBits = DarkGravityWave(pindexLast, pblock, params);
+
+    // Dead lock protection will halve work every block spacing when no block for 2 * number of active algos * block spacing (FxTC: every two minutes if no block for 10 minutes)
+    int nHalvings = (pblock->GetBlockTime() - pindexLast->GetBlockTime()) / (params.nPowTargetSpacing * 2) - ALGO_ACTIVE_COUNT + 1;
+    if (nHalvings > 0)
+    {
+        const arith_uint256 bnPowLimit = UintToArith256(params.powLimit);
+        arith_uint256 bnBits;
+        bnBits.SetCompact(nBits);
+
+        // Special difficulty rule for testnet:
+        // If the new block's timestamp is more than 2x block spacing
+        // then allow mining of a min-difficulty block.
+        // Also can not be less than PoW limit.
+        if (params.fPowAllowMinDifficultyBlocks || (bnPowLimit >> nHalvings) < bnBits)
+            bnBits = bnPowLimit;
+        else
+            bnBits <<= nHalvings;
+
+        nBits = bnBits.GetCompact();
+    }
+
+    return nBits;
+    */
+
+    // Megacoin
     assert(pindexLast != nullptr);
+    unsigned int nProofOfWorkLimit = UintToArith256(params.powLimit).GetCompact();
 
     int fork1 = 1000000;
     int fork2 = 21000;
-    if (pindexLast->nHeight+1 <= fork1)
+
+    // Megacoin Miningalgo switch
+	// 1571832146 Wednesday, 23. October 2019 12:02:26
+	// please check also block.cpp:L62
+    if(pblock->GetBlockTime() >= 1571832146 && pindexLast->GetBlockTime() <= 1571832146 + 86400) // We have a timerange from 24 hours  to find a new block
     {
-    return KimotoGravityWell(pindexLast, params, pblock);
+        if (pblock->GetBlockTime() > pindexLast->GetBlockTime() + params.nPowTargetSpacing*24) 
+            {
+        //consensus.nPowTargetSpacing = 2.5 * 60; // Megacoin	
+        //This should be one hour then is this function possible
+    LogPrintf("Megacoin Hashalgoupdate HashX16R \n");
+    return nProofOfWorkLimit;
+            }
     }
 
-    unsigned int nProofOfWorkLimit = UintToArith256(params.powLimit).GetCompact();
- if (pindexLast->nHeight+1 <= fork2)
+    if (pindexLast->nHeight+1 <= fork1) {
+        return KimotoGravityWell(pindexLast, pblock, params);
+    }
+
+    if (pindexLast->nHeight+1 <= fork2)
     {
     // Only change once per difficulty adjustment interval
     if ((pindexLast->nHeight+1) % params.DifficultyAdjustmentInterval() != 0)
@@ -233,6 +467,7 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
 
     return CalculateNextWorkRequired(pindexLast, pindexFirst->GetBlockTime(), params);
     }
+
     else
     {
         // Genesis block
@@ -258,7 +493,7 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
                     return pindex->nBits;
                 }
             }
-            //LogPrintf("difficulty adjustment interval %d  \n",(pindexLast->nHeight+1) % params.DifficultyAdjustmentIntervalV2());
+            // LogPrintf("difficulty adjustment interval %d  \n",(pindexLast->nHeight+1) % params.DifficultyAdjustmentIntervalV2());
             return pindexLast->nBits;
         }
 
@@ -279,23 +514,49 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
     }
 }
 
+
 unsigned int CalculateNextWorkRequired(const CBlockIndex* pindexLast, int64_t nFirstBlockTime, const Consensus::Params& params)
 {
+    /*
+    if (params.fPowNoRetargeting)
+        return pindexLast->nBits;
+
+    // Limit adjustment step
+    int64_t nActualTimespan = pindexLast->GetBlockTime() - nFirstBlockTime;
+    if (nActualTimespan < params.nPowTargetTimespan/4)
+        nActualTimespan = params.nPowTargetTimespan/4;
+    if (nActualTimespan > params.nPowTargetTimespan*4)
+        nActualTimespan = params.nPowTargetTimespan*4;
+
+    // Retarget
+    const arith_uint256 bnPowLimit = UintToArith256(params.powLimit);
+    arith_uint256 bnNew;
+    bnNew.SetCompact(pindexLast->nBits);
+    bnNew *= nActualTimespan;
+    bnNew /= params.nPowTargetTimespan;
+
+    if (bnNew > bnPowLimit)
+        bnNew = bnPowLimit;
+
+    return bnNew.GetCompact();
+    */
+
+    // Megacoin
     int fork2 = 21000;
     if (params.fPowNoRetargeting)
         return pindexLast->nBits;
 
     // Initial //64_15 Written by Limx Dev 04/2017
     int64_t nActualTimespan = pindexLast->GetBlockTime() - nFirstBlockTime;
-	const arith_uint256 bnPowLimit = UintToArith256(params.powLimit);
-	bool fShift;
-	// Initial
+    const arith_uint256 bnPowLimit = UintToArith256(params.powLimit);
+    bool fShift;
+    // Initial
     if (pindexLast->nHeight+1 <= fork2)
     {
-	if (nActualTimespan < params.nPowTargetTimespan/4)
-        nActualTimespan = params.nPowTargetTimespan/4;
-    if (nActualTimespan > params.nPowTargetTimespan*4)
-        nActualTimespan = params.nPowTargetTimespan*4;
+        if (nActualTimespan < params.nPowTargetTimespan/4)
+            nActualTimespan = params.nPowTargetTimespan/4;
+        if (nActualTimespan > params.nPowTargetTimespan*4)
+            nActualTimespan = params.nPowTargetTimespan*4;
 
     // Retarget
     arith_uint256 bnNew;
@@ -315,14 +576,14 @@ unsigned int CalculateNextWorkRequired(const CBlockIndex* pindexLast, int64_t nF
         bnNew = bnPowLimit;
 
     return bnNew.GetCompact();
-	
-	}
+
+    }
     else
     {
-    if (nActualTimespan < params.nPowTargetTimespanV2/1.15)
-        nActualTimespan = params.nPowTargetTimespanV2/1.15;
-    if (nActualTimespan > params.nPowTargetTimespanV2*1.15)
-        nActualTimespan = params.nPowTargetTimespanV2*1.15;
+        if (nActualTimespan < params.nPowTargetTimespanV2/1.15)
+            nActualTimespan = params.nPowTargetTimespanV2/1.15;
+        if (nActualTimespan > params.nPowTargetTimespanV2*1.15)
+            nActualTimespan = params.nPowTargetTimespanV2*1.15;
 
     // Retarget
     arith_uint256 bnNew;
@@ -342,7 +603,7 @@ unsigned int CalculateNextWorkRequired(const CBlockIndex* pindexLast, int64_t nF
         bnNew = bnPowLimit;
 
     return bnNew.GetCompact();
-	}
+    }
 }
 
 bool CheckProofOfWork(uint256 hash, unsigned int nBits, const Consensus::Params& params)
@@ -363,3 +624,35 @@ bool CheckProofOfWork(uint256 hash, unsigned int nBits, const Consensus::Params&
 
     return true;
 }
+
+/*
+// FXTC BEGIN
+unsigned int GetHandbrakeForce(int32_t nVersion, int nHeight)
+{
+    int32_t nVersionAlgo = nVersion & ALGO_VERSION_MASK;
+
+    // NIST5 braked and disabled
+    if (nVersionAlgo == ALGO_NIST5)
+    {
+        if (nHeight >= 21000) return 4070908800;
+        if (nHeight >= 19335) return 20;
+    }
+
+    if (nHeight >= sporkManager.GetSporkValue(SPORK_FXTC_01_HANDBRAKE_HEIGHT))
+    {
+        switch (nVersionAlgo)
+        {
+            case ALGO_SHA256D: return sporkManager.GetSporkValue(SPORK_FXTC_01_HANDBRAKE_FORCE_SHA256D);
+            case ALGO_SCRYPT:  return sporkManager.GetSporkValue(SPORK_FXTC_01_HANDBRAKE_FORCE_SCRYPT);
+            case ALGO_NIST5:   return sporkManager.GetSporkValue(SPORK_FXTC_01_HANDBRAKE_FORCE_NIST5);
+            case ALGO_LYRA2Z:  return sporkManager.GetSporkValue(SPORK_FXTC_01_HANDBRAKE_FORCE_LYRA2Z);
+            case ALGO_X11:     return sporkManager.GetSporkValue(SPORK_FXTC_01_HANDBRAKE_FORCE_X11);
+            case ALGO_X16R:    return sporkManager.GetSporkValue(SPORK_FXTC_01_HANDBRAKE_FORCE_X16R);
+            default:           return 1; // FXTC TODO: we should not be here
+        }
+    }
+
+    return 1; // FXTC TODO: we should not be here
+}
+// FXTC END
+*/

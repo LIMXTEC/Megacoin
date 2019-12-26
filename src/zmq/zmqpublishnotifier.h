@@ -1,11 +1,11 @@
-// Copyright (c) 2015-2016 The Bitcoin Core developers
+// Copyright (c) 2015-2018 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef MEGACOIN_ZMQ_ZMQPUBLISHNOTIFIER_H
-#define MEGACOIN_ZMQ_ZMQPUBLISHNOTIFIER_H
+#ifndef FXTC_ZMQ_ZMQPUBLISHNOTIFIER_H
+#define FXTC_ZMQ_ZMQPUBLISHNOTIFIER_H
 
-#include "zmqabstractnotifier.h"
+#include <zmq/zmqabstractnotifier.h>
 
 class CBlockIndex;
 
@@ -52,4 +52,4 @@ public:
     bool NotifyTransaction(const CTransaction &transaction) override;
 };
 
-#endif // MEGACOIN_ZMQ_ZMQPUBLISHNOTIFIER_H
+#endif // FXTC_ZMQ_ZMQPUBLISHNOTIFIER_H

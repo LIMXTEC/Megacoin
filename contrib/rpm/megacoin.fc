@@ -1,8 +1,0 @@
-/usr/bin/megacoin-cli		--	gen_context(system_u:object_r:megacoin_exec_t,s0)
-/usr/sbin/megacoind		--	gen_context(system_u:object_r:megacoin_exec_t,s0)
-/usr/lib(64)?/megacoin/megacoind		--	gen_context(system_u:object_r:megacoin_exec_t,s0)
-
-/etc/megacoin(/.*)?		gen_context(system_u:object_r:megacoin_conf_t,s0)
-/var/lib/megacoin(/.*)?		gen_context(system_u:object_r:megacoin_var_lib_t,s0)
-
-(/var)?/run/megacoind(/.*)?   gen_context(system_u:object_r:megacoin_var_run_t,s0)

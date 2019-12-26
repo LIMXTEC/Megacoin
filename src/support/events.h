@@ -1,9 +1,9 @@
-// Copyright (c) 2016 The Bitcoin Core developers
+// Copyright (c) 2016-2018 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef MEGACOIN_SUPPORT_EVENTS_H
-#define MEGACOIN_SUPPORT_EVENTS_H
+#ifndef FXTC_SUPPORT_EVENTS_H
+#define FXTC_SUPPORT_EVENTS_H
 
 #include <ios>
 #include <memory>
@@ -53,4 +53,4 @@ inline raii_evhttp_connection obtain_evhttp_connection_base(struct event_base* b
     return result;
 }
 
-#endif // MEGACOIN_SUPPORT_EVENTS_H
+#endif // FXTC_SUPPORT_EVENTS_H

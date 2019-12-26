@@ -1,37 +1,36 @@
-MegaCoin Core integration/staging tree
+Megacoin Core integration/staging tree
 =====================================
-
-Do not use this branch !! Please use the master.
-----------------
 
 [![Build Status](https://travis-ci.org/megacoin-project/megacoin.svg?branch=master)](https://travis-ci.org/megacoin-project/megacoin)
 
-https://megacoin.cc
+https://megacoin.eu
 
-What is MegaCoin?
+What is Megacoin?
 ----------------
 
-MegaCoin is an experimental digital currency that enables instant payments to
-anyone, anywhere in the world. MegaCoin uses peer-to-peer technology to operate
+Megacoin is an experimental digital currency that enables instant payments to
+anyone, anywhere in the world. Megacoin uses peer-to-peer technology to operate
 with no central authority: managing transactions and issuing money are carried
-out collectively by the network. MegaCoin Core is the name of open source
+out collectively by the network. Megacoin Core is the name of open source
 software which enables the use of this currency.
 
 For more information, as well as an immediately useable, binary version of
-the MegaCoin Core software, see [https://www.megacoin.eu](https://www.megacoin.eu).
+the Megacoin Core software, see [https://www.megacoin.eu](https://www.megacoin.eu).
 
 License
 -------
 
-MegaCoin Core is released under the terms of the MIT license. See [COPYING](COPYING) for more
+Megacoin Core is released under the terms of the MIT license. See [COPYING](COPYING) for more
 information or see https://opensource.org/licenses/MIT.
+
+
 
 Development Process
 -------------------
 
 The `master` branch is regularly built and tested, but is not guaranteed to be
-completely stable. [Tags](https://github.com/LIMXTEC/megacoin/tags) are created
-regularly to indicate new official, stable release versions of MegaCoin Core.
+completely stable. [Tags](https://github.com/LIMXTEC/Megacoin/tags) are created
+regularly to indicate new official, stable release versions of Megacoin Core.
 
 The contribution workflow is described in [CONTRIBUTING.md](CONTRIBUTING.md).
 
@@ -72,8 +71,8 @@ not straightforward.
 Translations
 ------------
 
-We only accept translation fixes that are submitted through [Bitcoin Core's Transifex page](https://www.transifex.com/projects/p/megacoin/).
-Translations are converted to MegaCoin periodically.
+We only accept translation fixes that are submitted through [Bitcoin Core's Transifex page](https://www.transifex.com/projects/p/bitcoin/).
+Translations are converted to Megacoin periodically.
 
 Translations are periodically pulled from Transifex and merged into the git repository. See the
 [translation process](doc/translation_process.md) for details on how this works.

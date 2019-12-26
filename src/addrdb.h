@@ -1,13 +1,13 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
-// Copyright (c) 2009-2017 The Bitcoin Core developers\n// Copyright (c) 2009-2016 The Litecoin Core developers\n// Copyright (c) 2009-2016 The Megacoin Core developers
+// Copyright (c) 2009-2018 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #ifndef MEGACOIN_ADDRDB_H
 #define MEGACOIN_ADDRDB_H
 
-#include "fs.h"
-#include "serialize.h"
+#include <fs.h>
+#include <serialize.h>
 
 #include <string>
 #include <map>
@@ -37,7 +37,7 @@ public:
         SetNull();
     }
 
-    CBanEntry(int64_t nCreateTimeIn)
+    explicit CBanEntry(int64_t nCreateTimeIn)
     {
         SetNull();
         nCreateTime = nCreateTimeIn;
@@ -61,7 +61,7 @@ public:
         banReason = BanReasonUnknown;
     }
 
-    std::string banReasonToString()
+    std::string banReasonToString() const
     {
         switch (banReason) {
         case BanReasonNodeMisbehaving:

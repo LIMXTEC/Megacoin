@@ -1,11 +1,11 @@
 Sample configuration files for:
 ```
-SystemD: megacoind.service
-Upstart: megacoind.conf
-OpenRC:  megacoind.openrc
-         megacoind.openrcconf
-CentOS:  megacoind.init
-OS X:    org.megacoin.megacoind.plist
+SystemD: bitcoind.service
+Upstart: bitcoind.conf
+OpenRC:  bitcoind.openrc
+         bitcoind.openrcconf
+CentOS:  bitcoind.init
+macOS:    org.bitcoin.bitcoind.plist
 ```
 have been made available to assist packagers in creating node packages here.
 

@@ -1,11 +1,11 @@
-// Copyright (c) 2015 The Bitcoin Core developers
+// Copyright (c) 2015-2018 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef MEGACOIN_ZMQ_ZMQABSTRACTNOTIFIER_H
-#define MEGACOIN_ZMQ_ZMQABSTRACTNOTIFIER_H
+#ifndef FXTC_ZMQ_ZMQABSTRACTNOTIFIER_H
+#define FXTC_ZMQ_ZMQABSTRACTNOTIFIER_H
 
-#include "zmqconfig.h"
+#include <zmq/zmqconfig.h>
 
 class CBlockIndex;
 class CZMQAbstractNotifier;
@@ -15,7 +15,7 @@ typedef CZMQAbstractNotifier* (*CZMQNotifierFactory)();
 class CZMQAbstractNotifier
 {
 public:
-    CZMQAbstractNotifier() : psocket(0) { }
+    CZMQAbstractNotifier() : psocket(nullptr) { }
     virtual ~CZMQAbstractNotifier();
 
     template <typename T>
@@ -41,4 +41,4 @@ protected:
     std::string address;
 };
 
-#endif // MEGACOIN_ZMQ_ZMQABSTRACTNOTIFIER_H
+#endif // FXTC_ZMQ_ZMQABSTRACTNOTIFIER_H

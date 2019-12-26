@@ -1,4 +1,6 @@
-// Copyright (c) 2011-2016 The Bitcoin Core developers
+// Copyright (c) 2011-2018 The Bitcoin Core developers
+// Copyright (c) 2018 FXTC developers
+// Copyright (c) 2019 Megacoin developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -27,8 +29,6 @@ static const bool DEFAULT_SPLASHSCREEN = true;
 #define COLOR_BAREADDRESS QColor(140, 140, 140)
 /* Transaction list -- TX status decoration - open until date */
 #define COLOR_TX_STATUS_OPENUNTILDATE QColor(64, 64, 255)
-/* Transaction list -- TX status decoration - offline */
-#define COLOR_TX_STATUS_OFFLINE QColor(192, 192, 192)
 /* Transaction list -- TX status decoration - danger, tx needs attention */
 #define COLOR_TX_STATUS_DANGER QColor(200, 100, 100)
 /* Transaction list -- TX status decoration - default color */
@@ -48,9 +48,10 @@ static const int MAX_URI_LENGTH = 255;
 /* Number of frames in spinner animation */
 #define SPINNER_FRAMES 36
 
-#define QAPP_ORG_NAME "MegaCoin"
-#define QAPP_ORG_DOMAIN "megacoin.cc"
-#define QAPP_APP_NAME_DEFAULT "MegaCoin-Qt"
-#define QAPP_APP_NAME_TESTNET "MegaCoin-Qt-testnet"
+#define QAPP_ORG_NAME "Megacoin"
+#define QAPP_ORG_DOMAIN "megacoin.eu"
+#define QAPP_APP_NAME_DEFAULT "Megacoin-Qt"
+#define QAPP_APP_NAME_TESTNET "Megacoin-Qt-testnet"
+#define QAPP_APP_NAME_REGTEST "Megacoin-Qt-regtest"
 
 #endif // MEGACOIN_QT_GUICONSTANTS_H

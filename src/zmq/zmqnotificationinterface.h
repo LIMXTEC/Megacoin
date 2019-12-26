@@ -1,11 +1,11 @@
-// Copyright (c) 2015-2016 The Bitcoin Core developers
+// Copyright (c) 2015-2018 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef MEGACOIN_ZMQ_ZMQNOTIFICATIONINTERFACE_H
-#define MEGACOIN_ZMQ_ZMQNOTIFICATIONINTERFACE_H
+#ifndef FXTC_ZMQ_ZMQNOTIFICATIONINTERFACE_H
+#define FXTC_ZMQ_ZMQNOTIFICATIONINTERFACE_H
 
-#include "validationinterface.h"
+#include <validationinterface.h>
 #include <string>
 #include <map>
 #include <list>
@@ -13,10 +13,12 @@
 class CBlockIndex;
 class CZMQAbstractNotifier;
 
-class CZMQNotificationInterface : public CValidationInterface
+class CZMQNotificationInterface final : public CValidationInterface
 {
 public:
     virtual ~CZMQNotificationInterface();
+
+    std::list<const CZMQAbstractNotifier*> GetActiveNotifiers() const;
 
     static CZMQNotificationInterface* Create();
 
@@ -37,4 +39,6 @@ private:
     std::list<CZMQAbstractNotifier*> notifiers;
 };
 
-#endif // MEGACOIN_ZMQ_ZMQNOTIFICATIONINTERFACE_H
+extern CZMQNotificationInterface* g_zmq_notification_interface;
+
+#endif // FXTC_ZMQ_ZMQNOTIFICATIONINTERFACE_H

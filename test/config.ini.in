@@ -3,16 +3,17 @@
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 # These environment variables are set by the build process and read by
-# test/functional/test_runner.py and test/util/megacoin-util-test.py
+# test/functional/test_runner.py and test/util/bitcoin-util-test.py
 
 [environment]
 SRCDIR=@abs_top_srcdir@
 BUILDDIR=@abs_top_builddir@
 EXEEXT=@EXEEXT@
+RPCAUTH=@abs_top_srcdir@/share/rpcauth/rpcauth.py
 
 [components]
 # Which components are enabled. These are commented out by `configure` if they were disabled when running config.
 @ENABLE_WALLET_TRUE@ENABLE_WALLET=true
-@BUILD_MEGACOIN_UTILS_TRUE@ENABLE_UTILS=true
-@BUILD_MEGACOIND_TRUE@ENABLE_MEGACOIND=true
+@BUILD_BITCOIN_UTILS_TRUE@ENABLE_UTILS=true
+@BUILD_BITCOIND_TRUE@ENABLE_BITCOIND=true
 @ENABLE_ZMQ_TRUE@ENABLE_ZMQ=true

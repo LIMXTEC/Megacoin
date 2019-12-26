@@ -1,18 +1,21 @@
 // Copyright (c) 2010 Satoshi Nakamoto
-// Copyright (c) 2009-2015 The Bitcoin Core developers
+// Copyright (c) 2009-2018 The Bitcoin Core developers
+// Copyright (c) 2014-2017 The Dash Core developers
+// Copyright (c) 2018 FXTC developers
+// Copyright (c) 2019 Megacoin developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include "chainparams.h"
-#include "consensus/merkle.h"
+#include <chainparams.h>
+#include <consensus/merkle.h>
 
-#include "tinyformat.h"
-#include "util.h"
-#include "utilstrencodings.h"
+#include <tinyformat.h>
+#include <util.h>
+#include <utilstrencodings.h>
 
 #include <assert.h>
 
-#include "chainparamsseeds.h"
+#include <chainparamsseeds.h>
 
 static CBlock CreateGenesisBlock(const char* pszTimestamp, const CScript& genesisOutputScript, uint32_t nTime, uint32_t nNonce, uint32_t nBits, int32_t nVersion, const CAmount& genesisReward)
 {
@@ -48,12 +51,10 @@ static CBlock CreateGenesisBlock(const char* pszTimestamp, const CScript& genesi
  */
 static CBlock CreateGenesisBlock(uint32_t nTime, uint32_t nNonce, uint32_t nBits, int32_t nVersion, const CAmount& genesisReward)
 {
-    //const char* pszTimestamp = "Der Tagesspiegel 06/Jan/2014 Henry Maske, famous fighter, is now 50 years old";
-    //const CScript genesisOutputScript = CScript() << ParseHex("040184710fa689ad5023690c80f3a49c8f13f8d45b8c857fbcbc8bc4a8e4d3eb4b10f4d4604fa08dce601aaf0f470216fe1b51850b4acf21b179c45070ac7b03a9") << OP_CHECKSIG;
-
-	const char* pszTimestamp = "Boston Herald - 21/May/2013 - IRS Official to Take Fifth to Avoid Testifying"; //03-2018
+    // Megacoin
+    const char* pszTimestamp = "Boston Herald - 21/May/2013 - IRS Official to Take Fifth to Avoid Testifying"; //03-2018
     const CScript genesisOutputScript = CScript() << ParseHex("0411582e4e718df82c9d75a4886ab7602f0a1b866d81a4e44acba04e847ccd0514b97bee4a61fa73b1474d12851422b01565f244f722f318f1608258b74a3f3fe6") << OP_CHECKSIG;
-	return CreateGenesisBlock(pszTimestamp, genesisOutputScript, nTime, nNonce, nBits, nVersion, genesisReward);
+    return CreateGenesisBlock(pszTimestamp, genesisOutputScript, nTime, nNonce, nBits, nVersion, genesisReward);
 }
 
 void CChainParams::UpdateVersionBitsParameters(Consensus::DeploymentPos d, int64_t nStartTime, int64_t nTimeout)
@@ -77,81 +78,112 @@ class CMainParams : public CChainParams {
 public:
     CMainParams() {
         strNetworkID = "main";
-        consensus.nSubsidyHalvingInterval = 420000;
-        consensus.BIP34Height = 500000; // MegaCoin BIP34 height 
-        consensus.BIP34Hash = uint256S("11618621285fb4f1a560b462a2f8c8eb44250aac1406d9fe2c90ffbc472e3ebb"); // MegaCoin BIP34 Hash
-        consensus.BIP65Height = 1050065; // c69f5106c4f3ba92cfdcd13d20135694de444087e975ba7ea89e3532708bfccf
-        consensus.BIP66Height = 1070066; // c69f5106c4f3ba92cfdcd13d20135694de444087e975ba7ea89e3532708bfccf
-        consensus.powLimit = uint256S("ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"); // To Do
-        consensus.nPowTargetTimespan = 3.5 * 24 * 60 * 60;
-		consensus.nPowTargetTimespanV2 = 160 * 60;
-        consensus.nPowTargetSpacing = 2.5 * 60;
+        consensus.nSubsidyHalvingInterval = 420000; // Megacoin
+        consensus.nMinimumSubsidy = 0.00100000 * COIN;
+
+        consensus.nMasternodeMinimumConfirmations = 15;
+        consensus.nMasternodePaymentsStartBlock = 50;
+        consensus.nMasternodePaymentsIncreaseBlock = 50; //not used
+        consensus.nMasternodePaymentsIncreasePeriod = 365 * 1440; // 1 common year
+        consensus.nMasternodeCollateralMinimum = 42000; // starting MN collateral
+        consensus.nMasternodeCollateralMaximum = 100000; // MN collateral at infinity
+
+        consensus.nInstantSendKeepLock = 24;
+// We need a seperate Update for that!! Limxdev 2019
+        consensus.nBudgetPaymentsStartBlock = 99999999; // Fork 0.17
+        consensus.nBudgetPaymentsCycleBlocks = 8064; // two weeks 
+        consensus.nBudgetPaymentsWindowBlocks = 100;
+        consensus.nBudgetProposalEstablishingTime = 86400; // 1 day
+// We need a seperate Update for that!! Limxdev 2019
+        consensus.nSuperblockStartBlock = 99999999; // Fork 0.17
+        consensus.nSuperblockCycle = 10958; // weekly
+
+        consensus.nGovernanceMinQuorum = 10;
+        consensus.nGovernanceFilterElements = 20000;
+
+        // FXTC TODO: BIP16Exception is valid for BTC blockchain only
+        consensus.BIP16Exception = uint256();
+        consensus.BIP34Height = 500000; // Megacoin
+        consensus.BIP34Hash = uint256S("11618621285fb4f1a560b462a2f8c8eb44250aac1406d9fe2c90ffbc472e3ebb"); // Megacoin
+        consensus.BIP65Height = 1050065; // Megacoin
+        consensus.BIP66Height = 1070066; // Megacoin
+        consensus.powLimit = uint256S("0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"); // Megacoin: ToDo
+        consensus.nPowTargetTimespan = 3.5 * 24 * 60 * 60; // Megacoin
+        consensus.nPowTargetTimespanV2 = 160 * 60; // Megacoin
+        consensus.nPowTargetSpacing = 2.5 * 60; // Megacoin
         consensus.fPowAllowMinDifficultyBlocks = false;
         consensus.fPowNoRetargeting = false;
-        consensus.nRuleChangeActivationThreshold = 6048; // Segwit direct online
-		// Megacoin with 75%
-        //Limx DevMinimum blocks including miner confirmation of the total of 2016 blocks in a retargeting period, (nPowTargetTimespan / nPowTargetSpacing) which is also used for BIP9 deployments. 
-        consensus.nMinerConfirmationWindow = 8064; //2016 nPowTargetTimespan / nPowTargetSpacing
+        consensus.nRuleChangeActivationThreshold = 6048; // Megacoin
+        consensus.nMinerConfirmationWindow = 8064; // Megacoin
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].bit = 28;
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nStartTime = 1525132800; // 05/01/2018 @ 12:00am (UTC)
-        consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nTimeout = 1746057600; // 05/01/2025 @ 12:00am (UTC)
+        consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nTimeout = 1746057600;   // 05/01/2025 @ 12:00am (UTC)
 
         // Deployment of BIP68, BIP112, and BIP113.
         consensus.vDeployments[Consensus::DEPLOYMENT_CSV].bit = 0;
         consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nStartTime = 1525132800; // 05/01/2018 @ 12:00am (UTC)
-        consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nTimeout = 1746057600; // 05/01/2025 @ 12:00am (UTC)
+        consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nTimeout = 1746057600;   // 05/01/2025 @ 12:00am (UTC)
+
+        // FXTC TODO:
+        // Dash
+        // Deployment of DIP0001
+        //consensus.vDeployments[Consensus::DEPLOYMENT_DIP0001].bit = 1;
+        //consensus.vDeployments[Consensus::DEPLOYMENT_DIP0001].nStartTime = Consensus::BIP9Deployment::ALWAYS_ACTIVE;
+        //consensus.vDeployments[Consensus::DEPLOYMENT_DIP0001].nTimeout = Consensus::BIP9Deployment::NO_TIMEOUT;
+        //consensus.vDeployments[Consensus::DEPLOYMENT_DIP0001].nWindowSize = 4032;
+        //consensus.vDeployments[Consensus::DEPLOYMENT_DIP0001].nThreshold = 3226; // 80% of 4032
+        //
+        //
 
         // Deployment of SegWit (BIP141, BIP143, and BIP147)
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].bit = 1;
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nStartTime = 1525132800; // 05/01/2018 @ 12:00am (UTC)
-        consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 1746057600; // 05/01/2025 @ 12:00am (UTC)
+        consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 1746057600;   // 05/01/2025 @ 12:00am (UTC)
 
         // The best chain should have at least this much work.
-        consensus.nMinimumChainWork = uint256S("0000000000000000000000000000000000000000000000000000000000000000"); // to do
+        consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000000000000000000000000"); // Megacoin
 
         // By default assume that the signatures in ancestors of this block are valid.
-        consensus.defaultAssumeValid = uint256S("0xc69f5106c4f3ba92cfdcd13d20135694de444087e975ba7ea89e3532708bfccf"); //974448
+        consensus.defaultAssumeValid = uint256S("0xc69f5106c4f3ba92cfdcd13d20135694de444087e975ba7ea89e3532708bfccf"); // Megacoin
 
         /**
          * The message start string is designed to be unlikely to occur in normal data.
          * The characters are rarely used upper ASCII, not valid as UTF-8, and produce
          * a large 32-bit integer with any alignment.
-         *
-	 */pchMessageStart[0] = 0xed;
+         */
+        // Megacoin
+        pchMessageStart[0] = 0xed;
         pchMessageStart[1] = 0xe0;
         pchMessageStart[2] = 0xe4;
         pchMessageStart[3] = 0xee;
         nDefaultPort = 7951;
         nPruneAfterHeight = 100000;
-		//Time Nonce ?
-		// genesis = CreateGenesisBlock(1492973331, 9377, 0x1e0ffff0, 1, 50 * COIN); // MegaCoin 1492973331, 3716037
-        genesis = CreateGenesisBlock(1369197853, 2084576387, 0x1e0ffff0, 1, 500 * COIN); // MegaCoin 1492973331, 3716037
+
+        genesis = CreateGenesisBlock(1369197853, 2084576387, 0x1e0ffff0, 1, 500 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
         assert(consensus.hashGenesisBlock == uint256S("0x7520788e2d99eec7cf6cf7315577e1268e177fff94cb0a7caf6a458ceeea9ac2"));
         assert(genesis.hashMerkleRoot == uint256S("0x6065d08d755e00a90449abe8a0923d0622feb6f7ab3f435c337369334119e636"));
 
-        // Note that of those with the service bits flag, most only support a subset of possible options
-		
+        // Note that of those which support the service bits prefix, most only support a subset of
+        // possible options.
+        // This is fine at runtime as we'll fall back to using them as a oneshot if they don't support the
+        // service bits we want, but we should get them updated to support all service bits wanted by any
+        // release ASAP to avoid it where possible.
+        // Megacoin
         vSeeds.emplace_back("37.120.190.76", false);
         vSeeds.emplace_back("37.120.186.85", false);
-		vSeeds.emplace_back("185.194.140.60", false);
+        vSeeds.emplace_back("185.194.140.60", false);
         vSeeds.emplace_back("188.71.223.206", false);
         vSeeds.emplace_back("185.194.142.122", false);
-		
-		/*
-		vSeeds.emplace_back("seed-a.litecoin.loshan.co.uk", true);
-        vSeeds.emplace_back("dnsseed.thrasher.io", true);
-        vSeeds.emplace_back("dnsseed.litecointools.com", true);
-        vSeeds.emplace_back("dnsseed.litecoinpool.org", true);
-        vSeeds.emplace_back("dnsseed.koin-project.com", false);
-        */
-		
+
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,50);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,5);
-        base58Prefixes[SCRIPT_ADDRESS2] = std::vector<unsigned char>(1,50);
         base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,178);
+        // BIP32 prefixes
         base58Prefixes[EXT_PUBLIC_KEY] = {0x04, 0x88, 0xB2, 0x1E};
         base58Prefixes[EXT_SECRET_KEY] = {0x04, 0x88, 0xAD, 0xE4};
+
+        bech32_hrp = "mec"; // Megacoin
 
         vFixedSeeds = std::vector<SeedSpec6>(pnSeed6_main, pnSeed6_main + ARRAYLEN(pnSeed6_main));
 
@@ -159,23 +191,41 @@ public:
         fRequireStandard = true;
         fMineBlocksOnDemand = false;
 
+        nPoolMaxTransactions = 3;
+        nFulfilledRequestExpireTime = 60*60; // fulfilled requests expire in 1 hour
+        strSporkPubKey = "0490511F62A54A924FF13A2E43383325A65FD9CAA16C66C2334FA39E000D1229E74A47B22230E37CFBB42806902B0EB08249EBA6FD7913FEA0557F4697109D42E3";
 
-        checkpointData = (CCheckpointData){
-        {
-			{ 5215, uint256S("0xf8a7fec79eeee3228499601c614b179d09b1b08bd58515be8a2795f6baafb493")},
-			{ 490000, uint256S("0x957ffdc0ead5ac30a6bb914fbf68f285a32dcf091b47b621827e3b58e8e9bf66")},
-			{ 974448, uint256S("0xc69f5106c4f3ba92cfdcd13d20135694de444087e975ba7ea89e3532708bfccf")},
-			{ 1001795, uint256S("0x0555327b8f542a4b1fb3de8c4d988ea46e687b9bd8ce406e1b2aea49fe959391")},
-        }
-		};
+        founderAddress = "M7uyx2is8rgnTsfxC28mTbuxmXqQPSTKAH";
+
+        // Megacoin
+        checkpointData = {
+            {
+                { 5215,    uint256S("0xf8a7fec79eeee3228499601c614b179d09b1b08bd58515be8a2795f6baafb493")},
+                { 490000,  uint256S("0x957ffdc0ead5ac30a6bb914fbf68f285a32dcf091b47b621827e3b58e8e9bf66")},
+                { 974448,  uint256S("0xc69f5106c4f3ba92cfdcd13d20135694de444087e975ba7ea89e3532708bfccf")},
+                { 1001795, uint256S("0x0555327b8f542a4b1fb3de8c4d988ea46e687b9bd8ce406e1b2aea49fe959391")},
+            }
+        };
+        // FXTC BEGIN
+        consensus.nlastValidPowHashHeight = 384650;
+        // FXTC
+
+        // Megacoin
+        consensus.nFirstMasternodeBlockHeight = 1200000; // Fork 0.17
 
         chainTxData = ChainTxData{
-            // Data as of block 0x8da1c7f79018fac8acac69a57b2f8b5d2743af67976a4525fdedc8c85a3a1418 (height 410476).
+            // Megacoin: data as of block 0x8da1c7f79018fac8acac69a57b2f8b5d2743af67976a4525fdedc8c85a3a1418 (height 410476).
             1521658394, // * UNIX timestamp of last known number of transactions
-            1000000,  // * total number of transactions between genesis and that timestamp
+            1000000,          // * total number of transactions between genesis and that timestamp
                         //   (the tx=... number in the SetBestChain debug.log lines)
-            1         // * estimated number of transactions per second after that timestamp
+            1           // * estimated number of transactions per second after that timestamp
         };
+
+        // FXTC TODO: we need to resolve fee calculation bug and disable fallback
+        ///* disable fallback fee on mainnet */
+        //m_fallback_fee_enabled = false;
+        m_fallback_fee_enabled = true;
+        //
     }
 };
 
@@ -186,91 +236,142 @@ class CTestNetParams : public CChainParams {
 public:
     CTestNetParams() {
         strNetworkID = "test";
-        consensus.nSubsidyHalvingInterval = 420000; // MegaCoin number of blocks until halving on 1st Nov. 2016 09:17:52 PM
-        consensus.BIP34Height = 0; // MegaCoin BIP34 height
-        consensus.BIP34Hash = uint256S("5b77f70e30731bbf8c4b6c44cf62170cc559b6015aa9b7988d8d44a30c4a4614"); // MegaCoin BIP34 Hash
-        consensus.BIP65Height = 0; // c49bfa33dd4d76a6a05f93c1eb4310993ce00c7a8a9ee23c76164ddc2eecbdef
-        consensus.BIP66Height = 0; // 83703951207fcf9e22516f97603f8621299de483e85d85e8a86f7b0fd32717dc
-        consensus.powLimit = uint256S("ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"); // MegaCoin PoW Limit
-        consensus.nPowTargetTimespan = 3.5 * 24 * 60 * 60; // two weeks
-        consensus.nPowTargetSpacing = 2.5 * 60;
+        consensus.nSubsidyHalvingInterval = 420000; // Megacoin
+        consensus.nMinimumSubsidy = 0.00100000 * COIN;
+
+        consensus.nMasternodeMinimumConfirmations = 15;
+        consensus.nMasternodePaymentsStartBlock = 10; // not true, but it's ok as long as it's less then nMasternodePaymentsIncreaseBlock
+        consensus.nMasternodePaymentsIncreaseBlock = 10;
+        consensus.nMasternodePaymentsIncreasePeriod = 25;
+        consensus.nMasternodeCollateralMinimum = 10; // starting MN collateral
+        consensus.nMasternodeCollateralMaximum = 1000; // MN collateral at infinity
+
+        consensus.nInstantSendKeepLock = 6;
+
+        consensus.nBudgetPaymentsStartBlock = 4100;
+        consensus.nBudgetPaymentsCycleBlocks = 50;
+        consensus.nBudgetPaymentsWindowBlocks = 10;
+        consensus.nBudgetProposalEstablishingTime = 60*20;
+
+        consensus.nSuperblockStartBlock = 4200;
+        consensus.nSuperblockCycle = 24;
+
+        consensus.nGovernanceMinQuorum = 1;
+        consensus.nGovernanceFilterElements = 500;
+
+        // FXTC TODO: BIP16Exception is valid for BTC blockchain only
+        consensus.BIP16Exception = uint256();
+        consensus.BIP34Height = 0; // genesis
+        consensus.BIP34Hash = uint256S("0x5b77f70e30731bbf8c4b6c44cf62170cc559b6015aa9b7988d8d44a30c4a4614"); // Megacoin
+        consensus.BIP65Height = 0; // genesis
+        consensus.BIP66Height = 0; // genesis
+        consensus.powLimit = uint256S("0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"); // Megacoin
+        consensus.nPowTargetTimespan = 3.5 * 24 * 60 * 60; // Megacoin
+        consensus.nPowTargetTimespanV2 = 160 * 60; // Megacoin
+        consensus.nPowTargetSpacing = 2.5 * 60; // Megacoin
         consensus.fPowAllowMinDifficultyBlocks = true;
         consensus.fPowNoRetargeting = false;
-        consensus.nRuleChangeActivationThreshold = 1; // Megacoin Testnet 1% of 2
-        consensus.nMinerConfirmationWindow = 2; // MegaCoin nPowTargetTimespan / nPowTargetSpacing
+        consensus.nRuleChangeActivationThreshold = 1; // Megacoin
+        consensus.nMinerConfirmationWindow = 2; // Megacoin
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].bit = 28;
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nStartTime = 1525132800; // January 1, 2008
-        consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nTimeout = 1746057600; // 05/01/2025 @ 12:00am (UTC)
+        consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nTimeout = 1746057600;   // 05/01/2025 @ 12:00am (UTC)
 
         // Deployment of BIP68, BIP112, and BIP113.
         consensus.vDeployments[Consensus::DEPLOYMENT_CSV].bit = 0;
         consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nStartTime = 1525132800; // January 28, 2017
-        consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nTimeout = 1746057600; // 05/01/2025 @ 12:00am (UTC)
+        consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nTimeout = 1746057600;   // 05/01/2025 @ 12:00am (UTC)
+
+        // FXTC TODO:
+        // Dash
+        // Deployment of DIP0001
+        //consensus.vDeployments[Consensus::DEPLOYMENT_DIP0001].bit = 1;
+        //consensus.vDeployments[Consensus::DEPLOYMENT_DIP0001].nStartTime = Consensus::BIP9Deployment::ALWAYS_ACTIVE;
+        //consensus.vDeployments[Consensus::DEPLOYMENT_DIP0001].nTimeout = Consensus::BIP9Deployment::NO_TIMEOUT;
+        //consensus.vDeployments[Consensus::DEPLOYMENT_DIP0001].nWindowSize = 100;
+        //consensus.vDeployments[Consensus::DEPLOYMENT_DIP0001].nThreshold = 50; // 50% of 100
+        //
+        //
 
         // Deployment of SegWit (BIP141, BIP143, and BIP147)
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].bit = 1;
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nStartTime = 1525132800; // April 23, 2017
-        consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 1746057600; // 05/01/2025 @ 12:00am (UTC)
+        consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 1746057600;   // 05/01/2025 @ 12:00am (UTC)
+
         // The best chain should have at least this much work.
-		
-        consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000000000000000000000000");
+        consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000000000000000000000000"); // Megacoin
 
         // By default assume that the signatures in ancestors of this block are valid.
-        consensus.defaultAssumeValid = uint256S("0x580a107e111bea326b64dc098c057a3b96622c1521c23e4f5b51647aa5e41ecb"); //2
+        consensus.defaultAssumeValid = uint256S("0x580a107e111bea326b64dc098c057a3b96622c1521c23e4f5b51647aa5e41ecb"); // Megacoin
 
-        /**
-         * The message start string is designed to be unlikely to occur in normal data.
-         * The characters are rarely used upper ASCII, not valid as UTF-8, and produce
-         * a large 32-bit integer with any alignment.
-         */
+        // Megacoin
         pchMessageStart[0] = 0xfd;
         pchMessageStart[1] = 0xf0;
         pchMessageStart[2] = 0xf4;
         pchMessageStart[3] = 0xfe;
-        nDefaultPort = 19444;;
+        nDefaultPort = 19444;
         nPruneAfterHeight = 1000;
 
-        genesis = CreateGenesisBlock(1369197853, 2084576387, 0x1e0ffff0, 1, 500 * COIN); // MegaCoin 1492973331, 3716037
+        genesis = CreateGenesisBlock(1369197853, 2084576387, 0x1e0ffff0, 1, 500 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
         assert(consensus.hashGenesisBlock == uint256S("0x7520788e2d99eec7cf6cf7315577e1268e177fff94cb0a7caf6a458ceeea9ac2"));
         assert(genesis.hashMerkleRoot == uint256S("0x6065d08d755e00a90449abe8a0923d0622feb6f7ab3f435c337369334119e636"));
 
-          vFixedSeeds.clear();
-        // Note that of those with the service bits flag, most only support a subset of possible options
-		vSeeds.emplace_back("188.68.52.172", true);
+        /*
+        // Megacoin
+        vFixedSeeds.clear();
+        vSeeds.clear();
+        */
+        vSeeds.emplace_back("188.68.52.172", true);
         vSeeds.emplace_back("37.120.186.85", true);
         vSeeds.emplace_back("37.120.186.85", true);
         vSeeds.emplace_back("188.71.223.206", true);
         vSeeds.emplace_back("185.194.142.122", false);
 
-		
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,111);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,196);
-        base58Prefixes[SCRIPT_ADDRESS2] = std::vector<unsigned char>(1,58);
         base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,239);
+        // BIP32 prefixes
         base58Prefixes[EXT_PUBLIC_KEY] = {0x04, 0x35, 0x87, 0xCF};
         base58Prefixes[EXT_SECRET_KEY] = {0x04, 0x35, 0x83, 0x94};
-		
+
+        bech32_hrp = "testnet1mec";
+
         vFixedSeeds = std::vector<SeedSpec6>(pnSeed6_test, pnSeed6_test + ARRAYLEN(pnSeed6_test));
 
         fDefaultConsistencyChecks = false;
-        fRequireStandard = true;
+        fRequireStandard = false;
         fMineBlocksOnDemand = false;
 
-        checkpointData = (CCheckpointData){
-        {
-			{ 2, uint256S("0x222db35707d9af172ea5c23582338874d1f2956b1850f857c50a3e6f2c6f313")},
-		}
+        nPoolMaxTransactions = 3;
+        nFulfilledRequestExpireTime = 5*60; // fulfilled requests expire in 5 minutes
+        strSporkPubKey = "04C637C5DBCA831BF02266B23E0F271B2689A5754A83BBE00B901C821D567AD23343007E21DA062F2D1C9231B23FDE29D34C7FC8F58292735CBB348F48F768C6F3";
+
+        founderAddress = "mv5hH1xC3KQJr4ATDr1yQLmFhRYgVmjua6";
+
+        // Megacoin
+        checkpointData = {
+            {
+                {2, uint256S("0x222db35707d9af172ea5c23582338874d1f2956b1850f857c50a3e6f2c6f313")},
+            }
         };
+        // FXTC BEGIN
+        consensus.nlastValidPowHashHeight = 5;
+        // FXTC
+
+        // Megacoin
+        consensus.nFirstMasternodeBlockHeight = 5000;
 
         chainTxData = ChainTxData{
-            // Data as of block 0x8da1c7f79018fac8acac69a57b2f8b5d2743af67976a4525fdedc8c85a3a1418 (height 410476).
+            // Megacoin: data as of block 0x8da1c7f79018fac8acac69a57b2f8b5d2743af67976a4525fdedc8c85a3a1418 (height 410476).
             1490495580, // * UNIX timestamp of last known number of transactions
-            449775,  // * total number of transactions between genesis and that timestamp
+            449775,     // * total number of transactions between genesis and that timestamp
                         //   (the tx=... number in the SetBestChain debug.log lines)
-            500.0         // * estimated number of transactions per second after that timestamp
+            500.0       // * estimated number of transactions per second after that timestamp
         };
 
+        /* enable fallback fee on testnet */
+        m_fallback_fee_enabled = true;
     }
 };
 
@@ -282,26 +383,61 @@ public:
     CRegTestParams() {
         strNetworkID = "regtest";
         consensus.nSubsidyHalvingInterval = 150;
-        consensus.BIP34Height = 5000; // BIP34 has not activated on regtest (far in the future so block v1 are not rejected in tests)
-        consensus.BIP34Hash = uint256();
-        consensus.BIP65Height = 5000; // BIP65 activated on regtest (Used in rpc activation tests)
-        consensus.BIP66Height = 5000; // BIP66 activated on regtest (Used in rpc activation tests)
+        consensus.nMinimumSubsidy = 10000.00000000 * COIN;
+
+        consensus.nMasternodeMinimumConfirmations = 15;
+        consensus.nMasternodePaymentsStartBlock = 240;
+        consensus.nMasternodePaymentsIncreaseBlock = 350;
+        consensus.nMasternodePaymentsIncreasePeriod = 10;
+        consensus.nMasternodeCollateralMinimum = 1; // starting MN collateral
+        consensus.nMasternodeCollateralMaximum = 100; // MN collateral at infinity
+
+        consensus.nInstantSendKeepLock = 6;
+
+        consensus.nBudgetPaymentsStartBlock = 1000;
+        consensus.nBudgetPaymentsCycleBlocks = 50;
+        consensus.nBudgetPaymentsWindowBlocks = 10;
+        consensus.nBudgetProposalEstablishingTime = 60*20;
+
+        consensus.nSuperblockStartBlock = 1500;
+        consensus.nSuperblockCycle = 10;
+
+        consensus.nGovernanceMinQuorum = 1;
+        consensus.nGovernanceFilterElements = 100;
+
+        // FXTC TODO: BIP16Exception is valid for BTC blockchain only
+        consensus.BIP16Exception = uint256();
+        consensus.BIP34Height = 5000; // Megacoin: BIP34 has not activated on regtest (far in the future so block v1 are not rejected in tests)
+        consensus.BIP34Hash = uint256(); // Megacoin
+        consensus.BIP65Height = 5000; // Megacoin: BIP65 activated on regtest (Used in rpc activation tests)
+        consensus.BIP66Height = 5000; // Megacoin: BIP66 activated on regtest (Used in rpc activation tests)
         consensus.powLimit = uint256S("7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
-        consensus.nPowTargetTimespan = 14 * 24 * 60 * 60; // two weeks
-        consensus.nPowTargetSpacing = 10 * 60;
+        consensus.nPowTargetTimespan = 14 * 24 * 60 * 60; // Megacoin
+        consensus.nPowTargetSpacing = 10 * 60; // Megacoin
+        consensus.nPowTargetTimespanV2 = 160 * 60; // Megacoin
         consensus.fPowAllowMinDifficultyBlocks = true;
         consensus.fPowNoRetargeting = true;
         consensus.nRuleChangeActivationThreshold = 108; // 75% for testchains
         consensus.nMinerConfirmationWindow = 144; // Faster than normal for regtest (144 instead of 2016)
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].bit = 28;
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nStartTime = 0;
-        consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nTimeout = 999999999999ULL;
+        consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nTimeout = Consensus::BIP9Deployment::NO_TIMEOUT;
         consensus.vDeployments[Consensus::DEPLOYMENT_CSV].bit = 0;
         consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nStartTime = 0;
-        consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nTimeout = 999999999999ULL;
+        consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nTimeout = Consensus::BIP9Deployment::NO_TIMEOUT;
+
+        // FXTC TODO:
+        // Dash
+        // Deployment of DIP0001
+        //consensus.vDeployments[Consensus::DEPLOYMENT_DIP0001].bit = 1;
+        //consensus.vDeployments[Consensus::DEPLOYMENT_DIP0001].nStartTime = 0;
+        //consensus.vDeployments[Consensus::DEPLOYMENT_DIP0001].nTimeout = Consensus::BIP9Deployment::NO_TIMEOUT;
+        //
+        //
+
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].bit = 1;
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nStartTime = 0;
-        consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 999999999999ULL;
+        consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = Consensus::BIP9Deployment::NO_TIMEOUT;
 
         // The best chain should have at least this much work.
         consensus.nMinimumChainWork = uint256S("0x00");
@@ -309,35 +445,44 @@ public:
         // By default assume that the signatures in ancestors of this block are valid.
         consensus.defaultAssumeValid = uint256S("0x00");
 
+        // Megacoin
         pchMessageStart[0] = 0xfd;
         pchMessageStart[1] = 0xf0;
         pchMessageStart[2] = 0xf4;
         pchMessageStart[3] = 0xfe;
         nDefaultPort = 19444;
-nPruneAfterHeight = 1000;
+        nPruneAfterHeight = 1000;
 
-        genesis = CreateGenesisBlock(1492973331, 9377, 0x1e0ffff0, 1, 0 * COIN); // MegaCoin 1492973331, 3716037
+        genesis = CreateGenesisBlock(1492973331, 9377, 0x1e0ffff0, 1, 0 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
         assert(consensus.hashGenesisBlock == uint256S("0x7520788e2d99eec7cf6cf7315577e1268e177fff94cb0a7caf6a458ceeea9ac2"));
         assert(genesis.hashMerkleRoot == uint256S("0x6065d08d755e00a90449abe8a0923d0622feb6f7ab3f435c337369334119e636"));
 
-        // Note that of those with the service bits flag, most only support a subset of possible options
-		vSeeds.emplace_back("188.68.52.172", true);
-        vSeeds.emplace_back("37.120.186.85", true);
-        vSeeds.emplace_back("37.120.186.85", true);
-        vSeeds.emplace_back("188.71.223.206", true);
-        vSeeds.emplace_back("185.194.142.122", false);
+        vFixedSeeds.clear(); //!< Regtest mode doesn't have any fixed seeds.
+        vSeeds.clear();      //!< Regtest mode doesn't have any DNS seeds.
 
         fDefaultConsistencyChecks = true;
         fRequireStandard = false;
-        fMineBlocksOnDemand = true; 
+        fMineBlocksOnDemand = true;
 
-        checkpointData = (CCheckpointData) {
+        nPoolMaxTransactions = 3;
+        nFulfilledRequestExpireTime = 5*60; // fulfilled requests expire in 5 minutes
+
+        founderAddress = "cXdevX1jzA1Bd6hZVTcTEPh5NH8iDx1s4Z";
+
+        // Megacoin
+        checkpointData = {
             {
-                { 999999, uint256S("0x0000000069e244f73d78e8fd29ba2fd2ed618bd6fa2ee92559f542fdb26e7c1d")},
+                {999999, uint256S("0x0000000069e244f73d78e8fd29ba2fd2ed618bd6fa2ee92559f542fdb26e7c1d")},
             }
         };
- 
+        // FXTC BEGIN
+        consensus.nlastValidPowHashHeight = 0;
+        // FXTC
+
+        // Megacoin
+        consensus.nFirstMasternodeBlockHeight = 5000;
+
         chainTxData = ChainTxData{
             0,
             0,
@@ -346,11 +491,14 @@ nPruneAfterHeight = 1000;
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,111);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,196);
-        base58Prefixes[SCRIPT_ADDRESS2] = std::vector<unsigned char>(1,58);
         base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,239);
         base58Prefixes[EXT_PUBLIC_KEY] = {0x04, 0x35, 0x87, 0xCF};
-base58Prefixes[EXT_SECRET_KEY] = {0x04, 0x35, 0x83, 0x94};
-  
+        base58Prefixes[EXT_SECRET_KEY] = {0x04, 0x35, 0x83, 0x94};
+
+        bech32_hrp = "regtest1mec";
+
+        /* enable fallback fee on regtest */
+        m_fallback_fee_enabled = true;
     }
 };
 
