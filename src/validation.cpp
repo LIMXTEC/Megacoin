@@ -1233,42 +1233,6 @@ double ConvertBitsToDouble(unsigned int nBits)
 
 CAmount GetBlockSubsidy(int nHeight, CBlockHeader pblock, const Consensus::Params& consensusParams, bool fSuperblockPartOnly)
 {
-    /*
-    int halvings = nHeight / consensusParams.nSubsidyHalvingInterval;
-    // Force block reward to zero when right shift is undefined.
-    if (halvings >= 64)
-        return 0;
-
-    // FXTC BEGIN
-    if (nHeight == 1)
-        return 1 * COIN;        // Founder marker (Ownership is transferred by moving this coin)
-    else if (nHeight == 2)
-        return 200000 * COIN;   // Exchange Fund (Exchange fees, Masternode listing fees, ...)
-    else if (nHeight == 3)
-        return 10000 * COIN;    // Marketing Fund (Wallet, Website, Marketing, ...)
-    else if (nHeight == 4)
-        return 789999 * COIN;   // Reserve Fund (Locked for future use)
-
-    CAmount nSubsidy = ConvertBitsToDouble(pblock.nBits) * COIN / (49500000 / pblock.GetAlgoEfficiency(nHeight)); // dynamic block reward by algo efficiency
-    nSubsidy /= GetHandbrakeForce(pblock.nVersion, nHeight);
-
-    // Subsidy is cut in half every 865,000 blocks which will occur approximately every 3 years.
-    nSubsidy >>= halvings;
-    // Make halvings linear since start block defined in spork
-    if (nHeight >= sporkManager.GetSporkValue(SPORK_FXTC_03_BLOCK_REWARD_SMOOTH_HALVING_START)) {
-        nSubsidy -= ((nSubsidy >> 1) * (nHeight % consensusParams.nSubsidyHalvingInterval)) / consensusParams.nSubsidyHalvingInterval;
-    }
-    // Force minimum subsidy allowed
-    if (nSubsidy < consensusParams.nMinimumSubsidy) {
-        nSubsidy = consensusParams.nMinimumSubsidy;
-    }
-    // FXTC END
-
-    // Hard fork to reduce the block reward by 10 extra percent (allowing budget/superblocks)
-    CAmount nSuperblockPart = (nHeight >= consensusParams.nBudgetPaymentsStartBlock) ? nSubsidy/10 : 0;
-
-    return fSuperblockPartOnly ? nSuperblockPart : nSubsidy - nSuperblockPart;
-    */
 
     // Megacoin
     CAmount nSubsidy = 500 * COIN;
@@ -1292,15 +1256,12 @@ CAmount GetBlockSubsidy(int nHeight, CBlockHeader pblock, const Consensus::Param
     else if (nHeight >= BlockCountA * 3) { nSubsidy = 75 * COIN; }
     else if (nHeight >= BlockCountA * 2) { nSubsidy = 125 * COIN; }
     else if (nHeight >= BlockCountA) { nSubsidy = 250 * COIN; }
-    // ToDo
-    int nMNFirstBlock = Params().GetConsensus().nFirstMasternodeBlockHeight;
-    
-    if (nHeight >= nMNFirstBlock){
-        CAmount nSuperblockPart1 = nSubsidy/10;
-        return nSubsidy - nSuperblockPart1; 
-        // Governancesystem10% for the community
-    }
-    return nSubsidy;
+         
+    // Megacoin 1.00
+    // Hard fork to reduce the block reward by 10 extra percent (allowing budget/superblocks))
+	CAmount nSuperblockPart = (nHeight > consensusParams.nBudgetPaymentsStartBlock) ? nSubsidy/10 : 0;
+
+    return fSuperblockPartOnly ? nSuperblockPart : nSubsidy - nSuperblockPart; 
 }
 
 //FXTC BEGIN

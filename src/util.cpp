@@ -1310,9 +1310,8 @@ std::string CopyrightHolders(const std::string& strPrefix)
 
     // Megacoin
     std::string strCopyrightHolders = strPrefix + strprintf(" %u-%u ", 2009, COPYRIGHT_YEAR) + "The Bitcoin Core developers";
-    strCopyrightHolders += "\n" + strPrefix + strprintf(" %u-%u ", 2011, COPYRIGHT_YEAR) + "The Litecoin Core developers";
     strCopyrightHolders += "\n" + strPrefix + strprintf(" %u-%u ", 2014, COPYRIGHT_YEAR) + "The Dash Core developers";
-    strCopyrightHolders += "\n" + strPrefix + strprintf(" %u-%u ", 2018, COPYRIGHT_YEAR) + "The FXTC developers";
+    strCopyrightHolders += "\n" + strPrefix + strprintf(" %u-%u ", 2019, COPYRIGHT_YEAR) + "The Litecoin Core  and FXTC developers";
     strCopyrightHolders += "\n" + strPrefix + strprintf(" %u-%u ", 2013, COPYRIGHT_YEAR) + strprintf(_(COPYRIGHT_HOLDERS), _(COPYRIGHT_HOLDERS_SUBSTITUTION));
     return strCopyrightHolders;
 }
