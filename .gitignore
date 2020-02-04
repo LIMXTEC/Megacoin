@@ -61,7 +61,7 @@ src/qt/bitcoin-qt.includes
 *.pyc
 *.o
 *.o-*
-*.patch
+#*.patch
 *.a
 *.pb.cc
 *.pb.h
@@ -79,7 +79,7 @@ src/qt/bitcoin-qt.includes
 
 # Compilation and Qt preprocessor part
 *.qm
-Makefile
+#Makefile
 megacoin-qt
 FxTC-Qt.app
 background.tiff*
