@@ -22,8 +22,8 @@
 
 
 // Megacoin
-#include "crypto/scrypt.h"
-#include "crypto/hashblock.h"
+#include <crypto/scrypt.h>
+#include <crypto/hashblock.h>
 
 uint256 CBlockHeader::GetHash() const
 {
