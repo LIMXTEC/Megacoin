@@ -165,7 +165,7 @@ bool IsBlockPayeeValid(const CTransactionRef txNew, int nBlockHeight, CAmount bl
         }
 
         if(sporkManager.IsSporkActive(SPORK_8_MASTERNODE_PAYMENT_ENFORCEMENT)) {
-            if (!sporkManager.IsSporkActive(SPORK_FXTC_02_IGNORE_MASTERNODE_REWARD_VALUE) && !sporkManager.IsSporkActive(SPORK_FXTC_02_IGNORE_MASTERNODE_REWARD_PAYEE)) {
+            if (!sporkManager.IsSporkActive(SPORK_MEGACOIN_02_IGNORE_MASTERNODE_REWARD_VALUE) && !sporkManager.IsSporkActive(SPORK_MEGACOIN_02_IGNORE_MASTERNODE_REWARD_PAYEE)) {
                 LogPrintf("IsBlockPayeeValid -- ERROR: Invalid masternode payment detected at height %d: %s\n", nBlockHeight, txNew->ToString());
                 return false;
             } else {

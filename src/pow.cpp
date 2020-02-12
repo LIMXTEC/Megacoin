@@ -638,16 +638,16 @@ unsigned int GetHandbrakeForce(int32_t nVersion, int nHeight)
         if (nHeight >= 19335) return 20;
     }
 
-    if (nHeight >= sporkManager.GetSporkValue(SPORK_FXTC_01_HANDBRAKE_HEIGHT))
+    if (nHeight >= sporkManager.GetSporkValue(SPORK_MEGACOIN_01_HANDBRAKE_HEIGHT))
     {
         switch (nVersionAlgo)
         {
-            case ALGO_SHA256D: return sporkManager.GetSporkValue(SPORK_FXTC_01_HANDBRAKE_FORCE_SHA256D);
-            case ALGO_SCRYPT:  return sporkManager.GetSporkValue(SPORK_FXTC_01_HANDBRAKE_FORCE_SCRYPT);
-            case ALGO_NIST5:   return sporkManager.GetSporkValue(SPORK_FXTC_01_HANDBRAKE_FORCE_NIST5);
-            case ALGO_LYRA2Z:  return sporkManager.GetSporkValue(SPORK_FXTC_01_HANDBRAKE_FORCE_LYRA2Z);
-            case ALGO_X11:     return sporkManager.GetSporkValue(SPORK_FXTC_01_HANDBRAKE_FORCE_X11);
-            case ALGO_X16R:    return sporkManager.GetSporkValue(SPORK_FXTC_01_HANDBRAKE_FORCE_X16R);
+            case ALGO_SHA256D: return sporkManager.GetSporkValue(SPORK_MEGACOIN_01_HANDBRAKE_FORCE_SHA256D);
+            case ALGO_SCRYPT:  return sporkManager.GetSporkValue(SPORK_MEGACOIN_01_HANDBRAKE_FORCE_SCRYPT);
+            case ALGO_NIST5:   return sporkManager.GetSporkValue(SPORK_MEGACOIN_01_HANDBRAKE_FORCE_NIST5);
+            case ALGO_LYRA2Z:  return sporkManager.GetSporkValue(SPORK_MEGACOIN_01_HANDBRAKE_FORCE_LYRA2Z);
+            case ALGO_X11:     return sporkManager.GetSporkValue(SPORK_MEGACOIN_01_HANDBRAKE_FORCE_X11);
+            case ALGO_X16R:    return sporkManager.GetSporkValue(SPORK_MEGACOIN_01_HANDBRAKE_FORCE_X16R);
             default:           return 1; // FXTC TODO: we should not be here
         }
     }

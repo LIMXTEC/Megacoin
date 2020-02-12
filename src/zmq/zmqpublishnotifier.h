@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FXTC_ZMQ_ZMQPUBLISHNOTIFIER_H
-#define FXTC_ZMQ_ZMQPUBLISHNOTIFIER_H
+#ifndef MEGACOIN_ZMQ_ZMQPUBLISHNOTIFIER_H
+#define MEGACOIN_ZMQ_ZMQPUBLISHNOTIFIER_H
 
 #include <zmq/zmqabstractnotifier.h>
 
@@ -52,4 +52,4 @@ public:
     bool NotifyTransaction(const CTransaction &transaction) override;
 };
 
-#endif // FXTC_ZMQ_ZMQPUBLISHNOTIFIER_H
+#endif // MEGACOIN_ZMQ_ZMQPUBLISHNOTIFIER_H

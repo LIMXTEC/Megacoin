@@ -93,7 +93,7 @@ UniValue spork(const JSONRPCRequest& request)
                 ret.push_back(Pair(sporkManager.GetSporkNameByID(nSporkID), sporkManager.GetSporkValue(nSporkID)));
         }
         // FXTC BEGIN
-        for(int nSporkID = SPORK_FXTC_START; nSporkID <= SPORK_FXTC_END; nSporkID++){
+        for(int nSporkID = SPORK_MEGACOIN_START; nSporkID <= SPORK_MEGACOIN_END; nSporkID++){
             if(sporkManager.GetSporkNameByID(nSporkID) != "Unknown")
                 ret.push_back(Pair(sporkManager.GetSporkNameByID(nSporkID), sporkManager.GetSporkValue(nSporkID)));
         }
@@ -106,7 +106,7 @@ UniValue spork(const JSONRPCRequest& request)
                 ret.push_back(Pair(sporkManager.GetSporkNameByID(nSporkID), sporkManager.IsSporkActive(nSporkID)));
         }
         // FXTC BEGIN
-        for(int nSporkID = SPORK_FXTC_START; nSporkID <= SPORK_FXTC_END; nSporkID++){
+        for(int nSporkID = SPORK_MEGACOIN_START; nSporkID <= SPORK_MEGACOIN_END; nSporkID++){
             if(sporkManager.GetSporkNameByID(nSporkID) != "Unknown")
                 ret.push_back(Pair(sporkManager.GetSporkNameByID(nSporkID), sporkManager.IsSporkActive(nSporkID)));
         }

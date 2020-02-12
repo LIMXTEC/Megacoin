@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FXTC_TEST_TEST_BITCOIN_H
-#define FXTC_TEST_TEST_BITCOIN_H
+#ifndef MEGACOIN_TEST_TEST_BITCOIN_H
+#define MEGACOIN_TEST_TEST_BITCOIN_H
 
 #include <chainparamsbase.h>
 #include <fs.h>
