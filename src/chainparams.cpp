@@ -82,11 +82,11 @@ public:
         consensus.nMinimumSubsidy = 0.00100000 * COIN;
 
         consensus.nMasternodeMinimumConfirmations = 15;
-        consensus.nMasternodePaymentsStartBlock = 50;
-        consensus.nMasternodePaymentsIncreaseBlock = 50; //not used
-        consensus.nMasternodePaymentsIncreasePeriod = 365 * 1440; // 1 common year
+        consensus.nMasternodePaymentsStartBlock = 50; // - not used
+        consensus.nMasternodePaymentsIncreaseBlock = 50; // - not used
+        consensus.nMasternodePaymentsIncreasePeriod = 365 * 1440; // 1 common year  - not used
         consensus.nMasternodeCollateralMinimum = 42000; // starting MN collateral
-        consensus.nMasternodeCollateralMaximum = 100000; // MN collateral at infinity
+        consensus.nMasternodeCollateralMaximum = 100000; // MN collateral at infinity - not used
 
         consensus.nInstantSendKeepLock = 24;
 // We need a seperate Update for that!! Limxdev 2019
@@ -102,12 +102,12 @@ public:
         consensus.nGovernanceFilterElements = 20000;
 
         // FXTC TODO: BIP16Exception is valid for BTC blockchain only
-        consensus.BIP16Exception = uint256();
+        consensus.BIP16Exception = uint256S("0x89");
         consensus.BIP34Height = 500000; // Megacoin
         consensus.BIP34Hash = uint256S("11618621285fb4f1a560b462a2f8c8eb44250aac1406d9fe2c90ffbc472e3ebb"); // Megacoin
         consensus.BIP65Height = 1050065; // Megacoin
         consensus.BIP66Height = 1070066; // Megacoin
-        consensus.powLimit = uint256S("0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"); // Megacoin: ToDo
+        consensus.powLimit = uint256S("0x00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"); // Megacoin: ToDo
         consensus.nPowTargetTimespan = 3.5 * 24 * 60 * 60; // Megacoin
         consensus.nPowTargetTimespanV2 = 160 * 60; // Megacoin
         consensus.nPowTargetSpacing = 2.5 * 60; // Megacoin
@@ -258,7 +258,7 @@ public:
         consensus.nGovernanceFilterElements = 500;
 
         // FXTC TODO: BIP16Exception is valid for BTC blockchain only
-        consensus.BIP16Exception = uint256();
+        consensus.BIP16Exception = uint256S("0x89");
         consensus.BIP34Height = 0; // genesis
         consensus.BIP34Hash = uint256S("0x5b77f70e30731bbf8c4b6c44cf62170cc559b6015aa9b7988d8d44a30c4a4614"); // Megacoin
         consensus.BIP65Height = 0; // genesis
@@ -402,7 +402,7 @@ public:
         consensus.nGovernanceFilterElements = 100;
 
         // FXTC TODO: BIP16Exception is valid for BTC blockchain only
-        consensus.BIP16Exception = uint256();
+        consensus.BIP16Exception = uint256S("0x89");
         consensus.BIP34Height = 5000; // Megacoin: BIP34 has not activated on regtest (far in the future so block v1 are not rejected in tests)
         consensus.BIP34Hash = uint256(); // Megacoin
         consensus.BIP65Height = 5000; // Megacoin: BIP65 activated on regtest (Used in rpc activation tests)

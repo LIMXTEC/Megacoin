@@ -137,25 +137,27 @@ CMasternode::CollateralStatus CMasternode::CheckCollateral(const COutPoint& outp
 // FXTC BEGIN
 bool CMasternode::CollateralValueCheck(int nHeight, CAmount TxValue)
 {
-    CAmount MNCollateral = CollateralValue(nHeight);
-
+    //CAmount MNCollateral = CollateralValue(nHeight);
+    // MEC BEGIN
     CAmount MinCollateral = Params().GetConsensus().nMasternodeCollateralMinimum * COIN;
-    CAmount MaxCollateral = Params().GetConsensus().nMasternodeCollateralMaximum * COIN;
+    //CAmount MaxCollateral = Params().GetConsensus().nMasternodeCollateralMaximum * COIN;
 
-    return (TxValue >= MinCollateral && TxValue >= 0.999 * MNCollateral && TxValue <= 1.001 * MNCollateral && TxValue <= MaxCollateral);
-}
+    //return (TxValue >= MinCollateral && TxValue >= 0.999 * MNCollateral && TxValue <= 1.001 * MNCollateral && TxValue <= MaxCollateral);
+    return MinCollateral;
+    // MEC END
+    }
 
 CAmount CMasternode::CollateralValue(int nHeight)
 {
     // Maximum 100000 FTC in infinity, starting 1000 FTC
 
-    int nMNPIPeriod = Params().GetConsensus().nMasternodePaymentsIncreasePeriod;
-    CAmount MinCollateral = Params().GetConsensus().nMasternodeCollateralMinimum;
-    CAmount MaxCollateral = Params().GetConsensus().nMasternodeCollateralMaximum;
+    //int nMNPIPeriod = Params().GetConsensus().nMasternodePaymentsIncreasePeriod;
+    CAmount MinCollateral = Params().GetConsensus().nMasternodeCollateralMinimum * COIN;
+    //CAmount MaxCollateral = Params().GetConsensus().nMasternodeCollateralMaximum;
 
-    CAmount MnCollateral = (MaxCollateral - (MaxCollateral - MinCollateral) * (100.00 * nMNPIPeriod / (1.00 * nHeight + 100.00 * nMNPIPeriod ))) * COIN;
+    //CAmount MnCollateral = (MaxCollateral - (MaxCollateral - MinCollateral) * (100.00 * nMNPIPeriod / (1.00 * nHeight + 100.00 * nMNPIPeriod ))) * COIN;
 
-    return MnCollateral;
+    return MinCollateral;
 }
 //
 

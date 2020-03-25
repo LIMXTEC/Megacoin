@@ -242,12 +242,12 @@ std::unique_ptr<CBlockTemplate> BlockAssembler::CreateNewBlock(const CScript& sc
                 coinbaseTx.vout[0].nValue -= nFounderReward;
                 coinbaseTx.vout.push_back(CTxOut(nFounderReward, CScript(FOUNDER_SCRIPT.begin(), FOUNDER_SCRIPT.end())));
             } else {
-                LogPrintf("CreateNewBlock(): invalid founder reward destination\n");
+                LogPrintf("CreateNewBlock(): invalid extra reward destination\n");
             }
         }
         //
 
-        LogPrintf("CreateNewBlock(): block height: %ld pow reward: %ld pos reward: %ld founder reward: %ld masternode reward: %ld\n", nHeight, nBlockReward, 0, nFounderReward, GetMasternodePayment(nHeight, nFees + nBlockReward));
+        LogPrintf("CreateNewBlock(): block height: %ld pow reward: %ld pos reward: %ld extra reward: %ld masternode reward: %ld\n", nHeight, nBlockReward, 0, nFounderReward, GetMasternodePayment(nHeight, nFees + nBlockReward));
 
     pblock->vtx[0] = MakeTransactionRef(std::move(coinbaseTx));
     pblocktemplate->vchCoinbaseCommitment = GenerateCoinbaseCommitment(*pblock, pindexPrev, chainparams.GetConsensus());
