@@ -23,6 +23,8 @@ bool CMasternodeConfig::read(std::string& strErr) {
     int linenumber = 1;
     boost::filesystem::path pathMasternodeConfigFile = GetConfigFile(gArgs.GetArg(MASTERNODE_CONF_FILENAME_ARG, MASTERNODE_CONF_FILENAME));
     boost::filesystem::ifstream streamConfig(pathMasternodeConfigFile);
+    boost::filesystem::path pathConfigFile = GetConfigFile(gArgs.GetArg(MASTERNODE_CONF_FILENAME_ARG, BITCOIN_CONF_FILENAME));
+    boost::filesystem::ifstream streamConfig2(pathConfigFile);
     //MEC Begin
     if (!streamConfig2.good()) {
         FILE* configFile = fopen(pathConfigFile.string().c_str(), "a");
@@ -54,8 +56,7 @@ bool CMasternodeConfig::read(std::string& strErr) {
                 return true; // Nothing to read, so just return
     }
     //We add a megacoin.conf by default
-    boost::filesystem::path pathConfigFile = GetConfigFile(gArgs.GetArg(MASTERNODE_CONF_FILENAME_ARG, BITCOIN_CONF_FILENAME));
-    boost::filesystem::ifstream streamConfig2(pathConfigFile);
+
     if (!streamConfig.good()) {
         FILE* configFile = fopen(pathMasternodeConfigFile.string().c_str(), "a");
         if (configFile != NULL) {
