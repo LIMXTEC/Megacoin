@@ -18,6 +18,7 @@ static const unsigned int MAX_BLOCK_WEIGHT = 20000000; // Megacoin
 static const int64_t MAX_BLOCK_SIGOPS_COST = 500000; // Megacoin
 /** Coinbase transaction outputs can only be spent after this number of new blocks (network rule) */
 static const int COINBASE_MATURITY = 100;
+static const int COINBASE_MATURITY_2 = 1152; // Two days
 
 static const int WITNESS_SCALE_FACTOR = 4;
 

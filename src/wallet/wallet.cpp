@@ -5615,7 +5615,11 @@ int CMerkleTx::GetBlocksToMaturity() const
         chain_depth = 0;
     // FXTC END
     assert(chain_depth >= 0); // coinbase tx should not be conflicted
-    return std::max(0, (COINBASE_MATURITY+1) - chain_depth);
+    //return std::max(0, (COINBASE_MATURITY+1) - chain_depth);
+    // MEC BEGIN
+    return std::max(0, ((!sporkManager.IsSporkActive(SPORK_MEGACOIN_15_COINBASE_MATURITY_STAGE_2)? COINBASE_MATURITY : COINBASE_MATURITY_2 )+1) - chain_depth);
+    // MEC END
+}
 }
 
 

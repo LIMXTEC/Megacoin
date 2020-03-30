@@ -19,6 +19,9 @@
 #include <util.h>
 #include <utilmoneystr.h>
 #include <utiltime.h>
+// MEC BEGIN
+#include <spork.h>
+// MEC END
 
 CTxMemPoolEntry::CTxMemPoolEntry(const CTransactionRef& _tx, const CAmount& _nFee,
                                  int64_t _nTime, unsigned int _entryHeight,
@@ -520,7 +523,12 @@ void CTxMemPool::removeForReorg(const CCoinsViewCache *pcoins, unsigned int nMem
                 const Coin &coin = pcoins->AccessCoin(txin.prevout);
                 if (nCheckFrequency != 0) assert(!coin.IsSpent());
                 if (coin.IsSpent() || (coin.IsCoinBase() && ((signed long)nMemPoolHeight) - coin.nHeight < COINBASE_MATURITY)) {
+                //if (coin.IsSpent() || (coin.IsCoinBase() && ((signed long)nMemPoolHeight) - coin.nHeight < COINBASE_MATURITY)) {
+                    // MEC BEGIN
+                    if (coin.IsSpent() || (coin.IsCoinBase() && ((signed long)nMemPoolHeight) - coin.nHeight < (!sporkManager.IsSporkActive(SPORK_MEGACOIN_15_COINBASE_MATURITY_STAGE_2)? COINBASE_MATURITY : COINBASE_MATURITY_2 ))) {
                     txToRemove.insert(it);
+                    break;
+                    // MEC END
                     break;
                 }
             }

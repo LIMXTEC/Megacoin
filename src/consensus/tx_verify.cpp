@@ -9,6 +9,10 @@
 #include <script/interpreter.h>
 #include <consensus/validation.h>
 
+// MEC BEGIN
+#include <spork.h>
+// MEC END
+
 // TODO remove the following dependencies
 #include <chain.h>
 #include <coins.h>
@@ -220,12 +224,15 @@ bool Consensus::CheckTxInputs(const CTransaction& tx, CValidationState& state, c
         assert(!coin.IsSpent());
 
         // If prev is coinbase, check that it's matured
-        if (coin.IsCoinBase() && nSpendHeight - coin.nHeight < COINBASE_MATURITY) {
+ // if (coin.IsCoinBase() && nSpendHeight - coin.nHeight < COINBASE_MATURITY) {
+        // MEC BEGIN
+        if (coin.IsCoinBase() && nSpendHeight - coin.nHeight < (!sporkManager.IsSporkActive(SPORK_MEGACOIN_15_COINBASE_MATURITY_STAGE_2)? COINBASE_MATURITY : COINBASE_MATURITY_2 )) {
+
             return state.Invalid(false,
                 REJECT_INVALID, "bad-txns-premature-spend-of-coinbase",
                 strprintf("tried to spend coinbase at depth %d", nSpendHeight - coin.nHeight));
         }
-
+// MEC END
         // Check for negative or overflow input values
         nValueIn += coin.out.nValue;
         if (!MoneyRange(coin.out.nValue) || !MoneyRange(nValueIn)) {
