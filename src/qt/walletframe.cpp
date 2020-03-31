@@ -204,6 +204,15 @@ void WalletFrame::unlockWallet()
         walletView->unlockWallet();
 }
 
+//MEC BEGIN
+void WalletFrame::unlockWalletAndKeepUnlocked()
+{
+    WalletView *walletView = currentWalletView();
+    if (walletView)
+        walletView->requestUnlockWallet();
+}
+//MEC END
+
 void WalletFrame::usedSendingAddresses()
 {
     WalletView *walletView = currentWalletView();
