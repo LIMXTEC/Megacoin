@@ -135,7 +135,8 @@ private:
     QAction* openRPCConsoleAction = nullptr;
     // Dash
     QAction *openMNConfEditorAction = nullptr;
-    //
+    // MEC
+    QAction *openConfEditorAction = nullptr;
     QAction* openAction = nullptr;
     QAction* showHelpMessageAction = nullptr;
 
@@ -298,7 +299,7 @@ private Q_SLOTS:
     //-//void showRepair();
 
     /** Open external (default) editor with dash.conf */
-    //-//void showConfEditor();
+    void showConfEditor();
     /** Open external (default) editor with masternode.conf */
     void showMNConfEditor();
     /** Show folder with wallet backups in default file browser */

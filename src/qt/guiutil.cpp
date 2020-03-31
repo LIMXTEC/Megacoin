@@ -453,7 +453,24 @@ ToolTipToRichTextFilter::ToolTipToRichTextFilter(int _size_threshold, QObject *p
     QObject(parent),
     size_threshold(_size_threshold)
 {
+//MEC BEGIN
+void openMECConfigfile()
+{
+    boost::filesystem::path pathConfig2 = GetConfigFile(BITCOIN_CONF_FILENAME);
 
+    /* Create the file */
+    boost::filesystem::ofstream configFile(pathConfig2, std::ios_base::app);
+
+    if (!configFile.good())
+        return;
+
+    configFile.close();
+
+    /* Open masternode.conf with the associated application */
+    if (fs::exists(pathConfig2))
+        QDesktopServices::openUrl(QUrl::fromLocalFile(boostPathToQString(pathConfig2)));
+}
+////MEC END
 }
 
 bool ToolTipToRichTextFilter::eventFilter(QObject *obj, QEvent *evt)

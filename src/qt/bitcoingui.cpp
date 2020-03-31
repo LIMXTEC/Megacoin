@@ -383,6 +383,8 @@ void BitcoinGUI::createActions()
     //-//openRepairAction->setStatusTip(tr("Show wallet repair options"));
     //-//openConfEditorAction = new QAction(QIcon(":/icons/" + theme + "/edit"), tr("Open Wallet &Configuration File"), this);
     //-//openConfEditorAction->setStatusTip(tr("Open configuration file"));
+    openConfEditorAction = new QAction(platformStyle->TextColorIcon(":/icons/edit"), tr("Open Wallet &Configuration File"), this);
+    openConfEditorAction->setStatusTip(tr("Open configuration file"));
     openMNConfEditorAction = new QAction(platformStyle->TextColorIcon(":/icons/edit"), tr("Open &Masternode Configuration File"), this);
     openMNConfEditorAction->setStatusTip(tr("Open Masternode configuration file"));
     //-//showBackupsAction = new QAction(QIcon(":/icons/" + theme + "/browse"), tr("Show Automatic &Backups"), this);
@@ -435,7 +437,7 @@ void BitcoinGUI::createActions()
     //-//connect(openRepairAction, SIGNAL(triggered()), this, SLOT(showRepair()));
 
     // Open configs and backup folder from menu
-    //-//connect(openConfEditorAction, SIGNAL(triggered()), this, SLOT(showConfEditor()));
+    connect(openConfEditorAction, SIGNAL(triggered()), this, SLOT(showConfEditor()));
     connect(openMNConfEditorAction, SIGNAL(triggered()), this, SLOT(showMNConfEditor()));
     //-//connect(showBackupsAction, SIGNAL(triggered()), this, SLOT(showBackups()));
 
@@ -532,7 +534,7 @@ void BitcoinGUI::createMenuBar()
         //-//tools->addAction(openPeersAction);
         //-//tools->addAction(openRepairAction);
         //-//tools->addSeparator();
-        //-//tools->addAction(openConfEditorAction);
+        tools->addAction(openConfEditorAction);
         tools->addAction(openMNConfEditorAction);
         //-//tools->addAction(showBackupsAction);
     }
@@ -912,6 +914,12 @@ void BitcoinGUI::showMNConfEditor()
     GUIUtil::openMNConfigfile();
 }
 //
+
+// MEC
+void BitcoinGUI::showConfEditor()
+{
+    GUIUtil::openBTXConfigfile();
+}
 
 void BitcoinGUI::showHelpMessageClicked()
 {
