@@ -198,8 +198,8 @@ bool CSporkManager::IsSporkActive(int nSporkID)
             case SPORK_MEGACOIN_15_COINBASE_MATURITY_STAGE_2:         r = SPORK_MEGACOIN_15_COINBASE_MATURITY_STAGE_2_DEFAULT; break;
             case SPORK_MEGACOIN_02_IGNORE_EXTRA_REWARD_CHECK:         r = SPORK_MEGACOIN_02_IGNORE_EXTRA_REWARD_CHECK_DEFAULT; break;
             case SPORK_MEGACOIN_02_IGNORE_EXTRA_REWARD_VALUE:         r = SPORK_MEGACOIN_02_IGNORE_EXTRA_REWARD_VALUE_DEFAULT; break;
-            case SPORK_MEGACOIN_16_UNKNOW:                            r = SPORK_MEGACOIN_16_UNKNOW_DEFAULT; break;
-            case SPORK_MEGACOIN_17_UNKNOW:                            r = SPORK_MEGACOIN_17_UNKNOW_DEFAULT; break;
+            case SPORK_MEGACOIN_16_MIN_PEER_PROTO_VERSION:                            r = SPORK_MEGACOIN_16_MIN_PEER_PROTO_VERSION_DEFAULT; break;
+            case SPORK_MEGACOIN_17_SHOW_UPDATE_MESSAGE:                            r = SPORK_MEGACOIN_17_SHOW_UPDATE_MESSAGE_DEFAULT; break;
             case SPORK_MEGACOIN_18_UNKNOW:                            r = SPORK_MEGACOIN_18_UNKNOW_DEFAULT; break;
             case SPORK_MEGACOIN_19_UNKNOW:                            r = SPORK_MEGACOIN_19_UNKNOW_DEFAULT; break;
             case SPORK_MEGACOIN_20_UNKNOW:                            r = SPORK_MEGACOIN_20_UNKNOW_DEFAULT; break;
@@ -244,8 +244,8 @@ int64_t CSporkManager::GetSporkValue(int nSporkID)
         case SPORK_MEGACOIN_15_COINBASE_MATURITY_STAGE_2:         return SPORK_MEGACOIN_15_COINBASE_MATURITY_STAGE_2_DEFAULT;
         case SPORK_MEGACOIN_02_IGNORE_EXTRA_REWARD_CHECK:         return SPORK_MEGACOIN_02_IGNORE_EXTRA_REWARD_CHECK_DEFAULT;
         case SPORK_MEGACOIN_02_IGNORE_EXTRA_REWARD_VALUE:         return SPORK_MEGACOIN_02_IGNORE_EXTRA_REWARD_VALUE_DEFAULT;
-        case SPORK_MEGACOIN_16_UNKNOW:                            return SPORK_MEGACOIN_16_UNKNOW_DEFAULT;
-        case SPORK_MEGACOIN_17_UNKNOW:                            return SPORK_MEGACOIN_17_UNKNOW_DEFAULT;
+        case SPORK_MEGACOIN_16_MIN_PEER_PROTO_VERSION:                            return SPORK_MEGACOIN_16_MIN_PEER_PROTO_VERSION_DEFAULT;
+        case SPORK_MEGACOIN_17_SHOW_UPDATE_MESSAGE:                            return SPORK_MEGACOIN_17_SHOW_UPDATE_MESSAGE_DEFAULT;
         case SPORK_MEGACOIN_18_UNKNOW:                            return SPORK_MEGACOIN_18_UNKNOW_DEFAULT;
         case SPORK_MEGACOIN_19_UNKNOW:                            return SPORK_MEGACOIN_19_UNKNOW_DEFAULT;        
         case SPORK_MEGACOIN_20_UNKNOW:                            return SPORK_MEGACOIN_20_UNKNOW_DEFAULT;
@@ -282,8 +282,8 @@ int CSporkManager::GetSporkIDByName(std::string strName)
     if (strName == "SPORK_MEGACOIN_15_COINBASE_MATURITY_STAGE_2")           return SPORK_MEGACOIN_15_COINBASE_MATURITY_STAGE_2;
     if (strName == "SPORK_MEGACOIN_02_IGNORE_EXTRA_REWARD_CHECK")           return SPORK_MEGACOIN_02_IGNORE_EXTRA_REWARD_CHECK;
     if (strName == "SPORK_MEGACOIN_02_IGNORE_EXTRA_REWARD_VALUE")           return SPORK_MEGACOIN_02_IGNORE_EXTRA_REWARD_VALUE;
-    if (strName == "SPORK_MEGACOIN_16_UNKNOW")                              return SPORK_MEGACOIN_16_UNKNOW;
-    if (strName == "SPORK_MEGACOIN_17_UNKNOW")                              return SPORK_MEGACOIN_17_UNKNOW;
+    if (strName == "SPORK_MEGACOIN_16_MIN_PEER_PROTO_VERSION")                              return SPORK_MEGACOIN_16_MIN_PEER_PROTO_VERSION;
+    if (strName == "SPORK_MEGACOIN_17_SHOW_UPDATE_MESSAGE")                              return SPORK_MEGACOIN_17_SHOW_UPDATE_MESSAGE;
     if (strName == "SPORK_MEGACOIN_18_UNKNOW")                              return SPORK_MEGACOIN_18_UNKNOW;
     if (strName == "SPORK_MEGACOIN_19_UNKNOW")                              return SPORK_MEGACOIN_19_UNKNOW;
     if (strName == "SPORK_MEGACOIN_20_UNKNOW")                              return SPORK_MEGACOIN_20_UNKNOW;
@@ -319,8 +319,8 @@ std::string CSporkManager::GetSporkNameByID(int nSporkID)
         case SPORK_MEGACOIN_15_COINBASE_MATURITY_STAGE_2:     return "SPORK_MEGACOIN_15_COINBASE_MATURITY_STAGE_2";
         case SPORK_MEGACOIN_02_IGNORE_EXTRA_REWARD_CHECK:         return "SPORK_MEGACOIN_02_IGNORE_EXTRA_REWARD_CHECK";
         case SPORK_MEGACOIN_02_IGNORE_EXTRA_REWARD_VALUE:         return "SPORK_MEGACOIN_02_IGNORE_EXTRA_REWARD_VALUE";
-        case SPORK_MEGACOIN_16_UNKNOW:      return "SPORK_MEGACOIN_16_UNKNOW";
-        case SPORK_MEGACOIN_17_UNKNOW:      return "SPORK_MEGACOIN_17_UNKNOW";
+        case SPORK_MEGACOIN_16_MIN_PEER_PROTO_VERSION:      return "SPORK_MEGACOIN_16_MIN_PEER_PROTO_VERSION";
+        case SPORK_MEGACOIN_17_SHOW_UPDATE_MESSAGE:      return "SPORK_MEGACOIN_17_SHOW_UPDATE_MESSAGE";
         case SPORK_MEGACOIN_18_UNKNOW:      return "SPORK_MEGACOIN_18_UNKNOW";
         case SPORK_MEGACOIN_19_UNKNOW:      return "SPORK_MEGACOIN_19_UNKNOW";
         case SPORK_MEGACOIN_20_UNKNOW:      return "SPORK_MEGACOIN_20_UNKNOW";
