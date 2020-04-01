@@ -200,8 +200,11 @@ bool CSporkManager::IsSporkActive(int nSporkID)
             case SPORK_MEGACOIN_02_IGNORE_EXTRA_REWARD_VALUE:         r = SPORK_MEGACOIN_02_IGNORE_EXTRA_REWARD_VALUE_DEFAULT; break;
             case SPORK_MEGACOIN_16_UNKNOW:                            r = SPORK_MEGACOIN_16_UNKNOW_DEFAULT; break;
             case SPORK_MEGACOIN_17_UNKNOW:                            r = SPORK_MEGACOIN_17_UNKNOW_DEFAULT; break;
-
-            case SPORK_MEGACOIN_03_BLOCK_REWARD_SMOOTH_HALVING_START:   r = SPORK_MEGACOIN_03_BLOCK_REWARD_SMOOTH_HALVING_START_DEFAULT; break;
+            case SPORK_MEGACOIN_18_UNKNOW:                            r = SPORK_MEGACOIN_18_UNKNOW_DEFAULT; break;
+            case SPORK_MEGACOIN_19_UNKNOW:                            r = SPORK_MEGACOIN_19_UNKNOW_DEFAULT; break;
+            case SPORK_MEGACOIN_20_UNKNOW:                            r = SPORK_MEGACOIN_20_UNKNOW_DEFAULT; break;
+            case SPORK_MEGACOIN_21_UNKNOW:                            r = SPORK_MEGACOIN_21_UNKNOW_DEFAULT; break;
+            case SPORK_MEGACOIN_22_UNKNOW:                            r = SPORK_MEGACOIN_22_UNKNOW_DEFAULT; break;
             // FXTC END
             default:
                 LogPrint(BCLog::SPORK, "CSporkManager::IsSporkActive -- Unknown Spork ID %d\n", nSporkID);
@@ -229,7 +232,7 @@ int64_t CSporkManager::GetSporkValue(int nSporkID)
         case SPORK_12_RECONSIDER_BLOCKS:                return SPORK_12_RECONSIDER_BLOCKS_DEFAULT;
         case SPORK_13_OLD_SUPERBLOCK_FLAG:              return SPORK_13_OLD_SUPERBLOCK_FLAG_DEFAULT;
         case SPORK_14_REQUIRE_SENTINEL_FLAG:            return SPORK_14_REQUIRE_SENTINEL_FLAG_DEFAULT;
-        // FXTC BEGIN
+
         case SPORK_MEGACOIN_01_HANDBRAKE_HEIGHT:            return SPORK_MEGACOIN_01_HANDBRAKE_HEIGHT_DEFAULT;
         case SPORK_MEGACOIN_01_HANDBRAKE_FORCE_SHA256D:     return SPORK_MEGACOIN_01_HANDBRAKE_FORCE_SHA256D_DEFAULT;
         case SPORK_MEGACOIN_01_HANDBRAKE_FORCE_SCRYPT:      return SPORK_MEGACOIN_01_HANDBRAKE_FORCE_SCRYPT_DEFAULT;
@@ -243,9 +246,12 @@ int64_t CSporkManager::GetSporkValue(int nSporkID)
         case SPORK_MEGACOIN_02_IGNORE_EXTRA_REWARD_VALUE:         return SPORK_MEGACOIN_02_IGNORE_EXTRA_REWARD_VALUE_DEFAULT;
         case SPORK_MEGACOIN_16_UNKNOW:                            return SPORK_MEGACOIN_16_UNKNOW_DEFAULT;
         case SPORK_MEGACOIN_17_UNKNOW:                            return SPORK_MEGACOIN_17_UNKNOW_DEFAULT;
+        case SPORK_MEGACOIN_18_UNKNOW:                            return SPORK_MEGACOIN_18_UNKNOW_DEFAULT;
+        case SPORK_MEGACOIN_19_UNKNOW:                            return SPORK_MEGACOIN_19_UNKNOW_DEFAULT;        
+        case SPORK_MEGACOIN_20_UNKNOW:                            return SPORK_MEGACOIN_20_UNKNOW_DEFAULT;
+        case SPORK_MEGACOIN_21_UNKNOW:                            return SPORK_MEGACOIN_21_UNKNOW_DEFAULT;
+        case SPORK_MEGACOIN_22_UNKNOW:                            return SPORK_MEGACOIN_22_UNKNOW_DEFAULT;
 
-        case SPORK_MEGACOIN_03_BLOCK_REWARD_SMOOTH_HALVING_START:   return SPORK_MEGACOIN_03_BLOCK_REWARD_SMOOTH_HALVING_START_DEFAULT;
-        // FXTC END
         default:
             LogPrint(BCLog::SPORK, "CSporkManager::GetSporkValue -- Unknown Spork ID %d\n", nSporkID);
             return -1;
@@ -278,8 +284,11 @@ int CSporkManager::GetSporkIDByName(std::string strName)
     if (strName == "SPORK_MEGACOIN_02_IGNORE_EXTRA_REWARD_VALUE")           return SPORK_MEGACOIN_02_IGNORE_EXTRA_REWARD_VALUE;
     if (strName == "SPORK_MEGACOIN_16_UNKNOW")                              return SPORK_MEGACOIN_16_UNKNOW;
     if (strName == "SPORK_MEGACOIN_17_UNKNOW")                              return SPORK_MEGACOIN_17_UNKNOW;
-
-    if (strName == "SPORK_MEGACOIN_03_BLOCK_REWARD_SMOOTH_HALVING_START")   return SPORK_MEGACOIN_03_BLOCK_REWARD_SMOOTH_HALVING_START;
+    if (strName == "SPORK_MEGACOIN_18_UNKNOW")                              return SPORK_MEGACOIN_18_UNKNOW;
+    if (strName == "SPORK_MEGACOIN_19_UNKNOW")                              return SPORK_MEGACOIN_19_UNKNOW;
+    if (strName == "SPORK_MEGACOIN_20_UNKNOW")                              return SPORK_MEGACOIN_20_UNKNOW;
+    if (strName == "SPORK_MEGACOIN_21_UNKNOW")                              return SPORK_MEGACOIN_21_UNKNOW;
+    if (strName == "SPORK_MEGACOIN_22_UNKNOW")                              return SPORK_MEGACOIN_22_UNKNOW;
     // FXTC END
 
     LogPrint(BCLog::SPORK, "CSporkManager::GetSporkIDByName -- Unknown Spork name '%s'\n", strName);
@@ -312,8 +321,11 @@ std::string CSporkManager::GetSporkNameByID(int nSporkID)
         case SPORK_MEGACOIN_02_IGNORE_EXTRA_REWARD_VALUE:         return "SPORK_MEGACOIN_02_IGNORE_EXTRA_REWARD_VALUE";
         case SPORK_MEGACOIN_16_UNKNOW:      return "SPORK_MEGACOIN_16_UNKNOW";
         case SPORK_MEGACOIN_17_UNKNOW:      return "SPORK_MEGACOIN_17_UNKNOW";
-
-        case SPORK_MEGACOIN_03_BLOCK_REWARD_SMOOTH_HALVING_START:   return "SPORK_MEGACOIN_03_BLOCK_REWARD_SMOOTH_HALVING_START";
+        case SPORK_MEGACOIN_18_UNKNOW:      return "SPORK_MEGACOIN_18_UNKNOW";
+        case SPORK_MEGACOIN_19_UNKNOW:      return "SPORK_MEGACOIN_19_UNKNOW";
+        case SPORK_MEGACOIN_20_UNKNOW:      return "SPORK_MEGACOIN_20_UNKNOW";
+        case SPORK_MEGACOIN_21_UNKNOW:      return "SPORK_MEGACOIN_21_UNKNOW";
+        case SPORK_MEGACOIN_22_UNKNOW:      return "SPORK_MEGACOIN_22_UNKNOW";
         // FXTC END
         default:
             LogPrint(BCLog::SPORK, "CSporkManager::GetSporkNameByID -- Unknown Spork ID %d\n", nSporkID);
