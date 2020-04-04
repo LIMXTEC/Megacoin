@@ -85,7 +85,7 @@ public:
         consensus.nMasternodePaymentsStartBlock = 50; // - not used
         consensus.nMasternodePaymentsIncreaseBlock = 50; // - not used
         consensus.nMasternodePaymentsIncreasePeriod = 365 * 1440; // 1 common year  - not used
-        consensus.nMasternodeCollateralMinimum = 42000; // starting MN collateral
+        consensus.nMasternodeCollateralMinimum = 4200; // starting MN collateral
         consensus.nMasternodeCollateralMaximum = 100000; // MN collateral at infinity - not used
 
         consensus.nInstantSendKeepLock = 24;
