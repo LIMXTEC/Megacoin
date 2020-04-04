@@ -918,7 +918,7 @@ void BitcoinGUI::showMNConfEditor()
 // MEC
 void BitcoinGUI::showConfEditor()
 {
-    GUIUtil::openBTXConfigfile();
+    GUIUtil::openMECConfigfile();
 }
 
 void BitcoinGUI::showHelpMessageClicked()

@@ -50,13 +50,13 @@ uint256 CBlockHeader::GetPoWHash() const
 
 // Megacoin
     /*
-    if(GetBlockTime() >= 1493124696) { //Human time (GMT): Tue, 25 Apr 2017 12:51:36 GMT
+    if(GetBlockTime() >= 1586020000) { //Human time (GMT): Tue, 25 Apr 2017 12:51:36 GMT
         return HashTimeTravel(BEGIN(nVersion), END(nNonce), GetBlockTime()); // MegaCoin TimeTravel
     }
     else 
     {
     */
-    
+        
     uint256 thash;
     // please check also pow.cpp:L414
 	//10/21/2019 @ 12:00am (UTC)

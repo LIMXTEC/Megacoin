@@ -40,12 +40,13 @@ SplashScreen::SplashScreen(interfaces::Node& node, Qt::WindowFlags f, const Netw
     devicePixelRatio = static_cast<QGuiApplication*>(QCoreApplication::instance())->devicePixelRatio();
 #endif
 
-    // define text to place
+    
+       // define text to place
     QString titleText       = tr("Megacoin");
     QString versionText     = QString("Version %1").arg(QString::fromStdString(FormatFullVersion()));
-    // QString copyrightText   = QString::fromUtf8(CopyrightHolders(strprintf("\xc2\xA9 %u-%u ", 2013, COPYRIGHT_YEAR)).c_str());
-    QString copyrightText   = QString::fromUtf8(CopyrightHolders("").c_str());
-    QString titleAddText    = networkStyle->getTitleAddText();
+    versionText = versionText.rightJustified(25, '.', true);
+    QString copyrightText   = "Megacoin Around The World\nMegacoin-Qt Wallet\n\nOfficial website\nmegacoin-mec.cc";
+    QString titleAddText    = networkStyle->getTitleAddText(); 
 
     QString font            = QApplication::font().toString();
 

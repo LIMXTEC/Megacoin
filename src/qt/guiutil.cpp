@@ -453,6 +453,8 @@ ToolTipToRichTextFilter::ToolTipToRichTextFilter(int _size_threshold, QObject *p
     QObject(parent),
     size_threshold(_size_threshold)
 {
+    
+}
 //MEC BEGIN
 void openMECConfigfile()
 {
@@ -471,7 +473,7 @@ void openMECConfigfile()
         QDesktopServices::openUrl(QUrl::fromLocalFile(boostPathToQString(pathConfig2)));
 }
 ////MEC END
-}
+
 
 bool ToolTipToRichTextFilter::eventFilter(QObject *obj, QEvent *evt)
 {

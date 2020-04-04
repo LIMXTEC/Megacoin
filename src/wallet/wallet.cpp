@@ -5620,7 +5620,6 @@ int CMerkleTx::GetBlocksToMaturity() const
     return std::max(0, ((!sporkManager.IsSporkActive(SPORK_MEGACOIN_15_COINBASE_MATURITY_STAGE_2)? COINBASE_MATURITY : COINBASE_MATURITY_2 )+1) - chain_depth);
     // MEC END
 }
-}
 
 
 bool CWalletTx::AcceptToMemoryPool(const CAmount& nAbsurdFee, CValidationState& state)
