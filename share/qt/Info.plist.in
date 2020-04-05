@@ -46,7 +46,7 @@
       <key>CFBundleTypeRole</key>
       <string>Editor</string>
       <key>CFBundleURLName</key>
-      <string>org.megacoinoin.FxTCoinPayment</string>
+      <string>org.megacoinoin.MegacoinPayment</string>
       <key>CFBundleURLSchemes</key>
       <array>
         <string>megacoinoin</string>
@@ -60,7 +60,7 @@
       <key>UTTypeIdentifier</key>
       <string>org.megacoinoin.paymentrequest</string>
       <key>UTTypeDescription</key>
-      <string>FxTCoin payment request</string>
+      <string>Megacoin payment request</string>
       <key>UTTypeConformsTo</key>
       <array>
         <string>public.data</string>
