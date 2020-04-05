@@ -102,9 +102,9 @@ public:
         consensus.nGovernanceFilterElements = 20000;
 
         // FXTC TODO: BIP16Exception is valid for BTC blockchain only
-        consensus.BIP16Exception = uint256S("0x89");
+        consensus.BIP16Exception = uint256S("0x11618621285fb4f1a560b462a2f8c8eb44250aac1406d9fe2c90ffbc472e3ebb"); // Megacoin 500000
         consensus.BIP34Height = 500000; // Megacoin
-        consensus.BIP34Hash = uint256S("11618621285fb4f1a560b462a2f8c8eb44250aac1406d9fe2c90ffbc472e3ebb"); // Megacoin
+        consensus.BIP34Hash = uint256S("0x11618621285fb4f1a560b462a2f8c8eb44250aac1406d9fe2c90ffbc472e3ebb"); // Megacoin 500000
         consensus.BIP65Height = 1050065; // Megacoin
         consensus.BIP66Height = 1070066; // Megacoin
         consensus.powLimit = uint256S("0x00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"); // Megacoin: ToDo
