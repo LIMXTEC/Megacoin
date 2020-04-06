@@ -17,6 +17,7 @@
 #include <chain.h>
 #include <primitives/block.h>
 #include <uint256.h>
+#include <consensus/consensus.h>
 
 /*
 unsigned int static DarkGravityWave(const CBlockIndex* pindexLast, const CBlockHeader *pblock, const Consensus::Params& params) {

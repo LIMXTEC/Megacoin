@@ -11,6 +11,7 @@
 #include <tinyformat.h>
 #include <utilstrencodings.h>
 #include <crypto/common.h>
+#include <consensus/consensus.h>
 
 /*
 #include <crypto/lyra2z.h>
