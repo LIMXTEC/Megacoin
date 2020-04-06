@@ -60,7 +60,7 @@ uint256 CBlockHeader::GetPoWHash() const
     uint256 thash;
     // please check also pow.cpp:L414
 	//10/21/2019 @ 12:00am (UTC)
-    if(GetBlockTime() >= 1571832146) //Wednesday, 23. October 2019 12:02:26
+    if(GetBlockTime() >= HASH_FORK_TIME_1) //Wednesday, 23. October 2019 12:02:26
     {
         thash = HashX16R(BEGIN(nVersion), END(nNonce), hashPrevBlock);
     } //10/21/2019 @ 12:00am (UTC)
