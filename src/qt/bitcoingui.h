@@ -130,6 +130,7 @@ private:
     QAction *openRepairAction = nullptr;
     // Dash
     QAction *unlockWalletAction = nullptr;
+    QAction *lockWalletAction = nullptr;
     //
     QAction* aboutQtAction = nullptr;
     QAction* openRPCConsoleAction = nullptr;

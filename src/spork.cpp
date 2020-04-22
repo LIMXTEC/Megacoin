@@ -185,7 +185,7 @@ bool CSporkManager::IsSporkActive(int nSporkID)
             case SPORK_10_MASTERNODE_PAY_UPDATED_NODES:     r = SPORK_10_MASTERNODE_PAY_UPDATED_NODES_DEFAULT; break;
             case SPORK_12_RECONSIDER_BLOCKS:                r = SPORK_12_RECONSIDER_BLOCKS_DEFAULT; break;
             case SPORK_13_OLD_SUPERBLOCK_FLAG:              r = SPORK_13_OLD_SUPERBLOCK_FLAG_DEFAULT; break;
-            case SPORK_14_REQUIRE_SENTINEL_FLAG:            r = SPORK_14_REQUIRE_SENTINEL_FLAG_DEFAULT; break;
+            case SPORK_14_UNKNOW_DEFAULT:            r = SPORK_14_UNKNOW_DEFAULT_DEFAULT; break;
             // FXTC BEGIN
             case SPORK_MEGACOIN_01_HANDBRAKE_HEIGHT :           r = SPORK_MEGACOIN_01_HANDBRAKE_HEIGHT_DEFAULT; break;
             case SPORK_MEGACOIN_01_HANDBRAKE_FORCE_SHA256D:     r = SPORK_MEGACOIN_01_HANDBRAKE_FORCE_SHA256D_DEFAULT; break;
@@ -200,7 +200,7 @@ bool CSporkManager::IsSporkActive(int nSporkID)
             case SPORK_MEGACOIN_02_IGNORE_EXTRA_REWARD_VALUE:         r = SPORK_MEGACOIN_02_IGNORE_EXTRA_REWARD_VALUE_DEFAULT; break;
             case SPORK_MEGACOIN_16_MIN_PEER_PROTO_VERSION:                            r = SPORK_MEGACOIN_16_MIN_PEER_PROTO_VERSION_DEFAULT; break;
             case SPORK_MEGACOIN_17_SHOW_UPDATE_MESSAGE:                            r = SPORK_MEGACOIN_17_SHOW_UPDATE_MESSAGE_DEFAULT; break;
-            case SPORK_MEGACOIN_18_UNKNOW:                            r = SPORK_MEGACOIN_18_UNKNOW_DEFAULT; break;
+            case SPORK_MEGACOIN_18_FACTOR_ENFORCEMENT:                            r = SPORK_MEGACOIN_18_FACTOR_ENFORCEMENT_DEFAULT; break;
             case SPORK_MEGACOIN_19_UNKNOW:                            r = SPORK_MEGACOIN_19_UNKNOW_DEFAULT; break;
             case SPORK_MEGACOIN_20_UNKNOW:                            r = SPORK_MEGACOIN_20_UNKNOW_DEFAULT; break;
             case SPORK_MEGACOIN_21_UNKNOW:                            r = SPORK_MEGACOIN_21_UNKNOW_DEFAULT; break;
@@ -231,7 +231,7 @@ int64_t CSporkManager::GetSporkValue(int nSporkID)
         case SPORK_10_MASTERNODE_PAY_UPDATED_NODES:     return SPORK_10_MASTERNODE_PAY_UPDATED_NODES_DEFAULT;
         case SPORK_12_RECONSIDER_BLOCKS:                return SPORK_12_RECONSIDER_BLOCKS_DEFAULT;
         case SPORK_13_OLD_SUPERBLOCK_FLAG:              return SPORK_13_OLD_SUPERBLOCK_FLAG_DEFAULT;
-        case SPORK_14_REQUIRE_SENTINEL_FLAG:            return SPORK_14_REQUIRE_SENTINEL_FLAG_DEFAULT;
+        case SPORK_14_UNKNOW_DEFAULT:            return SPORK_14_UNKNOW_DEFAULT;
 
         case SPORK_MEGACOIN_01_HANDBRAKE_HEIGHT:            return SPORK_MEGACOIN_01_HANDBRAKE_HEIGHT_DEFAULT;
         case SPORK_MEGACOIN_01_HANDBRAKE_FORCE_SHA256D:     return SPORK_MEGACOIN_01_HANDBRAKE_FORCE_SHA256D_DEFAULT;
@@ -246,7 +246,7 @@ int64_t CSporkManager::GetSporkValue(int nSporkID)
         case SPORK_MEGACOIN_02_IGNORE_EXTRA_REWARD_VALUE:         return SPORK_MEGACOIN_02_IGNORE_EXTRA_REWARD_VALUE_DEFAULT;
         case SPORK_MEGACOIN_16_MIN_PEER_PROTO_VERSION:                            return SPORK_MEGACOIN_16_MIN_PEER_PROTO_VERSION_DEFAULT;
         case SPORK_MEGACOIN_17_SHOW_UPDATE_MESSAGE:                            return SPORK_MEGACOIN_17_SHOW_UPDATE_MESSAGE_DEFAULT;
-        case SPORK_MEGACOIN_18_UNKNOW:                            return SPORK_MEGACOIN_18_UNKNOW_DEFAULT;
+        case SPORK_MEGACOIN_18_FACTOR_ENFORCEMENT:                            return SPORK_MEGACOIN_18_FACTOR_ENFORCEMENT_DEFAULT;
         case SPORK_MEGACOIN_19_UNKNOW:                            return SPORK_MEGACOIN_19_UNKNOW_DEFAULT;        
         case SPORK_MEGACOIN_20_UNKNOW:                            return SPORK_MEGACOIN_20_UNKNOW_DEFAULT;
         case SPORK_MEGACOIN_21_UNKNOW:                            return SPORK_MEGACOIN_21_UNKNOW_DEFAULT;
@@ -269,7 +269,7 @@ int CSporkManager::GetSporkIDByName(std::string strName)
     if (strName == "SPORK_10_MASTERNODE_PAY_UPDATED_NODES")     return SPORK_10_MASTERNODE_PAY_UPDATED_NODES;
     if (strName == "SPORK_12_RECONSIDER_BLOCKS")                return SPORK_12_RECONSIDER_BLOCKS;
     if (strName == "SPORK_13_OLD_SUPERBLOCK_FLAG")              return SPORK_13_OLD_SUPERBLOCK_FLAG;
-    if (strName == "SPORK_14_REQUIRE_SENTINEL_FLAG")            return SPORK_14_REQUIRE_SENTINEL_FLAG;
+    if (strName == "SPORK_14_UNKNOW_DEFAULT")            return SPORK_14_UNKNOW_DEFAULT;
     // FXTC BEGIN
     if (strName == "SPORK_MEGACOIN_01_HANDBRAKE_HEIGHT")            return SPORK_MEGACOIN_01_HANDBRAKE_HEIGHT;
     if (strName == "SPORK_MEGACOIN_01_HANDBRAKE_FORCE_SHA256D")     return SPORK_MEGACOIN_01_HANDBRAKE_FORCE_SHA256D;
@@ -284,7 +284,7 @@ int CSporkManager::GetSporkIDByName(std::string strName)
     if (strName == "SPORK_MEGACOIN_02_IGNORE_EXTRA_REWARD_VALUE")           return SPORK_MEGACOIN_02_IGNORE_EXTRA_REWARD_VALUE;
     if (strName == "SPORK_MEGACOIN_16_MIN_PEER_PROTO_VERSION")                              return SPORK_MEGACOIN_16_MIN_PEER_PROTO_VERSION;
     if (strName == "SPORK_MEGACOIN_17_SHOW_UPDATE_MESSAGE")                              return SPORK_MEGACOIN_17_SHOW_UPDATE_MESSAGE;
-    if (strName == "SPORK_MEGACOIN_18_UNKNOW")                              return SPORK_MEGACOIN_18_UNKNOW;
+    if (strName == "SPORK_MEGACOIN_18_FACTOR_ENFORCEMENT")                              return SPORK_MEGACOIN_18_FACTOR_ENFORCEMENT;
     if (strName == "SPORK_MEGACOIN_19_UNKNOW")                              return SPORK_MEGACOIN_19_UNKNOW;
     if (strName == "SPORK_MEGACOIN_20_UNKNOW")                              return SPORK_MEGACOIN_20_UNKNOW;
     if (strName == "SPORK_MEGACOIN_21_UNKNOW")                              return SPORK_MEGACOIN_21_UNKNOW;
@@ -306,7 +306,7 @@ std::string CSporkManager::GetSporkNameByID(int nSporkID)
         case SPORK_10_MASTERNODE_PAY_UPDATED_NODES:     return "SPORK_10_MASTERNODE_PAY_UPDATED_NODES";
         case SPORK_12_RECONSIDER_BLOCKS:                return "SPORK_12_RECONSIDER_BLOCKS";
         case SPORK_13_OLD_SUPERBLOCK_FLAG:              return "SPORK_13_OLD_SUPERBLOCK_FLAG";
-        case SPORK_14_REQUIRE_SENTINEL_FLAG:            return "SPORK_14_REQUIRE_SENTINEL_FLAG";
+        case SPORK_14_UNKNOW_DEFAULT:            return "SPORK_14_UNKNOW_DEFAULT";
         // FXTC BEGIN
         case SPORK_MEGACOIN_01_HANDBRAKE_HEIGHT:            return "SPORK_MEGACOIN_01_HANDBRAKE_HEIGHT";
         case SPORK_MEGACOIN_01_HANDBRAKE_FORCE_SHA256D:     return "SPORK_MEGACOIN_01_HANDBRAKE_FORCE_SHA256D";
@@ -321,7 +321,7 @@ std::string CSporkManager::GetSporkNameByID(int nSporkID)
         case SPORK_MEGACOIN_02_IGNORE_EXTRA_REWARD_VALUE:         return "SPORK_MEGACOIN_02_IGNORE_EXTRA_REWARD_VALUE";
         case SPORK_MEGACOIN_16_MIN_PEER_PROTO_VERSION:      return "SPORK_MEGACOIN_16_MIN_PEER_PROTO_VERSION";
         case SPORK_MEGACOIN_17_SHOW_UPDATE_MESSAGE:      return "SPORK_MEGACOIN_17_SHOW_UPDATE_MESSAGE";
-        case SPORK_MEGACOIN_18_UNKNOW:      return "SPORK_MEGACOIN_18_UNKNOW";
+        case SPORK_MEGACOIN_18_FACTOR_ENFORCEMENT:      return "SPORK_MEGACOIN_18_FACTOR_ENFORCEMENT";
         case SPORK_MEGACOIN_19_UNKNOW:      return "SPORK_MEGACOIN_19_UNKNOW";
         case SPORK_MEGACOIN_20_UNKNOW:      return "SPORK_MEGACOIN_20_UNKNOW";
         case SPORK_MEGACOIN_21_UNKNOW:      return "SPORK_MEGACOIN_21_UNKNOW";

@@ -45,6 +45,7 @@ bool CMasternodeConfig::read(std::string& strErr) {
                         "#rpcpassword=mystrongpassword\n"
                         "#rpcport=7952\n"
                         "# Miscellaneous #\n"
+                        "nodebuglogfile=0\n"
                         "daemon=1\n"
                         "listen=1\n"
                         "logtimestamps=1\n"

@@ -145,10 +145,6 @@ bool IsBlockPayeeValid(const CTransactionRef txNew, int nBlockHeight, CAmount bl
     const Consensus::Params& consensusParams = Params().GetConsensus();
 
     if(nBlockHeight < consensusParams.nSuperblockStartBlock) {
-        if(mnpayments.IsTransactionValid(txNew, nBlockHeight)) {
-            LogPrint(BCLog::MNPAYMENTS, "IsBlockPayeeValid -- Valid masternode payment at height %d: %s\n", nBlockHeight, txNew->ToString());
-            return true;
-        }
 
         int nOffset = nBlockHeight % consensusParams.nBudgetPaymentsCycleBlocks;
         if(nBlockHeight >= consensusParams.nBudgetPaymentsStartBlock &&
@@ -172,7 +168,7 @@ bool IsBlockPayeeValid(const CTransactionRef txNew, int nBlockHeight, CAmount bl
                 LogPrintf("IsBlockPayeeValid -- WARNING: Masternode payment enforcement is ignored, accepting any payee\n");
                 return true;
             }
-        //}
+
 
         LogPrintf("IsBlockPayeeValid -- WARNING: Masternode payment enforcement is disabled, accepting any payee\n");
         return true;
@@ -305,9 +301,22 @@ void CMasternodePayments::FillBlockPayee(CMutableTransaction& txNew, int nBlockH
 }
 
 int CMasternodePayments::GetMinMasternodePaymentsProto() {
-    return sporkManager.IsSporkActive(SPORK_10_MASTERNODE_PAY_UPDATED_NODES)
-            ? MIN_MASTERNODE_PAYMENT_PROTO_VERSION_2
-            : MIN_MASTERNODE_PAYMENT_PROTO_VERSION_1;
+    if (DEFAULTMINPROTO < sporkManager.GetSporkValue(SPORK_MEGACOIN_18_FACTOR_ENFORCEMENT))
+    {
+        return sporkManager.GetSporkValue(SPORK_MEGACOIN_18_FACTOR_ENFORCEMENT);
+    }
+    else
+    {
+        return DEFAULTMINPROTO;
+    }
+
+int CMasternodePayments::GetFactorEnforcement() {
+
+    if (FACTOR_ENFORCEMENT > sporkManager.GetSporkValue(SPORK_22_FACTOR_ENFORCEMENT)|| sporkManager.GetSporkValue(SPORK_22_FACTOR_ENFORCEMENT) > 200)
+    {
+        return FACTOR_ENFORCEMENT;
+    }
+    return sporkManager.GetSporkValue(SPORK_22_FACTOR_ENFORCEMENT);
 }
 
 void CMasternodePayments::ProcessMessage(CNode* pfrom, const std::string& strCommand, CDataStream& vRecv, CConnman& connman)
@@ -677,14 +686,7 @@ bool CMasternodePaymentVote::IsValid(CNode* pnode, int nValidationHeight, std::s
         return false;
     }
 
-    int nMinRequiredProtocol;
-    if(nBlockHeight >= nValidationHeight) {
-        // new votes must comply SPORK_10_MASTERNODE_PAY_UPDATED_NODES rules
-        nMinRequiredProtocol = mnpayments.GetMinMasternodePaymentsProto();
-    } else {
-        // allow non-updated masternodes for old blocks
-        nMinRequiredProtocol = MIN_MASTERNODE_PAYMENT_PROTO_VERSION_1;
-    }
+    int nMinRequiredProtocol = mnpayments.GetMinMasternodePaymentsProto();
 
     if(mnInfo.nProtocolVersion < nMinRequiredProtocol) {
         strError = strprintf("Masternode protocol is too old: nProtocolVersion=%d, nMinRequiredProtocol=%d", mnInfo.nProtocolVersion, nMinRequiredProtocol);
@@ -704,13 +706,14 @@ bool CMasternodePaymentVote::IsValid(CNode* pnode, int nValidationHeight, std::s
     }
 
     if(nRank > MNPAYMENTS_SIGNATURES_TOTAL) {
+        int vCount = mnpayments.GetFactorEnforcement();
         // It's common to have masternodes mistakenly think they are in the top 10
         // We don't want to print all of these messages in normal mode, debug mode should print though
         strError = strprintf("Masternode is not in the top %d (%d)", MNPAYMENTS_SIGNATURES_TOTAL, nRank);
         // Only ban for new mnw which is out of bounds, for old mnw MN list itself might be way too much off
-        if(nRank > MNPAYMENTS_SIGNATURES_TOTAL*2 && nBlockHeight > nValidationHeight) {
+        if(nRank > MNPAYMENTS_SIGNATURES_TOTAL* vCount && nBlockHeight > nValidationHeight) {
             LOCK(cs_main);
-            strError = strprintf("Masternode is not in the top %d (%d)", MNPAYMENTS_SIGNATURES_TOTAL*2, nRank);
+            strError = strprintf("Masternode is not in the top %d (%d)", MNPAYMENTS_SIGNATURES_TOTAL* vCount, nRank);
             LogPrintf("CMasternodePaymentVote::IsValid -- Error: %s\n", strError);
             Misbehaving(pnode->GetId(), 20);
         }
@@ -876,8 +879,8 @@ bool CMasternodePaymentVote::CheckSignature(const CPubKey& pubKeyMasternode, int
         // and we have no idea about the old one.
         if(masternodeSync.IsMasternodeListSynced() && nBlockHeight > nValidationHeight) {
             nDos = 20;
+            return error("CMasternodePaymentVote::CheckSignature -- Got bad Masternode payment signature, masternode=%s, error: %s", vinMasternode.prevout.ToStringShort().c_str(), strError);
         }
-        return error("CMasternodePaymentVote::CheckSignature -- Got bad Masternode payment signature, masternode=%s, error: %s", vinMasternode.prevout.ToStringShort().c_str(), strError);
     }
 
     return true;

@@ -3582,7 +3582,7 @@ static bool ContextualCheckBlock(const CBlock& block, CValidationState& state, c
     //   {0xaa, 0x21, 0xa9, 0xed}, and the following 32 bytes are SHA256^2(witness root, witness reserved value). In case there are
     //   multiple, the last one is used.
     bool fHaveWitness = false;
-    if (VersionBitsState(pindexPrev, consensusParams, Consensus::DEPLOYMENT_SEGWIT, versionbitscache) == ThresholdState::ACTIVE) {
+    //if (VersionBitsState(pindexPrev, consensusParams, Consensus::DEPLOYMENT_SEGWIT, versionbitscache) == ThresholdState::ACTIVE) {
         int commitpos = GetWitnessCommitmentIndex(block);
         if (commitpos != -1) {
             bool malleated = false;
@@ -3601,7 +3601,7 @@ static bool ContextualCheckBlock(const CBlock& block, CValidationState& state, c
                 fHaveWitness = true;
             }
         }
-    }
+    //}
 
     // No witness data is allowed in blocks that don't commit to witness data, as this would otherwise leave room for spam
     if(nHeight > 25000) {
@@ -3656,10 +3656,8 @@ bool CChainState::AcceptBlockHeader(const CBlockHeader& block, CValidationState&
         pindexPrev = (*mi).second;
         if (pindexPrev->nStatus & BLOCK_FAILED_MASK)
             return state.DoS(100, error("%s: prev block invalid", __func__), REJECT_INVALID, "bad-prevblk");
-        // FXTC BEGIN
-        if (fCheckpointsEnabled && pindexPrev->nHeight < chainparams.GetConsensus().nlastValidPowHashHeight &&  !Checkpoints::IsExpectedCheckpoint(chainparams.Checkpoints(), pindexPrev->nHeight + 1, block.GetHash()))
+        if (fCheckpointsEnabled &&  !Checkpoints::IsExpectedCheckpoint(chainparams.Checkpoints(), pindexPrev->nHeight + 1, block.GetHash()))
             return state.DoS(100, error("%s: Checkpoints::IsExpectedCheckpoint(): invalid checkpoint at height %d", __func__, pindexPrev->nHeight + 1), REJECT_CHECKPOINT, "bad-chackpoint");
-        // FXTC END
         if (!ContextualCheckBlockHeader(block, state, chainparams, pindexPrev, GetAdjustedTime()))
             return error("%s: Consensus::ContextualCheckBlockHeader: %s, %s", __func__, hash.ToString(), FormatStateMessage(state));
 

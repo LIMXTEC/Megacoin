@@ -206,10 +206,6 @@ public:
                 { 1001795, uint256S("0x0555327b8f542a4b1fb3de8c4d988ea46e687b9bd8ce406e1b2aea49fe959391")},
             }
         };
-        // FXTC BEGIN
-        consensus.nlastValidPowHashHeight = 384650;
-        // FXTC
-
 
         chainTxData = ChainTxData{
             // Megacoin: data as of block 0x8da1c7f79018fac8acac69a57b2f8b5d2743af67976a4525fdedc8c85a3a1418 (height 410476).
@@ -353,9 +349,6 @@ public:
                 {2, uint256S("0x222db35707d9af172ea5c23582338874d1f2956b1850f857c50a3e6f2c6f313")},
             }
         };
-        // FXTC BEGIN
-        consensus.nlastValidPowHashHeight = 5;
-        // FXTC
 
 
         chainTxData = ChainTxData{
@@ -472,9 +465,6 @@ public:
                 {999999, uint256S("0x0000000069e244f73d78e8fd29ba2fd2ed618bd6fa2ee92559f542fdb26e7c1d")},
             }
         };
-        // FXTC BEGIN
-        consensus.nlastValidPowHashHeight = 0;
-        // FXTC
 
 
         chainTxData = ChainTxData{
