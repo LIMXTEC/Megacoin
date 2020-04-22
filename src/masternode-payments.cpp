@@ -301,22 +301,23 @@ void CMasternodePayments::FillBlockPayee(CMutableTransaction& txNew, int nBlockH
 }
 
 int CMasternodePayments::GetMinMasternodePaymentsProto() {
-    if (DEFAULTMINPROTO < sporkManager.GetSporkValue(SPORK_MEGACOIN_18_FACTOR_ENFORCEMENT))
+    if (DEFAULTMINPROTO < sporkManager.GetSporkValue(SPORK_MEGACOIN_16_MIN_PEER_PROTO_VERSION))
     {
-        return sporkManager.GetSporkValue(SPORK_MEGACOIN_18_FACTOR_ENFORCEMENT);
+        return sporkManager.GetSporkValue(SPORK_MEGACOIN_16_MIN_PEER_PROTO_VERSION);
     }
     else
     {
         return DEFAULTMINPROTO;
     }
+}
 
 int CMasternodePayments::GetFactorEnforcement() {
 
-    if (FACTOR_ENFORCEMENT > sporkManager.GetSporkValue(SPORK_22_FACTOR_ENFORCEMENT)|| sporkManager.GetSporkValue(SPORK_22_FACTOR_ENFORCEMENT) > 200)
+    if (FACTOR_ENFORCEMENT > sporkManager.GetSporkValue(SPORK_MEGACOIN_18_FACTOR_ENFORCEMENT)|| sporkManager.GetSporkValue(SPORK_MEGACOIN_18_FACTOR_ENFORCEMENT) > 200)
     {
         return FACTOR_ENFORCEMENT;
     }
-    return sporkManager.GetSporkValue(SPORK_22_FACTOR_ENFORCEMENT);
+    return sporkManager.GetSporkValue(SPORK_MEGACOIN_18_FACTOR_ENFORCEMENT);
 }
 
 void CMasternodePayments::ProcessMessage(CNode* pfrom, const std::string& strCommand, CDataStream& vRecv, CConnman& connman)
