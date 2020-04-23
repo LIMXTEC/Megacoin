@@ -208,17 +208,17 @@ BitcoinGUI::BitcoinGUI(interfaces::Node& node, const PlatformStyle *_platformSty
     // Megacoin
     connect(openWebsite1, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot1()));
     connect(openWebsite2, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot2()));
-    connect(openWebsite3, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot3()));
-    connect(openWebsite4, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot4()));
+    //connect(openWebsite3, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot3()));
+    //connect(openWebsite4, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot4()));
     connect(openWebsite5, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot5()));
     connect(openWebsite6, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot6()));
     connect(openWebsite7, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot7()));
     connect(openWebsite8, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks_slot8()));
 
     connect(Exchangesite1, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks2_slot1()));
-    connect(Exchangesite2, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks2_slot2()));
-    connect(Exchangesite3, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks2_slot3()));
-    connect(Exchangesite4, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks2_slot4()));
+    //connect(Exchangesite2, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks2_slot2()));
+    //connect(Exchangesite3, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks2_slot3()));
+    //connect(Exchangesite4, SIGNAL(triggered()), rpcConsole, SLOT(hyperlinks2_slot4()));
 
     modalOverlay = new ModalOverlay(this->centralWidget());
 #ifdef ENABLE_WALLET
@@ -455,17 +455,17 @@ void BitcoinGUI::createActions()
     // Megacoin
     openWebsite1 = new QAction(QIcon(":/icons/megacoin"), tr("&Megacoin.eu"), this);
     openWebsite2 = new QAction(QIcon(":/icons/telegram"), tr("&Telegram"), this);
-    openWebsite3 = new QAction(QIcon(":/icons/telegram"), tr("&Twitter"), this);
-    openWebsite4 = new QAction(QIcon(":/icons/twitter"), tr("&Twitter"), this);
+    //openWebsite3 = new QAction(QIcon(":/icons/telegram"), tr("&Twitter"), this);
+    //openWebsite4 = new QAction(QIcon(":/icons/twitter"), tr("&Twitter"), this);
     openWebsite5 = new QAction(QIcon(":/icons/discord"), tr("&Discord"), this);
     openWebsite6 = new QAction(QIcon(":/icons/bitcointalk"), tr("&Bitcointalk"), this);
     openWebsite7 = new QAction(QIcon(":/icons/cryptoID"), tr("&CryptoID"), this);
     openWebsite8 = new QAction(QIcon(":/icons/github"), tr("&Github"), this);
 
     Exchangesite1 = new QAction(QIcon(":/icons/crex24"), tr("&Crex24"), this);
-    Exchangesite2 = new QAction(QIcon(":/icons/cryptopia"), tr("&Cryptopia"), this);
-    Exchangesite3 = new QAction(QIcon(":/icons/coinexchange"), tr("&CoinExchange"), this);
-    Exchangesite4 = new QAction(QIcon(":/icons/novaexchange"), tr("&Novaexchange"), this);
+    //Exchangesite2 = new QAction(QIcon(":/icons/cryptopia"), tr("&Cryptopia"), this);
+    //Exchangesite3 = new QAction(QIcon(":/icons/coinexchange"), tr("&CoinExchange"), this);
+    //Exchangesite4 = new QAction(QIcon(":/icons/novaexchange"), tr("&Novaexchange"), this);
 
 #ifdef ENABLE_WALLET
     if(walletFrame)
@@ -561,8 +561,8 @@ void BitcoinGUI::createMenuBar()
         hyperlinks->addAction(openWebsite1);
         hyperlinks->addSeparator();
         hyperlinks->addAction(openWebsite2);
-        hyperlinks->addAction(openWebsite3);
-        // hyperlinks->addAction(openWebsite4);
+        //hyperlinks->addAction(openWebsite3);
+        //hyperlinks->addAction(openWebsite4);
         hyperlinks->addAction(openWebsite5);
         hyperlinks->addAction(openWebsite6);
         hyperlinks->addAction(openWebsite7);
@@ -572,9 +572,9 @@ void BitcoinGUI::createMenuBar()
      if (walletFrame) {
         QMenu* hyperlinks2 = appMenuBar->addMenu(tr("&Exchanges"));
         hyperlinks2->addAction(Exchangesite1);
-        hyperlinks2->addAction(Exchangesite2);
-        hyperlinks2->addAction(Exchangesite3);
-        hyperlinks2->addAction(Exchangesite4);
+        //hyperlinks2->addAction(Exchangesite2);
+        //hyperlinks2->addAction(Exchangesite3);
+        //hyperlinks2->addAction(Exchangesite4);
     }
 
     QMenu *help = appMenuBar->addMenu(tr("&Help"));

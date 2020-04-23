@@ -415,7 +415,7 @@ bool openBitcoinConf()
 }
 
 // Megacoin resources
-void hyperlinks_slot1(){QString link1 = "https://megacoin.eu/"; QDesktopServices::openUrl(QUrl(link1, QUrl::TolerantMode));}
+void hyperlinks_slot1(){QString link1 = "https://megacoin-mec.cc/"; QDesktopServices::openUrl(QUrl(link1, QUrl::TolerantMode));}
 void hyperlinks_slot2(){QString link1 = "https://t.me/Megacoin1"; QDesktopServices::openUrl(QUrl(link1, QUrl::TolerantMode));}
 void hyperlinks_slot3(){QString link1 = "https://t.me/Megacoin_MEC"; QDesktopServices::openUrl(QUrl(link1, QUrl::TolerantMode));}
 void hyperlinks_slot4(){QString link1 = "https://twitter.com/megacoin3"; QDesktopServices::openUrl(QUrl(link1, QUrl::TolerantMode));}

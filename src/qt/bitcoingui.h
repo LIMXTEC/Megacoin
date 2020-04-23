@@ -144,17 +144,17 @@ private:
     // Megacoin
     QAction* openWebsite1 = nullptr;
     QAction* openWebsite2 = nullptr;
-    QAction* openWebsite3 = nullptr;
-    QAction* openWebsite4 = nullptr;
+    //QAction* openWebsite3 = nullptr;
+    //QAction* openWebsite4 = nullptr;
     QAction* openWebsite5 = nullptr;
     QAction* openWebsite6 = nullptr;
     QAction* openWebsite7 = nullptr;
     QAction* openWebsite8 = nullptr;
 
     QAction* Exchangesite1 = nullptr;
-    QAction* Exchangesite2 = nullptr;
-    QAction* Exchangesite3 = nullptr;
-    QAction* Exchangesite4 = nullptr;
+    //QAction* Exchangesite2 = nullptr;
+    //QAction* Exchangesite3 = nullptr;
+    //QAction* Exchangesite4 = nullptr;
 
     QAction* m_wallet_selector_label_action = nullptr;
     QAction* m_wallet_selector_action = nullptr;
