@@ -141,7 +141,7 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 1746057600;   // 05/01/2025 @ 12:00am (UTC)
 
         // The best chain should have at least this much work.
-        consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000000000c626cbb40320000"); // Megacoin
+        consensus.nMinimumChainWork = uint256S("0x00ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"); // Megacoin
 
         // By default assume that the signatures in ancestors of this block are valid.
         consensus.defaultAssumeValid = uint256S("0xc69f5106c4f3ba92cfdcd13d20135694de444087e975ba7ea89e3532708bfccf"); // Megacoin
@@ -254,7 +254,7 @@ public:
         consensus.nGovernanceFilterElements = 500;
 
         // FXTC TODO: BIP16Exception is valid for BTC blockchain only
-        consensus.BIP16Exception = uint256S("0x89");
+        consensus.BIP16Exception = uint256S("0x5b77f70e30731bbf8c4b6c44cf62170cc559b6015aa9b7988d8d44a30c4a4614");
         consensus.BIP34Height = 0; // genesis
         consensus.BIP34Hash = uint256S("0x5b77f70e30731bbf8c4b6c44cf62170cc559b6015aa9b7988d8d44a30c4a4614"); // Megacoin
         consensus.BIP65Height = 0; // genesis
