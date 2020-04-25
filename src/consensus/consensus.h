@@ -19,7 +19,7 @@ static const int64_t MAX_BLOCK_SIGOPS_COST = 500000; // Megacoin
 /** Coinbase transaction outputs can only be spent after this number of new blocks (network rule) */
 static const int COINBASE_MATURITY = 100;
 static const int COINBASE_MATURITY_2 = 1152; // Two days
-
+/**Algoswitch Megacoin */
 static const unsigned int HASH_FORK_TIME_1 = 1687409200;
 
 static const int WITNESS_SCALE_FACTOR = 4;
