@@ -391,7 +391,6 @@ crypto_libbitcoin_crypto_base_a_SOURCES += \
   crypto/bmw.c \
   crypto/cubehash.c \
   crypto/hashblock.h \
-  crypto/hashblock2.h \
   crypto/echo.c \
   crypto/groestl.c \
   crypto/jh.c \
@@ -437,7 +436,8 @@ crypto_libbitcoin_crypto_base_a_SOURCES += \
   crypto/tiger.cpp \
   crypto/sph_tiger.h \
   crypto/x11.h \
-  crypto/x16r.h
+  crypto/x16r.h \
+  crypto/hashblock2.h \
 
 
 if USE_ASM

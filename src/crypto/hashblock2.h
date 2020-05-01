@@ -27,7 +27,7 @@
 #include <crypto/sph_whirlpool.h>
 extern "C"{
 #include <crypto/sph_sha2.h>
-#include <sph_tiger.h>
+#include <crypto/sph_tiger.h>
 }
 
 inline int GetHashSelection(const uint256 PrevBlockHash, int index) {
