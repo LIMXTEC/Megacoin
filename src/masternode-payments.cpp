@@ -159,6 +159,11 @@ bool IsBlockPayeeValid(const CTransactionRef txNew, int nBlockHeight, CAmount bl
             // TODO: reprocess blocks to make sure they are legit?
             return true;
         }
+        
+        if(mnpayments.IsTransactionValid(txNew, nBlockHeight)) {
+        LogPrint(BCLog::MNPAYMENTS, "IsBlockPayeeValid -- Valid masternode payment at height %d: %s\n", nBlockHeight, txNew->ToString());
+        return true;
+        }
 
         if(sporkManager.IsSporkActive(SPORK_8_MASTERNODE_PAYMENT_ENFORCEMENT)) {
            // if (!sporkManager.IsSporkActive(SPORK_MEGACOIN_99_IGNORE_MASTERNODE_REWARD_VALUE) && !sporkManager.IsSporkActive(SPORK_MEGACOIN_99_IGNORE_MASTERNODE_REWARD_PAYEE)) {
