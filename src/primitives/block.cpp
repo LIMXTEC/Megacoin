@@ -18,7 +18,7 @@
 #include <crypto/nist5.h>
 #include <crypto/x11.h>
 */
-#include <crypto/x16r.h>
+//#include <crypto/x16r.h>
 
 
 // Megacoin
@@ -64,7 +64,8 @@ uint256 CBlockHeader::GetPoWHash() const
 	//10/21/2019 @ 12:00am (UTC)
     if(GetBlockTime() >= HASH_FORK_TIME_1) //Wednesday, 23. October 2019 12:02:26
     {
-        thash = HashX16R(BEGIN(nVersion), END(nNonce), hashPrevBlock);
+        //thash = HashX16R(BEGIN(nVersion), END(nNonce), hashPrevBlock);
+        scrypt_1024_1_1_256(BEGIN(nVersion), BEGIN(thash));
     } //10/21/2019 @ 12:00am (UTC)
     else 
     {
