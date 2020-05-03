@@ -5,8 +5,8 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef MEGACOIN_CRYPTO_HASHBLOCK2_H
-#define MEGACOIN_CRYPTO_HASHBLOCK2_H
+#ifndef MEGACOIN_CRYPTO_MEGA_MEC_H
+#define MEGACOIN_CRYPTO_MEGA_MEC_H
 
 #include <uint256.h>
 
@@ -185,4 +185,4 @@ inline uint256 HashX16RV2(const T1 pbegin, const T1 pend, const uint256 PrevBloc
     return hash[15].trim256();
 }
 
-#endif // MEGACOIN_CRYPTO_HASHBLOCK2_H
+#endif // MEGACOIN_CRYPTO_MEGA_MEC_H

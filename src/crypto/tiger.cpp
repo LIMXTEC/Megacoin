@@ -654,7 +654,7 @@ sph_tiger_init(void *cc)
 	sc->val[2] = SPH_C64(0xF096A5B4C3B2E187);
 	sc->count = 0;
 }
-#include <crypto/md_helper.c>
+//#include <crypto/md_helper.c>
 #define RFUN   tiger_round
 #define HASH   tiger
 #define LE64   1
