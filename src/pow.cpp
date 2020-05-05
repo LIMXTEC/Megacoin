@@ -406,6 +406,10 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
     // Megacoin
     assert(pindexLast != nullptr);
     unsigned int nProofOfWorkLimit = UintToArith256(params.powLimit).GetCompact();
+    if (params.fPowNoRetargeting && params.fPowAllowMinDifficultyBlocks )
+    {
+        return nProofOfWorkLimit;
+    }
 
     int fork1 = 1000000;
     int fork2 = 21000;

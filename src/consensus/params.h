@@ -116,7 +116,7 @@ struct Params {
     int64_t DifficultyAdjustmentIntervalV2() const { return nPowTargetTimespanV2 / nPowTargetSpacing; } // Megacoin
     uint256 nMinimumChainWork;
     uint256 defaultAssumeValid;
-
+    int nlastValidPowHashHeight; // BTX for faster loading
 };
 } // namespace Consensus
 
