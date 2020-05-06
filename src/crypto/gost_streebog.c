@@ -5,7 +5,7 @@
 #include <memory.h>
 #include <math.h>
 
-#include "gost_streebog.h"
+#include <crypto/gost_streebog.h>
 
 #ifdef __cplusplus
 extern "C"{

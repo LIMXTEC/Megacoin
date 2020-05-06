@@ -408,6 +408,8 @@ crypto_libbitcoin_crypto_base_a_SOURCES += \
   crypto/shavite.c \
   crypto/simd.c \
   crypto/skein.c \
+  crypto/sph_haval.h \
+  crypto/haval.c \
   crypto/sph_blake.h \
   crypto/sph_bmw.h \
   crypto/sph_cubehash.h \
