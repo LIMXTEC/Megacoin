@@ -4,6 +4,7 @@
 // Copyright (c) 2019 Limxtec developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+// written by Limxdev 2020 https://bitcointalk.org/index.php?action=profile;u=389271
 
 #ifndef MEGACOIN_CRYPTO_MEGA_MEC_H
 #define MEGACOIN_CRYPTO_MEGA_MEC_H
