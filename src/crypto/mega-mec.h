@@ -35,7 +35,7 @@ extern "C" {
 }
 #include <crypto/lyra2.h>
 
-#define HASH_FUNC_BASE_TIMESTAMP 1492973331 // BitCore: Genesis Timestamp
+#define HASH_FUNC_BASE_TIMESTAMP 1370079299 // Megacoin Block 1
 #define HASH_FUNC_COUNT_1 8
 #define HASH_FUNC_COUNT_2 8
 #define HASH_FUNC_COUNT_3 7
@@ -67,31 +67,27 @@ inline uint256 Mega_Mec(const T1 pbegin, const T1 pend,uint32_t timestamp)
     sph_sha512_context       ctx_sha512;
     sph_gost512_context      ctx_gost;
     sph_haval256_5_context    ctx_haval;
-   // sph_tiger_context         ctx_tiger;
+    //sph_tiger_context         ctx_tiger;
 
     static unsigned char pblank[1];
     arith_uint512 hash[23];
     uint32_t permutation_1[HASH_FUNC_COUNT_1];
 	uint32_t permutation_2[HASH_FUNC_COUNT_2 + HASH_FUNC_COUNT_1];
 	uint32_t permutation_3[HASH_FUNC_COUNT_3 + HASH_FUNC_COUNT_2 + HASH_FUNC_COUNT_1];
-
-
-    			//Init1
+    
+    	    //Init1
 			for (uint32_t i = 1; i < HASH_FUNC_COUNT_1; i++) {
 				permutation_1[i] = i;
-				//std::cout << "Init1: " << permutation_1[i] << " \n";
 			}
 
 			//Init2
 			for (uint32_t i = HASH_FUNC_COUNT_1; i < HASH_FUNC_COUNT_2 + HASH_FUNC_COUNT_1; i++) {
 				permutation_2[i] = i;
-				//std::cout << "Init2: " << permutation_2[i] << " \n";
 			}
 
 			//Init3
 			for (uint32_t i = HASH_FUNC_COUNT_1 + HASH_FUNC_COUNT_2; i < HASH_FUNC_COUNT_3 + HASH_FUNC_COUNT_2 + HASH_FUNC_COUNT_1; i++) {
 				permutation_3[i] = i;
-				//std::cout << "Init3: " << permutation_3[i] << " \n";
 			}
 
 			uint32_t steps_1 = (timestamp - HASH_FUNC_BASE_TIMESTAMP) % HASH_FUNC_COUNT_PERMUTATIONS_7;
@@ -271,7 +267,6 @@ inline uint256 Mega_Mec(const T1 pbegin, const T1 pend,uint32_t timestamp)
 					break;
 				}
 			}
-
 			for (int i = HASH_FUNC_COUNT_2; i < HASH_FUNC_COUNT_1 + HASH_FUNC_COUNT_2 + HASH_FUNC_COUNT_3; i++) {
 				toHash = static_cast<const void*>(&hash[i]);;
                 switch (permutation_3[i]) {
