@@ -3,7 +3,7 @@ Megacoin Core integration/staging tree
 
 [![Build Status](https://travis-ci.org/megacoin-project/megacoin.svg?branch=master)](https://travis-ci.org/megacoin-project/megacoin)
 
-https://megacoin.eu
+https://megacoin-mec.cc
 
 What is Megacoin?
 ----------------
@@ -15,7 +15,7 @@ out collectively by the network. Megacoin Core is the name of open source
 software which enables the use of this currency.
 
 For more information, as well as an immediately useable, binary version of
-the Megacoin Core software, see [https://www.megacoin.eu](https://www.megacoin.eu).
+the Megacoin Core software, see [https://megacoin-mec.cc](https://megacoin-mec.cc).
 
 License
 -------
