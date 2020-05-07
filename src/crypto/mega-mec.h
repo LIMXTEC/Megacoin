@@ -35,7 +35,7 @@ extern "C" {
 }
 #include <crypto/lyra2.h>
 
-#define HASH_FUNC_BASE_TIMESTAMP 1370079299 // Megacoin Block 1
+#define HASH_FUNC_BASE_TIMESTAMP_1 1370079299 // Megacoin Block 1
 #define HASH_FUNC_COUNT_1 8
 #define HASH_FUNC_COUNT_2 8
 #define HASH_FUNC_COUNT_3 7
@@ -90,17 +90,17 @@ inline uint256 Mega_Mec(const T1 pbegin, const T1 pend,uint32_t timestamp)
 				permutation_3[i] = i;
 			}
 
-			uint32_t steps_1 = (timestamp - HASH_FUNC_BASE_TIMESTAMP) % HASH_FUNC_COUNT_PERMUTATIONS_7;
+			uint32_t steps_1 = (timestamp - HASH_FUNC_BASE_TIMESTAMP_1) % HASH_FUNC_COUNT_PERMUTATIONS_7;
 			for (uint32_t i = 0; i < steps_1; i++) {
 				std::next_permutation(permutation_1, permutation_1 + HASH_FUNC_COUNT_1);
 			}
 
-			uint32_t steps_2 = (timestamp+ HASH_FUNC_VAR_1 - HASH_FUNC_BASE_TIMESTAMP) % HASH_FUNC_COUNT_PERMUTATIONS;
+			uint32_t steps_2 = (timestamp+ HASH_FUNC_VAR_1 - HASH_FUNC_BASE_TIMESTAMP_1) % HASH_FUNC_COUNT_PERMUTATIONS;
 			for (uint32_t i = 0; i < steps_2; i++) {
 				std::next_permutation(permutation_2 + HASH_FUNC_COUNT_1, permutation_2 + HASH_FUNC_COUNT_1 + HASH_FUNC_COUNT_2);
 			}
 
-			uint32_t steps_3 = (timestamp+ HASH_FUNC_VAR_2 - HASH_FUNC_BASE_TIMESTAMP) % HASH_FUNC_COUNT_PERMUTATIONS_7;
+			uint32_t steps_3 = (timestamp+ HASH_FUNC_VAR_2 - HASH_FUNC_BASE_TIMESTAMP_1) % HASH_FUNC_COUNT_PERMUTATIONS_7;
 			for (uint32_t i = 0; i < steps_3; i++) {
 				std::next_permutation(permutation_3 + HASH_FUNC_COUNT_1 + HASH_FUNC_COUNT_2, permutation_3 + HASH_FUNC_COUNT_1 + HASH_FUNC_COUNT_2 + HASH_FUNC_COUNT_3);
 			}
