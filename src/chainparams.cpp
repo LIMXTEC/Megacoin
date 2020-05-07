@@ -90,12 +90,12 @@ public:
 
         consensus.nInstantSendKeepLock = 24;
 // We need a seperate Update for that!! Limxdev 2019
-        consensus.nBudgetPaymentsStartBlock = 99999999; // Fork 0.17
+        consensus.nBudgetPaymentsStartBlock = 1260000; // Fork 0.17
         consensus.nBudgetPaymentsCycleBlocks = 8064; // two weeks 
         consensus.nBudgetPaymentsWindowBlocks = 100;
         consensus.nBudgetProposalEstablishingTime = 86400; // 1 day
 // We need a seperate Update for that!! Limxdev 2019
-        consensus.nSuperblockStartBlock = 99999999; // Fork 0.17
+        consensus.nSuperblockStartBlock = 1260000; // Fork 0.17
         consensus.nSuperblockCycle = 10958; // weekly
 
         consensus.nGovernanceMinQuorum = 10;
@@ -141,7 +141,12 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 1746057600;   // 05/01/2025 @ 12:00am (UTC)
 
         // The best chain should have at least this much work.
-        consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000000000000000000000011"); // Megacoin
+        consensus.nMinimumChainWork = uint256S("0x00000000000000000000000000000000000000000000000005dfab1790ba9fdd"); // Megacoin
+
+        //0x0000000000000000000000000000000000000000000000000b6cc0f906e29fdd
+        //823245007696863197
+        //0x00000000000000000000000000000000000000000000000005dfab1790ba9fdd
+        //423245007696863197
 
         // By default assume that the signatures in ancestors of this block are valid.
         consensus.defaultAssumeValid = uint256S("0xc69f5106c4f3ba92cfdcd13d20135694de444087e975ba7ea89e3532708bfccf"); // Megacoin
@@ -205,11 +210,12 @@ public:
                 { 490000,  uint256S("0x957ffdc0ead5ac30a6bb914fbf68f285a32dcf091b47b621827e3b58e8e9bf66")},
                 { 974448,  uint256S("0xc69f5106c4f3ba92cfdcd13d20135694de444087e975ba7ea89e3532708bfccf")},
                 { 1001795, uint256S("0x0555327b8f542a4b1fb3de8c4d988ea46e687b9bd8ce406e1b2aea49fe959391")},
+                { 1253244, uint256S("0x058403d520ee00f1f2651eddb1e9a105145481cdfdc9a1b4eb0f8bd8ba68fa9f")},
             }
         };
 
-        // BTX for faster loading
-        consensus.nlastValidPowHashHeight = 1001795;
+        // MEC for faster loading
+        consensus.nlastValidPowHashHeight = 1253244;
         chainTxData = ChainTxData{
             // Megacoin: data as of block 0x8da1c7f79018fac8acac69a57b2f8b5d2743af67976a4525fdedc8c85a3a1418 (height 410476).
             1521658394, // * UNIX timestamp of last known number of transactions

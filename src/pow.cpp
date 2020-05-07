@@ -423,7 +423,7 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
             {
         //consensus.nPowTargetSpacing = 2.5 * 60; // Megacoin	
         //This should be one hour then is this function possible
-    LogPrintf("Megacoin Hashalgoupdate HashX16R \n");
+    LogPrintf("Megacoin Hashalgoupdate MEGA MEC!!! \n");
     return nProofOfWorkLimit;
             }
     }
