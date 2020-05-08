@@ -405,6 +405,8 @@ RES_IMAGES = \
   qt/res/images/megacoin_logo_horizontal.png \
   qt/res/images/megacoin_main_hgB.png
 
+RES_CSS = qt/res/css/megacoin_main.css
+
 RES_MOVIES = $(wildcard $(srcdir)/qt/res/movies/spinner-*.png)
 
 BITCOIN_RC = qt/res/bitcoin-qt-res.rc
