@@ -9,7 +9,6 @@ cache:
   - $HOME/.ccache
 git:
   depth: false  # full clone for git subtree check, this works around issue #12388
-
 stages:
   - lint
   - test
