@@ -239,7 +239,7 @@ bool Consensus::CheckTxInputs(const CTransaction& tx, CValidationState& state, c
             }
         else
             {
-                if (coin.IsCoinBase() && nSpendHeight - coin.nHeight < (!sporkManager.IsSporkActive(SPORK_MEGACOIN_15_COINBASE_MATURITY_STAGE_2)? COINBASE_MATURITY : COINBASE_MATURITY_2 )) 
+                if (coin.IsCoinBase() && nSpendHeight - coin.nHeight < COINBASE_MATURITY_2 ) 
                     {
                     return state.Invalid(false,
                         REJECT_INVALID, "bad-txns-premature-spend-of-coinbase",

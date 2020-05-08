@@ -1,5 +1,4 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
-// Copyright (c) 2009-2018 The Bitcoin Core developers
 // Copyright (c) 2019 Megacoin developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
@@ -291,27 +290,27 @@ arith_uint256 UintToArith256(const uint256 &);
 
 // Megacoin
 /** 512-bit unsigned integer */
-class arith_uint512 
+class arith_uint512
 {
 protected:
-    enum { WIDTH = 512 / 32 };
-    uint32_t pn[WIDTH];
+	enum { WIDTH = 512 / 32 };
+	uint32_t pn[WIDTH];
 
 public:
-    arith_uint512()
-    {
-        for (int i = 0; i < WIDTH; i++)
-            pn[i] = 0;
-    }
+	arith_uint512()
+	{
+		for (int i = 0; i < WIDTH; i++)
+			pn[i] = 0;
+	}
 
-    arith_uint256 trim256() const
-    {
-        arith_uint256 ret;
-        for (unsigned int i = 0; i < arith_uint256::WIDTH; i++) {
-            ret.pn[i] = pn[i];
-        }
-        return ret;
-    }
+	arith_uint256 trim256() const
+	{
+		arith_uint256 ret;
+		for (unsigned int i = 0; i < arith_uint256::WIDTH; i++) {
+			ret.pn[i] = pn[i];
+		}
+		return ret;
+	}
 };
 
 #endif // MEGACOIN_ARITH_UINT256_H
