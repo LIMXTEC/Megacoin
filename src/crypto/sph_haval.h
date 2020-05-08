@@ -58,15 +58,15 @@
  * @author   Thomas Pornin <thomas.pornin@cryptolog.com>
  */
 
-#ifndef SPH_HAVAL_H__
-#define SPH_HAVAL_H__
+#ifndef MEGACOIN_CRYPTO_SPH_HAVAL_H
+#define MEGACOIN_CRYPTO_SPH_HAVAL_H
 
 #ifdef __cplusplus
 extern "C"{
 #endif
 
 #include <stddef.h>
-#include "sph_types.h"
+#include <crypto/sph_types.h>
 
 /**
  * Output size (in bits) for HAVAL-128/3.
@@ -973,4 +973,4 @@ void sph_haval_5_comp(const sph_u32 msg[32], sph_u32 val[8]);
 #ifdef __cplusplus
 }
 #endif
-#endif
+#endif // MEGACOIN_CRYPTO_SPH_HAVAL_H

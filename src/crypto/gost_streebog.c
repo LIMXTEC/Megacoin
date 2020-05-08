@@ -1,5 +1,6 @@
 /* GOST-R Streebog hash function for sib algo SibCoin */
-
+#ifndef MEGACOIN_CRYPTO_GOST_STREEBOG_H
+#define MEGACOIN_CRYPTO_GOST_STREEBOG_H
 #include <stdio.h>
 #include <stdlib.h>
 #include <memory.h>
@@ -1020,4 +1021,4 @@ void sph_gost512_addbits_and_close(void *cc, unsigned ub, unsigned n, void *dst)
 
 #ifdef __cplusplus
 }
-#endif
+#endif // MEGACOIN_CRYPTO_GOST_STREEBOG_H
