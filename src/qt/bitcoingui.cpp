@@ -453,7 +453,7 @@ void BitcoinGUI::createActions()
     connect(quitAction, SIGNAL(triggered()), rpcConsole, SLOT(hide()));
 
     // Megacoin
-    openWebsite1 = new QAction(QIcon(":/icons/megacoin"), tr("&Megacoin.eu"), this);
+    openWebsite1 = new QAction(QIcon(":/icons/megacoin"), tr("&Megacoin-mec.cc"), this);
     openWebsite2 = new QAction(QIcon(":/icons/telegram"), tr("&Telegram"), this);
     //openWebsite3 = new QAction(QIcon(":/icons/telegram"), tr("&Twitter"), this);
     //openWebsite4 = new QAction(QIcon(":/icons/twitter"), tr("&Twitter"), this);

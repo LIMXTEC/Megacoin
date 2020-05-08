@@ -49,7 +49,7 @@ static const int MAX_URI_LENGTH = 255;
 #define SPINNER_FRAMES 36
 
 #define QAPP_ORG_NAME "Megacoin"
-#define QAPP_ORG_DOMAIN "megacoin.eu"
+#define QAPP_ORG_DOMAIN "megacoin-mec.cc"
 #define QAPP_APP_NAME_DEFAULT "Megacoin-Qt"
 #define QAPP_APP_NAME_TESTNET "Megacoin-Qt-testnet"
 #define QAPP_APP_NAME_REGTEST "Megacoin-Qt-regtest"

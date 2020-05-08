@@ -586,7 +586,7 @@ std::string LicenseInfo()
 {
     // Megacoin
     const std::string URL_SOURCE_CODE = "<https://github.com/LIMXTEC/Megacoin>";
-    const std::string URL_WEBSITE = "<https://megacoin.eu>";
+    const std::string URL_WEBSITE = "<https://megacoin-mec.cc>";
 
     // FXTC BEGIN
     //return CopyrightHolders(strprintf(_("Copyright (C) %i-%i"), 2009, COPYRIGHT_YEAR) + " ") + "\n" +
