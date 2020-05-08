@@ -8,7 +8,7 @@ https://megacoin-mec.cc
 What is Megacoin?
 ----------------
 
-Established on 24th of April 2017, BitCore from the community for the community. BitCore has one of the lowest transaction fees on the market while possibly providing the best on-chain scaling solution in the  entire crypto-sphere. Take a look at our [comparison chart](https://bitcore.cc/wp-content/uploads/2019/11/BitCoreVsAgosto2019.jpg).
+Established on 01th of June 2013, Megacoin from the community for the community. Megacoin has one of the lowest transaction fees on the market while possibly providing the best on-chain scaling solution in the  entire crypto-sphere. Take a look at our [comparison chart](https://bitcore.cc/wp-content/uploads/2019/11/BitCoreVsAgosto2019.jpg).
 
 BitCore BTX preserves and implements Bitcoin features such as SegWit, which enables advanced scaling technologies like Lightning Network. Significant differences at launch time included:
 
