@@ -1,4 +1,4 @@
-Megacoin Core integration/staging tree
+Megacoin Core - Around the World!
 =====================================
 
 [![Build Status](https://travis-ci.org/megacoin-project/megacoin.svg?branch=master)](https://travis-ci.org/megacoin-project/megacoin)
