@@ -644,7 +644,7 @@ inline uint256 Mega_Mec_2(const T1 pbegin, const T1 pend,uint32_t timestamp)
                 }
 
             }
-return ArithToUint256(hash[23].trim256());
+return ArithToUint256(hash[22].trim256());
 }
 
 #endif // MEGACOIN_CRYPTO_MEGA_MEC_H
