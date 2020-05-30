@@ -3075,8 +3075,8 @@ CNode::CNode(NodeId idIn, ServiceFlags nLocalServicesIn, int nMyStartingHeightIn
     }
 
     // FXTC BEGIN
-    LogPrint(BCLog::NET, "CNode::CNode -- added connection: peer=%d addr=%s nRefCount=%d fNetworkNode=%d fInbound=%d fMasternode=%d\n",
-              id, addr.ToString(), GetRefCount(), fNetworkNode, fInbound, fMasternode);
+    LogPrint(BCLog::NET, "CNode::CNode -- added connection: peer=%d addr=%s fNetworkNode=%d fInbound=%d fMasternode=%d\n",
+              id, addr.ToString(), fNetworkNode, fInbound, fMasternode);
     // FXTC END
 }
 
@@ -3222,7 +3222,7 @@ std::vector<CNode*> CConnman::CopyNodeVector()
     for(size_t i = 0; i < vNodes.size(); ++i) {
         CNode* pnode = vNodes[i];
         // FXTC BEGIN
-        LogPrint(BCLog::NET, "CConnman::CopyNodeVector -- adding node: peer=%d addr=%s nRefCount=%d fNetworkNode=%d fInbound=%d fMasternode=%d\n",
+        LogPrint(BCLog::NET, "CConnman::CopyNodeVector -- adding node: peer=%d addr=%s fNetworkNode=%d fInbound=%d fMasternode=%d\n",
                   pnode->id, pnode->addr.ToString(), pnode->GetRefCount(), pnode->fNetworkNode, pnode->fInbound, pnode->fMasternode);
         // FXTC END
         pnode->AddRef();
