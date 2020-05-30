@@ -118,12 +118,14 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].bit = 28;
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nStartTime = 1525132800; // 05/01/2018 @ 12:00am (UTC)
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nTimeout = 1746057600;   // 05/01/2025 @ 12:00am (UTC)
+        consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nHeight = 1280000;
 
         // Deployment of BIP68, BIP112, and BIP113.
         consensus.vDeployments[Consensus::DEPLOYMENT_CSV].bit = 0;
         consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nStartTime = 1525132800; // 05/01/2018 @ 12:00am (UTC)
         consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nTimeout = 1746057600;   // 05/01/2025 @ 12:00am (UTC)
-
+        consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nHeight = 1280000;
+        
         // FXTC TODO:
         // Dash
         // Deployment of DIP0001
@@ -139,6 +141,7 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].bit = 1;
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nStartTime = 1525132800; // 05/01/2018 @ 12:00am (UTC)
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 1746057600;   // 05/01/2025 @ 12:00am (UTC)
+        consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nHeight = 1280000;
 
         // The best chain should have at least this much work.
         consensus.nMinimumChainWork = uint256S("0x00000000000000000000000000000000000000000000000005dfab1790ba9fdd"); // Megacoin
