@@ -38,6 +38,8 @@ ThresholdState AbstractThresholdConditionChecker::GetStateFor(const CBlockIndex*
     int nThreshold = Threshold(params);
     int64_t nTimeStart = BeginTime(params);
     int64_t nTimeTimeout = EndTime(params);
+    int64_t nThresholdHeight = Height(params);
+    int64_t nHeight = 0;
 
     // Check if this deployment is always active.
     if (nTimeStart == Consensus::BIP9Deployment::ALWAYS_ACTIVE) {
@@ -99,7 +101,7 @@ ThresholdState AbstractThresholdConditionChecker::GetStateFor(const CBlockIndex*
                     }
                     pindexCount = pindexCount->pprev;
                 }
-                if (count >= nThreshold) {
+                if (count >= nThreshold && nHeight >= nThresholdHeight) {
                     stateNext = ThresholdState::LOCKED_IN;
                 }
                 break;
