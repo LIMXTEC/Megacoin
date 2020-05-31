@@ -67,23 +67,23 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
         {
         if (pblock->GetBlockTime() > pindexLast->GetBlockTime() + params.nPowTargetSpacing*24) 
             {
-            //consensus.nPowTargetSpacing = 2.5 * 60; // Megacoin	
-            //This should be one hour then is this function possible
-            LogPrintf("Megacoin Hashalgoupdate Test!!! \n");
-            return nProofOfWorkLimit;
+                //consensus.nPowTargetSpacing = 2.5 * 60; // Megacoin	
+                //This should be one hour then is this function possible
+                LogPrintf("Megacoin Hashalgoupdate Test!!! \n");
+                return nProofOfWorkLimit;
             }
         }
         // We have a timerange from 24 hours  to find a new block
-        if(pblock->GetBlockTime() >= HASH_FORK_TIME_2 && pindexLast->GetBlockTime() <= HASH_FORK_TIME_2 + 86400)
+    if(pblock->GetBlockTime() >= HASH_FORK_TIME_2 && pindexLast->GetBlockTime() <= HASH_FORK_TIME_2 + 86400)
+        {
+        if (pblock->GetBlockTime() > pindexLast->GetBlockTime() + params.nPowTargetSpacing*24) 
             {
-            if (pblock->GetBlockTime() > pindexLast->GetBlockTime() + params.nPowTargetSpacing*24) 
-                {
                 //consensus.nPowTargetSpacing = 2.5 * 60; // Megacoin	
                 //This should be one hour then is this function possible
                 LogPrintf("Megacoin Hashalgoupdate MEGA MEC!!! \n");
                 return nProofOfWorkLimit;
-                }
             }
+        }
 
     if (pindexLast->nHeight+1 <= fork1) {
         return nProofOfWorkLimit;

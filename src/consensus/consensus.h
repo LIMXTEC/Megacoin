@@ -22,6 +22,9 @@ static const int COINBASE_MATURITY_2 = 4032; // One Week
 /**Algoswitch Megacoin */
 static const unsigned int HASH_FORK_TIME_1 = 1588842000; //05/07/2020 @ 9:00am (UTC)
 static const unsigned int HASH_FORK_TIME_2 = 1591131463;
+static const unsigned int SKIPP_NBITS = 1257000;
+static const unsigned int UNEXPECTED_WITNESS = 1285000;
+
 
 static const int WITNESS_SCALE_FACTOR = 4;
 

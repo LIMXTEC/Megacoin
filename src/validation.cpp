@@ -3504,7 +3504,8 @@ static bool ContextualCheckBlockHeader(const CBlockHeader& block, CValidationSta
 
     // Check proof of work
     const Consensus::Params& consensusParams = params.GetConsensus();
-    if(nHeight >= 1257000) {
+    //Consensus.h:L25
+    if(nHeight >= SKIPP_NBITS) {
         if (block.nBits != GetNextWorkRequired(pindexPrev, &block, consensusParams))
             return state.DoS(100, false, REJECT_INVALID, "bad-diffbits", false, "incorrect proof of work");
     }
@@ -3592,7 +3593,8 @@ static bool ContextualCheckBlock(const CBlock& block, CValidationState& state, c
             // The malleation check is ignored; as the transaction tree itself
             // already does not permit it, it is impossible to trigger in the
             // witness tree.
-            if(nHeight > 25000) {
+            // Consensus.h:L26
+            if(nHeight > UNEXPECTED_WITNESS) {
                 if (block.vtx[0]->vin[0].scriptWitness.stack.size() != 1 || block.vtx[0]->vin[0].scriptWitness.stack[0].size() != 32) {
                     return state.DoS(100, false, REJECT_INVALID, "bad-witness-nonce-size", true, strprintf("%s : invalid witness reserved value size", __func__));
                 }
@@ -3606,7 +3608,8 @@ static bool ContextualCheckBlock(const CBlock& block, CValidationState& state, c
     }
 
     // No witness data is allowed in blocks that don't commit to witness data, as this would otherwise leave room for spam
-    if(nHeight > 25000) {
+    // Consensus.h:L26
+    if(nHeight > UNEXPECTED_WITNESS) {
         if (!fHaveWitness) {
           for (const auto& tx : block.vtx) {
                 if (tx->HasWitness()) {
