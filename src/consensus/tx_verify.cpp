@@ -228,7 +228,7 @@ bool Consensus::CheckTxInputs(const CTransaction& tx, CValidationState& state, c
  // if (coin.IsCoinBase() && nSpendHeight - coin.nHeight < COINBASE_MATURITY) {
         // MEC BEGIN
         // BTX BEGIN
-        if (AHeight < 1253800)
+        if (AHeight < 1260800)
             {
             if (coin.IsCoinBase() && nSpendHeight - coin.nHeight < COINBASE_MATURITY) 
                 {
