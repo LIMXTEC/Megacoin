@@ -33,8 +33,8 @@
  * @author   Mish <mish@btchouse.com>
  */
 
-#ifndef SPH_GOST_H__
-#define SPH_GOST_H__
+#ifndef MEGACOIN_CRYPTO_GOST_STREEBOG_H
+#define MEGACOIN_CRYPTO_GOST_STREEBOG_H
 
 #ifdef __cplusplus
 extern "C"{
@@ -182,4 +182,4 @@ void sph_gost512_addbits_and_close(
 }
 #endif
 
-#endif
+#endif //MEGACOIN_CRYPTO_GOST_STREEBOG_H
