@@ -3223,7 +3223,7 @@ std::vector<CNode*> CConnman::CopyNodeVector()
         CNode* pnode = vNodes[i];
         // FXTC BEGIN
         LogPrint(BCLog::NET, "CConnman::CopyNodeVector -- adding node: peer=%d addr=%s fNetworkNode=%d fInbound=%d fMasternode=%d\n",
-                  pnode->id, pnode->addr.ToString(), pnode->GetRefCount(), pnode->fNetworkNode, pnode->fInbound, pnode->fMasternode);
+                  pnode->id, pnode->addr.ToString(), pnode->fNetworkNode, pnode->fInbound, pnode->fMasternode);
         // FXTC END
         pnode->AddRef();
         vecNodesCopy.push_back(pnode);
