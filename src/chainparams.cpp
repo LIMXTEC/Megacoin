@@ -214,11 +214,12 @@ public:
                 { 974448,  uint256S("0xc69f5106c4f3ba92cfdcd13d20135694de444087e975ba7ea89e3532708bfccf")},
                 { 1001795, uint256S("0x0555327b8f542a4b1fb3de8c4d988ea46e687b9bd8ce406e1b2aea49fe959391")},
                 { 1253244, uint256S("0x058403d520ee00f1f2651eddb1e9a105145481cdfdc9a1b4eb0f8bd8ba68fa9f")},
+                { 1269715, uint256S("0xab6b610ec05a663343e635a54213f4f4eac13c4d0703a104ae1ea9b72cf2a9b8")},
             }
         };
 
         // MEC for faster loading
-        consensus.nlastValidPowHashHeight = 1253244;
+        consensus.nlastValidPowHashHeight = 1269715;
         chainTxData = ChainTxData{
             // Megacoin: data as of block 0x8da1c7f79018fac8acac69a57b2f8b5d2743af67976a4525fdedc8c85a3a1418 (height 410476).
             1521658394, // * UNIX timestamp of last known number of transactions
