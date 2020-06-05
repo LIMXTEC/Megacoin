@@ -152,11 +152,13 @@ struct CompactTallyItem
 };
 //
 
-//! Default for -addresstype
-constexpr OutputType DEFAULT_ADDRESS_TYPE{OutputType::P2SH_SEGWIT};
+//! Default for -addresstype legacy
+//constexpr OutputType DEFAULT_ADDRESS_TYPE{OutputType::P2SH_SEGWIT};
+constexpr OutputType DEFAULT_ADDRESS_TYPE{OutputType::LEGACY};
 
 //! Default for -changetype
-constexpr OutputType DEFAULT_CHANGE_TYPE{OutputType::CHANGE_AUTO};
+//constexpr OutputType DEFAULT_CHANGE_TYPE{OutputType::CHANGE_AUTO};
+constexpr OutputType DEFAULT_CHANGE_TYPE{OutputType::LEGACY};
 
 enum WalletFlags : uint64_t {
     // wallet flags in the upper section (> 1 << 31) will lead to not opening the wallet if flag is unknown

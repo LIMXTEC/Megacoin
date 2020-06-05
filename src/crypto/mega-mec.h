@@ -33,7 +33,7 @@ extern "C" {
 #include <crypto/sph_sha2.h>
 //#include <crypto/sph_tiger.h>
 }
-#include <crypto/lyra2.h>
+//#include <crypto/lyra2.h>
 
 #define HASH_FUNC_BASE_TIMESTAMP_1 1370079299 // Megacoin Block 1
 #define HASH_FUNC_COUNT_1 8
