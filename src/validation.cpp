@@ -2466,7 +2466,7 @@ void static UpdateTip(const CBlockIndex *pindexNew, const CChainParams& chainPar
             if (state == ThresholdState::ACTIVE || state == ThresholdState::LOCKED_IN) {
                 const std::string strWarning = strprintf(_("Warning: unknown new rules activated (versionbit %i)"), bit);
                 if (state == ThresholdState::ACTIVE) {
-                    DoWarning(strWarning);
+                    //DoWarning(strWarning);
                 } else {
                     AppendWarning(warningMessages, strWarning);
                 }
