@@ -215,14 +215,15 @@ public:
                 { 1001795, uint256S("0x0555327b8f542a4b1fb3de8c4d988ea46e687b9bd8ce406e1b2aea49fe959391")},
                 { 1253244, uint256S("0x058403d520ee00f1f2651eddb1e9a105145481cdfdc9a1b4eb0f8bd8ba68fa9f")},
                 { 1269715, uint256S("0xab6b610ec05a663343e635a54213f4f4eac13c4d0703a104ae1ea9b72cf2a9b8")},
+                { 1299115, uint256S("0x93ebdcb6c6378bf9c19f47aa3a1ffb1d18d8325636507c159f2ac90afb247ecc")},
             }
         };
 
         // MEC for faster loading
-        consensus.nlastValidPowHashHeight = 1269715;
+        consensus.nlastValidPowHashHeight = 1299115;
         chainTxData = ChainTxData{
             // Megacoin: data as of block 0x8da1c7f79018fac8acac69a57b2f8b5d2743af67976a4525fdedc8c85a3a1418 (height 410476).
-            1521658394, // * UNIX timestamp of last known number of transactions
+            1595274616, // * UNIX timestamp of last known number of transactions
             1000000,          // * total number of transactions between genesis and that timestamp
                         //   (the tx=... number in the SetBestChain debug.log lines)
             1           // * estimated number of transactions per second after that timestamp
