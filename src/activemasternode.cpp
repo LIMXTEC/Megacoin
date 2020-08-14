@@ -217,12 +217,14 @@ void CActiveMasternode::ManageStateRemote()
     mnodeman.CheckMasternode(pubKeyMasternode, true);
     masternode_info_t infoMn;
     if(mnodeman.GetMasternodeInfo(pubKeyMasternode, infoMn)) {
+        /*
         if(infoMn.nProtocolVersion != PROTOCOL_VERSION) {
             nState = ACTIVE_MASTERNODE_NOT_CAPABLE;
             strNotCapableReason = "Invalid protocol version";
             LogPrintf("CActiveMasternode::ManageStateRemote -- %s: %s\n", GetStateString(), strNotCapableReason);
             return;
         }
+        */
         if(service != infoMn.addr) {
             nState = ACTIVE_MASTERNODE_NOT_CAPABLE;
             strNotCapableReason = "Broadcasted IP doesn't match our external address. Make sure you issued a new broadcast if IP of this masternode changed recently.";
