@@ -221,10 +221,10 @@ public:
         };
 
         // MEC for faster loading
-        consensus.nlastValidPowHashHeight = 1299115;
+        consensus.nlastValidPowHashHeight = 1328857; // Bitte updaten bei neuen Checkpoint sowie auch time
         chainTxData = ChainTxData{
             // Megacoin: data as of block 0x8da1c7f79018fac8acac69a57b2f8b5d2743af67976a4525fdedc8c85a3a1418 (height 410476).
-            1595274616, // * UNIX timestamp of last known number of transactions
+            1599855918, // * UNIX timestamp of last known number of transactions
             1000000,          // * total number of transactions between genesis and that timestamp
                         //   (the tx=... number in the SetBestChain debug.log lines)
             1           // * estimated number of transactions per second after that timestamp
