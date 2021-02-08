@@ -196,12 +196,14 @@ public:
 
     // FXTC BEGIN
     //! (memory only) Total amount of work normalized to algorithm efficiency
+    /*
     arith_uint256 nChainWorkSha256d;
     arith_uint256 nChainWorkScrypt;
     arith_uint256 nChainWorkNist5;
     arith_uint256 nChainWorkLyra2Z;
     arith_uint256 nChainWorkX11;
     arith_uint256 nChainWorkX16R;
+    */
     // FXTC END
 
     //! Number of transactions in this block.

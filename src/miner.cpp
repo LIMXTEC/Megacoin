@@ -79,11 +79,11 @@ int64_t UpdateTime(CBlock* pblock, const Consensus::Params& consensusParams, con
                     if (IsValidDestination(destination)) {
                         CScript FOUNDER_SCRIPT = GetScriptForDestination(destination);
 
-                        for (auto output : coinbaseTx.vout) {
-                            if (output.scriptPubKey == FOUNDER_SCRIPT) {
-                                coinbaseTx.vout[0].nValue -= nFounderReward;
-                                output.nValue = nFounderReward;
-                                break;
+                        for (unsigned int i = 0; i < coinbaseTx.vout.size(); i++) {
+                        if (coinbaseTx.vout[i].scriptPubKey == FOUNDER_SCRIPT) {
+                            coinbaseTx.vout[0].nValue -= nFounderReward;
+                            coinbaseTx.vout[i].nValue = nFounderReward;
+                            break;
                             }
                         }
                     }
@@ -91,15 +91,14 @@ int64_t UpdateTime(CBlock* pblock, const Consensus::Params& consensusParams, con
 
                 // FXTC TODO: add superblocks support
 
-                // Update masternode reward to new value
-                CScript cMasternodePayee;
-                if(mnpayments.GetBlockPayee(pindexPrev->nHeight + 1, cMasternodePayee)) {
-                    for (auto output : coinbaseTx.vout) {
-                        if (output.scriptPubKey == cMasternodePayee) {
-                            coinbaseTx.vout[0].nValue -= nMasternodePayment;
-                            output.nValue = nMasternodePayment;
-                            break;
-                        }
+            // Update masternode reward to new value
+            CScript cMasternodePayee;
+            if(mnpayments.GetBlockPayee(pindexPrev->nHeight + 1, cMasternodePayee)) {
+                for (unsigned int i = 0; i < coinbaseTx.vout.size(); i++) {
+                    if (coinbaseTx.vout[i].scriptPubKey == cMasternodePayee) {
+                        coinbaseTx.vout[0].nValue -= nMasternodePayment;
+                        coinbaseTx.vout[i].nValue = nMasternodePayment;
+                        break;
                     }
                 }
 
