@@ -2265,7 +2265,7 @@ bool CChainState::ConnectBlock(const CBlock& block, CValidationState& state, CBl
 //if (!sporkManager.IsSporkActive(SPORK_MEGACOIN_99_IGNORE_MASTERNODE_REWARD_PAYEE) && !IsBlockPayeeValid(block.vtx[0], pindex->nHeight, block.vtx[0]->GetValueOut(), pindex->GetBlockHeader())) {
         if (!IsBlockPayeeValid(block.vtx[0], pindex->nHeight, block.vtx[0]->GetValueOut(), pindex->GetBlockHeader())) {
             mapRejectedBlocks.insert(make_pair(block.GetHash(), GetTime()));
-            return state.DoS(0, error("ConnectBlock(MEC): couldn't find masternode or superblock payments"),
+            return state.DoS(100, error("ConnectBlock(MEC): couldn't find masternode or superblock payments"),
                                     REJECT_INVALID, "bad-cb-payee");
         }
         // END DASH
