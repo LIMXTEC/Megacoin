@@ -29,6 +29,10 @@
 #include <QSet>
 #include <QTimer>
 
+#include <boost/bind/bind.hpp>
+
+using namespace boost::placeholders;
+
 
 WalletModel::WalletModel(std::unique_ptr<interfaces::Wallet> wallet, interfaces::Node& node, const PlatformStyle *platformStyle, OptionsModel *_optionsModel, QObject *parent) :
     QObject(parent), m_wallet(std::move(wallet)), m_node(node), optionsModel(_optionsModel), addressTableModel(0),

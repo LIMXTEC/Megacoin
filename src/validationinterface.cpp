@@ -19,6 +19,9 @@
 #include <future>
 
 #include <boost/signals2/signal.hpp>
+#include <boost/bind/bind.hpp>
+
+using namespace boost::placeholders;
 
 struct MainSignalsInstance {
     // Dash
