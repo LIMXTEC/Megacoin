@@ -69,6 +69,7 @@ struct Params {
     int nSubsidyHalvingInterval;
 
     int nMasternodeMinimumConfirmations;
+    int nMasternodeEnforcementHeight;
     int nMasternodePaymentsStartBlock;
     int nMasternodePaymentsIncreaseBlock;
     int nMasternodePaymentsIncreasePeriod; // in blocks

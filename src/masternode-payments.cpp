@@ -165,14 +165,10 @@ bool IsBlockPayeeValid(const CTransactionRef txNew, int nBlockHeight, CAmount bl
         return true;
         }
 
-        if(sporkManager.IsSporkActive(SPORK_8_MASTERNODE_PAYMENT_ENFORCEMENT)) {
-           // if (!sporkManager.IsSporkActive(SPORK_MEGACOIN_99_IGNORE_MASTERNODE_REWARD_VALUE) && !sporkManager.IsSporkActive(SPORK_MEGACOIN_99_IGNORE_MASTERNODE_REWARD_PAYEE)) {
-                LogPrintf("IsBlockPayeeValid -- ERROR: Invalid masternode payment detected at height %d: %s\n", nBlockHeight, txNew->ToString());
-                return false;
-            } else {
-                LogPrintf("IsBlockPayeeValid -- WARNING: Masternode payment enforcement is ignored, accepting any payee\n");
-                return true;
-            }
+        if(sporkManager.IsSporkActive(SPORK_8_MASTERNODE_PAYMENT_ENFORCEMENT) || nBlockHeight >= consensusParams.nMasternodeEnforcementHeight) {
+            LogPrintf("IsBlockPayeeValid -- ERROR: Invalid masternode payment detected at height %d: %s\n", nBlockHeight, txNew->ToString());
+            return false;
+        }
 
 
         LogPrintf("IsBlockPayeeValid -- WARNING: Masternode payment enforcement is disabled, accepting any payee\n");
@@ -206,7 +202,7 @@ bool IsBlockPayeeValid(const CTransactionRef txNew, int nBlockHeight, CAmount bl
         return true;
     }
 
-    if(sporkManager.IsSporkActive(SPORK_8_MASTERNODE_PAYMENT_ENFORCEMENT)) {
+    if(sporkManager.IsSporkActive(SPORK_8_MASTERNODE_PAYMENT_ENFORCEMENT) || nBlockHeight >= consensusParams.nMasternodeEnforcementHeight) {
         LogPrintf("IsBlockPayeeValid -- ERROR: Invalid masternode payment detected at height %d: %s\n", nBlockHeight, txNew->ToString());
         return false;
     }

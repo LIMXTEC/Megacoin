@@ -82,6 +82,7 @@ public:
         consensus.nMinimumSubsidy = 0.00100000 * COIN;
 
         consensus.nMasternodeMinimumConfirmations = 15;
+        consensus.nMasternodeEnforcementHeight = 2200000; // v1.10.0 Soft Fork height (2.20M)
         consensus.nMasternodePaymentsStartBlock = 50; // - not used
         consensus.nMasternodePaymentsIncreaseBlock = 50; // - not used
         consensus.nMasternodePaymentsIncreasePeriod = 365 * 1440; // 1 common year  - not used
@@ -249,6 +250,7 @@ public:
         consensus.nMinimumSubsidy = 0.00100000 * COIN;
 
         consensus.nMasternodeMinimumConfirmations = 15;
+        consensus.nMasternodeEnforcementHeight = 100; // v1.10.0 Soft Fork height
         consensus.nMasternodePaymentsStartBlock = 10; // not true, but it's ok as long as it's less then nMasternodePaymentsIncreaseBlock
         consensus.nMasternodePaymentsIncreaseBlock = 10;
         consensus.nMasternodePaymentsIncreasePeriod = 25;
