@@ -1,8 +1,8 @@
 package=qrencode
-$(package)_version=3.4.4
-$(package)_download_path=https://fukuchi.org/works/qrencode/
+$(package)_version=4.1.1
+$(package)_download_path=https://bitcoincore.org/depends-sources
 $(package)_file_name=$(package)-$($(package)_version).tar.gz
-$(package)_sha256_hash=1ad020144e3c2d53e58a71389319de558c2d83fceb324f051a8ab3f5fbb5f39c
+$(package)_sha256_hash=da448ed4f52aba6bcb0cd48cac0dd51b8692bccc4cd127431402fca6f8171e8e
 
 define $(package)_set_vars
 $(package)_config_opts=--disable-shared -without-tools --disable-sdltest
