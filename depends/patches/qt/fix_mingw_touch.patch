@@ -1,0 +1,11 @@
+--- a/qtbase/src/plugins/platforms/windows/qwindowsmousehandler.cpp
++++ b/qtbase/src/plugins/platforms/windows/qwindowsmousehandler.cpp
+@@ -62,7 +62,7 @@
+ #  define NLS_ALPHANUMERIC 0x00000000
+ #endif
+ 
+-#ifndef TOUCHINPUT_DEFINED
++#if !defined(TOUCHINPUT_DEFINED) && !defined(__MINGW32__)
+ typedef struct tagTOUCHINPUT {
+     LONG x;
+     LONG y;
