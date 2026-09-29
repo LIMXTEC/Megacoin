@@ -1,11 +1,11 @@
 --- a/qtbase/src/plugins/platforms/windows/qwindowsmousehandler.cpp
 +++ b/qtbase/src/plugins/platforms/windows/qwindowsmousehandler.cpp
-@@ -62,7 +62,7 @@
- #  define NLS_ALPHANUMERIC 0x00000000
- #endif
+@@ -60,7 +60,7 @@
+  * are present in the Windows SDK's, but not in older MSVC Express
+  * versions. */
  
--#ifndef TOUCHINPUT_DEFINED
-+#if !defined(TOUCHINPUT_DEFINED) && !defined(__MINGW32__)
+-#if defined(Q_CC_MINGW) || !defined(TOUCHEVENTF_MOVE)
++#if (!defined(__MINGW32__) && defined(Q_CC_MINGW)) || !defined(TOUCHEVENTF_MOVE)
+ 
  typedef struct tagTOUCHINPUT {
      LONG x;
-     LONG y;
