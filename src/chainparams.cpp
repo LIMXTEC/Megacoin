@@ -82,7 +82,6 @@ public:
         consensus.nMinimumSubsidy = 0.00100000 * COIN;
 
         consensus.nMasternodeMinimumConfirmations = 15;
-        consensus.nMasternodeEnforcementHeight = 2200000; // v1.10.0 Soft Fork height (2.20M)
         consensus.nMasternodePaymentsStartBlock = 50; // - not used
         consensus.nMasternodePaymentsIncreaseBlock = 50; // - not used
         consensus.nMasternodePaymentsIncreasePeriod = 365 * 1440; // 1 common year  - not used
@@ -143,6 +142,13 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nStartTime = 1525132800; // 05/01/2018 @ 12:00am (UTC)
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 1746057600;   // 05/01/2025 @ 12:00am (UTC)
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nHeight = 1280000;
+
+        // Deployment of Masternode Payment Enforcement (BIP9 bit 2, 80% threshold over 8,000 blocks)
+        consensus.vDeployments[Consensus::DEPLOYMENT_MN_ENFORCEMENT].bit = 2;
+        consensus.vDeployments[Consensus::DEPLOYMENT_MN_ENFORCEMENT].nStartTime = 1767225600; // Jan 01, 2026 @ 12:00am (UTC)
+        consensus.vDeployments[Consensus::DEPLOYMENT_MN_ENFORCEMENT].nTimeout = 1830297600;   // Jan 01, 2028 @ 12:00am (UTC)
+        consensus.vDeployments[Consensus::DEPLOYMENT_MN_ENFORCEMENT].nWindowSize = 8000;
+        consensus.vDeployments[Consensus::DEPLOYMENT_MN_ENFORCEMENT].nThreshold = 6400; // 80% of 8000
 
         // The best chain should have at least this much work.
         consensus.nMinimumChainWork = uint256S("0x00000000000000000000000000000000000000000000000005dfab1790ba9fdd"); // Megacoin
@@ -250,7 +256,6 @@ public:
         consensus.nMinimumSubsidy = 0.00100000 * COIN;
 
         consensus.nMasternodeMinimumConfirmations = 15;
-        consensus.nMasternodeEnforcementHeight = 100; // v1.10.0 Soft Fork height
         consensus.nMasternodePaymentsStartBlock = 10; // not true, but it's ok as long as it's less then nMasternodePaymentsIncreaseBlock
         consensus.nMasternodePaymentsIncreaseBlock = 10;
         consensus.nMasternodePaymentsIncreasePeriod = 25;
@@ -308,6 +313,13 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].bit = 1;
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nStartTime = 1525132800; // April 23, 2017
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 1746057600;   // 05/01/2025 @ 12:00am (UTC)
+
+        // Deployment of Masternode Payment Enforcement
+        consensus.vDeployments[Consensus::DEPLOYMENT_MN_ENFORCEMENT].bit = 2;
+        consensus.vDeployments[Consensus::DEPLOYMENT_MN_ENFORCEMENT].nStartTime = 1525132800; // April 23, 2017
+        consensus.vDeployments[Consensus::DEPLOYMENT_MN_ENFORCEMENT].nTimeout = 1746057600;   // 05/01/2025 @ 12:00am (UTC)
+        consensus.vDeployments[Consensus::DEPLOYMENT_MN_ENFORCEMENT].nWindowSize = 100;
+        consensus.vDeployments[Consensus::DEPLOYMENT_MN_ENFORCEMENT].nThreshold = 80; // 80% of 100
 
         // The best chain should have at least this much work.
         consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000000000000000000000000"); // Megacoin
@@ -446,6 +458,10 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nStartTime = 0;
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = Consensus::BIP9Deployment::NO_TIMEOUT;
 
+        consensus.vDeployments[Consensus::DEPLOYMENT_MN_ENFORCEMENT].bit = 2;
+        consensus.vDeployments[Consensus::DEPLOYMENT_MN_ENFORCEMENT].nStartTime = 0;
+        consensus.vDeployments[Consensus::DEPLOYMENT_MN_ENFORCEMENT].nTimeout = Consensus::BIP9Deployment::NO_TIMEOUT;
+
         // The best chain should have at least this much work.
         consensus.nMinimumChainWork = uint256S("0x00");
 
@@ -457,10 +473,10 @@ public:
         pchMessageStart[1] = 0xf0;
         pchMessageStart[2] = 0xf4;
         pchMessageStart[3] = 0xfe;
-        nDefaultPort = 19444;
+        nDefaultPort = 19445;
         nPruneAfterHeight = 1000;
 
-        genesis = CreateGenesisBlock(1492973331, 9377, 0x1e0ffff0, 1, 0 * COIN);
+        genesis = CreateGenesisBlock(1369197853, 2084576387, 0x1e0ffff0, 1, 500 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
         assert(consensus.hashGenesisBlock == uint256S("0x7520788e2d99eec7cf6cf7315577e1268e177fff94cb0a7caf6a458ceeea9ac2"));
         assert(genesis.hashMerkleRoot == uint256S("0x6065d08d755e00a90449abe8a0923d0622feb6f7ab3f435c337369334119e636"));

@@ -23,12 +23,11 @@ const struct VBDeploymentInfo VersionBitsDeploymentInfo[Consensus::MAX_VERSION_B
         /*.name =*/ "segwit",
         /*.gbt_force =*/ true,
         /*.check_mn_protocol =*/ false,
-    // FXTC TODO:
-    //},
-    //{
-    //    /*.name =*/ "dip0001",
-    //    /*.gbt_force =*/ true,
-    //    /*.check_mn_protocol =*/ true,
+    },
+    {
+        /*.name =*/ "mn_enforcement",
+        /*.gbt_force =*/ true,
+        /*.check_mn_protocol =*/ false,
     }
 };
 
@@ -201,8 +200,18 @@ protected:
     int64_t BeginTime(const Consensus::Params& params) const override { return params.vDeployments[id].nStartTime; }
     int64_t EndTime(const Consensus::Params& params) const override { return params.vDeployments[id].nTimeout; }
     int64_t Height(const Consensus::Params& params) const override { return params.vDeployments[id].nHeight; }
-    int Period(const Consensus::Params& params) const override { return params.nMinerConfirmationWindow; }
-    int Threshold(const Consensus::Params& params) const override { return params.nRuleChangeActivationThreshold; }
+    int Period(const Consensus::Params& params) const override {
+        if (params.vDeployments[id].nWindowSize > 0) {
+            return params.vDeployments[id].nWindowSize;
+        }
+        return params.nMinerConfirmationWindow;
+    }
+    int Threshold(const Consensus::Params& params) const override {
+        if (params.vDeployments[id].nThreshold > 0) {
+            return params.vDeployments[id].nThreshold;
+        }
+        return params.nRuleChangeActivationThreshold;
+    }
 
     bool Condition(const CBlockIndex* pindex, const Consensus::Params& params) const override
     {

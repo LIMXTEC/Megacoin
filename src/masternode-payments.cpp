@@ -13,6 +13,7 @@
 #include <netmessagemaker.h>
 #include <spork.h>
 #include <util.h>
+#include <validation.h>
 
 #include <boost/lexical_cast.hpp>
 
@@ -131,6 +132,18 @@ bool IsBlockValueValid(const CBlock& block, int nBlockHeight, CAmount blockRewar
     return isBlockRewardValueMet;
 }
 
+bool IsMasternodePaymentEnforced(const CBlockIndex* pindexPrev)
+{
+    if (sporkManager.IsSporkActive(SPORK_8_MASTERNODE_PAYMENT_ENFORCEMENT)) {
+        return true;
+    }
+    const Consensus::Params& consensusParams = Params().GetConsensus();
+    if (pindexPrev != nullptr) {
+        return VersionBitsState(pindexPrev, consensusParams, Consensus::DEPLOYMENT_MN_ENFORCEMENT, versionbitscache) == ThresholdState::ACTIVE;
+    }
+    return VersionBitsTipState(consensusParams, Consensus::DEPLOYMENT_MN_ENFORCEMENT) == ThresholdState::ACTIVE;
+}
+
 bool IsBlockPayeeValid(const CTransactionRef txNew, int nBlockHeight, CAmount blockReward, CBlockHeader pblock)
 {
     if(!masternodeSync.IsSynced()) {
@@ -143,6 +156,16 @@ bool IsBlockPayeeValid(const CTransactionRef txNew, int nBlockHeight, CAmount bl
     // we can only check masternode payments
 
     const Consensus::Params& consensusParams = Params().GetConsensus();
+    const CBlockIndex* pindexPrev = nullptr;
+    BlockMap::iterator it = mapBlockIndex.find(pblock.hashPrevBlock);
+    if (it != mapBlockIndex.end()) {
+        pindexPrev = it->second;
+    } else if (chainActive.Height() >= nBlockHeight - 1 && nBlockHeight > 0) {
+        pindexPrev = chainActive[nBlockHeight - 1];
+    } else {
+        pindexPrev = chainActive.Tip();
+    }
+    bool fEnforced = IsMasternodePaymentEnforced(pindexPrev);
 
     if(nBlockHeight < consensusParams.nSuperblockStartBlock) {
 
@@ -165,7 +188,7 @@ bool IsBlockPayeeValid(const CTransactionRef txNew, int nBlockHeight, CAmount bl
         return true;
         }
 
-        if(sporkManager.IsSporkActive(SPORK_8_MASTERNODE_PAYMENT_ENFORCEMENT) || nBlockHeight >= consensusParams.nMasternodeEnforcementHeight) {
+        if(fEnforced) {
             LogPrintf("IsBlockPayeeValid -- ERROR: Invalid masternode payment detected at height %d: %s\n", nBlockHeight, txNew->ToString());
             return false;
         }
@@ -202,7 +225,7 @@ bool IsBlockPayeeValid(const CTransactionRef txNew, int nBlockHeight, CAmount bl
         return true;
     }
 
-    if(sporkManager.IsSporkActive(SPORK_8_MASTERNODE_PAYMENT_ENFORCEMENT) || nBlockHeight >= consensusParams.nMasternodeEnforcementHeight) {
+    if(fEnforced) {
         LogPrintf("IsBlockPayeeValid -- ERROR: Invalid masternode payment detected at height %d: %s\n", nBlockHeight, txNew->ToString());
         return false;
     }

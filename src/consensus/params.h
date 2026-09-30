@@ -22,6 +22,7 @@ enum DeploymentPos
     DEPLOYMENT_TESTDUMMY,
     DEPLOYMENT_CSV, // Deployment of BIP68, BIP112, and BIP113.
     DEPLOYMENT_SEGWIT, // Deployment of BIP141, BIP143, and BIP147.
+    DEPLOYMENT_MN_ENFORCEMENT, // Deployment of Masternode payment enforcement.
 
     // Dash
     // FXTC TODO:
@@ -69,7 +70,6 @@ struct Params {
     int nSubsidyHalvingInterval;
 
     int nMasternodeMinimumConfirmations;
-    int nMasternodeEnforcementHeight;
     int nMasternodePaymentsStartBlock;
     int nMasternodePaymentsIncreaseBlock;
     int nMasternodePaymentsIncreasePeriod; // in blocks
