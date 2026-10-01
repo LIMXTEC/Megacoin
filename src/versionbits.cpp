@@ -76,6 +76,9 @@ ThresholdState AbstractThresholdConditionChecker::GetStateFor(const CBlockIndex*
         ThresholdState stateNext = state;
         pindexPrev = vToCompute.back();
         vToCompute.pop_back();
+        if (pindexPrev != nullptr) {
+            nHeight = pindexPrev->nHeight;
+        }
 
         switch (state) {
             case ThresholdState::DEFINED: {
