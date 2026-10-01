@@ -4532,6 +4532,25 @@ bool CChainState::RewindBlockIndex(const CChainParams& params)
         }
     }
 
+    // Clean up block index candidates that have invalid ancestors with nChainTx == 0
+    std::set<CBlockIndex*, CBlockIndexWorkComparator>::iterator itCand = setBlockIndexCandidates.begin();
+    while (itCand != setBlockIndexCandidates.end()) {
+        CBlockIndex* pcheck = *itCand;
+        bool fValid = true;
+        while (pcheck && pcheck->nHeight > 0) {
+            if (pcheck->nChainTx == 0) {
+                fValid = false;
+                break;
+            }
+            pcheck = pcheck->pprev;
+        }
+        if (!fValid) {
+            itCand = setBlockIndexCandidates.erase(itCand);
+        } else {
+            ++itCand;
+        }
+    }
+
     if (chainActive.Tip() != nullptr) {
         // We can't prune block index candidates based on our tip if we have
         // no tip due to chainActive being empty!
