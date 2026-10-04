@@ -19,14 +19,6 @@ diff -u -b -N -r bdb_clean/dbinc/atomic.h bdb_patched/dbinc/atomic.h
 diff -u -b -N -r bdb_clean/dbinc/mutex_int.h bdb_patched/dbinc/mutex_int.h
 --- bdb_clean/dbinc/mutex_int.h	2010-04-12 22:25:22.000000000 +0200
 +++ bdb_patched/dbinc/mutex_int.h	2026-10-04 02:21:47.878589042 +0200
-@@ -164,6 +164,7 @@
- #define	MUTEX_INIT(tsl)         (MUTEX_UNSET(tsl), 0)
- #endif
- #endif
-+#endif
- 
- /*********************************************************************
-  * General C library functions (msemaphore).
 @@ -470,6 +471,12 @@
   * ARM/gcc assembly.
   *********************************************************************/
@@ -40,3 +32,11 @@ diff -u -b -N -r bdb_clean/dbinc/mutex_int.h bdb_patched/dbinc/mutex_int.h
  typedef unsigned char tsl_t;
  
  #ifdef LOAD_ACTUAL_MUTEX_CODE
+@@ -486,6 +493,7 @@
+ 		: "r" (tsl) : "memory");				\
+ 	return ((int)t);						\
+ }
++#endif
+ #endif
+ 
+ /*********************************************************************
