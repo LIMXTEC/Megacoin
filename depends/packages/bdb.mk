@@ -7,7 +7,9 @@ $(package)_build_subdir=build_unix
 $(package)_patches=aarch64_mutex.patch
 
 define $(package)_set_vars
-$(package)_config_opts=--disable-shared --enable-cxx --disable-replication --with-mutex=ARM/gcc-assembly
+$(package)_config_opts=--disable-shared --enable-cxx --disable-replication
+$(package)_config_opts_aarch64=--with-mutex=ARM/gcc-assembly
+$(package)_config_opts_arm=--with-mutex=ARM/gcc-assembly
 $(package)_config_opts_mingw32=--enable-mingw
 $(package)_config_opts_linux=--with-pic
 $(package)_cxxflags=-std=c++11
