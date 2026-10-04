@@ -8,8 +8,11 @@ define $(package)_set_vars
 $(package)_build_opts=CC="$($(package)_cc)"
 $(package)_build_opts_darwin=LIBTOOL="$($(package)_libtool)"
 $(package)_build_opts_mingw32=-f Makefile.mingw
+ifeq ($(host_os),mingw32)
+$(package)_lib_file=libminiupnpc.a
+else
 $(package)_lib_file=build/libminiupnpc.a
-$(package)_lib_file_mingw32=libminiupnpc.a
+endif
 $(package)_build_env+=CFLAGS="$($(package)_cflags) $($(package)_cppflags)" AR="$($(package)_ar)"
 endef
 
