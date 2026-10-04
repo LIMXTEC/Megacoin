@@ -8,6 +8,8 @@ define $(package)_set_vars
 $(package)_build_opts=CC="$($(package)_cc)"
 $(package)_build_opts_darwin=LIBTOOL="$($(package)_libtool)"
 $(package)_build_opts_mingw32=-f Makefile.mingw
+$(package)_lib_file=build/libminiupnpc.a
+$(package)_lib_file_mingw32=libminiupnpc.a
 $(package)_build_env+=CFLAGS="$($(package)_cflags) $($(package)_cppflags)" AR="$($(package)_ar)"
 endef
 
@@ -19,11 +21,11 @@ define $(package)_preprocess_cmds
 endef
 
 define $(package)_build_cmds
-	$(MAKE) build/libminiupnpc.a $($(package)_build_opts)
+	$(MAKE) $($(package)_lib_file) $($(package)_build_opts)
 endef
 
 define $(package)_stage_cmds
 	mkdir -p $($(package)_staging_prefix_dir)/include/miniupnpc $($(package)_staging_prefix_dir)/lib &&\
 	install include/*.h miniupnpcstrings.h $($(package)_staging_prefix_dir)/include/miniupnpc &&\
-	install build/libminiupnpc.a $($(package)_staging_prefix_dir)/lib
+	install $($(package)_lib_file) $($(package)_staging_prefix_dir)/lib
 endef
