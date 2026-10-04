@@ -1,0 +1,42 @@
+diff -u -b -N -r bdb_clean/dbinc/atomic.h bdb_patched/dbinc/atomic.h
+--- bdb_clean/dbinc/atomic.h	2010-04-12 22:25:22.000000000 +0200
++++ bdb_patched/dbinc/atomic.h	2026-10-04 02:22:19.880833485 +0200
+@@ -72,6 +72,14 @@
+ #define	atomic_read(p)		((p)->value)
+ #define	atomic_init(p, val)	((p)->value = (val))
+ 
++#if !defined(HAVE_ATOMIC_SUPPORT) && defined(__GNUC__)
++#define HAVE_ATOMIC_SUPPORT 1
++#define atomic_inc(env, p)	__sync_add_and_fetch(&(p)->value, 1)
++#define atomic_dec(env, p)	__sync_sub_and_fetch(&(p)->value, 1)
++#define atomic_compare_exchange(env, p, oldval, newval) \
++	__sync_bool_compare_and_swap(&(p)->value, (oldval), (newval))
++#endif
++
+ #ifdef HAVE_ATOMIC_SUPPORT
+ 
+ #if defined(DB_WIN32)
+diff -u -b -N -r bdb_clean/dbinc/mutex_int.h bdb_patched/dbinc/mutex_int.h
+--- bdb_clean/dbinc/mutex_int.h	2010-04-12 22:25:22.000000000 +0200
++++ bdb_patched/dbinc/mutex_int.h	2026-10-04 02:21:47.878589042 +0200
+@@ -164,6 +164,7 @@
+ #define	MUTEX_INIT(tsl)         (MUTEX_UNSET(tsl), 0)
+ #endif
+ #endif
++#endif
+ 
+ /*********************************************************************
+  * General C library functions (msemaphore).
+@@ -470,6 +471,12 @@
+  * ARM/gcc assembly.
+  *********************************************************************/
+ #ifdef HAVE_MUTEX_ARM_GCC_ASSEMBLY
++#if defined(__aarch64__)
++typedef unsigned char tsl_t;
++#define MUTEX_SET(tsl) (!__atomic_test_and_set((tsl), __ATOMIC_ACQUIRE))
++#define MUTEX_UNSET(tsl) __atomic_clear((tsl), __ATOMIC_RELEASE)
++#define MUTEX_INIT(tsl) (MUTEX_UNSET(tsl), 0)
++#else
+ typedef unsigned char tsl_t;
+ 
+ #ifdef LOAD_ACTUAL_MUTEX_CODE

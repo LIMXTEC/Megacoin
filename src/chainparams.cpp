@@ -184,13 +184,13 @@ public:
         // This is fine at runtime as we'll fall back to using them as a oneshot if they don't support the
         // service bits we want, but we should get them updated to support all service bits wanted by any
         // release ASAP to avoid it where possible.
-        // Megacoin
-        vSeeds.emplace_back("37.120.190.76");
-        vSeeds.emplace_back("37.120.186.85");
-        vSeeds.emplace_back("185.194.140.60");
-        vSeeds.emplace_back("188.71.223.206");
-        vSeeds.emplace_back("185.194.142.122");
-        //vSeeds.emplace_back("185.194.142.122", false);
+        // Megacoin Seed Nodes
+        vSeeds.emplace_back("119.29.65.239");
+        vSeeds.emplace_back("62.103.70.207");
+        vSeeds.emplace_back("42.193.151.25");
+        vSeeds.emplace_back("207.188.185.47");
+        vSeeds.emplace_back("34.0.197.65");
+        vSeeds.emplace_back("106.53.150.104");
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,50);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,5);

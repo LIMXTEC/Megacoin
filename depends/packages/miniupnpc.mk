@@ -12,17 +12,18 @@ $(package)_build_env+=CFLAGS="$($(package)_cflags) $($(package)_cppflags)" AR="$
 endef
 
 define $(package)_preprocess_cmds
-  mkdir dll && \
+  mkdir -p dll build && \
   sed -e 's|MINIUPNPC_VERSION_STRING \"version\"|MINIUPNPC_VERSION_STRING \"$($(package)_version)\"|' -e 's|OS/version|$(host)|' miniupnpcstrings.h.in > miniupnpcstrings.h && \
+  cp miniupnpcstrings.h build/ && \
   sed -i.old "s|miniupnpcstrings.h: miniupnpcstrings.h.in wingenminiupnpcstrings|miniupnpcstrings.h: miniupnpcstrings.h.in|" Makefile.mingw
 endef
 
 define $(package)_build_cmds
-	$(MAKE) libminiupnpc.a $($(package)_build_opts)
+	$(MAKE) build/libminiupnpc.a $($(package)_build_opts)
 endef
 
 define $(package)_stage_cmds
 	mkdir -p $($(package)_staging_prefix_dir)/include/miniupnpc $($(package)_staging_prefix_dir)/lib &&\
-	install *.h $($(package)_staging_prefix_dir)/include/miniupnpc &&\
-	install libminiupnpc.a $($(package)_staging_prefix_dir)/lib
+	install include/*.h miniupnpcstrings.h $($(package)_staging_prefix_dir)/include/miniupnpc &&\
+	install build/libminiupnpc.a $($(package)_staging_prefix_dir)/lib
 endef
