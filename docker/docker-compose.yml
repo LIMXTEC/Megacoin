@@ -10,7 +10,6 @@ services:
       - "7951:7951"
       - "127.0.0.1:9469:9469"
     volumes:
-      - megacoin-data:/var/lib/megacoin
-
-volumes:
-  megacoin-data:
+      # Mapea los archivos del nodo (blockchain, wallet.dat, megacoin.conf)
+      # a la carpeta './data' de tu máquina para editarlos fácilmente.
+      - ./data:/var/lib/megacoin
