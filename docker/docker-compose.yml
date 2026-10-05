@@ -1,0 +1,16 @@
+services:
+  megacoind:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: scotynau/megacoin:1.10.0
+    container_name: megacoin-node
+    restart: unless-stopped
+    ports:
+      - "7951:7951"
+      - "127.0.0.1:9469:9469"
+    volumes:
+      - megacoin-data:/var/lib/megacoin
+
+volumes:
+  megacoin-data:
