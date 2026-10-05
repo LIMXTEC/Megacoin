@@ -1,8 +1,8 @@
-# Official Debian base image
-FROM debian:bookworm-slim
+# Official Debian Trixie base image
+FROM debian:trixie-slim
 
 LABEL maintainer="Megacoin Developers <info@megacoin.eu>"
-LABEL description="Official Megacoin Daemon Docker image (x86_64)"
+LABEL description="Official Megacoin Daemon Docker image (amd64 / x86_64, Debian Trixie)"
 
 # Install runtime dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -13,8 +13,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 # Create megacoin user and group with explicit UID/GID
-RUN addgroup --gid 1000 megacoin \
-    && adduser --disabled-password --gecos "" --uid 1000 --gid 1000 megacoin
+RUN groupadd --gid 1000 megacoin \
+    && useradd --uid 1000 --gid 1000 --create-home --shell /bin/bash megacoin
 
 # Set up data directory
 ENV MEGACOIN_DATA=/var/lib/megacoin

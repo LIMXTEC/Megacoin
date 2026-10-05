@@ -1,6 +1,6 @@
-# Megacoin Docker Deployment (Debian)
+# Megacoin Docker Deployment (Debian Trixie amd64)
 
-Contenedor Docker oficial basado en **Debian Bookworm (slim)** con los binarios x86_64 de Megacoin `v1.10.0` (`megacoind`, `megacoin-cli`, `megacoin-tx`).
+Contenedor Docker oficial basado en **Debian Trixie (slim) para arquitectura amd64 / x86_64** con los binarios de Megacoin `v1.10.0` (`megacoind`, `megacoin-cli`, `megacoin-tx`).
 
 Imagen pública en Docker Hub: [scotynau/megacoin](https://hub.docker.com/r/scotynau/megacoin)
 
