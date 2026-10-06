@@ -54,7 +54,10 @@
 #include <sstream>
 
 #include <boost/algorithm/string/replace.hpp>
+#include <boost/bind/bind.hpp>
 #include <boost/thread.hpp>
+
+using namespace boost::placeholders;
 
 #if defined(NDEBUG)
 # error "Megacoin cannot be compiled without assertions."
@@ -2262,7 +2265,7 @@ bool CChainState::ConnectBlock(const CBlock& block, CValidationState& state, CBl
 //if (!sporkManager.IsSporkActive(SPORK_MEGACOIN_99_IGNORE_MASTERNODE_REWARD_PAYEE) && !IsBlockPayeeValid(block.vtx[0], pindex->nHeight, block.vtx[0]->GetValueOut(), pindex->GetBlockHeader())) {
         if (!IsBlockPayeeValid(block.vtx[0], pindex->nHeight, block.vtx[0]->GetValueOut(), pindex->GetBlockHeader())) {
             mapRejectedBlocks.insert(make_pair(block.GetHash(), GetTime()));
-            return state.DoS(0, error("ConnectBlock(MEC): couldn't find masternode or superblock payments"),
+            return state.DoS(100, error("ConnectBlock(MEC): couldn't find masternode or superblock payments"),
                                     REJECT_INVALID, "bad-cb-payee");
         }
         // END DASH
@@ -4526,6 +4529,25 @@ bool CChainState::RewindBlockIndex(const CChainParams& params)
             }
         } else if (pindexIter->IsValid(BLOCK_VALID_TRANSACTIONS) && pindexIter->nChainTx) {
             setBlockIndexCandidates.insert(pindexIter);
+        }
+    }
+
+    // Clean up block index candidates that have invalid ancestors with nChainTx == 0
+    std::set<CBlockIndex*, CBlockIndexWorkComparator>::iterator itCand = setBlockIndexCandidates.begin();
+    while (itCand != setBlockIndexCandidates.end()) {
+        CBlockIndex* pcheck = *itCand;
+        bool fValid = true;
+        while (pcheck && pcheck->nHeight > 0) {
+            if (pcheck->nChainTx == 0) {
+                fValid = false;
+                break;
+            }
+            pcheck = pcheck->pprev;
+        }
+        if (!fValid) {
+            itCand = setBlockIndexCandidates.erase(itCand);
+        } else {
+            ++itCand;
         }
     }
 

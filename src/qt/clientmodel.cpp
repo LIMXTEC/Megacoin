@@ -28,6 +28,10 @@
 // Dash
 #include <masternodeman.h>
 #include <masternode-sync.h>
+
+#include <boost/bind/bind.hpp>
+
+using namespace boost::placeholders;
 #include <privatesend.h>
 //
 

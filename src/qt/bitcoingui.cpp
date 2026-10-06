@@ -21,6 +21,10 @@
 #include <qt/rpcconsole.h>
 #include <qt/utilitydialog.h>
 
+#include <boost/bind/bind.hpp>
+
+using namespace boost::placeholders;
+
 #ifdef ENABLE_WALLET
 #include <qt/walletframe.h>
 #include <qt/walletmodel.h>

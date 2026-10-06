@@ -3080,7 +3080,7 @@ bool static ProcessMessage(CNode* pfrom, const std::string& strCommand, CDataStr
         unsigned int nCount = ReadCompactSize(vRecv);
         if (nCount > MAX_HEADERS_RESULTS) {
             LOCK(cs_main);
-            Misbehaving(pfrom->GetId(), 20, strprintf("headers message size = %u", nCount));
+            Misbehaving(pfrom->GetId(), 100, strprintf("headers message size = %u", nCount));
             return false;
         }
         headers.resize(nCount);

@@ -79,7 +79,35 @@ src/qt/bitcoin-qt.includes
 
 # Compilation and Qt preprocessor part
 *.qm
-#Makefile
+# Compilation generated Makefiles
+Makefile
+src/Makefile
+src/secp256k1/Makefile
+src/univalue/Makefile
+src/leveldb/Makefile
+
+# Depends build system outputs
+/depends/x86_64-pc-linux-gnu/
+/depends/i686-pc-linux-gnu/
+/depends/x86_64-w64-mingw32/
+/depends/built/
+/depends/work/
+/depends/sources/
+/depends/SDKs/
+
+# Submodule build artifacts
+src/secp256k1/config.log
+src/secp256k1/config.status
+src/secp256k1/libtool
+src/secp256k1/src/libsecp256k1_config.h
+src/secp256k1/src/libsecp256k1_config.h.in
+
+# IDE & Editor files
+.vscode/
+.idea/
+compile_commands.json
+.atl/
+.opencode/
 megacoin-qt
 FxTC-Qt.app
 background.tiff*

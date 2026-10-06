@@ -122,8 +122,8 @@ public:
 
         // Deployment of BIP68, BIP112, and BIP113.
         consensus.vDeployments[Consensus::DEPLOYMENT_CSV].bit = 0;
-        consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nStartTime = 1525132800; // 05/01/2018 @ 12:00am (UTC)
-        consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nTimeout = 1746057600;   // 05/01/2025 @ 12:00am (UTC)
+        consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nStartTime = Consensus::BIP9Deployment::ALWAYS_ACTIVE;
+        consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nTimeout = Consensus::BIP9Deployment::NO_TIMEOUT;
         consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nHeight = 1280000;
         
         // FXTC TODO:
@@ -139,9 +139,16 @@ public:
 
         // Deployment of SegWit (BIP141, BIP143, and BIP147)
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].bit = 1;
-        consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nStartTime = 1525132800; // 05/01/2018 @ 12:00am (UTC)
-        consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 1746057600;   // 05/01/2025 @ 12:00am (UTC)
+        consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nStartTime = Consensus::BIP9Deployment::ALWAYS_ACTIVE;
+        consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = Consensus::BIP9Deployment::NO_TIMEOUT;
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nHeight = 1280000;
+
+        // Deployment of Masternode Payment Enforcement (BIP9 bit 2, 80% threshold over 8,000 blocks)
+        consensus.vDeployments[Consensus::DEPLOYMENT_MN_ENFORCEMENT].bit = 2;
+        consensus.vDeployments[Consensus::DEPLOYMENT_MN_ENFORCEMENT].nStartTime = 1767225600; // Jan 01, 2026 @ 12:00am (UTC)
+        consensus.vDeployments[Consensus::DEPLOYMENT_MN_ENFORCEMENT].nTimeout = 1830297600;   // Jan 01, 2028 @ 12:00am (UTC)
+        consensus.vDeployments[Consensus::DEPLOYMENT_MN_ENFORCEMENT].nWindowSize = 8000;
+        consensus.vDeployments[Consensus::DEPLOYMENT_MN_ENFORCEMENT].nThreshold = 6400; // 80% of 8000
 
         // The best chain should have at least this much work.
         consensus.nMinimumChainWork = uint256S("0x00000000000000000000000000000000000000000000000005dfab1790ba9fdd"); // Megacoin
@@ -177,13 +184,13 @@ public:
         // This is fine at runtime as we'll fall back to using them as a oneshot if they don't support the
         // service bits we want, but we should get them updated to support all service bits wanted by any
         // release ASAP to avoid it where possible.
-        // Megacoin
-        vSeeds.emplace_back("37.120.190.76");
-        vSeeds.emplace_back("37.120.186.85");
-        vSeeds.emplace_back("185.194.140.60");
-        vSeeds.emplace_back("188.71.223.206");
-        vSeeds.emplace_back("185.194.142.122");
-        //vSeeds.emplace_back("185.194.142.122", false);
+        // Megacoin Seed Nodes
+        vSeeds.emplace_back("119.29.65.239");
+        vSeeds.emplace_back("62.103.70.207");
+        vSeeds.emplace_back("42.193.151.25");
+        vSeeds.emplace_back("207.188.185.47");
+        vSeeds.emplace_back("34.0.197.65");
+        vSeeds.emplace_back("106.53.150.104");
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,50);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,5);
@@ -306,6 +313,13 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].bit = 1;
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nStartTime = 1525132800; // April 23, 2017
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 1746057600;   // 05/01/2025 @ 12:00am (UTC)
+
+        // Deployment of Masternode Payment Enforcement
+        consensus.vDeployments[Consensus::DEPLOYMENT_MN_ENFORCEMENT].bit = 2;
+        consensus.vDeployments[Consensus::DEPLOYMENT_MN_ENFORCEMENT].nStartTime = 1525132800; // April 23, 2017
+        consensus.vDeployments[Consensus::DEPLOYMENT_MN_ENFORCEMENT].nTimeout = 1746057600;   // 05/01/2025 @ 12:00am (UTC)
+        consensus.vDeployments[Consensus::DEPLOYMENT_MN_ENFORCEMENT].nWindowSize = 100;
+        consensus.vDeployments[Consensus::DEPLOYMENT_MN_ENFORCEMENT].nThreshold = 80; // 80% of 100
 
         // The best chain should have at least this much work.
         consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000000000000000000000000"); // Megacoin
@@ -444,6 +458,10 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nStartTime = 0;
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = Consensus::BIP9Deployment::NO_TIMEOUT;
 
+        consensus.vDeployments[Consensus::DEPLOYMENT_MN_ENFORCEMENT].bit = 2;
+        consensus.vDeployments[Consensus::DEPLOYMENT_MN_ENFORCEMENT].nStartTime = 0;
+        consensus.vDeployments[Consensus::DEPLOYMENT_MN_ENFORCEMENT].nTimeout = Consensus::BIP9Deployment::NO_TIMEOUT;
+
         // The best chain should have at least this much work.
         consensus.nMinimumChainWork = uint256S("0x00");
 
@@ -455,10 +473,10 @@ public:
         pchMessageStart[1] = 0xf0;
         pchMessageStart[2] = 0xf4;
         pchMessageStart[3] = 0xfe;
-        nDefaultPort = 19444;
+        nDefaultPort = 19445;
         nPruneAfterHeight = 1000;
 
-        genesis = CreateGenesisBlock(1492973331, 9377, 0x1e0ffff0, 1, 0 * COIN);
+        genesis = CreateGenesisBlock(1369197853, 2084576387, 0x1e0ffff0, 1, 500 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
         assert(consensus.hashGenesisBlock == uint256S("0x7520788e2d99eec7cf6cf7315577e1268e177fff94cb0a7caf6a458ceeea9ac2"));
         assert(genesis.hashMerkleRoot == uint256S("0x6065d08d755e00a90449abe8a0923d0622feb6f7ab3f435c337369334119e636"));

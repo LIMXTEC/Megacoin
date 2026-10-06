@@ -21,7 +21,7 @@ import struct
 import sys
 import threading
 
-from test_framework.messages import CBlockHeader, MIN_VERSION_SUPPORTED, msg_addr, msg_block, MSG_BLOCK, msg_blocktxn, msg_cmpctblock, msg_feefilter, msg_getaddr, msg_getblocks, msg_getblocktxn, msg_getdata, msg_getheaders, msg_headers, msg_inv, msg_mempool, msg_ping, msg_pong, msg_reject, msg_sendcmpct, msg_sendheaders, msg_tx, MSG_TX, MSG_TYPE_MASK, msg_verack, msg_version, NODE_NETWORK, NODE_WITNESS, sha256
+from test_framework.messages import CBlockHeader, MIN_VERSION_SUPPORTED, msg_addr, msg_block, MSG_BLOCK, msg_blocktxn, msg_cmpctblock, msg_feefilter, msg_generic, msg_getaddr, msg_getblocks, msg_getblocktxn, msg_getdata, msg_getheaders, msg_headers, msg_inv, msg_mempool, msg_ping, msg_pong, msg_reject, msg_sendcmpct, msg_sendheaders, msg_tx, MSG_TX, MSG_TYPE_MASK, msg_verack, msg_version, NODE_NETWORK, NODE_WITNESS, sha256
 from test_framework.util import wait_until
 
 logger = logging.getLogger("TestFramework.mininode")
@@ -51,9 +51,9 @@ MESSAGEMAP = {
 }
 
 MAGIC_BYTES = {
-    "mainnet": b"\xf9\xbe\xb4\xd9",   # mainnet
-    "testnet3": b"\x0b\x11\x09\x07",  # testnet3
-    "regtest": b"\xfa\xbf\xb5\xda",   # regtest
+    "mainnet": b"\xed\xe0\xe4\xee",   # mainnet (Megacoin)
+    "testnet3": b"\xfd\xf0\xf4\xfe",  # testnet3 (Megacoin)
+    "regtest": b"\xfd\xf0\xf4\xfe",   # regtest (Megacoin)
 }
 
 
@@ -153,15 +153,16 @@ class P2PConnection(asyncio.Protocol):
                 if checksum != h[:4]:
                     raise ValueError("got bad checksum " + repr(self.recvbuf))
                 self.recvbuf = self.recvbuf[4+12+4+4+msglen:]
-                if command not in MESSAGEMAP:
-                    raise ValueError("Received unknown command from %s:%d: '%s' %s" % (self.dstaddr, self.dstport, command, repr(msg)))
                 f = BytesIO(msg)
-                t = MESSAGEMAP[command]()
+                if command not in MESSAGEMAP:
+                    t = msg_generic(command)
+                else:
+                    t = MESSAGEMAP[command]()
                 t.deserialize(f)
                 self._log_message("receive", t)
                 self.on_message(t)
         except Exception as e:
-            logger.exception('Error reading message:', repr(e))
+            logger.exception('Error reading message: %s', repr(e))
             raise
 
     def on_message(self, message):
@@ -269,7 +270,8 @@ class P2PInterface(P2PConnection):
                 command = message.command.decode('ascii')
                 self.message_count[command] += 1
                 self.last_message[command] = message
-                getattr(self, 'on_' + command)(message)
+                if hasattr(self, 'on_' + command):
+                    getattr(self, 'on_' + command)(message)
             except:
                 print("ERROR delivering %s (%s)" % (repr(message), sys.exc_info()[0]))
                 raise

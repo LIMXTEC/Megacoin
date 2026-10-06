@@ -1,0 +1,15 @@
+services:
+  megacoind:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: scotynau/megacoin:1.10.0
+    container_name: megacoin-node
+    restart: unless-stopped
+    ports:
+      - "7951:7951"
+      - "127.0.0.1:9469:9469"
+    volumes:
+      # Mapea los archivos del nodo (blockchain, wallet.dat, megacoin.conf)
+      # a la carpeta './data' de tu máquina para editarlos fácilmente.
+      - ./data:/var/lib/megacoin

@@ -479,10 +479,15 @@ class BitcoinTestFramework(metaclass=BitcoinTestMetaClass):
                 return os.path.join(get_datadir_path(self.options.cachedir, n), "regtest", *paths)
 
             for i in range(MAX_NODES):
-                os.rmdir(cache_path(i, 'wallets'))  # Remove empty wallets dir
+                if os.path.isdir(cache_path(i, 'wallets')):
+                    shutil.rmtree(cache_path(i, 'wallets'))  # Remove empty wallets dir
                 for entry in os.listdir(cache_path(i)):
                     if entry not in ['chainstate', 'blocks']:
-                        os.remove(cache_path(i, entry))
+                        entry_path = cache_path(i, entry)
+                        if os.path.isdir(entry_path):
+                            shutil.rmtree(entry_path)
+                        else:
+                            os.remove(entry_path)
 
         for i in range(self.num_nodes):
             from_dir = get_datadir_path(self.options.cachedir, i)

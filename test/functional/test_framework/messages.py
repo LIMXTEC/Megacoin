@@ -611,10 +611,15 @@ class CBlock(CBlockHeader):
 
         return self.get_merkle_root(hashes)
 
+    def calc_pow(self):
+        header = super(CBlock, self).serialize()
+        pow_bytes = hashlib.scrypt(header, salt=header, n=1024, r=1, p=1, maxmem=32*1024*1024, dklen=32)
+        return uint256_from_str(pow_bytes[::-1])
+
     def is_valid(self):
         self.calc_sha256()
         target = uint256_from_compact(self.nBits)
-        if self.sha256 > target:
+        if self.calc_pow() > target:
             return False
         for tx in self.vtx:
             if not tx.is_valid():
@@ -626,7 +631,7 @@ class CBlock(CBlockHeader):
     def solve(self):
         self.rehash()
         target = uint256_from_compact(self.nBits)
-        while self.sha256 > target:
+        while self.calc_pow() > target:
             self.nNonce += 1
             self.rehash()
 
@@ -1088,15 +1093,18 @@ class msg_block():
 # for cases where a user needs tighter control over what is sent over the wire
 # note that the user must supply the name of the command, and the data
 class msg_generic():
-    def __init__(self, command, data=None):
+    def __init__(self, command=b"", data=None):
         self.command = command
         self.data = data
 
+    def deserialize(self, f):
+        self.data = f.read()
+
     def serialize(self):
-        return self.data
+        return self.data if self.data is not None else b""
 
     def __repr__(self):
-        return "msg_generic()"
+        return "msg_generic(command=%s)" % repr(self.command)
 
 class msg_witness_block(msg_block):
 

@@ -1565,6 +1565,26 @@ void CMasternodeMan::UpdatedBlockTip(const CBlockIndex *pindex)
         // normal wallet does not need to update this every block, doing update on rpc call should be enough
         UpdateLastPaid(pindex);
     }
+
+    // Force UTXO check and remove spent masternodes on every block tip update
+    {
+        LOCK(cs);
+        std::map<COutPoint, CMasternode>::iterator it = mapMasternodes.begin();
+        while (it != mapMasternodes.end()) {
+            it->second.Check(true);
+            if (it->second.IsOutpointSpent()) {
+                LogPrintf("CMasternodeMan::UpdatedBlockTip -- Purging spent masternode: %s\n", it->first.ToStringShort());
+                CMasternodeBroadcast mnb(it->second);
+                mapSeenMasternodeBroadcast.erase(mnb.GetHash());
+                mWeAskedForMasternodeListEntry.erase(it->first);
+                it->second.FlagGovernanceItemsAsDirty();
+                mapMasternodes.erase(it++);
+                fMasternodesRemoved = true;
+            } else {
+                ++it;
+            }
+        }
+    }
 }
 
 void CMasternodeMan::NotifyMasternodeUpdates(CConnman& connman)

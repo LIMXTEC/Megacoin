@@ -19,6 +19,7 @@
 
 #include <boost/thread.hpp>
 
+#include <array>
 #include <list>
 #include <vector>
 
