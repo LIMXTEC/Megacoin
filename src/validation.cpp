@@ -4532,6 +4532,12 @@ bool CChainState::RewindBlockIndex(const CChainParams& params)
         }
     }
 
+    if (chainActive.Tip() != nullptr) {
+        // Prune block index candidates based on tip BEFORE walking ancestor chains
+        // to avoid O(N^2) checks across millions of historical blocks on startup.
+        PruneBlockIndexCandidates();
+    }
+
     // Clean up block index candidates that have invalid ancestors with nChainTx == 0
     std::set<CBlockIndex*, CBlockIndexWorkComparator>::iterator itCand = setBlockIndexCandidates.begin();
     while (itCand != setBlockIndexCandidates.end()) {
@@ -4552,10 +4558,6 @@ bool CChainState::RewindBlockIndex(const CChainParams& params)
     }
 
     if (chainActive.Tip() != nullptr) {
-        // We can't prune block index candidates based on our tip if we have
-        // no tip due to chainActive being empty!
-        PruneBlockIndexCandidates();
-
         CheckBlockIndex(params.GetConsensus());
     }
 
